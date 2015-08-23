@@ -1,0 +1,35 @@
+<article id="wateat" class="panel">
+	<header>
+		<h2>What To Eat?!</h2>
+	</header>
+
+	<form action="#prestoresto" method="post">
+
+		<select name="price" id="price">
+			<option value="0" selected="selected"> Price Range </option>
+			<option value="1"> $ </option> 
+			<option value="2"> $$ </option> 
+			<option value="3"> $$$ </option> 
+			<option value="4"> $$$$ </option> 
+		</select> 
+
+		<select name="radius" id="radius"> 
+			<option value=".5" selected="selected"> Distance </option>
+			<option value=".5"> 1/2 mile </option> 
+			<option value="1"> 1 mile </option> 
+			<option value="2"> 2 miles </option> 
+			<option value="5"> 5 miles </option> 
+			<option value="10"> 10 mile </option> 
+		</select>
+
+		<br />Enter Keyword: 
+		<input type= "text" name="keyword" /> 
+		<br />
+		<br />
+		<input type="hidden" name="GPSlad" value="<?php echo $geoplugin->latitude; ?>" />
+		<input type="hidden" name="GPSlong" value="<?php echo $geoplugin->longitude; ?>" />
+
+		<input type="submit" name="topic_submit" value="Search" />
+	
+	</form>			
+</article>

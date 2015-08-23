@@ -6,21 +6,21 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" />
-		<script src="js/jquery.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/init.js"></script>
 
 		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag    'noscript', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag    'style-desktop', media: 'all', 'data-turbolinks-track' => true %>
+		<%= stylesheet_link_tag    'skel-noscript', media: 'all', 'data-turbolinks-track' => true %>
+
+		<%= javascript_include_tag 'skel.min', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
 	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	  <%= csrf_meta_tags %>
-		
-		<noscript>
-			<link rel="stylesheet" href="css/skel-noscript.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-desktop.css" />
-			<link rel="stylesheet" href="css/noscript.css" />
-		</noscript>
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+	  <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	  <%= javascript_include_tag 'init', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+
 	</head>
 	<body class="homepage">
 
@@ -29,10 +29,10 @@
 				
 				<!-- Nav -->
 					<nav id="nav">
-						<a href="#me" class="fa fa-home active"><span>Home</span></a>
-						<a href="#wateat" class="fa fa-cutlery"><span>What To Eat</span></a>
-						<a href="#watdo" class="fa fa-ticket"><span>What To Do</span></a>
-						<a href="#random" class="fa fa-random"><span>Randomizer</span></a>
+						<a href="/" class="fa fa-home active"><span>Home</span></a>
+						<a href="whateat" class="fa fa-cutlery"><span>What To Eat</span></a>
+						<a href="whatdo" class="fa fa-ticket"><span>What To Do</span></a>
+						<a href="random" class="fa fa-random"><span>Randomizer</span></a>
 					</nav>
 
 					<!-- Main -->

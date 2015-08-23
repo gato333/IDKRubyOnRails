@@ -1,0 +1,32 @@
+<article id="watdo" class="panel">
+	<header>
+		<h2>What To Do?!</h2>
+	</header>
+
+	<form action="#todo" method="post">
+
+		<br />Enter Price:
+		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" />
+		<br />
+
+		<select name="radius" id="radius"> 
+		<option value=".5" selected="selected"> Distance </option>
+		<option value=".5"> 1/2 mile </option> 
+		<option value="1"> 1 mile </option> 
+		<option value="2"> 2 miles </option> 
+		<option value="5"> 5 miles </option> 
+		<option value="10"> 10 mile </option> 
+		</select>
+
+		<br />Enter Keyword: 
+		<input type= "text" name="keyword" /> 
+		<br />
+		<br />
+		<input type="hidden" name="GPSlad" value="<?php echo $geoplugin->latitude; ?>" />
+		<input type="hidden" name="GPSlong" value="<?php echo $geoplugin->longitude; ?>" />
+
+		<input type="submit" name="topic_submit" value="Search" />
+
+	</form action>
+
+</article>

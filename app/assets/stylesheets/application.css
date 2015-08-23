@@ -1,130 +1,347 @@
-html, body {
-    height: 100%;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-}
+@charset 'UTF-8';
 
-body {
-    font-family: lucida grande, tahoma, verdana, arial, sans-serif;
-}
+@font-face{font-family:'FontAwesome';src: url('fontawesome-webfont.eot?v=4.0.1');src:url('fontawesome-webfont.eot?#iefix&v=4.0.1') format('embedded-opentype'),url('fontawesome-webfont.woff?v=4.0.1') format('woff'),url('fontawesome-webfont.ttf?v=4.0.1') format('truetype'),url('fontawesome-webfont.svg?v=4.0.1#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}
 
-/* IE7 Fix */
-* html #container {
-    display: table;
-    height: 100%
-}
-
-/* Opera Fix */
-body:before {
-    content: "";
-    height: 100%;
-    float: left;
-    width: 0;
-    margin-top: -32767px;
-}
-
-/* IE6 Fix */
-* html div#body {
-    overflow: visible;
-}
-
-div#container {
-    height: 100%;
-    height: auto !important;
-    min-height: 100%;
-    position: relative;
-    /*background: url("images/bg.jpg") repeat-y top left;*/
-}
-
-div#main {
-    overflow: auto;
-    padding-bottom: 100px;
-}
-
-div#header {
-    height: 60px;
-    background-image:url('images/bg.jpg');
-    background-repeat:repeat;
-/*    border-bottom: 1px solid #000; */
-    padding: 20px;
-}
-
-div#nav {
-    height: 30px;
-    background-image:url('images/navbg.jpg');
-    background-repeat:repeat;
-}
-
-div#body {
-    overflow: hidden;
-    height: 100%;
-}
-
-div#content {
-    margin: 0px 0px 0px 250px;
-    position: relative;
-    clear: both; 
-    padding: 10px;
-}
-
-div#left-sidebar {
-    width: 250px;
-    float: left;
-/*    padding: 20px;*/
-    background-image:url('images/bg.jpg');
-    background-repeat:repeat;
-    position: absolute;
-    left: 0;
-    top: 130px;
-    bottom: 50px;
-}
 /*
-div#footer {
-    background-image:url('images/bg.jpg');
-    background-repeat:repeat;
-    border-top: 1px solid #000;
-
-    position: relative;
-    height: 100px;
-    margin-top: -101px;
-    clear: both;
-    
-    color: white;
-}
+    Astral 2.5 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-#footer{
-    background-image:url('images/bg.jpg');
-    background-repeat:repeat; 
-    position: fixed; /* works fine on ios */
-    bottom:0;
-    left:0;
-    width:100%;
-    height: 50px;
-        border-top: 1px solid #000;
-    	color: white;
+/*********************************************************************************/
+/* Basic                                                                         */
+/*********************************************************************************/
 
+
+body
+{
+    /*
+        Fallback for browsers that don't support pseudo elements.
+    */
+
+    background: url('bg.jpg');
+
+    margin:0;
+}
+
+    body:before
+    {
+        content: '';
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        /*
+            Default background is a weird gradient so I've set it to stretch to
+            100% in both directions. If you replace it with a photo or something,
+            set background-size to "cover".
+        */
+
+        background: url('bg.jpg');
+        background-size: 100% 100%;
+    }
+
+    /*
+        The pseudo element below applies a noise pattern to the background image. It's
+        meant to help mask blurriness, but you can remove it if you don't like it.
+    */
+
+    body:after
+    {
+        content: '';
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: url('overlay.png');
+        z-index: -1;
+    }
+
+body, input, textarea
+{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    color: #777;
+}
+
+#wrapper {
+    position: relative;
+    margin:0 auto;
+    min-width: 650px;
+    width: 60%;
+}
+
+#main {
+    background: #fff; 
+    border-radius: 5px;
+    padding: 25px;
+}
+
+form
+{
+}
+
+    form input.text,
+    form select,
+    form textarea
+    {
+        border: 0;
+        background: #f0f0f0;
+        padding: 0.65em;
+        width: 70%;
+    }
+
+    form input.button,
+    form input.text,
+    form select,
+    form textarea
+    {
+        -webkit-appearance: none;
+    }
+    
+    form textarea
+    {
+        height: 15em;
+    }
+    
+    form input:focus,
+    form select:focus,
+    form textarea:focus
+    {
+        background: #f5f5f5;
+    }
+
+    form ::-webkit-input-placeholder
+    {
+        color: #999;
+    }
+
+    form :-moz-placeholder
+    {
+        color: #999;
+    }
+
+    form ::-moz-placeholder
+    {
+        color: #999;
+    }
+
+    form :-ms-input-placeholder
+    {
+        color: #999;
+    }       
+
+section > :last-child,
+article > :last-child
+{
+    margin-bottom: 0;
+}
+
+section:last-child,
+article:last-child
+{
+    margin-bottom: 0;
+}
+
+.image
+{
+    display: inline-block;
+}
+
+    .image img
+    {
+        display: block;
+        width: 100%;
+    }
+
+.image-full
+{
+    display: block;
+    width: 100%;
+    margin: 0 0 2em 0;
+}
+
+.image-left
+{
+    float: left;
+    margin: 0 2em 2em 0;
+}
+
+.image-centered
+{
+    display: block;
+    margin: 0 0 2em 0;
+}
+
+    .image-centered img
+    {
+        margin: 0 auto;
+        width: auto;
+    }
+    
+.button
+{
+    display: inline-block;
+    background-color: #222222;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    outline: 0;
+    -moz-transition: background-color .25s ease-in-out;
+    -webkit-transition: background-color .25s ease-in-out;
+    -o-transition: background-color .25s ease-in-out;
+    -ms-transition: background-color .25s ease-in-out;
+    transition: background-color .25s ease-in-out;
+}
+
+    .button:hover
+    {
+        background-color: #333333;
+    }
+    
+    .button:active
+    {
+        background-color: #444444;
+    }
+
+
+    
+
+ul.style1
+{
+    list-style: disc;
+    padding-left: 1em;
+}
+
+    ul.style1 li
+    {
+        padding-left: 0.5em;
+    }
+
+ul.links {
+    width: 400px; 
+    margin: 20px auto;
+    padding:0;
+}
+
+    ul.links li
+    {
+        display: inline-block;
+    }
+
+        ul.links li:before
+        {
+            display: inline;
+            content: '\2022';
+            opacity: 0.5;
+        }
+    
+        ul.links li:first-child:before
+        {
+            display: none;
+        }
+        
+
+/*********************************************************************************/
+/* Icons                                                                         */
+/* Powered by Font Awesome by Dave Gandy | http://fontawesome.io                 */
+/* Licensed under the SIL OFL 1.1 (font), MIT (CSS)                              */
+/*********************************************************************************/
+
+.fa
+{
+    text-decoration: none;
 }
 
 
-div#footer p {
-    padding: 15px;
-    margin: 0px;
-    text-align: center;
+    
+.fa span
+{
+    display: none;
 }
 
-img.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.fa:before
+{
+    display:inline-block;
+    font-family: FontAwesome;
+    font-size: 2em;
+    margin: 10px 20px;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
 }
 
-#result{
-      font-size: 24px;
-      font-weight: bold;
-	   position:fixed;
-	   top:50%;
-	   left:50%;
-	   width:250px;
- }
+.fa-cutlery:before{content:"\f0f5"}    
+.fa-home:before{content:"\f015"}
+
+.fa-random:before{content:"\f074"}
+.fa-ticket:before{content:"\f145"}
+
+/*********************************************************************************/
+/* Nav                                                                           */
+/*********************************************************************************/
+#nav {
+    width: 300px;
+    margin: 0 auto ;
+}
+
+#nav a
+{
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    opacity: .7;
+    line-height: 0.9em;
+    margin-bottom: 10px;
+    padding-bottom:10px;
+}
+
+#nav a:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -0.5em;
+    margin-left: -0.75em;
+    border-bottom: solid 0em #fff;
+    border-left: solid 0.75em transparent;
+    border-right: solid 0.75em transparent;
+    -moz-transition: border-bottom-width .25s ease-in-out;
+    -webkit-transition: border-bottom-width .25s ease-in-out;
+    -o-transition: border-bottom-width .25s ease-in-out;
+    -ms-transition: border-bottom-width .25s ease-in-out;
+    transition: border-bottom-width .25s ease-in-out;
+}
+
+#nav a.active {
+    opacity: 1.0;
+}
+
+#nav a.active:after {
+    border-bottom-width: 1em;
+}
+
+#nav a.icon:before
+{
+    padding-right: 0;
+}
+
+
+.panel
+{
+    position: relative;
+    overflow: hidden;
+} 
+
+a.fa-home {
+    content:"\f015";
+    font-family: FontAwesome;
+    font-size: 1.25em;
+}
