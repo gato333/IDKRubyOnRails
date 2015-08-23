@@ -1,3 +1,4 @@
+<% provide(:title, "RANDOM") %>
 <article id="random" class="panel">
 
 	<header>
@@ -9,9 +10,11 @@
 	
 	<center>
 		<form action="" onsubmit="return false;">
-			<textarea id="choicelist" rows=5 cols=40></textarea><br /><br />
-			<input type="button" value="Pick For Me" onclick="chooseRandomly(); return false;"><br /><br />
-			<input id="result" type="text" size="40" value="" readonly="readonly" style="border:1px solid #FFFFFF" ><br /><br />
+			<input type="text" placeholder="1st Choice" name= "choice-1"> <br /> 
+			<input type="text" placeholder="2nd Choice" name= "choice-2"> <br /> 
+			<input type="button" value="Another Choice" name="addmore" onclick="addChoice(); return false">
+			<input type="button" value="Pick For Me" name="pick" onclick="chooseRandomly(); return false;"><br /><br />
+			<span class="result"></span>
 		</form>
 	</center>
 

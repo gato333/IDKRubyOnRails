@@ -15,8 +15,44 @@
 //= require turbolinks
 //= require_tree .
 
+
+//click events for random page
 function chooseRandomly() {
-  choices = document.getElementById("choicelist").value.split("\n");
-  if (choices.length == 0) return;
-  document.getElementById("result").value = choices[Math.floor(Math.random() * choices.length)];
+  choices = $("input[type!='button']").removeClass("error").removeClass("chosen"); 
+  var result = $("span.result").text("");
+
+  $(choices).each( function() {
+  	console.log($(this).val());
+  	if($(this).val() === ""){
+  		$(this).addClass("error");
+  		$(result).text("All Choices must be filled, put 'nothing' if you must.");  
+  	}
+  }); 
+  if($(result).text() === ""){
+	  var chosen = Math.floor(Math.random() * choices.length); 
+	  $(result).text($(choices.get(chosen)).addClass("chosen").val()); 
+	}
 }
+
+function addChoice(){
+	var choiceCount = ($("form input[type='text']").length + 1).toString(); 
+	var countWord = choiceCount == 3 ? 'rd': 'th'; 
+	var newChoice = $('<input type="text" placeholder="'+choiceCount+countWord+' Choice" name= "choice-'+choiceCount+'"> <br /> <br/>'); 
+	$("input[name='addmore']").before(newChoice);
+}
+
+
+$(document).ready( function() {
+	
+	//top nav click events
+	//may or not be necessary since the page redirects 
+	//too fast most of the times to bear the fruit of the
+	//animation tranistion that this funciton would create
+	$(".fa").on("click", function(){
+		if( !$(this).hasClass("active") ){
+			$(".fa").removeClass("active");
+			$(this).addClass("active");
+		}
+	});
+
+});

@@ -81,59 +81,35 @@ body, input, textarea
     padding: 25px;
 }
 
-form
-{
+input, select {
+    margin: 10px 0; 
+    padding: 1em;
+    width: 400px;
+}     
+
+input[type="button"] {
+    display: inline-block;
+    width:300px;
 }
 
-    form input.text,
-    form select,
-    form textarea
-    {
-        border: 0;
-        background: #f0f0f0;
-        padding: 0.65em;
-        width: 70%;
-    }
+input[type="button"][name="addmore"] {
+    margin-right: 30px;
+}
 
-    form input.button,
-    form input.text,
-    form select,
-    form textarea
-    {
-        -webkit-appearance: none;
-    }
-    
-    form textarea
-    {
-        height: 15em;
-    }
-    
-    form input:focus,
-    form select:focus,
-    form textarea:focus
-    {
-        background: #f5f5f5;
-    }
+input[type="button"][name="pick"] {
+    margin-left:30px;
+}
+input.chosen {
+    border: 2px green solid;
+}
 
-    form ::-webkit-input-placeholder
-    {
-        color: #999;
-    }
+input.error {
+    border: 2px red solid;
+}
 
-    form :-moz-placeholder
-    {
-        color: #999;
-    }
-
-    form ::-moz-placeholder
-    {
-        color: #999;
-    }
-
-    form :-ms-input-placeholder
-    {
-        color: #999;
-    }       
+article {
+    min-height: 250px
+}
 
 section > :last-child,
 article > :last-child
@@ -299,8 +275,7 @@ ul.links {
     color: #fff;
     opacity: .7;
     line-height: 0.9em;
-    margin-bottom: 10px;
-    padding-bottom:10px;
+    padding-bottom:15px;
 }
 
 #nav a:after {
@@ -308,11 +283,11 @@ ul.links {
     display: block;
     position: absolute;
     left: 50%;
-    bottom: -0.5em;
-    margin-left: -0.75em;
+    bottom: -0.7wem;
+    margin-left: -1em;
     border-bottom: solid 0em #fff;
-    border-left: solid 0.75em transparent;
-    border-right: solid 0.75em transparent;
+    border-left: solid 1em transparent;
+    border-right: solid 1em transparent;
     -moz-transition: border-bottom-width .25s ease-in-out;
     -webkit-transition: border-bottom-width .25s ease-in-out;
     -o-transition: border-bottom-width .25s ease-in-out;
@@ -343,5 +318,4 @@ ul.links {
 a.fa-home {
     content:"\f015";
     font-family: FontAwesome;
-    font-size: 1.25em;
 }
