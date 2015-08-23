@@ -37,10 +37,14 @@ function chooseRandomly() {
 function addChoice(){
 	var choiceCount = ($("form input[type='text']").length + 1).toString(); 
 	var countWord = choiceCount == 3 ? 'rd': 'th'; 
-	var newChoice = $('<input type="text" placeholder="'+choiceCount+countWord+' Choice" name= "choice-'+choiceCount+'"> <br /> <br/>'); 
+	var newChoice = $('<input type="text" placeholder="'+choiceCount+countWord+' Choice" class= "choice-'+choiceCount+'"><div class="delete-choice choice-'+choiceCount+'" onclick="deleteChoice(this); return false;">x</div>'); 
 	$("input[name='addmore']").before(newChoice);
 }
 
+function deleteChoice(elem){
+	var name = elem.className.replace("delete-choice", "").replace(" ", "");
+	$("."+name).remove(); 
+}
 
 $(document).ready( function() {
 	
