@@ -3,11 +3,19 @@ class PagesController < ApplicationController
   end
 
   def do
+  	
   end
 
   def eat
+
   end
 
   def random
+
   end
+
+  def results 
+
+  end
+
 end

@@ -89,7 +89,7 @@ input, select {
 
 input[type="button"] {
     display: inline-block;
-    width:300px;
+    width:250px;
 }
 
 input[type="button"][name="addmore"] {
@@ -199,7 +199,7 @@ ul.style1
     }
 
 ul.links {
-    width: 400px; 
+    width: 475px; 
     margin: 20px auto;
     padding:0;
 }
@@ -265,7 +265,7 @@ ul.links {
 /*********************************************************************************/
 #nav {
     width: 300px;
-    margin: 0 auto ;
+    margin: 20px auto 0 auto;
 }
 
 #nav a
