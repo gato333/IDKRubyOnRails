@@ -1,11 +1,8 @@
 module Location
+	require 'geoplugin'
 
-    def initialize()
-        @tangerine = "And now a thousand years between"
-    end
-
-    def apple()
-        puts "I AM CLASSY APPLES!"
+    def getCoor
+       location = Geoplugin.me
     end
 
 end

@@ -28,8 +28,8 @@
 		<input type= "text" name="keyword" /> 
 		<br />
 		<br />
-		<input type="hidden" name="GPSlad" value="<?php echo $geoplugin->latitude; ?>" />
-		<input type="hidden" name="GPSlong" value="<?php echo $geoplugin->longitude; ?>" />
+		<input type="hidden" name="GPSlad" value="<%= @latitude %>" />
+		<input type="hidden" name="GPSlong" value="<% @longitude %>" />
 
 		<input type="submit" name="topic_submit" value="Search" />
 	

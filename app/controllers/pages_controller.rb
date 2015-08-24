@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+	require location
 	protect_from_forgery
 
 	EAT_STATUS = "EAT"
@@ -8,9 +9,15 @@ class PagesController < ApplicationController
   end
 
   def do
+  	location = Location.getCoor
+  	@latitude = location["latitude"]
+  	@longitude = location["longitude"]
   end
 
   def eat
+  	location = Location.getCoor
+  	@latitude = location["latitude"]
+  	@longitude = location["longitude"]
   end
 
   def random
