@@ -4,12 +4,12 @@
 		<h2>What To Do?!</h2>
 	</header>
 
-	<form action="#todo" method="post">
+	<form action="results" method="post">
 
 		<br />Enter Price:
 		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" />
 		<br />
-
+		<input type="hidden" name="source" value="<%= yield(:title) %>">
 		<select name="radius" id="radius"> 
 		<option value=".5" selected="selected"> Distance </option>
 		<option value=".5"> 1/2 mile </option> 
