@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-	require location
+	require "location.rb"
 	protect_from_forgery
 
 	EAT_STATUS = "EAT"
@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
 
   def eat
-  	location = Location.getCoor
+  	@location = Location.getCoor
   	@latitude = location["latitude"]
   	@longitude = location["longitude"]
   end
