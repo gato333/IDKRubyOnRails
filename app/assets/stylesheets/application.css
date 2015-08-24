@@ -328,3 +328,22 @@ a.fa-home {
     content:"\f015";
     font-family: FontAwesome;
 }
+/*********************************************************************************/
+/* Error page                                                                           */
+/*********************************************************************************/
+
+div.error_msg {
+        display: inline-block;
+    width: 475px;
+    vertical-align: top;
+    margin-left: 20px;
+}
+
+div.error_icon {
+    display: inline-block; 
+}
+
+img.error_icon {
+    width: 100px;
+    height: 100px;
+}

@@ -4,7 +4,7 @@
 	<header>
 		<center><h1>Error</h1></center>
 	</header>
-	<div class="error_icon"> <img src="error_icon.png"></div>
+	<div class="error_icon"> <%= image_tag("error_icon.png", :alt => "Error", :class =>"error_icon") %></div>
 	<div class="error_msg"> 
 			<%= @error_msg %>
 	</div>

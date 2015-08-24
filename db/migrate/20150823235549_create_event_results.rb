@@ -6,8 +6,7 @@ class CreateEventResults < ActiveRecord::Migration
       t.string :image
       t.float :lat
       t.float :long
-      t.string :time
-      t.string :date
+      t.datetime :date
       t.string :type
 
       t.timestamps null: false
