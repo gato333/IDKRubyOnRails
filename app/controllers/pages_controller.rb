@@ -1,9 +1,10 @@
 class PagesController < ApplicationController
   def home
+
   end
 
   def do
-  	
+
   end
 
   def eat
@@ -15,7 +16,11 @@ class PagesController < ApplicationController
   end
 
   def results 
-
+  	if params? 
+  		@title = params["source"]
+  	else 
+  		@title = "NEITHER"
+  	end
   end
 
 end
