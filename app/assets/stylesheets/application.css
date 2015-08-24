@@ -208,9 +208,14 @@ ul.style1
     }
 
 ul.links {
-    width: 475px; 
+    width: 525px; 
     margin: 20px auto;
     padding:0;
+}
+
+ul.links a {
+    text-decoration: none;
+    color: #777;
 }
 
     ul.links li
@@ -223,6 +228,7 @@ ul.links {
             display: inline;
             content: '\2022';
             opacity: 0.5;
+            padding: 0 10px;
         }
     
         ul.links li:first-child:before
