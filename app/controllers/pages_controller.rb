@@ -11,15 +11,15 @@ class PagesController < ApplicationController
   def do
   	location = Location.new 
   	location = Location.getCoor
-  	@latitude = location["latitude"]
-  	@longitude = location["longitude"]
+  	@latitude = location.latitude
+  	@longitude = location.longitude
   end
 
   def eat
   	location = Location.new 
   	location = Location.getCoor
-  	@latitude = location["latitude"]
-  	@longitude = location["longitude"]
+  	@latitude = location.latitude
+  	@longitude = location.longitude
   end
 
   def random
