@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
-	require "location.rb"
 	protect_from_forgery
 
-	EAT_STATUS = "EAT"
-	DO_STATUS = "DO"
+	require "location.rb"
+	require "restaurant_query_handler.rb"
+	include ApplicationHelper  
 
   def home
   end
@@ -28,12 +28,19 @@ class PagesController < ApplicationController
   def results 
   	if params.include?("source")
   		@title = params["source"]
-  		if @title == EAT_STATUS
-
-
-  		elsif @title == DO_STATUS
-
-
+  		if @title == ApplicationHelper.EAT_STATUS
+  			if ApplicationHelper.validateForm(params)
+  				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
+  				@results = query.getRestaurantResults
+  			else 
+  				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
+  			end
+  		elsif @title == ApplicationHelper.DO_STATUS
+  			if ApplicationHelper.validateForm(params)
+  				@results = "hi"
+  			else 
+					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
+  			end
   		else 
   			redirect_to :action => 'error', :error_msg => "Submitted from a not accepted page."
   		end

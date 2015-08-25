@@ -17,19 +17,19 @@
 
 		<select name="radius" id="radius"> 
 			<option value=".5" selected="selected"> Distance </option>
-			<option value=".5"> 1/2 mile </option> 
-			<option value="1"> 1 mile </option> 
-			<option value="2"> 2 miles </option> 
-			<option value="5"> 5 miles </option> 
-			<option value="10"> 10 mile </option> 
+			<option value="800"> 1/2 mile </option> 
+			<option value="1600"> 1 mile </option> 
+			<option value="3200"> 2 miles </option> 
+			<option value="8000"> 5 miles </option> 
+			<option value="16000"> 10 mile </option> 
 		</select>
 
 		<br />Enter Keyword: 
 		<input type= "text" name="keyword" /> 
 		<br />
 		<br />
-		<input type="hidden" name="GPSlad" value="<%= @latitude %>" />
-		<input type="hidden" name="GPSlong" value="<%= @longitude %>" />
+		<input type="hidden" name="lat" value="<%= @latitude %>" />
+		<input type="hidden" name="long" value="<%= @longitude %>" />
 
 		<input type="submit" name="topic_submit" value="Search" />
 	
