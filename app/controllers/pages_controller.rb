@@ -9,13 +9,15 @@ class PagesController < ApplicationController
   end
 
   def do
+  	location = Location.new 
   	location = Location.getCoor
   	@latitude = location["latitude"]
   	@longitude = location["longitude"]
   end
 
   def eat
-  	@location = Location.getCoor
+  	location = Location.new 
+  	location = Location.getCoor
   	@latitude = location["latitude"]
   	@longitude = location["longitude"]
   end
