@@ -3,21 +3,19 @@ class PagesController < ApplicationController
 
 	require "location.rb"
 	require "restaurant_query_handler.rb"
-	include ApplicationHelper  
+	include PagesHelper  
 
   def home
   end
 
   def do
-  	location = Location.new 
   	location = Location.getCoor
   	@latitude = location.latitude
   	@longitude = location.longitude
   end
 
-  def eat
-  	location = Location.new 
-  	location = Location.getCoor
+  def eat          
+  	location = Location.getCoor 
   	@latitude = location.latitude
   	@longitude = location.longitude
   end
@@ -28,15 +26,16 @@ class PagesController < ApplicationController
   def results 
   	if params.include?("source")
   		@title = params["source"]
-  		if @title == ApplicationHelper.EAT_STATUS
-  			if ApplicationHelper.validateForm(params)
-  				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
-  				@results = query.getRestaurantResults
+  		if @title == PagesHelper::EAT_STATUS
+  			if PagesHelper.validateForm(params)
+  				query = RestaurantQueryHandler.new
+  				query = query.setVal( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
+          @results = query.getRestaurantResults
   			else 
   				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
   			end
-  		elsif @title == ApplicationHelper.DO_STATUS
-  			if ApplicationHelper.validateForm(params)
+  		elsif @title == PagesHelper::DO_STATUS
+  			if PagesHelper.validateForm(params)
   				@results = "hi"
   			else 
 					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"

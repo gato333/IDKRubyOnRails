@@ -1,5 +1,6 @@
 class RestaurantQueryHandler
 	require 'open-uri'
+	attr_accessor :lat, :long, :radius, :price, :keyword, :url, :api
 	@@lat = 0; 
 	@@long = 0; 
 	@@radius = 0; 
@@ -7,8 +8,16 @@ class RestaurantQueryHandler
 	@@keyword = nil; 
 	@@url = "";
 	@@api = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
-		#
-    def self.initialize(  lat, long, radius, price, keyword = "")
+	
+    def initialize
+    	@lat = 0
+    	@long = 0 
+    	@radius = 0
+    	@price = 0 
+    	@keyword = ""
+    end
+
+    def self.setVal(lat, long, radius, price, keyword = "")
     	@lat = lat
     	@long = long 
     	@radius = radius
