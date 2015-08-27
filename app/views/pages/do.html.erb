@@ -5,26 +5,25 @@
 	</header>
 
 	<form action="results" method="post">
-
 		<br />Enter Price:
-		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= @params['price'] || '' %>" />
+		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= params.include?('price') ? params['price'] : '' %>" />
 		<br />
 
 		<select name="radius" id="radius"> 
-			<option value="0" selected="selected"> Distance </option>
-			<option value="800"> 1/2 mile </option> 
-			<option value="1600"> 1 mile </option> 
-			<option value="3200"> 2 miles </option> 
-			<option value="8000"> 5 miles </option> 
-			<option value="16000"> 10 mile </option>
+			<option value="0" <%= params.include?('radius') ? (params['radius'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Distance </option>
+			<option value="800" <%= params.include?('radius') ? (params['radius'] == '800' ? 'selected="selected"' : ''): '' %> > 1/2 mile </option> 
+			<option value="1600" <%= params.include?('radius') ? (params['radius'] == '1600' ? 'selected="selected"' : ''): '' %> > 1 mile </option> 
+			<option value="3200" <%= params.include?('radius') ? (params['radius'] == '3200' ? 'selected="selected"' : ''): '' %> > 2 miles </option> 
+			<option value="8000" <%= params.include?('radius') ? (params['radius'] == '8000' ? 'selected="selected"' : ''): '' %> > 5 miles </option> 
+			<option value="16000" <%= params.include?('radius') ? (params['radius'] == '16000' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
 
 		<br />Enter Keyword: 
-		<input type= "text" name="keyword" value="<%= @params['keyword'] || '' %>" /> 
+		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
 		<br />
 		<br />
-		<input type="hidden" name="lat" value="<%= @params['latitude'] || @latitude %>" />
-		<input type="hidden" name="long" value="<%= params['longitude'] || @longitude %>" />
+		<input type="hidden" name="lat" value="<%= params.include?('latitude') ? params['latitude'] : '' %>" />
+		<input type="hidden" name="long" value="<%= params.include?('longitude') ? params['longitude'] : '' %>" />
 
 		<input type="hidden" name="source" value="<%= yield(:title) %>">
 

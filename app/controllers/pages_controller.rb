@@ -9,15 +9,12 @@ class PagesController < ApplicationController
   end
 
   def do
-    if params.include?("radius")
-      @params = params
-    end
   	location = Location.getCoor
   	@latitude = location.latitude
   	@longitude = location.longitude
   end
 
-  def eat          
+  def eat      
   	location = Location.getCoor 
   	@latitude = location.latitude
   	@longitude = location.longitude

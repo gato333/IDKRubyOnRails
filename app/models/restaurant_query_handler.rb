@@ -7,7 +7,7 @@ class RestaurantQueryHandler
 	@@price = 0; 
 	@@keyword = nil; 
 	@@url = "";
-	@@api = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
+  api = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
 	
     def initialize(lat, long, radius, price, keyword = "")
     	@lat = lat
@@ -21,7 +21,7 @@ class RestaurantQueryHandler
     	@url = "https://maps.googleapis.com/maps/api/place/nearbysearch/xml?location="				
     	@url.concat(@lat + "," +@long)
     	@url.concat("&radius=" + @radius)
-    	@url.concat("&key=" + @@api )
+    	@url.concat("&key=" + api )
     	@url.concat("&opennow&types=food&maxprice=" + @price)
     	if(@keyword != "")
     		@url.concat("&keyword=" + @keyword)
