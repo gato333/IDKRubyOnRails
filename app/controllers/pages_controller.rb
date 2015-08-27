@@ -2,13 +2,16 @@ class PagesController < ApplicationController
 	protect_from_forgery
 
 	require "location.rb"
-	require "restaurant_query_handler.rb"
+	require "restaurant_query_handler"
 	include PagesHelper  
 
   def home
   end
 
   def do
+    if params.include?("radius")
+      @params = params
+    end
   	location = Location.getCoor
   	@latitude = location.latitude
   	@longitude = location.longitude
@@ -28,8 +31,7 @@ class PagesController < ApplicationController
   		@title = params["source"]
   		if @title == PagesHelper::EAT_STATUS
   			if PagesHelper.validateForm(params)
-  				query = RestaurantQueryHandler.new
-  				query = query.setVal( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
+  				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getRestaurantResults
   			else 
   				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
