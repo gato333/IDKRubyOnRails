@@ -60,7 +60,7 @@ class RestaurantQueryHandler
     		end
     		chooseRandom3(resultArray)
     	else 
-    		results.status
+    		results["status"]
     	end
     end
 
