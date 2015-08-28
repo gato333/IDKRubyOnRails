@@ -27,14 +27,14 @@ class PagesController < ApplicationController
   	if params.include?("source")
   		@title = params["source"]
   		if @title == PagesHelper::EAT_STATUS
-  			if PagesHelper.validateForm(params)
+  			if PagesHelper.validateForm(params, PagesHelper::EAT_STATUS)
   				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getRestaurantResults
   			else 
   				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
   			end
   		elsif @title == PagesHelper::DO_STATUS
-  			if PagesHelper.validateForm(params)
+  			if PagesHelper.validateForm(params, PagesHelper::DO_STATUS)
   				@results = "hi"
   			else 
 					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"

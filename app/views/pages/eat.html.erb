@@ -8,29 +8,29 @@
 
 		<input type="hidden" name="source" value="<%= yield(:title) %>">
 		<select name="price" id="price">
-			<option value="0" selected="selected"> Price Range </option>
-			<option value="1"> $ </option> 
-			<option value="2"> $$ </option> 
-			<option value="3"> $$$ </option> 
-			<option value="4"> $$$$ </option> 
+			<option value="0" <%= params.include?('price') ? (params['price'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Price Range </option>
+			<option value="1" <%= params.include?('price') ? (params['price'] == '1' ? 'selected="selected"' : ''): "" %> > $ </option> 
+			<option value="2" <%= params.include?('price') ? (params['price'] == '2' ? 'selected="selected"' : ''): "" %> > $$ </option> 
+			<option value="3" <%= params.include?('price') ? (params['price'] == '3' ? 'selected="selected"' : ''): "" %> > $$$ </option> 
+			<option value="4" <%= params.include?('price') ? (params['price'] == '4' ? 'selected="selected"' : ''): "" %> > $$$$ </option> 
 		</select> 
 
 		<select name="radius" id="radius"> 
-			<option value=".5" selected="selected"> Distance </option>
-			<option value="800"> 1/2 mile </option> 
-			<option value="1600"> 1 mile </option> 
-			<option value="3200"> 2 miles </option> 
-			<option value="8000"> 5 miles </option> 
-			<option value="16000"> 10 mile </option> 
+		<option value="0" <%= params.include?('radius') ? (params['radius'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Distance </option>
+			<option value="800" <%= params.include?('radius') ? (params['radius'] == '800' ? 'selected="selected"' : ''): '' %> > 1/2 mile </option> 
+			<option value="1600" <%= params.include?('radius') ? (params['radius'] == '1600' ? 'selected="selected"' : ''): '' %> > 1 mile </option> 
+			<option value="3200" <%= params.include?('radius') ? (params['radius'] == '3200' ? 'selected="selected"' : ''): '' %> > 2 miles </option> 
+			<option value="8000" <%= params.include?('radius') ? (params['radius'] == '8000' ? 'selected="selected"' : ''): '' %> > 5 miles </option> 
+			<option value="16000" <%= params.include?('radius') ? (params['radius'] == '16000' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
 
 		<br />Enter Keyword: 
-		<input type= "text" name="keyword" /> 
+		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
+		
 		<br />
 		<br />
-		<input type="hidden" name="lat" value="<%= @latitude %>" />
-		<input type="hidden" name="long" value="<%= @longitude %>" />
-
+		<input type="hidden" name="lat" value="<%= params.include?('latitude') ? params['latitude'] : @latitude %>" />
+		<input type="hidden" name="long" value="<%= params.include?('longitude') ? params['longitude'] : @longitude %>" />
 		<input type="submit" name="topic_submit" value="Search" />
 	
 	</form>			

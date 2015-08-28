@@ -1,11 +1,30 @@
 <% provide(:title, @title) %>
-<article id="random" class="panel">
+<article id="results" class="panel">
 
 	<header>
 		<center><h1>Results</h1></center>
 	</header>
 
 	<div> 
-			I will put something here soon
+		<%  if @results == "ZERO_RESULTS" %>
+					SORY NO RESULTS
+		<%	elsif @results == "INVALID_REQUEST" %>
+			 		SOMETHING HAPPEDN BAD REQEST
+		<%  elsif @results.kind_of?(Array) == false %>
+					<%= @results.inspect %>
+		<% else %>
+			<%  @results.each do |result| %>
+						<div class="result-container">
+							<h1><%= result.name %></h1>
+							<h3>Address: <%= result.address %></h3>
+							<h3>Type: <%= result.types %></h3>
+							<h3>Price: <%= result.price %></h3>
+							<h3>Rating: <%= result.rating %></h3>
+							<img src="<%= result.imageurl %>">
+							<br \><br /> <br />
+						</div>
+			 <% end 
+				end %>
+		
 	</div>
 </article>
