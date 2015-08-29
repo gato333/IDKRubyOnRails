@@ -3,13 +3,8 @@ class RestaurantQueryHandler
 	require 'json'
 	require "result_container"
 
-	@@lat = 0; 
-	@@long = 0; 
-	@@radius = 0; 
-	@@price = 0; 
-	@@keyword = nil; 
-	@@url = "";
-  API = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
+    attr_accessor :lat, :long, :radius, :keyword, :price, :url
+    API = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
 	
     def initialize(lat, long, radius, price, keyword = "")
     	@lat = lat.to_s
@@ -39,7 +34,7 @@ class RestaurantQueryHandler
     	imageurl = "https://maps.googleapis.com/maps/api/place/photo?"
     	imageurl.concat("key=" + API)
     	imageurl.concat("&photoreference=" + photoref)
-    	imageurl.concat("&maxheight=300&maxwidth=300")
+    	imageurl.concat("&maxheight=150")
     end
 
     def json2Object
@@ -51,17 +46,31 @@ class RestaurantQueryHandler
     			rholder.lat = r["geometry"]["location"]["lat"]
     			rholder.long = r["geometry"]["location"]["lng"]
     			rholder.name = r["name"]
-    			rholder.imageurl = r.include?("photos") ? generateGoogleImage( r["photos"][0]["photo_reference"] ) : nil
-    			rholder.types = r["types"].join(",")
+    			rholder.imageurl = r.include?("photos") ? generateGoogleImage( r["photos"][0]["photo_reference"] ) : r["icon"]
+    			rholder.types = r["types"].join(", ")
     			rholder.address = r["vicinity"]
-    			rholder.price = r["price_level"]
-    			rholder.rating = r["rating"]
+    			rholder.price = moneyConversion(r["price_level"])
+    			rholder.rating = r["rating"].nil? || !r["rating"] ? "no rating" : r["rating"]
     			resultArray.push(rholder)
     		end
     		chooseRandom3(resultArray)
     	else 
     		results["status"]
     	end
+    end
+
+    def moneyConversion(money)
+        if money == 1
+            return "$"
+        elsif money == 2
+            return "$$"
+        elsif money == 3
+            return "$$$"
+        elsif money == 4
+            return "$$$$"
+        else 
+            return ""
+        end
     end
 
     def chooseRandom3(resultArray)

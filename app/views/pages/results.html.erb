@@ -15,16 +15,18 @@
 		<% else %>
 			<%  @results.each do |result| %>
 						<div class="result-container">
-							<h><%= result.name %></h1>
-							<h3>Address: <%= result.address %></h3>
-							<h3>Type: <%= result.types %></h3>
-							<h3>Price: <%= result.price %></h3>
-							<h3>Rating: <%= result.rating %></h3>
+							<div class="text">
+							<h2> <%= result.name %> </h2>
+							<h5>Address: <%= result.address %></h5>
+							<h5>Type: <%= result.types %></h5>
+							<h5 class="short">Price: <%= result.price %></h5>
+							<h5 class="short">Rating: <%= result.rating %></h5>
 							<img src="<%= result.imageurl %>">
-							<br \><br /> <br />
 						</div>
-			 <% end 
-				end %>
+	
+					</div>
+		 <% end 
+			end %>
 		
 	</div>
 </article>

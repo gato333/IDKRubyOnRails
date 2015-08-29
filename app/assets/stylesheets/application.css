@@ -85,7 +85,19 @@ input, select {
     margin: 10px 0; 
     padding: 1em;
     width: 400px;
-}     
+}    
+
+select {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    background: none;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 0;
+    width: 525px;
+} 
 
 input[type="button"] {
     display: inline-block;
@@ -208,7 +220,7 @@ ul.style1
     }
 
 ul.links {
-    width: 525px; 
+    width: 350px; 
     margin: 20px auto;
     padding:0;
 }
@@ -252,7 +264,21 @@ ul.links a {
     
 .fa span
 {
+    position: absolute;
+    top: -15px;
+    background-color: #333;
+    border-radius: 5px;
+    padding: 3px;
+    width: 50px;
+    left: 10px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 12px;
     display: none;
+}
+
+.fa:hover span {
+    display: block;
 }
 
 .fa:before
@@ -334,6 +360,26 @@ a.fa-home {
     content:"\f015";
     font-family: FontAwesome;
 }
+
+/*********************************************************************************/
+/* Results page                                                                           */
+/*********************************************************************************/
+
+.result-container .text {
+    width: 300px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.result-container .text .short {
+    width: 49%;
+    display: inline-block;
+}
+
+.result-container h5 {
+    margin: 10px 0;
+}
+
 /*********************************************************************************/
 /* Error page                                                                           */
 /*********************************************************************************/
