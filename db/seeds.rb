@@ -10,7 +10,9 @@
 require 'time'
 
 Eventbrite.token = '2JMBKUKZ75AVI7ETL3TR'
-
+puts "start delete"
+#EventResult.delete_all
+puts "delete completed"
 searchObj = Hash.new 
 searchObj["location.latitude"] = "40.741080"
 searchObj["location.longitude"] = "-73.988559" 
@@ -18,16 +20,17 @@ searchObj["location.within"] = "30mi"
 searchObj["start_date.range_start"] = Time.now.utc.iso8601
 
 categories = Eventbrite::Category.all
-
+puts "start category query"
 allCatagories = Hash.new
 categories.categories.each do |c|
 	allCatagories[c["id"]] = c["name"]
 end
-
+puts "category done"
+puts "start ebents query"
 events = Eventbrite::Event.search(searchObj)
 all_event = events.events
 i = 0
-if events.paginated? == false
+if events.paginated? 
 	while events.next? && i <= 20
 		searchObj[:page] = events.next_page 
 		events = Eventbrite::Event.search(searchObj)
@@ -36,8 +39,9 @@ if events.paginated? == false
 		puts i
 	end 
 end
-
+puts "event query complete"
+puts "saving events to db"
 all_event.each do |e|
-	EventResult.create( name: e["name"]["text"][0..72].gsub(/\s\w+\s*$/,'...'), address: e["venue_id"], imageurl: e["logo"]["url"], eventurl: e["url"] ,date: e["start"], description: e["description"]["text"][0..147].gsub(/\s\w+\s*$/,'...'), type: allCatagories[e["category"].to_i] )
+	EventResult.create( name: e["name"]["text"][0..97].gsub(/\s\w+\s*$/,'...'), address: e["venue_id"], imageurl: e["logo"] ? e["logo"]["url"] : '' , eventurl: e["url"] , startdate: e["start"]["local"], enddate: e["end"]["local"], description: e["description"]["text"] ? e["description"]["text"][0..197].gsub(/\s\w+\s*$/,'...') : '', types: allCatagories[e["category_id"]] )
 end
-
+puts "completed"
