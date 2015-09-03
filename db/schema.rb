@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150823235549) do
     t.string   "types"
     t.string   "description"
     t.float    "price"
+    t.string   "source"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
