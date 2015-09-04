@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'nokogiri'
 
-gem 'eventbrite'
+gem 'geocoder'
 
 
 # Use ActiveModel has_secure_password
