@@ -9,6 +9,8 @@
 require 'open-uri'
 
 EventResult.delete_all
+time = Time.now
+
 =begin
 #**************************************#
 # 		Eventbrite Scrapper 		
@@ -39,7 +41,7 @@ loop do
 		geo = e.css(".list-card__body .list-card__venue span[itemprop='geo']")
 		lat = geo.css("meta[itemprop='latitude']")[0]["content"]
 		long = geo.css("meta[itemprop='longitude']")[0]["content"]
-		EventResult.create!( name: name[0..97].gsub(/\s\w+\s*$/,'...'), price: price, lat: lat, long: long, address: address, imageurl: imglink ? imglink : '' , eventurl: link , startdate: date, enddate: "", description: '', types: '', source: eventbrite_source)
+		EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: price, lat: lat, long: long, address: address, imageurl: imglink ? imglink : '' , eventurl: link , startdate: date, enddate: "", description: '', types: '', source: eventbrite_source)
 	end
 end
 
@@ -47,7 +49,6 @@ end
 #**************************************#
 # 	Artslant Scrapper 		
 #**************************************#
-time = Time.now
 #for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 dateTomorrow = time.month.to_s + "/" + (time.day.to_i + 1).to_s  + "/" + time.year.to_s
 artslanturl = "http://www.artslant.com/ny/events/list?featured=all&fromdate=#{dateTomorrow}&listtype=openings&todate=#{dateTomorrow}"
@@ -81,10 +82,78 @@ loop do
 		long = geo.nil? ? "" : geo[1]
 		org = rightarray[1]
 
-		EventResult.create!( name: name, price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: date, enddate: enddate, description: "", types: "art, art gallery openings", source: artslant_source)
+		EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: date, enddate: enddate, description: "", types: "art, art gallery openings", source: artslant_source)
 	end
 end
+
+
+#**************************************#
+# 	NYArtBeat Scrapper 		
+#**************************************#
+
+nyartbeaturl = "http://www.nyartbeat.com/list/event_opening"
+nyartbeat_source = "nyartbeat"
+
+html = Nokogiri::HTML(open(nyartbeaturl))
+container = html.css("ul.longsmartlist")[0]
+events = container.css("> li")
+
+events.each do |e|
+	name = e.css("h4 a").text.split.join(" ")
+	imglink = "http://www.nyartbeat.com/" + e.css("div.smartpic_m a img")[0]["src"]
+	link = e.css("div.smartpic_m a")[0]["href"]
+
+	addressholder =  e.css("div.smart_details ul li")[2]
+	address = addressholder.css("span").text
+
+	datecontainer = e.css("div.smart_details ul li")[4]
+	date = datecontainer.text.scan( /\d{2}\:\d{2}/ )
+	startdate = time.to_date.to_s + " " + date[0]
+	enddate = time.to_date.to_s + " " + date[1]
+
+	geo = Geocoder.coordinates(address)
+	lat = geo.nil? ? "" : geo[0]
+	long = geo.nil? ? "" : geo[1]
+
+	orgcontainer = e.css("div.smart_details ul li")[0]
+	org = orgcontainer.text.split.join(" ")[3..-1]
+
+	EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: startdate, enddate: enddate, description: "", types: "art, art gallery openings", source: nyartbeat_source)
+end
+
+
+#**************************************#
+# 	NYCard Scrapper 		
+#**************************************#
+
+artcardsurl = "http://artcards.cc/"
+artcards_source = "artcards"
+
+html = Nokogiri::HTML(open(artcardsurl))
+
+container = html.css("section")[1]
+events = container.css("article")
+
+events.each do |e|
+	name = e.css("span[itemprop='name']").text.split.join(" ")
+	imglink = e.css("a.thumb img")[0]["src"]
+	link = e.css("a.thumb")[0]["href"]
+	org = e.css("div[itemprop='location'] a[itemprop='url'] span").text.split.join(" ")
+
+	address =  e.css("div[itemprop='location'] a.map-link").text.split.join(" ")
+	geo = Geocoder.coordinates(address)
+	lat = geo.nil? ? "" : geo[0]
+	long = geo.nil? ? "" : geo[1]
+
+	datecontainer = e.css("div[itemprop='location'] time").text.split("-")
+	startdate =  time.to_date.to_s + " " + DateTime.parse(datecontainer[0] + "pm").strftime("%H:%M")
+	enddate =  time.to_date.to_s + " " + DateTime.parse(datecontainer[1]).strftime("%H:%M")
+
+	EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: startdate, enddate: enddate, description: "", types: "art, art gallery openings", source: artcards_source)
+end
 =end
+
+
 
 
 
