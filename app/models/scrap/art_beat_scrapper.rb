@@ -4,7 +4,6 @@ class ArtBeatScrapper < AbstractScrapper
 
 	def initilize
 		super		#call absract scrapper class
-		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@nyartbeaturl = "http://www.nyartbeat.com/list/event_opening"
 	end
 

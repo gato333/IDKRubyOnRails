@@ -4,7 +4,6 @@ class NyCardScrapper > AbstractScrapper
 
 	def initilize
 		super		#call absract scrapper class
-		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@artcardsurl = "http://artcards.cc/"
 	end
 	#no pagination
