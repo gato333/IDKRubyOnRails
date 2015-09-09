@@ -10,10 +10,11 @@ class ArtslantScrapper < AbstractScrapper
 		@pagecount = 1
 	end
 
+	#has pagination
 	def scrap
 		loop do 
 			page = "&page=" + @pagecount.to_s
-			html = Nokogiri::HTML(open(@artslanturl + page))
+			html = pullHtml(@artslanturl + page)
 			events = html.css("tbody#thelist tr.t1")
 
 			break if events.empty?
@@ -30,11 +31,8 @@ class ArtslantScrapper < AbstractScrapper
 				
 				rightarray = tableright.text.split(/\n/).reject(&:empty?).reject(&:blank?)
 				address =  rightarray[3] + " " + rightarray[4]
-
-				geo = Geocoder.coordinates(address)
-
-				lat = geo.nil? ? "" : geo[0]
-				long = geo.nil? ? "" : geo[1]
+				lat, long = calculateGeo(address)
+				
 				org = rightarray[1]
 
 				EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: date, enddate: enddate, description: "", types: "art, art gallery openings", source: ARTSLANT_SOURCE)

@@ -7,23 +7,20 @@ class NyCardScrapper > AbstractScrapper
 		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@artcardsurl = "http://artcards.cc/"
 	end
-
+	#no pagination
 	def scrap
-		html = Nokogiri::HTML(open(@artcardsurl))
-
+		html = pullHtml(@artcardsurl)
 		container = html.css("section")[1]
 		events = container.css("article")
 
 		events.each do |e|
-			name = e.css("span[itemprop='name']").text.split.join(" ")
+			name = explodeImplode( e.css("span[itemprop='name']"))
 			imglink = e.css("a.thumb img")[0]["src"]
 			link = e.css("a.thumb")[0]["href"]
-			org = e.css("div[itemprop='location'] a[itemprop='url'] span").text.split.join(" ")
+			org = explodeImplode( e.css("div[itemprop='location'] a[itemprop='url'] span") )
 
-			address =  e.css("div[itemprop='location'] a.map-link").text.split.join(" ")
-			geo = Geocoder.coordinates(address)
-			lat = geo.nil? ? "" : geo[0]
-			long = geo.nil? ? "" : geo[1]
+			address =  explodeImplode( e.css("div[itemprop='location'] a.map-link") )
+			lat, long = calculateGeo(address)
 
 			datecontainer = e.css("div[itemprop='location'] time").text.split("-")
 			startdate =  @time.to_date.to_s + " " + DateTime.parse(datecontainer[0] + "pm").strftime("%H:%M")

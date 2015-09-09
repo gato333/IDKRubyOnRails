@@ -8,8 +8,9 @@ class ArtBeatScrapper < AbstractScrapper
 		@nyartbeaturl = "http://www.nyartbeat.com/list/event_opening"
 	end
 
+	#no pagination
 	def scrap
-		html = Nokogiri::HTML(open(@nyartbeaturl))
+		html = pullHtml(@nyartbeaturl)
 		container = html.css("ul.longsmartlist")[0]
 		events = container.css("> li")
 
@@ -20,15 +21,12 @@ class ArtBeatScrapper < AbstractScrapper
 
 			addressholder =  e.css("div.smart_details ul li")[2]
 			address = addressholder.css("span").text
-
+			lat, long = calculateGeo(address)
+			
 			datecontainer = e.css("div.smart_details ul li")[4]
 			date = datecontainer.text.scan( /\d{2}\:\d{2}/ )
 			startdate = @time.to_date.to_s + " " + date[0]
 			enddate = @time.to_date.to_s + " " + date[1]
-
-			geo = Geocoder.coordinates(address)
-			lat = geo.nil? ? "" : geo[0]
-			long = geo.nil? ? "" : geo[1]
 
 			orgcontainer = e.css("div.smart_details ul li")[0]
 			org = orgcontainer.text.split.join(" ")[3..-1]
