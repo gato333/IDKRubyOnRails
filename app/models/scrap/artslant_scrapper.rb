@@ -1,8 +1,9 @@
+require "scrap/abstract_scrapper"
 class ArtslantScrapper < AbstractScrapper
 	attr_accessor :artslanturl, :pagecount, :dateTomorrow
 	ARTSLANT_SOURCE = 'artslant'
 
-	def initilize
+	def initialize
 		super		#call absract scrapper class
 		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@dateTomorrow = @time.month.to_s + "/" + (@time.day.to_i + 1).to_s  + "/" + @time.year.to_s

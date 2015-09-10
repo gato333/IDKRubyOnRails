@@ -1,8 +1,9 @@
-class NyCardScrapper > AbstractScrapper
+require "scrap/abstract_scrapper"
+class NyCardScrapper < AbstractScrapper
 	attr_accessor :artcardsurl
 	ARTCARDS_SOURCE = "artcards"
 
-	def initilize
+	def initialize
 		super		#call absract scrapper class
 		@artcardsurl = "http://artcards.cc/"
 	end

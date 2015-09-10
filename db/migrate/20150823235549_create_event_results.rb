@@ -11,7 +11,7 @@ class CreateEventResults < ActiveRecord::Migration
       t.datetime :enddate
       t.string :types
       t.string :description
-      t.float :price
+      t.string :price
       t.string :source
 
       t.timestamps null: false

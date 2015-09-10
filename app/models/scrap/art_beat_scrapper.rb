@@ -1,8 +1,9 @@
+require "scrap/abstract_scrapper"
 class ArtBeatScrapper < AbstractScrapper 
 	attr_accessor :nyartbeaturl
 	NYARTBEAT_SOURCE = "nyartbeat"
 
-	def initilize
+	def initialize
 		super		#call absract scrapper class
 		@nyartbeaturl = "http://www.nyartbeat.com/list/event_opening"
 	end

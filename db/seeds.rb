@@ -5,11 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-require 'open-uri'
+require "scrap/art_beat_scrapper"
+require "scrap/artslant_scrapper"
+require "scrap/eventbrite_scrapper"
+require "scrap/ny_card_scrapper"
 
 EventResult.delete_all
-time = Time.now
+
+#EventResult.create( name: "yo")
+es = EventbriteScrapper.new
+es.scrap
 
 =begin
 #**************************************#
