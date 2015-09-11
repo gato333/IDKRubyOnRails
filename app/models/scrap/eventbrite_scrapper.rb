@@ -1,9 +1,9 @@
-require "scrap/abstract_scrapper"
 class EventbriteScrapper < AbstractScrapper
 	attr_accessor :pagecount, :urlbeg, :urlend
 	EVENTBRITE_SOURCE = 'eventbrite'
 
 	def initialize
+		puts "Eventbrite Scrap Start"
 		super		#call absract scrapper class
 		@pagecount = 1
 		@urlbeg = "https://www.eventbrite.com/d/ny--manhattan/events--today/?"
@@ -21,7 +21,6 @@ class EventbriteScrapper < AbstractScrapper
 			@pagecount += 1
 
 			events.each do |e|
-	
 				link =  e.css("a.js-search-result-click-action")[0]["href"]
 				imglink = e.css(".list-card__header img")[0]["src"]
 				
@@ -35,11 +34,10 @@ class EventbriteScrapper < AbstractScrapper
 				lat = geo.css("meta[itemprop='latitude']")[0]["content"]
 				long = geo.css("meta[itemprop='longitude']")[0]["content"]
 
-				p = EventResult.create!( name: name[0..97].gsub(/\s\w+\s*$/,'...'), price: price, lat: lat, long: long, address: address, imageurl: imglink.nil? ? '' : imglink , eventurl: link , startdate: date, enddate: "", description: '', types: '', source: EVENTBRITE_SOURCE)
-				puts p.valid?
-				puts p.errors.inspect
+				EventResult.create!( name: name[0..97].gsub(/\s\w+\s*$/,'...'), price: price, lat: lat, long: long, address: address, imageurl: imglink.nil? ? '' : imglink , eventurl: link , startdate: date, enddate: "", description: '', types: '', source: EVENTBRITE_SOURCE)
 			end
 		end
+		puts "Eventbrite Done"
 	end
 
 end

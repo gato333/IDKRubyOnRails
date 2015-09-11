@@ -1,9 +1,9 @@
-require "scrap/abstract_scrapper"
 class ArtBeatScrapper < AbstractScrapper 
 	attr_accessor :nyartbeaturl
 	NYARTBEAT_SOURCE = "nyartbeat"
 
 	def initialize
+		puts "Art Beat Scrap Start"
 		super		#call absract scrapper class
 		@nyartbeaturl = "http://www.nyartbeat.com/list/event_opening"
 	end
@@ -33,6 +33,7 @@ class ArtBeatScrapper < AbstractScrapper
 
 			EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: startdate, enddate: enddate, description: "", types: "art, art gallery openings", source: NYARTBEAT_SOURCE)
 		end
+		puts "Art Beat Done"
 	end
 
 end
