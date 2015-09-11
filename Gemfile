@@ -27,7 +27,7 @@ gem 'nokogiri'
 
 gem 'geocoder'
 
-gem 'validate_url'
+#gem 'validate_url'
 
 
 # Use ActiveModel has_secure_password

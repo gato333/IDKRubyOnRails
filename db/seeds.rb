@@ -8,15 +8,16 @@
 require "scrap/art_beat_scrapper"
 require "scrap/artslant_scrapper"
 require "scrap/eventbrite_scrapper"
+require "event_result"
 require "scrap/ny_card_scrapper"
 
 EventResult.delete_all
 
 #EventResult.create( name: "yo")
-es = EventbriteScrapper.new
-es.scrap
+#es = EventbriteScrapper.new
+#es.scrap
 
-=begin
+
 #**************************************#
 # 		Eventbrite Scrapper 		
 #**************************************#
@@ -156,7 +157,6 @@ events.each do |e|
 
 	EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: startdate, enddate: enddate, description: "", types: "art, art gallery openings", source: artcards_source)
 end
-=end
 
 
 
