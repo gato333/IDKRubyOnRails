@@ -5,7 +5,7 @@ class AbstractScrapper
   attr_accessor :time
 
 	def initialize
-		Geocoder.configure(:lookup   => :dstk)
+		Geocoder.configure(:lookup   => :google, :timeout => 5)
     @time = Time.now
   end
 

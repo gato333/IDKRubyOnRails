@@ -31,7 +31,7 @@ class ArtBeatScrapper < AbstractScrapper
 			orgcontainer = e.css("div.smart_details ul li")[0]
 			org = orgcontainer.text.split.join(" ")[3..-1]
 
-			EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "free", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: startdate, enddate: enddate, description: "", types: "art, art gallery openings", source: NYARTBEAT_SOURCE)
+			EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "0", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: startdate, enddate: enddate, description: "", types: "art, art gallery openings", source: NYARTBEAT_SOURCE)
 		end
 		puts "Art Beat Done"
 	end

@@ -24,7 +24,8 @@ class EventbriteScrapper < AbstractScrapper
 				link =  e.css("a.js-search-result-click-action")[0]["href"]
 				imglink = e.css(".list-card__header img")[0]["src"]
 				
-				price = e.css(".list-card__header span.list-card__label").text
+				price = e.css(".list-card__header span.list-card__label").text.split.
+				price = freeTest(price)
 				name = e.css(".list-card__body .list-card__title").text.split.join(" ")
 				date = e.css(".list-card__body .list-card__date").text.split.join(" ")
 				address = e.css(".list-card__body .list-card__venue").text.split.join(" ")
@@ -40,4 +41,11 @@ class EventbriteScrapper < AbstractScrapper
 		puts "Eventbrite Done"
 	end
 
+	def freeTest(price)
+    if price.downcase == "free" || price == "$0"
+      "0"
+    else 
+      price
+    end
+  end
 end
