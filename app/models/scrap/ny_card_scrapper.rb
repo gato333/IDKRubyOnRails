@@ -34,7 +34,20 @@ class NyCardScrapper < AbstractScrapper
 				startdate =  @time.to_date.to_s 
 				enddate =  @time.to_date.to_s 
 			end
-			EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "0", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: startdate, enddate: enddate, description: "", types: "art, art gallery openings", source: ARTCARDS_SOURCE)
+			EventResult.create!( 
+				name: name[0..98].gsub(/\s\w+\s*$/,'...'), 
+				price: "0", 
+				lat: lat, 
+				long: long, 
+				address: address, 
+				imageurl: imglink , 
+				eventurl: link , 
+				startdate: startdate, 
+				enddate: enddate, 
+				description: "", 
+				types: "art, art gallery openings", 
+				source: ARTCARDS_SOURCE
+			)
 		end
 		puts "NY Art Card Done"
 	end

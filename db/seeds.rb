@@ -14,6 +14,10 @@ require "scrap/ny_card_scrapper"
 EventResult.delete_all
 #EventResult.destroy_all(:source => "artcards")
 
+#se demora mucho!!!
+es = EventbriteScrapper.new
+es.scrap
+
 nyc = NyCardScrapper.new
 nyc.scrap
 
@@ -22,7 +26,3 @@ artb.scrap
 
 arts = ArtslantScrapper.new
 arts.scrap
-
-#se demora mucho!!!
-es = EventbriteScrapper.new
-es.scrap

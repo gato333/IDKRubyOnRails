@@ -23,8 +23,7 @@ class EventbriteScrapper < AbstractScrapper
 			events.each do |e|
 				link =  e.css("a.js-search-result-click-action")[0]["href"]
 				imglink = e.css(".list-card__header img")[0]["src"]
-				
-				price = e.css(".list-card__header span.list-card__label").text.split.
+				price = e.css(".list-card__header span.list-card__label").text.split("-").first
 				price = freeTest(price)
 				name = e.css(".list-card__body .list-card__title").text.split.join(" ")
 				date = e.css(".list-card__body .list-card__date").text.split.join(" ")
@@ -35,14 +34,31 @@ class EventbriteScrapper < AbstractScrapper
 				lat = geo.css("meta[itemprop='latitude']")[0]["content"]
 				long = geo.css("meta[itemprop='longitude']")[0]["content"]
 
-				EventResult.create!( name: name[0..97].gsub(/\s\w+\s*$/,'...'), price: price, lat: lat, long: long, address: address, imageurl: imglink.nil? ? '' : imglink , eventurl: link , startdate: date, enddate: "", description: '', types: '', source: EVENTBRITE_SOURCE)
+				EventResult.create!( 
+					name: name[0..97].gsub(/\s\w+\s*$/,'...'), 
+					price: price, 
+					lat: lat, 
+					long: long, 
+					address: address, 
+					imageurl: imglink.nil? ? '' : imglink, 
+					eventurl: link, 
+					startdate: date, 
+					enddate: "", 
+					description: '', 
+					types: '', 
+					source: EVENTBRITE_SOURCE
+				)
 			end
 		end
 		puts "Eventbrite Done"
 	end
 
 	def freeTest(price)
-    if price.downcase == "free" || price == "$0"
+		if price.nil?
+			return "n/a"
+		end
+		price = price.gsub("$", "")
+    if price.downcase == "free"
       "0"
     else 
       price

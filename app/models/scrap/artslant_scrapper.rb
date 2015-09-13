@@ -36,7 +36,20 @@ class ArtslantScrapper < AbstractScrapper
 				
 				org = rightarray[1]
 
-				EventResult.create!( name: name[0..98].gsub(/\s\w+\s*$/,'...'), price: "0", lat: lat, long: long, address: address, imageurl: imglink , eventurl: link , startdate: date, enddate: enddate, description: "", types: "art, art gallery openings", source: ARTSLANT_SOURCE)
+				EventResult.create!( 
+					name: name[0..98].gsub(/\s\w+\s*$/,'...'), 
+					price: "0", 
+					lat: lat, 
+					long: long, 
+					address: address, 
+					imageurl: imglink , 
+					eventurl: link , 
+					startdate: date, 
+					enddate: enddate, 
+					description: "", 
+					types: "art, art gallery openings", 
+					source: ARTSLANT_SOURCE
+				)
 			end
 		end
 		puts "Artslant Done"
