@@ -9,33 +9,39 @@ class EventQueryHandler
     	@long = long.to_f
     	@radius = radius.to_f
     	@price = price.to_f
-      @eastlat, @northlong = new_coords( 45 )
-      @westlat, @southlong = new_coords( 225 )
+
+      @northlong = new_coords( 0 , false )
+      @eastlat = new_coords( 90 , true )
+      @southlong = new_coords( 180, false )
+      @westlat = new_coords( 270, true )
+  
     	@keyword = keyword.to_s
       puts @lat.to_s + " " + @long.to_s + " " + @radius.to_s + " " + @price.to_s + " " + @keyword.to_s
       puts @eastlat.to_s + " " + @westlat.to_s + " " + @southlong.to_s + " " + @northlong.to_s
     end
 
-    def new_coords(bearing)
+    def new_coords(bearing, returnlat )
       r = 3959;
       #  New latitude in degrees.
-      new_latitude = rad2deg(Math.asin(Math.sin(deg2rad(@lat)) * Math.cos(@radius / r) + Math.cos(deg2rad(@lat)) * Math.sin(@radius / r) * Math.cos(deg2rad(bearing)) ));
+      new_latitude = rad2deg(Math.asin(Math.sin(deg2rad(@lat)) * Math.cos(@radius / r) + Math.cos(deg2rad(@lat)) * Math.sin(@radius / r) * Math.cos(deg2rad(bearing)) ))
+      if(returnlat)
+        return new_latitude
+      end
       # New longitude in degrees.
-      new_longitude = rad2deg(deg2rad(@long) + Math.atan2(Math.sin(deg2rad(bearing)) * Math.sin(@radius / r) * Math.cos(deg2rad(@lat)), Math.cos(@radius / r) - Math.sin(deg2rad(@lat)) * Math.sin(deg2rad(new_latitude)) ));
-
-      return new_latitude, new_longitude;
+      new_longitude = rad2deg(deg2rad(@long) + Math.atan2(Math.sin(deg2rad(bearing)) * Math.sin(@radius / r) * Math.cos(deg2rad(@lat)), Math.cos(@radius / r) - Math.sin(deg2rad(@lat)) * Math.sin(deg2rad(new_latitude)) ))
+      return  new_longitude
     end
 
     def deg2rad(deg)
-      deg * Math::PI / 180
+      deg * ( Math::PI / 180 )
     end
 
     def rad2deg(rad)
-      rad / 180 * Math::PI 
+      rad * ( 180 / Math::PI )
     end
 
    	def getEventResults
       ja8
-      EventResult.find_by_price_and_lat_and_long(0..@price+1, @westlat..@eastlat, @southlong..@northlong)
+      EventResult.find_by_price_and_lat_and_long(0.0..@price+1, @westlat..@eastlat, @southlong..@northlong)
    	end
 end
