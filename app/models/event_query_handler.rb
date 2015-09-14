@@ -10,26 +10,35 @@ class EventQueryHandler
     	@radius = radius.to_f
     	@price = price.to_f
 
-      @northlong = new_coords( 0 , false )
-      @eastlat = new_coords( 90 , true )
-      @southlong = new_coords( 180, false )
-      @westlat = new_coords( 270, true )
+      @northlong, @eastlat, @southlong, @westlat = boundingBox
   
     	@keyword = keyword.to_s
       puts @lat.to_s + " " + @long.to_s + " " + @radius.to_s + " " + @price.to_s + " " + @keyword.to_s
       puts @eastlat.to_s + " " + @westlat.to_s + " " + @southlong.to_s + " " + @northlong.to_s
     end
 
-    def new_coords(bearing, returnlat )
-      r = 3959;
-      #  New latitude in degrees.
-      new_latitude = rad2deg(Math.asin(Math.sin(deg2rad(@lat)) * Math.cos(@radius / r) + Math.cos(deg2rad(@lat)) * Math.sin(@radius / r) * Math.cos(deg2rad(bearing)) ))
-      if(returnlat)
-        return new_latitude
+    def boundingBox
+      latConFactor = @radius / 69
+      longConFactor = @radius / 69 / Math.cos(deg2rad(@lat)).abs
+
+      min_lat = @lat - latConFactor
+      max_lat = @lat + latConFactor
+      min_long = @long - longConFactor
+      max_long  = @long + longConFactor
+
+      if (min_lat  < -90) 
+        min_lat = 90 - (-90 - min_lat )
       end
-      # New longitude in degrees.
-      new_longitude = rad2deg(deg2rad(@long) + Math.atan2(Math.sin(deg2rad(bearing)) * Math.sin(@radius / r) * Math.cos(deg2rad(@lat)), Math.cos(@radius / r) - Math.sin(deg2rad(@lat)) * Math.sin(deg2rad(new_latitude)) ))
-      return  new_longitude
+      if (max_lat  > 90) 
+        max_lat = -90 + (max_lat  - 90)
+      end
+      if (min_long  < -180) 
+        min_long = 180 - (-180 - min_long)
+      end
+      if (max_long > 180) 
+        max_long = -180 + (max_long - 180)
+      end
+      return  max_lat, max_long, min_lat, min_long
     end
 
     def deg2rad(deg)

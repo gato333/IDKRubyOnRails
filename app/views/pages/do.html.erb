@@ -11,11 +11,11 @@
 
 		<select name="radius" id="radius"> 
 			<option value="0" <%= params.include?('radius') ? (params['radius'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Distance </option>
-			<option value="800" <%= params.include?('radius') ? (params['radius'] == '800' ? 'selected="selected"' : ''): '' %> > 1/2 mile </option> 
-			<option value="1600" <%= params.include?('radius') ? (params['radius'] == '1600' ? 'selected="selected"' : ''): '' %> > 1 mile </option> 
-			<option value="3200" <%= params.include?('radius') ? (params['radius'] == '3200' ? 'selected="selected"' : ''): '' %> > 2 miles </option> 
-			<option value="8000" <%= params.include?('radius') ? (params['radius'] == '8000' ? 'selected="selected"' : ''): '' %> > 5 miles </option> 
-			<option value="16000" <%= params.include?('radius') ? (params['radius'] == '16000' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
+			<option value=".5" <%= params.include?('radius') ? (params['radius'] == '.5' ? 'selected="selected"' : ''): '' %> > 1/2 mile </option> 
+			<option value="1" <%= params.include?('radius') ? (params['radius'] == '1' ? 'selected="selected"' : ''): '' %> > 1 mile </option> 
+			<option value="2" <%= params.include?('radius') ? (params['radius'] == '2' ? 'selected="selected"' : ''): '' %> > 2 miles </option> 
+			<option value="5" <%= params.include?('radius') ? (params['radius'] == '5' ? 'selected="selected"' : ''): '' %> > 5 miles </option> 
+			<option value="10" <%= params.include?('radius') ? (params['radius'] == '10' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
 
 		<br />Enter Keyword: 
