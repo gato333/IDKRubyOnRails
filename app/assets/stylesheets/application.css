@@ -68,6 +68,10 @@ body, input, textarea
     color: #777;
 }
 
+h1 {
+    color:black;
+}
+
 #wrapper {
     position: relative;
     margin:0 auto;
@@ -364,11 +368,27 @@ a.fa-home {
 /*********************************************************************************/
 /* Results page                                                                           */
 /*********************************************************************************/
+.result-container{
+    padding: 0 15px 10px 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.page_link {
+    right: 20px;
+    position: absolute;
+    bottom: 20px;
+}
+
+.even {
+    background-color: #efefef;
+}
 
 .result-container .text {
     width: 300px;
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 5px;
 }
 
 .result-container .text .short {
@@ -378,12 +398,25 @@ a.fa-home {
 
 .result-container h5 {
     margin: 10px 0;
+    font-weight: 300;
+    color: black;
 }
+
+.result-container h5 span {
+   font-weight: 600;
+}
+
 
 .result-container img {
     display: inline-block;
     vertical-align: top;
-    width: 275px;
+    margin-top: 20px;
+    width: 260px;
+}
+
+.result_submit {
+    margin-left: 150px;
+    width: 300px;
 }
 
 /*********************************************************************************/

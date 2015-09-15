@@ -29,8 +29,8 @@
 		
 		<br />
 		<br />
-		<input type="hidden" name="lat" value="<%= params.include?('latitude') ? params['latitude'] : @latitude %>" />
-		<input type="hidden" name="long" value="<%= params.include?('longitude') ? params['longitude'] : @longitude %>" />
+		<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : @latitude %>" />
+		<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : @longitude %>" />
 		<input type="submit" name="topic_submit" value="Search" />
 	
 	</form>			

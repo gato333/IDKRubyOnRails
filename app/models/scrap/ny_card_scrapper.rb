@@ -34,6 +34,8 @@ class NyCardScrapper < AbstractScrapper
 				startdate =  @time.to_date.to_s 
 				enddate =  @time.to_date.to_s 
 			end
+
+			@eventcount += 1 
 			EventResult.create!( 
 				name: name, 
 				price: "0", 
@@ -44,11 +46,12 @@ class NyCardScrapper < AbstractScrapper
 				eventurl: link , 
 				startdate: startdate, 
 				enddate: enddate, 
-				description: "", 
+				description: '', 
 				types: "art, art gallery openings", 
 				source: ARTCARDS_SOURCE
 			)
 		end
+		puts @eventcount.to_s + " events created"
 		puts "NY Art Card Done"
 	end
 

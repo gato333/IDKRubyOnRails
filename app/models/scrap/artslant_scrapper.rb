@@ -35,7 +35,8 @@ class ArtslantScrapper < AbstractScrapper
 				lat, long = calculateGeo(address)
 				
 				org = rightarray[1]
-
+				
+				@eventcount += 1 
 				EventResult.create!( 
 					name: name, 
 					price: "0", 
@@ -46,12 +47,13 @@ class ArtslantScrapper < AbstractScrapper
 					eventurl: link , 
 					startdate: date, 
 					enddate: enddate, 
-					description: "", 
+					description: '', 
 					types: "art, art gallery openings", 
 					source: ARTSLANT_SOURCE
 				)
 			end
 		end
+		puts @eventcount.to_s + " events created"
 		puts "Artslant Done"
 	end
 

@@ -7,7 +7,7 @@
 
 	<div> 
 		<%  if @results == "ZERO_RESULTS" %>
-					SORY NO RESULTS
+					Error: NO RESULTS
 		<%	elsif @results == "INVALID_REQUEST" %>
 			 		SOMETHING HAPPEDN BAD REQEST
 		<%  elsif @results.empty?  %>
@@ -16,39 +16,59 @@
 					Error: <%= @results.inspect %>
 		<%  else %>
 			<% if @title == "DO" 
+					count = 1
 					@results.each do |result| %>
-							<div class="result-container">
+							<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
 								<div class="text">
 									<h2> <%= result.name %> </h2>
-									<h5>Address: <%= result.address %></h5>
-									<h5>Type: <%= result.types %></h5>
-									<h5>URL: <%= result.eventurl %></h5>
-									<h5>Start Time: <%= result.startdate %></h5>
-									<% if !result.enddate.empty? %>
-											<h5>End Time: <%= result.enddate %></h5>
+									<h5><span>Address:</span> <%= result.address %></h5>
+									<h5><span>Type:</span> <%= result.types %></h5>
+									<h5><span>Start Time:</span> <%= result.startdate.strftime("%l:%M %P") %></h5>
+									<% if !result.enddate.nil? %>
+											<h5><span>End Time:</span> <%= result.enddate.strftime("%l:%M %P") %></h5>
 									<% end 
-										 if !result.description.empty? %>
-											<h5>Description: <%= result.description %></h5>
+										 if !result.description.empty?  %>
+											<h5><span>Description:</span> <%= result.description %></h5>
 									<% end %>
-									<h5>Price: <%= result.price %></h5>
+									<h5><span>Price:</span> <%= result.price %></h5>
 								</div>
 								<img src="<%= result.imageurl %>">
+								<a class="page_link" href="<%= result.eventurl %>"> more info... </a>
 							</div>
-			 		<% end 
-				elsif @title = "EAT"
+			 		<% count += 1
+			 			end %>
+				 	<form method="post" action="results"> 
+				 		<input type="hidden" type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= params.include?('price') ? params['price'] : '' %>" />
+						<input type="hidden" name="radius" value="<%= params.include?('radius') ? params['radius'] : '' %>" /> 
+						<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
+						<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
+						<input type="hidden" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" />
+						<input type="hidden" name="source" value="<%= @title %>">
+				 		<input type="submit" name="topic_submit" value="More" class="result_submit" />
+				 	</form>
+				<% elsif @title = "EAT"
 					@results.each do |result| %>
 							<div class="result-container">
 								<div class="text">
 									<h2> <%= result.name %> </h2>
-									<h5>Address: <%= result.address %></h5>
-									<h5>Type: <%= result.types %></h5>
-									<h5 class="short">Price: <%= result.price %></h5>
-									<h5 class="short">Rating: <%= result.rating %></h5>
+									<h5><span>Address:</span> <%= result.address %></h5>
+									<h5><span>Type:</span> <%= result.types %></h5>
+									<h5 class="short"><span>Price:</span> <%= result.price %></h5>
+									<h5 class="short"><span>Rating:</span> <%= result.rating %></h5>
 								</div>
 								<img src="<%= result.imageurl %>">
 							</div>
-			 	<% end 
-				end 
+			 	<% end %>
+			 		<form method="post" action="results"> 
+				 		<input type="hidden" type= "number" name="price" value="<%= params.include?('price') ? params['price'] : '' %>" />
+						<input type="hidden" name="radius" value="<%= params.include?('radius') ? params['radius'] : '' %>" /> 
+						<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
+						<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
+						<input type="hidden" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" />
+						<input type="hidden" name="source" value="<%= @title %>">
+				 		<input type="submit" name="topic_submit" value="More" class="result_submit"/>
+				 	</form>
+				<% end 
 			end %>
 	</div>
 </article>

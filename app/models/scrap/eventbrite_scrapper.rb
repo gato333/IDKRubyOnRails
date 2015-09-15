@@ -32,14 +32,15 @@ class EventbriteScrapper < AbstractScrapper
 				typelist = e.css(".poster-card__footer .poster-card__tags a")
 				type = ""
 				typelist.each do |t|
-					type.concat(explodeImplode(t))
+					type.concat(explodeImplode(t).gsub("#", "") + " ")
 				end
 
 				geo = e.css(".poster-card__body .poster-card__venue span[itemprop='location'] span[itemprop='geo']")
 				lat = geo.css("meta[itemprop='latitude']")[0]["content"]
 				long = geo.css("meta[itemprop='longitude']")[0]["content"]
 
-				puts EventResult.create!( 
+				@eventcount += 1
+				EventResult.create!( 
 					name: name, 
 					price: price, 
 					lat: lat, 
@@ -48,13 +49,14 @@ class EventbriteScrapper < AbstractScrapper
 					imageurl: imglink.nil? ? '' : imglink, 
 					eventurl: link, 
 					startdate: date, 
-					enddate: "", 
+					enddate: '', 
 					description: '', 
 					types: type, 
 					source: EVENTBRITE_SOURCE
-				).inspect
+				)
 			end
 		end
+		puts @eventcount.to_s + " events created"
 		puts "Eventbrite Done"
 	end
 

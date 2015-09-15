@@ -85,7 +85,7 @@ class EventQueryHandler
 
     def chooseRandom3(resultArray)
       finalResults = Array.new
-      until finalResults.length >= 3 do 
+      until finalResults.length >= 3 || resultArray.empty? do 
         randomChoice = Random.rand(resultArray.length) 
         finalResults.push(resultArray[randomChoice])
         resultArray.delete_at(randomChoice)

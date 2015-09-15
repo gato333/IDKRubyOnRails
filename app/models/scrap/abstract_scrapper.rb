@@ -2,11 +2,12 @@ class AbstractScrapper
 	require 'open-uri'
 	require 'event_result'
 
-  attr_accessor :time
+  attr_accessor :time, :eventcount
 
 	def initialize
 		Geocoder.configure(:lookup   => :google, :timeout => 5)
     @time = Time.now
+    @eventcount = 0
   end
 
   #abstract funciton to implement

@@ -31,6 +31,7 @@ class ArtBeatScrapper < AbstractScrapper
 			orgcontainer = e.css("div.smart_details ul li")[0]
 			org = orgcontainer.text.split.join(" ")[3..-1]
 
+			@eventcount += 1 
 			EventResult.create!( 
 				name: name, 
 				price: "0", 
@@ -41,11 +42,12 @@ class ArtBeatScrapper < AbstractScrapper
 				eventurl: link , 
 				startdate: startdate, 
 				enddate: enddate, 
-				description: "", 
+				description: '', 
 				types: "art, art gallery openings", 
 				source: NYARTBEAT_SOURCE
 			)
 		end
+		puts @eventcount.to_s + " events created"
 		puts "Art Beat Done"
 	end
 
