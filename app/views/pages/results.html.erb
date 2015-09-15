@@ -30,7 +30,7 @@
 										 if !result.description.empty?  %>
 											<h5><span>Description:</span> <%= result.description %></h5>
 									<% end %>
-									<h5><span>Price:</span> <%= result.price %></h5>
+									<h5><span>Price:</span> <%= result.price == 0 ? " free" : " $" + result.price.to_s + "0" %></h5>
 								</div>
 								<img src="<%= result.imageurl %>">
 								<a class="page_link" href="<%= result.eventurl %>"> more info... </a>

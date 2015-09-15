@@ -1,8 +1,7 @@
 class Location
-	require 'geoplugin'
 
     def self.getCoor
-       location = Geoplugin.me
+       location = Geocoder.coordinates
     end
 
 end
