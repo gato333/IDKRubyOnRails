@@ -16,26 +16,31 @@ class EventbriteScrapper < AbstractScrapper
 			url = @urlbeg + page + @urlend
 			html = pullHtml(url)
 
-			events = html.css(".js-event-list-container.l-block-stack div.l-block-2")
+			events = html.css("section.js-content div.g-cell div.poster-card.js-d-poster")
 			break if events.empty?
 			@pagecount += 1
 
 			events.each do |e|
-				link =  e.css("a.js-search-result-click-action")[0]["href"]
-				imglink = e.css(".list-card__header img")[0]["src"]
-				price = e.css(".list-card__header span.list-card__label").text.split("-").first
+				linkholder =  e.css("a.js-event-link.js-xd-track-link")
+				link = linkholder[0]["href"]
+				imglink = linkholder.css(".poster-card__header .poster-card__image img")[0]["src"]
+				price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
 				price = freeTest(price)
-				name = e.css(".list-card__body .list-card__title").text.split.join(" ")
-				date = e.css(".list-card__body .list-card__date").text.split.join(" ")
-				address = e.css(".list-card__body .list-card__venue").text.split.join(" ")
-				org = e.css(".list-card__body .list-card__organizer").text.split.join(" ")
-				
-				geo = e.css(".list-card__body .list-card__venue span[itemprop='geo']")
+				name = explodeImplode(linkholder.css(".poster-card__body .poster-card__title"))
+				date = explodeImplode(linkholder.css(".poster-card__body .poster-card__date"))
+				address = explodeImplode(linkholder.css(".poster-card__body .poster-card__venue"))
+				typelist = e.css(".poster-card__footer .poster-card__tags a")
+				type = ""
+				typelist.each do |t|
+					type.concat(explodeImplode(t))
+				end
+
+				geo = e.css(".poster-card__body .poster-card__venue span[itemprop='location'] span[itemprop='geo']")
 				lat = geo.css("meta[itemprop='latitude']")[0]["content"]
 				long = geo.css("meta[itemprop='longitude']")[0]["content"]
 
-				EventResult.create!( 
-					name: name[0..97].gsub(/\s\w+\s*$/,'...'), 
+				puts EventResult.create!( 
+					name: name, 
 					price: price, 
 					lat: lat, 
 					long: long, 
@@ -45,9 +50,9 @@ class EventbriteScrapper < AbstractScrapper
 					startdate: date, 
 					enddate: "", 
 					description: '', 
-					types: '', 
+					types: type, 
 					source: EVENTBRITE_SOURCE
-				)
+				).inspect
 			end
 		end
 		puts "Eventbrite Done"

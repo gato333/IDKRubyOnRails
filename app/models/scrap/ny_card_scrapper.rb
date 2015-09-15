@@ -35,7 +35,7 @@ class NyCardScrapper < AbstractScrapper
 				enddate =  @time.to_date.to_s 
 			end
 			EventResult.create!( 
-				name: name[0..98].gsub(/\s\w+\s*$/,'...'), 
+				name: name, 
 				price: "0", 
 				lat: lat, 
 				long: long, 

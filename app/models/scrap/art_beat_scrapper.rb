@@ -32,7 +32,7 @@ class ArtBeatScrapper < AbstractScrapper
 			org = orgcontainer.text.split.join(" ")[3..-1]
 
 			EventResult.create!( 
-				name: name[0..98].gsub(/\s\w+\s*$/,'...'), 
+				name: name, 
 				price: "0", 
 				lat: lat, 
 				long: long, 

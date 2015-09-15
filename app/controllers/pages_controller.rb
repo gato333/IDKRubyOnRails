@@ -37,7 +37,6 @@ class PagesController < ApplicationController
   			if PagesHelper.validateForm(params, PagesHelper::DO_STATUS)
   				query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getEventResults
-          ie904 
   			else 
 					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
   			end

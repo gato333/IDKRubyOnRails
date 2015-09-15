@@ -1,6 +1,7 @@
 class EventQueryHandler
 		require 'open-uri'
     require 'event_result'
+    require "result_container"
 
 		attr_accessor :lat, :eastlat, :westlat, :long, :northlong, :southlong, :radius, :keyword, :price
 
@@ -10,7 +11,7 @@ class EventQueryHandler
     	@radius = radius.to_f
     	@price = price.to_f
 
-      @northlong, @eastlat, @southlong, @westlat = boundingBox
+      @northlat, @eastlong, @southlat, @westlong = boundingBox
   
     	@keyword = keyword.to_s
       puts @lat.to_s + " " + @long.to_s + " " + @radius.to_s + " " + @price.to_s + " " + @keyword.to_s
@@ -49,8 +50,46 @@ class EventQueryHandler
       rad * ( 180 / Math::PI )
     end
 
+    def queryDB 
+      EventResult.where("price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ?", 0.0, @price, @northlat, @southlat, @westlong, @eastlong )
+    end
+
    	def getEventResults
-      ja8
-      EventResult.find_by_price_and_lat_and_long(0.0..@price+1, @westlat..@eastlat, @southlong..@northlong)
-   	end
+      formatResults
+    end
+
+    def formatResults
+      results = queryDB
+      if !results.empty?
+        resultArray = Array.new
+        results.each do |r|
+          rholder = ResultContainer.new
+          rholder.lat = r.lat
+          rholder.long = r.long
+          rholder.name = r.name
+          rholder.imageurl = r.imageurl
+          rholder.types = r.types
+          rholder.address = r.address
+          rholder.price = r.price
+          rholder.eventurl = r.eventurl
+          rholder.startdate = r.startdate
+          rholder.enddate = r.enddate
+          rholder.description = r.description
+          resultArray.push(rholder)
+        end
+        chooseRandom3(resultArray)
+      else 
+        "No Results"
+      end
+    end
+
+    def chooseRandom3(resultArray)
+      finalResults = Array.new
+      until finalResults.length >= 3 do 
+        randomChoice = Random.rand(resultArray.length) 
+        finalResults.push(resultArray[randomChoice])
+        resultArray.delete_at(randomChoice)
+      end
+      finalResults
+    end
 end

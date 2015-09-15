@@ -10,23 +10,45 @@
 					SORY NO RESULTS
 		<%	elsif @results == "INVALID_REQUEST" %>
 			 		SOMETHING HAPPEDN BAD REQEST
+		<%  elsif @results.empty?  %>
+					No Results.
 		<%  elsif @results.kind_of?(Array) == false %>
-					<%= @results.inspect %>
-		<% else %>
-			<%  @results.each do |result| %>
-						<div class="result-container">
-							<div class="text">
-							<h2> <%= result.name %> </h2>
-							<h5>Address: <%= result.address %></h5>
-							<h5>Type: <%= result.types %></h5>
-							<h5 class="short">Price: <%= result.price %></h5>
-							<h5 class="short">Rating: <%= result.rating %></h5>
-							<img src="<%= result.imageurl %>">
-						</div>
-	
-					</div>
-		 <% end 
+					Error: <%= @results.inspect %>
+		<%  else %>
+			<% if @title == "DO" 
+					@results.each do |result| %>
+							<div class="result-container">
+								<div class="text">
+									<h2> <%= result.name %> </h2>
+									<h5>Address: <%= result.address %></h5>
+									<h5>Type: <%= result.types %></h5>
+									<h5>URL: <%= result.eventurl %></h5>
+									<h5>Start Time: <%= result.startdate %></h5>
+									<% if !result.enddate.empty? %>
+											<h5>End Time: <%= result.enddate %></h5>
+									<% end 
+										 if !result.description.empty? %>
+											<h5>Description: <%= result.description %></h5>
+									<% end %>
+									<h5>Price: <%= result.price %></h5>
+								</div>
+								<img src="<%= result.imageurl %>">
+							</div>
+			 		<% end 
+				elsif @title = "EAT"
+					@results.each do |result| %>
+							<div class="result-container">
+								<div class="text">
+									<h2> <%= result.name %> </h2>
+									<h5>Address: <%= result.address %></h5>
+									<h5>Type: <%= result.types %></h5>
+									<h5 class="short">Price: <%= result.price %></h5>
+									<h5 class="short">Rating: <%= result.rating %></h5>
+								</div>
+								<img src="<%= result.imageurl %>">
+							</div>
+			 	<% end 
+				end 
 			end %>
-		
 	</div>
 </article>
