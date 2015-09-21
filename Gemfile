@@ -27,6 +27,8 @@ gem 'nokogiri'
 
 gem 'geocoder'
 
+gem 'whenever', require: false
+
 #gem 'validate_url'
 
 

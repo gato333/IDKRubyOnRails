@@ -3,7 +3,7 @@ class NyCardScrapper < AbstractScrapper
 	ARTCARDS_SOURCE = "artcards"
 
 	def initialize
-		puts "NY Art Card Scrap Start"
+		db_logger.info("NY Art Card Scrap Start")
 		super		#call absract scrapper class
 		@artcardsurl = "http://artcards.cc/"
 	end
@@ -51,8 +51,8 @@ class NyCardScrapper < AbstractScrapper
 				source: ARTCARDS_SOURCE
 			)
 		end
-		puts @eventcount.to_s + " events created"
-		puts "NY Art Card Done"
+		db_logger.info( @eventcount.to_s + " events created")
+		db_logger.info( "NY Art Card Done" )
 	end
 
 end

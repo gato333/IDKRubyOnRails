@@ -3,7 +3,7 @@ class EventbriteScrapper < AbstractScrapper
 	EVENTBRITE_SOURCE = 'eventbrite'
 
 	def initialize
-		puts "Eventbrite Scrap Start"
+		db_logger.info( "Eventbrite Scrap Start")
 		super		#call absract scrapper class
 		@pagecount = 1
 		@urlbeg = "https://www.eventbrite.com/d/ny--manhattan/events--today/?"
@@ -56,8 +56,8 @@ class EventbriteScrapper < AbstractScrapper
 				)
 			end
 		end
-		puts @eventcount.to_s + " events created"
-		puts "Eventbrite Done"
+		db_logger.info( @eventcount.to_s + " events created")
+		db_logger.info( "Eventbrite Done")
 	end
 
 	def freeTest(price)

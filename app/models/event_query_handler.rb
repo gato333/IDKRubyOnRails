@@ -55,11 +55,10 @@ class EventQueryHandler
     end
 
    	def getEventResults
-      formatResults
+      formatResults( queryDB )
     end
 
-    def formatResults
-      results = queryDB
+    def formatResults(results)
       if !results.empty?
         resultArray = Array.new
         results.each do |r|

@@ -3,7 +3,7 @@ class ArtslantScrapper < AbstractScrapper
 	ARTSLANT_SOURCE = 'artslant'
 
 	def initialize
-		puts "Artslant Scrap Start"
+		db_logger.info("Artslant Scrap Start")
 		super		#call absract scrapper class
 		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@dateTomorrow = @time.month.to_s + "/" + (@time.day.to_i + 1).to_s  + "/" + @time.year.to_s
@@ -53,8 +53,8 @@ class ArtslantScrapper < AbstractScrapper
 				)
 			end
 		end
-		puts @eventcount.to_s + " events created"
-		puts "Artslant Done"
+		db_logger.info(@eventcount.to_s + " events created")
+		db_logger.info("Artslant Done")
 	end
 
 end

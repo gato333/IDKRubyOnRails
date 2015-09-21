@@ -10,6 +10,10 @@ class AbstractScrapper
     @eventcount = 0
   end
 
+  def db_logger 
+    @@db_logger ||= Logger.new("#{Rails.root}/log/db.log")
+  end
+
   #abstract funciton to implement
   def scrap
   end
