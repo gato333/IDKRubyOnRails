@@ -12,7 +12,6 @@ require "scrap/eventbrite_scrapper"
 require "scrap/ny_card_scrapper"
 
 EventResult.delete_all
-#EventResult.destroy_all(:source => "artcards")
 
 #se demora mucho!!!
 es = EventbriteScrapper.new
