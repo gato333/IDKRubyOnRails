@@ -8,20 +8,19 @@ class ApplicationController < ActionController::Base
 	include ApplicationHelper  
 
 	#page functions
-
   def home
   end
 
   def do
-  	location = remote_ip.location
-  	@latitude = location.latitude
-  	@longitude = location.longitude
+  	location = Location.getCoor(remote_ip)
+  	@latitude = location["latitude"]
+  	@longitude = location["longitude"]
   end
 
   def eat      
-  	location =  remote_ip.location
-  	@latitude = location.latitude
-  	@longitude = location.longitude
+  	location = Location.getCoor(remote_ip)
+  	@latitude = location["latitude"]
+  	@longitude = location["longitude"]
   end
 
   def random
@@ -30,15 +29,15 @@ class ApplicationController < ActionController::Base
   def results 
   	if params.include?("source")
   		@title = params["source"]
-  		if @title == PagesHelper::EAT_STATUS
-  			if PagesHelper.validateForm(params, PagesHelper::EAT_STATUS)
+  		if @title == ApplicationHelper::EAT_STATUS
+  			if ApplicationHelper.validateForm(params, ApplicationHelper::EAT_STATUS)
   				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getRestaurantResults
   			else 
   				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
   			end
-  		elsif @title == PagesHelper::DO_STATUS
-  			if PagesHelper.validateForm(params, PagesHelper::DO_STATUS)
+  		elsif @title == ApplicationHelper::DO_STATUS
+  			if ApplicationHelper.validateForm(params, ApplicationHelper::DO_STATUS)
   				query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getEventResults
   			else 
@@ -68,7 +67,7 @@ class ApplicationController < ActionController::Base
 
   def remote_ip
   	 if request.remote_ip == '127.0.0.1' ||  request.remote_ip == '::1'
-      '192.168.0.30'
+      '190.100.238.198'
     else
       request.remote_ip
     end
