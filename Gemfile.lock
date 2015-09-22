@@ -62,6 +62,9 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hike (1.2.3)
+    httparty (0.13.6)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     ipaddress (0.8.0)
     jbuilder (2.3.1)
@@ -80,6 +83,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.0)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -164,6 +168,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   geocoder
   geoplugin
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
   nokogiri

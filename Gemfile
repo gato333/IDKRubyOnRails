@@ -29,6 +29,8 @@ gem 'geocoder'
 
 gem 'whenever', require: false
 
+gem 'httparty'
+
 #gem 'validate_url'
 
 
