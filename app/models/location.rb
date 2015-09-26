@@ -4,7 +4,7 @@ class Location
 
     def self.getCoor(ip)
     	resp = self.get( "/" + ip)
-    	JSON.parse(resp.body)
+    	eval(resp.body)
     end
 
 end

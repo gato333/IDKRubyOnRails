@@ -66,7 +66,9 @@ class ApplicationController < ActionController::Base
   end
 
   def remote_ip
-  	 if request.remote_ip == '127.0.0.1' ||  request.remote_ip == '::1'
+    app_logger.info(request.remote_ip)
+
+  	if request.remote_ip == '127.0.0.1' ||  request.remote_ip == '::1'
       '190.100.238.198'
     else
       request.remote_ip

@@ -6,6 +6,6 @@
 # Learn more: http://github.com/javan/whenever
 
 # regeneartes the db every day
-every 1.day, :at => '12:20 pm' do
+every 1.day, :at => '4:30 am' do
   rake "db:seed"
 end

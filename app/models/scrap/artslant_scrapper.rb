@@ -31,7 +31,11 @@ class ArtslantScrapper < AbstractScrapper
 				name = tableright.css("a span.artist").text.split.join(" ") + ": " + tableright.css("a i").text.split.join(" ")
 				
 				rightarray = tableright.text.split(/\n/).reject(&:empty?).reject(&:blank?)
-				address =  rightarray[3] + " " + rightarray[4]
+				if( rightarray[3].nil? || rightarray[4].nil? )
+					address = ""
+				else 
+					address =  rightarray[3] + " " + rightarray[4]
+				end
 				lat, long = calculateGeo(address)
 				
 				org = rightarray[1]

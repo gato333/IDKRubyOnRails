@@ -22,15 +22,15 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+# data-scrapping tool
 gem 'nokogiri'
-
+# convert address to geolocation
 gem 'geocoder'
-
+# cron job like thing
 gem 'whenever', require: false
-
+# use for rest api 
 gem 'httparty'
-
+# validating url duuuuh
 #gem 'validate_url'
 
 
