@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
     app_logger.info(request.remote_ip)
 
   	if request.remote_ip == '127.0.0.1' ||  request.remote_ip == '::1'
-      '190.100.238.198'
+      '108.27.76.225'
     else
       request.remote_ip
     end

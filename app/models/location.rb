@@ -1,10 +1,10 @@
 class Location
 	require 'net/http'
-  base_uri 'http://freegeoip.net/json'
+  BASE_URL = 'http://freegeoip.net/json'
 
     def self.getCoor(ip)
-    	resp = Net::HTTP.get( "/" + ip)
-    	JSON.parse(resp.body)
+    	resp = Net::HTTP.get( URI( BASE_URL + "/" + ip) )
+    	JSON.parse(resp)
     end
 
 end
