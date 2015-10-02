@@ -24,7 +24,7 @@
 			<option value="16000" <%= params.include?('radius') ? (params['radius'] == '16000' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
 
-		<br />Enter Keyword: 
+		<br />Enter Keyword: IP: <%= @ip %>
 		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
 		
 		<br />

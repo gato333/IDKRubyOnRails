@@ -26,7 +26,7 @@ class ArtBeatScrapper < AbstractScrapper
 			datecontainer = e.css("div.smart_details ul li")[4]
 			date = datecontainer.text.scan( /\d{2}\:\d{2}/ )
 			startdate = @time.to_date.to_s + " " + date[0]
-			enddate = @time.to_date.to_s + " " + date[1]
+			enddate = date[1].nil? ? "" : @time.to_date.to_s + " " + date[1]
 
 			orgcontainer = e.css("div.smart_details ul li")[0]
 			org = orgcontainer.text.split.join(" ")[3..-1]
