@@ -26,10 +26,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'nokogiri'
 # convert address to geolocation
 gem 'geocoder'
-# cron job like thing
-gem 'whenever', require: false
-# use for rest api 
-gem 'httparty'
 # validating url duuuuh
 #gem 'validate_url'
 
