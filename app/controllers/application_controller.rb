@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def do
     puts request.remote_ip
-    @ip = remote_ip
+    @ip = request.remote_ip
   end
 
   def eat 
