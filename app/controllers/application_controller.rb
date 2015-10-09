@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def do
+    puts request.remote_ip
     @ip = remote_ip
   end
 
