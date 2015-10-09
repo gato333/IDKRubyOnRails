@@ -77,7 +77,7 @@ $(document).ready( function() {
 	var ip = $('.ipHolder').val(); 
 
 	$.ajax({ 
-		url: 'http://freegeoip.net/json/' + ip, 
+		url: 'https://freegeoip.net/json/' + ip, 
 		dataType: 'jsonp',
 		type: 'GET',
 		success: function(result){
