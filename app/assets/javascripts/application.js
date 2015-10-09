@@ -47,7 +47,8 @@ function deleteChoice(elem){
 }
 
 $(document).ready( function() {
-	
+	$('.dbquery').prop('disabled', true);
+
 	//top nav click events
 	//may or not be necessary since the page redirects 
 	//too fast most of the times to bear the fruit of the
@@ -58,5 +59,27 @@ $(document).ready( function() {
 			$(this).addClass("active");
 		}
 	});
+
+	var ip = $('.ipHolder').val(); 
+
+	$.ajax({ 
+		url: 'http://freegeoip.net/json/' + ip, 
+		dataType: 'jsonp',
+		type: 'GET',
+		success: function(result){
+			console.log("result"); 
+      console.log(result);
+      $('.dbquery').prop('disabled', false);
+      $('input[name="lat"]').val(result.latitude); 
+      $('input[name="long"]').val(result.longitude); 
+    }, 
+  	error: function(data){
+  		$('.dbquery').on('click', function(){
+  			alert("Can not submit your request. I cannot discern your location.")
+  		});
+  		console.log("errors"); 
+  		console.log(data);
+  	}
+  });
 
 });

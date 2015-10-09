@@ -12,17 +12,11 @@ class ApplicationController < ActionController::Base
   end
 
   def do
-  	location = Location.getCoor(remote_ip)
-  	@latitude = location["latitude"]
-  	@longitude = location["longitude"]
-    @ip = request.remote_ip
+    @ip = remote_ip
   end
 
-  def eat      
-  	location = Location.getCoor(remote_ip)
-  	@latitude = location["latitude"]
-  	@longitude = location["longitude"]
-    @ip = request.remote_ip
+  def eat 
+    @ip = remote_ip
   end
 
   def random

@@ -18,12 +18,17 @@
 			<option value="10" <%= params.include?('radius') ? (params['radius'] == '10' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
 
-		<br />Enter Keyword: IP: <%= @ip %>
+		<br>
+		IP: <%= @ip %>
+		<br><br>
+
+		<br />Enter Keyword:
 		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
 		<br />
 		<br />
-		<input type="hidden" name="lat" value="<%= params.include?('latitude') ? params['latitude'] : @latitude %>" />
-		<input type="hidden" name="long" value="<%= params.include?('longitude') ? params['longitude'] : @longitude %>" />
+		<input class="ipHolder" type="hidden" name="ip" value="<%= @ip %>" />
+		<input type="hidden" name="lat" value="<%= params.include?('latitude') ? params['latitude'] : '' %>" />
+		<input type="hidden" name="long" value="<%= params.include?('longitude') ? params['longitude'] : '' %>" />
 
 		<input type="hidden" name="source" value="<%= yield(:title) %>">
 

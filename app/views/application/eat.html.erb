@@ -24,13 +24,18 @@
 			<option value="16000" <%= params.include?('radius') ? (params['radius'] == '16000' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
 
-		<br />Enter Keyword: IP: <%= @ip %>
+		<br>
+		IP: <%= @ip %>
+		
+		<br />Enter Keyword: 
 		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
 		
 		<br />
 		<br />
-		<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : @latitude %>" />
-		<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : @longitude %>" />
+		<input class="ipHolder" type="hidden" name="ip" value="<%= @ip %>" />
+		
+		<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
+		<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
 		<input type="submit" name="topic_submit" value="Search" />
 	
 	</form>			
