@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.8)
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -50,19 +51,15 @@ GEM
     coffee-script-source (1.9.1.1)
     debug_inspector (0.0.2)
     erubis (2.7.0)
+    ethon (0.8.0)
+      ffi (>= 1.3.0)
     execjs (2.6.0)
-    faraday (0.9.1)
-      multipart-post (>= 1.2, < 3)
+    ffi (1.9.10)
     geocoder (1.2.9)
-    geoplugin (0.3.1)
-      faraday
-      ipaddress
-      json
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hike (1.2.3)
     i18n (0.7.0)
-    ipaddress (0.8.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -79,7 +76,6 @@ GEM
     mini_portile (0.6.2)
     minitest (5.8.0)
     multi_json (1.11.2)
-    multipart-post (2.0.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.17.1)
@@ -142,11 +138,16 @@ GEM
     tilt (1.4.1)
     turbolinks (2.5.3)
       coffee-rails
+    typhoeus (0.8.0)
+      ethon (>= 0.8.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    validate_url (1.0.2)
+      activemodel (>= 3.0.0)
+      addressable
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -160,7 +161,6 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   geocoder
-  geoplugin
   jbuilder (~> 2.0)
   jquery-rails
   nokogiri
@@ -171,5 +171,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   spring
   turbolinks
+  typhoeus
   uglifier (>= 1.3.0)
+  validate_url
   web-console (~> 2.0)
