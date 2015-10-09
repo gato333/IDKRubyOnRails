@@ -26,8 +26,6 @@ gem 'geocoder'
 # validating url duuuuh
 gem 'validate_url'
 
-gem 'typhoeus'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

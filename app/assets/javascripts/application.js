@@ -16,13 +16,14 @@
 //= require_tree .
 
 
-//click events for random page
+//  click events for random page
+//  randomly chooses one of the supplied options, given that all the options 
+// 	are filled in
 function chooseRandomly() {
   choices = $("input[type!='button']").removeClass("error").removeClass("chosen"); 
   var result = $("span.result").text("");
 
   $(choices).each( function() {
-  	console.log($(this).val());
   	if($(this).val() === ""){
   		$(this).addClass("error");
   		$(result).text("All Choices must be filled, put 'nothing' if you must.");  
@@ -34,6 +35,7 @@ function chooseRandomly() {
 	}
 }
 
+//  adds choice to the randomizer, allows for infinite addition of options
 function addChoice(){
 	var choiceCount = ($("form input[type='text']").length + 1).toString(); 
 	var countWord = choiceCount == 3 ? 'rd': 'th'; 
@@ -41,18 +43,20 @@ function addChoice(){
 	$("input[name='addmore']").before(newChoice);
 }
 
+//  removes choice to the randomizer, except for the first two
 function deleteChoice(elem){
 	var name = elem.className.replace("delete-choice", "").replace(" ", "");
 	$("."+name).remove(); 
 }
 
 $(document).ready( function() {
+	//  submit is disabled until the ajax call finishes, and is successful
 	$('.dbquery').prop('disabled', true);
 
-	//top nav click events
-	//may or not be necessary since the page redirects 
-	//too fast most of the times to bear the fruit of the
-	//animation tranistion that this funciton would create
+	//  top nav click events
+	//  may or not be necessary since the page redirects 
+	//  too fast most of the times to bear the fruit of the
+	//  animation tranistion that this funciton would create
 	$(".fa").on("click", function(){
 		if( !$(this).hasClass("active") ){
 			$(".fa").removeClass("active");
@@ -60,6 +64,16 @@ $(document).ready( function() {
 		}
 	});
 
+	//  removes red from form elements on focus
+	//  gives reactive look
+	$('.error').on("onfocus click", function(){
+		$(this).removeClass("error");
+	})
+
+	//  gets the ip which ruby has saved into website
+	//  ajax call is then ulized to retrieve the geolocation of 
+	//  the supplied ip address, and embeds it in the page, 
+	//  also enables the submit on success, error msg on failure
 	var ip = $('.ipHolder').val(); 
 
 	$.ajax({ 
@@ -67,8 +81,6 @@ $(document).ready( function() {
 		dataType: 'jsonp',
 		type: 'GET',
 		success: function(result){
-			console.log("result"); 
-      console.log(result);
       $('.dbquery').prop('disabled', false);
       $('input[name="lat"]').val(result.latitude); 
       $('input[name="long"]').val(result.longitude); 

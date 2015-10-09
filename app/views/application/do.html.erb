@@ -4,12 +4,16 @@
 		<h2>What To Do?!</h2>
 	</header>
 
+	<% if defined? @error_msg %>
+		<div class="error_msg"> <%= @error_msg %> </div>
+	<% end %>
+
 	<form action="results" method="post">
 		<br />Enter Price:
-		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= params.include?('price') ? params['price'] : '' %>" />
+		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= params.include?('price') ? params['price'] : '' %>" class="<%= @price_error.nil? ? '' : 'error' %>"/>
 		<br />
 
-		<select name="radius" id="radius"> 
+		<select name="radius" id="radius" class="<%= @radius_error.nil? ? '' : 'error' %>"> 
 			<option value="0" <%= params.include?('radius') ? (params['radius'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Distance </option>
 			<option value=".5" <%= params.include?('radius') ? (params['radius'] == '.5' ? 'selected="selected"' : ''): '' %> > 1/2 mile </option> 
 			<option value="1" <%= params.include?('radius') ? (params['radius'] == '1' ? 'selected="selected"' : ''): '' %> > 1 mile </option> 
@@ -17,10 +21,6 @@
 			<option value="5" <%= params.include?('radius') ? (params['radius'] == '5' ? 'selected="selected"' : ''): '' %> > 5 miles </option> 
 			<option value="10" <%= params.include?('radius') ? (params['radius'] == '10' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
-
-		<br>
-		IP: <%= @ip %>
-		<br><br>
 
 		<br />Enter Keyword:
 		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
@@ -32,7 +32,7 @@
 
 		<input type="hidden" name="source" value="<%= yield(:title) %>">
 
-		<input type="submit" name="topic_submit" value="Search" />
+		<input type="submit" name="topic_submit" value="Search" class="dbquery" />
 
 	</form action>
 

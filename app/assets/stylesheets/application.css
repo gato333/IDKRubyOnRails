@@ -366,6 +366,29 @@ a.fa-home {
 }
 
 /*********************************************************************************/
+/* eat and do page                                                                           */
+/*********************************************************************************/
+
+.error {
+    border: 1px solid red;
+    color: red; 
+}
+
+.error_msg {
+    border: 1px solid red;
+    color: red; 
+    padding: 5px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.error_msg span {
+    font-weight: 600; 
+    font-style: 
+}
+
+
+/*********************************************************************************/
 /* Results page                                                                           */
 /*********************************************************************************/
 .result-container{
@@ -423,7 +446,7 @@ a.fa-home {
 /* Error page                                                                           */
 /*********************************************************************************/
 
-div.error_msg {
+#error div.error_msg {
         display: inline-block;
     width: 475px;
     vertical-align: top;

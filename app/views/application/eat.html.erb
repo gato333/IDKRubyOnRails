@@ -3,11 +3,13 @@
 	<header>
 		<h2>What To Eat?!</h2>
 	</header>
-
+	<% if defined? @error_msg %>
+		<div class="error_msg"> <%= @error_msg %> </div>
+	<% end %>
 	<form action="results" method="post">
 
 		<input type="hidden" name="source" value="<%= yield(:title) %>">
-		<select name="price" id="price">
+		<select name="price" id="price" class="<%= @price_error.nil? ? '' : 'error' %>">
 			<option value="0" <%= params.include?('price') ? (params['price'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Price Range </option>
 			<option value="1" <%= params.include?('price') ? (params['price'] == '1' ? 'selected="selected"' : ''): "" %> > $ </option> 
 			<option value="2" <%= params.include?('price') ? (params['price'] == '2' ? 'selected="selected"' : ''): "" %> > $$ </option> 
@@ -15,7 +17,7 @@
 			<option value="4" <%= params.include?('price') ? (params['price'] == '4' ? 'selected="selected"' : ''): "" %> > $$$$ </option> 
 		</select> 
 
-		<select name="radius" id="radius"> 
+		<select name="radius" id="radius" class="<%= @radius_error.nil? ? '' : 'error' %>"> 
 		<option value="0" <%= params.include?('radius') ? (params['radius'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Distance </option>
 			<option value="800" <%= params.include?('radius') ? (params['radius'] == '800' ? 'selected="selected"' : ''): '' %> > 1/2 mile </option> 
 			<option value="1600" <%= params.include?('radius') ? (params['radius'] == '1600' ? 'selected="selected"' : ''): '' %> > 1 mile </option> 
@@ -23,9 +25,6 @@
 			<option value="8000" <%= params.include?('radius') ? (params['radius'] == '8000' ? 'selected="selected"' : ''): '' %> > 5 miles </option> 
 			<option value="16000" <%= params.include?('radius') ? (params['radius'] == '16000' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
-
-		<br>
-		IP: <%= @ip %>
 		
 		<br />Enter Keyword: 
 		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
@@ -36,7 +35,7 @@
 		
 		<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
 		<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
-		<input type="submit" name="topic_submit" value="Search" />
+		<input type="submit" name="topic_submit" value="Search"  class="dbquery"/>
 	
 	</form>			
 </article>

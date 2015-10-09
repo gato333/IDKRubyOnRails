@@ -11,11 +11,17 @@ class ApplicationController < ActionController::Base
   end
 
   def do
-    puts request.remote_ip
-    @ip = request.remote_ip
+    if params.include?('error') 
+      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, ApplicationHelper::DO_STATUS);
+    end
+    @ip = remote_ip
+
   end
 
   def eat 
+    if params.include?('error') 
+      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, ApplicationHelper::EAT_STATUS);
+    end
     @ip = remote_ip
   end
 
@@ -56,7 +62,6 @@ class ApplicationController < ActionController::Base
   end
 
   ## helper functions 
-
   def app_logger 
     @@app_logger ||= Logger.new("#{Rails.root}/log/app.log")
   end
