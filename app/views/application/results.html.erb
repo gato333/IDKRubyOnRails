@@ -24,16 +24,15 @@
 									<h5><span>Address:</span> <%= result.address %></h5>
 									<h5><span>Type:</span> <%= result.types %></h5>
 									<h5><span>Start Time:</span> <%= result.startdate.strftime("%l:%M %P") %></h5>
-									<% if !result.enddate.nil? %>
-											<h5><span>End Time:</span> <%= result.enddate.strftime("%l:%M %P") %></h5>
-									<% end 
-										 if !result.description.empty?  %>
-											<h5><span>Description:</span> <%= result.description %></h5>
-									<% end %>
+									<h5><span>End Time:</span> <%= result.endate.nil? ? "" : result.enddate.strftime("%l:%M %P") %></h5>
 									<h5><span>Price:</span> <%= result.price == 0 ? " free" : " $" + result.price.to_s + "0" %></h5>
 								</div>
 								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
-								<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> more info... </a></div>
+								<div class="learn_more_box hidden">
+										<h5><span>Description:</span> <%= result.description %></h5>
+										<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> event link</a></div>
+								</div>
+								<div class="expand_learn_more"><input class="learn_more_button" type="button"> more... </a></div>
 							</div>
 			 		<% count += 1
 			 			end %>
