@@ -51,7 +51,12 @@ class EventQueryHandler
     end
 
     def queryDB 
-      EventResult.where("price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ?", 0.0, @price, @northlat, @southlat, @westlong, @eastlong )
+
+      EventResult.where("price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ? AND (types LIKE ? OR name LIKE ? OR address LIKE ? OR description LIKE ? )", 0.0, @price, @northlat, @southlat, @westlong, @eastlong, queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword) )
+    end
+
+    def queryLikeHelper(word)
+      '%' + word + '%'
     end
 
    	def getEventResults

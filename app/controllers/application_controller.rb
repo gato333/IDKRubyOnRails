@@ -8,27 +8,34 @@ class ApplicationController < ActionController::Base
 
 	#page functions
   def home
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
   end
 
   def do
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DO_STATUS); 
     if params.include?('error') 
       @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, ApplicationHelper::DO_STATUS);
     end
+    puts request.remote_ip
     @ip = remote_ip
 
   end
 
   def eat 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::EAT_STATUS); 
     if params.include?('error') 
       @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, ApplicationHelper::EAT_STATUS);
     end
+    puts request.remote_ip
     @ip = remote_ip
   end
 
   def random
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::RANDOM_STATUS); 
   end
 
   def results 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
   	if params.include?("source")
   		@title = params["source"]
   		if @title == ApplicationHelper::EAT_STATUS
@@ -54,6 +61,7 @@ class ApplicationController < ActionController::Base
   end
 
   def error 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
   	if params.include?(:error_msg)
   		@error_msg = params[:error_msg]
   	else 

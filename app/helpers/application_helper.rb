@@ -2,6 +2,8 @@ module ApplicationHelper
 
 	EAT_STATUS = "EAT"
 	DO_STATUS = "DO"
+	DEFAULT_STATUS = "DEFAULT"
+	RANDOM_STATUS = "RANDOM"
 
 	def self.validateForm( params , status )
 		if !validateRadius(params["radius"])
@@ -52,5 +54,17 @@ module ApplicationHelper
 		end
 		return error_msg, radius_error, price_error
 	end
-	
+
+	def self.includeJavascripts(status) 
+		if status == EAT_STATUS || status == DO_STATUS
+			['application', 'form']
+		elsif status == RANDOM_STATUS
+			['application', 'random']
+		elsif status == DEFAULT_STATUS
+			['application']
+		else
+			"problem assinging javacripts to page" 
+		end
+	end
+
 end

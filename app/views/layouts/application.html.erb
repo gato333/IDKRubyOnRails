@@ -9,13 +9,24 @@
 		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" />
 		-->
 		<%= stylesheet_link_tag    'application.css', media: 'all', 'data-turbolinks-track' => true %>
+		<% @javascriptsArray.each do |file| %>
+	  	<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
+	  <% end %>
 
-	  <%= javascript_include_tag 'application.js', 'data-turbolinks-track' => true %>
 	  <%= csrf_meta_tags %>
 
 	</head>
 	<body class="homepage">
 
+			<div class="ipDialog hidden">
+				<div class="dialog-back">
+				</div>
+				<div class="dialog-box">
+						<input class="x-button" type="button" value="x">
+						Sorry. there was a problem, in pinpointing your location. Please refresh the page.
+						<input class="refresh-button" type="submit" value="Refresh">
+				</div>
+			</div>
 		<!-- Wrapper-->
 			<div id="wrapper">
 				

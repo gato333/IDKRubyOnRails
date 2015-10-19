@@ -32,8 +32,8 @@
 									<% end %>
 									<h5><span>Price:</span> <%= result.price == 0 ? " free" : " $" + result.price.to_s + "0" %></h5>
 								</div>
-								<img src="<%= result.imageurl %>">
-								<a class="page_link" href="<%= result.eventurl %>"> more info... </a>
+								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
+								<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> more info... </a></div>
 							</div>
 			 		<% count += 1
 			 			end %>
@@ -56,7 +56,7 @@
 									<h5 class="short"><span>Price:</span> <%= result.price %></h5>
 									<h5 class="short"><span>Rating:</span> <%= result.rating %></h5>
 								</div>
-								<img src="<%= result.imageurl %>">
+								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
 							</div>
 			 	<% end %>
 			 		<form method="post" action="results"> 
