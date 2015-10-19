@@ -13,7 +13,7 @@
 		<%  elsif @results.empty?  %>
 					No Results.
 		<%  elsif @results.kind_of?(Array) == false %>
-					Error: <%= @results.inspect %>
+				<%= @results %>
 		<%  else %>
 			<% if @title == "DO" 
 					count = 1

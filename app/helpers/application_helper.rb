@@ -6,7 +6,9 @@ module ApplicationHelper
 	RANDOM_STATUS = "RANDOM"
 
 	def self.validateForm( params , status )
-		if !validateRadius(params["radius"])
+		if !validateGeoLocation(params)
+			return false 
+		elsif !validateRadius(params["radius"])
 			return false 
 		elsif !validatePriceEat(params["price"], status)
 			return false
@@ -15,6 +17,14 @@ module ApplicationHelper
 		else 
 			return true
 		end
+	end
+
+	def self.validateGeoLocation( params )
+		puts params
+		if params["lat"] == nil || params["lat"] == "" || params["long"] == nil || params["long"] == ""
+			return false 
+		end 
+		return true
 	end
 
 	def self.validateRadius( radius )
@@ -41,13 +51,16 @@ module ApplicationHelper
 	def self.formErrorMsg( params, status )
 		error_msg = ""
 		radius_error = price_error = nil
+		if !validateGeoLocation(params)
+			error_msg += "There was a problem discerning where your location was, please try submiting again. <br>"
+		end
 		if !validateRadius(params["radius"])
 			radius_error = true
-			error_msg += "You must supply a valid RADIUS to be able to generate a response. "
+			error_msg += "You must supply a valid RADIUS to be able to generate a response. <br>"
 		end
 		if !validatePriceEat(params["price"], status)
 			price_error = true
-			error_msg += "You must supply a valid PRICE to be able to generate a response. "
+			error_msg += "You must supply a valid PRICE to be able to generate a response. <br>"
 		elsif !validatePriceDo(params["price"], status)
 			price_error = true
 			error_msg += "You must supply a valid PRICE to be able to generate a response. "

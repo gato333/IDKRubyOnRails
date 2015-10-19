@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
-
 	require "restaurant_query_handler"
 	include ApplicationHelper  
 
@@ -43,14 +42,14 @@ class ApplicationController < ActionController::Base
   				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getRestaurantResults
   			else 
-  				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
+  				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1", :lat => params["lat"] || "", :long => params["long"] || ""
   			end
   		elsif @title == ApplicationHelper::DO_STATUS
   			if ApplicationHelper.validateForm(params, ApplicationHelper::DO_STATUS)
   				query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getEventResults
   			else 
-					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1"
+					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1", :lat => params["lat"] || "", :long => params["long"] || ""
   			end
   		else 
   			redirect_to :action => 'error', :error_msg => "Submitted from a not accepted page."
@@ -76,7 +75,6 @@ class ApplicationController < ActionController::Base
 
   def remote_ip
     app_logger.info(request.remote_ip)
-
   	if request.remote_ip == '127.0.0.1' ||  request.remote_ip == '::1'
       '108.27.76.225'
     else

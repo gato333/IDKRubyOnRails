@@ -5,7 +5,7 @@
 	</header>
 
 	<% if defined? @error_msg %>
-		<div class="error_msg"> <%= @error_msg %> </div>
+		<div class="error_msg"> <%= @error_msg.html_safe %> </div>
 	<% end %>
 
 	<form action="results" method="post">

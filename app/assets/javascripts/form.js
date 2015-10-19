@@ -29,19 +29,22 @@ $(document).ready( function() {
 	} else {
 		$.ajax({ 
 			url: 'https://freegeoip.net/json/' + ip, 
-			dataType: 'jsonp',
+			dataType: 'json',
 			type: 'GET',
+			timeout: 1000,
 			success: function(result){
+				$('.dbquery').on('click', function(e){});
 	      $('.dbquery').prop('disabled', false);
 	      $('input[name="lat"]').val(result.latitude); 
 	      $('input[name="long"]').val(result.longitude); 
 	    }, 
 	  	error: function(data){
-	  		$('.dbquery').on('click', function(){
-	  			alert("Can not submit your request. I cannot discern your location.")
+	  		$('.dbquery').prop('disabled', false);
+	  		$('.dbquery').on('click', function(e){
+	  			e.preventDefault();
+	  			$('.ipDialog').removeClass("hidden");
+	  			$('.ipDialog .dialog-box span').text("Can not submit your request. I cannot discern your location."); 
 	  		});
-	  		console.log("errors"); 
-	  		console.log(data);
 	  	}
 	  });
 	}

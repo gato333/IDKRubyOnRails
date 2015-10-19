@@ -4,7 +4,7 @@
 		<h2>What To Eat?!</h2>
 	</header>
 	<% if defined? @error_msg %>
-		<div class="error_msg"> <%= @error_msg %> </div>
+		<div class="error_msg"> <%= @error_msg.html_safe %> </div>
 	<% end %>
 	<form action="results" method="post">
 
@@ -35,7 +35,7 @@
 		
 		<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
 		<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
-		<input type="submit" name="topic_submit" value="Search"  class="dbquery"/>
+		<input type="submit" name="topic_submit" value="Search"  class="dbquery" />
 	
 	</form>			
 </article>
