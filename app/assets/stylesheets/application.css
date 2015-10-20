@@ -488,8 +488,8 @@ input.x-button {
    font-weight: 600;
 }
 
-.result-container .learn_more {
-    width: 100%; 
+.result-container .learn_more_button {
+    width: 100px; 
     height: 20px; 
     position: relative;
 }

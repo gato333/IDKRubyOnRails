@@ -24,7 +24,7 @@
 									<h5><span>Address:</span> <%= result.address %></h5>
 									<h5><span>Type:</span> <%= result.types %></h5>
 									<h5><span>Start Time:</span> <%= result.startdate.strftime("%l:%M %P") %></h5>
-									<h5><span>End Time:</span> <%= result.endate.nil? ? "" : result.enddate.strftime("%l:%M %P") %></h5>
+									<h5><span>End Time:</span> <%= result.enddate.nil? ? "" : result.enddate.strftime("%l:%M %P") %></h5>
 									<h5><span>Price:</span> <%= result.price == 0 ? " free" : " $" + result.price.to_s + "0" %></h5>
 								</div>
 								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
@@ -32,7 +32,7 @@
 										<h5><span>Description:</span> <%= result.description %></h5>
 										<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> event link</a></div>
 								</div>
-								<div class="expand_learn_more"><input class="learn_more_button" type="button"> more... </a></div>
+								<input class="learn_more_button" type="button" value="expand">
 							</div>
 			 		<% count += 1
 			 			end %>

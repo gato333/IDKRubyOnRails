@@ -27,7 +27,7 @@ class ArtslantScrapper < AbstractScrapper
 				date = @time.to_date.to_s + " " + e.css("td table tr td")[2].css("b span").text.split("-")[0]
 				enddate = @time.to_date.to_s + e.css("td table tr td")[2].css("b span").text.split("-")[1]
 
-				link = "http://www.artslant.com" + ( tableright.css("a")[1].nil? ? tableright.css("a")[0]["href"] : tableright.css("a")[1]["href"] )
+				link = ( tableright.css("a")[1].nil? ? (tableright.css("a")[0].nil? "http://www.artslant.com" + e.css("span.imagethumbfield a")[0]["href"] : tableright.css("a")[0]["href"] ) : tableright.css("a")[1]["href"] )
 				name = tableright.css("a span.artist").text.split.join(" ") + ": " + tableright.css("a i").text.split.join(" ")
 				
 				rightarray = tableright.text.split(/\n/).reject(&:empty?).reject(&:blank?)
