@@ -78,6 +78,7 @@ class EventQueryHandler
           rholder.eventurl = r.eventurl
           rholder.startdate = r.startdate
           rholder.enddate = r.enddate
+          rholder.source = r.source
           rholder.description = r.description
           resultArray.push(rholder)
         end

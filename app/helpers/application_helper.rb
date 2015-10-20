@@ -4,6 +4,7 @@ module ApplicationHelper
 	DO_STATUS = "DO"
 	DEFAULT_STATUS = "DEFAULT"
 	RANDOM_STATUS = "RANDOM"
+	RESULT_STATUS = "RESULT"
 
 	def self.validateForm( params , status )
 		if !validateGeoLocation(params)
@@ -73,6 +74,8 @@ module ApplicationHelper
 			['application', 'form']
 		elsif status == RANDOM_STATUS
 			['application', 'random']
+		elsif status == RESULT_STATUS
+			['application', 'result']
 		elsif status == DEFAULT_STATUS
 			['application']
 		else
