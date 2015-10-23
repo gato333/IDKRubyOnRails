@@ -502,7 +502,7 @@ input.x-button {
     position: relative;
     max-width: 100%;
     float: right;
-    background-size: contain;
+    background-size: cover;
     width: 260px;
     min-width: 40%;
     margin-top: 20px;
