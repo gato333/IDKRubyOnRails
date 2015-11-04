@@ -13,8 +13,14 @@ $(document).ready( function() {
 	$('.ipDialog .x-button').on('click', function(){
 		$('.ipDialog').addClass('hidden');
 	});
+
 	$('.ipDialog .refresh-button').on('click', function(){
 		location.reload();
+	});
+	// wont go here if goes through the below ajax call's error function
+	$('.dbquery').on( 'click' function(e){
+		console.log("SUBMIT");
+		e.preventDefault();
 	});
 
 	//  gets the ip which ruby has saved into website
