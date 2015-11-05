@@ -14,8 +14,8 @@ require "scrap/ny_card_scrapper"
 EventResult.delete_all
 
 #se demora mucho!!!
-es = EventbriteScrapper.new
-es.scrap
+#es = EventbriteScrapper.new
+#es.scrap
 
 nyc = NyCardScrapper.new
 nyc.scrap

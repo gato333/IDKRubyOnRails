@@ -29,6 +29,16 @@ class AbstractScrapper
     textManipulate.text.split.join(" ")
   end
 
+  # test to see if there is time sufix in a string 
+  # if so returns it unscathed 
+  # other wise adds pm to it
+  def findAddTimeSufix(text)
+    if text.include? "am" or text.include? "pm" or text.include? "AM" or text.include? "PM" 
+      return text
+    end 
+    text + "pm"
+  end
+
   def calculateGeo(address)
     geo = Geocoder.coordinates(address)
 

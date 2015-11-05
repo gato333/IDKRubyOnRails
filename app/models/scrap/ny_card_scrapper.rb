@@ -25,10 +25,10 @@ class NyCardScrapper < AbstractScrapper
 			datecontainer = e.css("div[itemprop='location'] time").text.split("-")
 			datecontainer = datecontainer.map { |x| x == "noon" ? "12" : x }
 			if( datecontainer.length > 1 )
-				startdate =  @time.to_date.to_s + " " + DateTime.parse(datecontainer[0] + "pm").strftime("%H:%M")
-				enddate =  @time.to_date.to_s + " " + DateTime.parse(datecontainer[1]).strftime("%H:%M")
+				startdate =  @time.to_date.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
+				enddate =  @time.to_date.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[1] )).strftime("%H:%M")
 			elsif ( datecontainer[0].to_i.to_s == datecontainer[0] )
-				startdate =  @time.to_date.to_s + " " + DateTime.parse(datecontainer[0] + "pm").strftime("%H:%M")
+				startdate =  @time.to_date.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
 				enddate =  ""
 			else
 				startdate =  @time.to_date.to_s 
