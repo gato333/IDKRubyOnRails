@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
     end
     puts request.remote_ip
     @ip = remote_ip
-
   end
 
   def eat 
@@ -34,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def results 
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::RESULT_STATUS); 
   	if params.include?("source")
   		@title = params["source"]
   		if @title == ApplicationHelper::EAT_STATUS
