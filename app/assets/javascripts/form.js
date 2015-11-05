@@ -18,7 +18,7 @@ $(document).ready( function() {
 		location.reload();
 	});
 	// wont go here if goes through the below ajax call's error function
-	$('.dbquery').on( 'click' function(e){
+	$('.dbquery').on( 'click', function(e){
 		console.log("SUBMIT");
 		e.preventDefault();
 	});
