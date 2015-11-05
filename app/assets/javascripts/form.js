@@ -42,7 +42,10 @@ $(document).ready( function() {
 				$('.dbquery').on('click', function(e){});
 	      $('.dbquery').prop('disabled', false);
 	      $('input[name="lat"]').val(result.latitude); 
-	      $('input[name="long"]').val(result.longitude); 
+	      $('input[name="long"]').val(result.longitude);
+	      $('.dbquery').on( 'click', function(e){
+					console.log("SUBMIT"); 
+				});	
 	    }, 
 	  	error: function(data){
 	  		$('.dbquery').prop('disabled', false);
