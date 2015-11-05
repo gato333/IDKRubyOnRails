@@ -17,11 +17,6 @@ $(document).ready( function() {
 	$('.ipDialog .refresh-button').on('click', function(){
 		location.reload();
 	});
-	// wont go here if goes through the below ajax call's error function
-	$('.dbquery').on( 'click', function(e){
-		console.log("SUBMIT");
-		e.preventDefault();
-	});
 
 	//  gets the ip which ruby has saved into website
 	//  ajax call is then ulized to retrieve the geolocation of 
@@ -43,9 +38,7 @@ $(document).ready( function() {
 	      $('.dbquery').prop('disabled', false);
 	      $('input[name="lat"]').val(result.latitude); 
 	      $('input[name="long"]').val(result.longitude);
-	      $('.dbquery').on( 'click', function(e){
-					console.log("SUBMIT"); 
-				});	
+	    
 	    }, 
 	  	error: function(data){
 	  		$('.dbquery').prop('disabled', false);
