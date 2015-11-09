@@ -13,9 +13,8 @@ require "scrap/ny_card_scrapper"
 
 EventResult.delete_all
 
-#se demora mucho!!!
-#es = EventbriteScrapper.new
-#es.scrap
+arts = ArtslantScrapper.new
+arts.scrap
 
 nyc = NyCardScrapper.new
 nyc.scrap
@@ -23,5 +22,5 @@ nyc.scrap
 artb = ArtBeatScrapper.new
 artb.scrap
 
-arts = ArtslantScrapper.new
-arts.scrap
+es = EventbriteScrapper.new
+es.scrap

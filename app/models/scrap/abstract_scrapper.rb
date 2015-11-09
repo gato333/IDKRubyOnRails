@@ -1,7 +1,7 @@
 class AbstractScrapper
 	require 'open-uri'
 	require 'event_result'
-  require 'string'
+  require 'string_helper'
 
   attr_accessor :time, :eventcount
 
