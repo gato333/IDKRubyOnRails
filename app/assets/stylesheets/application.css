@@ -503,8 +503,8 @@ input.x-button {
     max-width: 100%;
     float: right;
     background-size: cover;
-    width: 300px;
-    min-width: 50%;
+    width: 265px;
+    min-width: 45%;
     margin-top: 20px;
     height: 160px;
 }

@@ -32,7 +32,7 @@ $(document).ready( function() {
 			url: 'https://freegeoip.net/json/' + ip, 
 			dataType: 'json',
 			type: 'GET',
-			timeout: 1000,
+			timeout: 30000,
 			success: function(result){
 				$('.dbquery').on('click', function(e){});
 	      $('.dbquery').prop('disabled', false);

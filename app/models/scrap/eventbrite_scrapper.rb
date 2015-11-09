@@ -39,6 +39,8 @@ class EventbriteScrapper < AbstractScrapper
 				lat = geo.css("meta[itemprop='latitude']")[0]["content"]
 				long = geo.css("meta[itemprop='longitude']")[0]["content"]
 
+				description = deepscrap(link);
+
 				@eventcount += 1
 				EventResult.create!( 
 					name: name, 
@@ -50,7 +52,7 @@ class EventbriteScrapper < AbstractScrapper
 					eventurl: link, 
 					startdate: date, 
 					enddate: '', 
-					description: '', 
+					description: description, 
 					types: type, 
 					source: EVENTBRITE_SOURCE
 				)
@@ -58,6 +60,11 @@ class EventbriteScrapper < AbstractScrapper
 		end
 		db_logger.info( @eventcount.to_s + " events created")
 		db_logger.info( "Eventbrite Done")
+	end
+
+	def deepscrap(link)
+		html = pullHtml(link)
+		
 	end
 
 	def freeTest(price)
