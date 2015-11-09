@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get '/error' => 'application#error'
 
+  get '/count' => 'application#count'
+
   # Example resource route with options:
   #   resources :products do
   #     member do

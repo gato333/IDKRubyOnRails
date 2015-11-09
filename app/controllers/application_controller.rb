@@ -58,6 +58,12 @@ class ApplicationController < ActionController::Base
   	end
   end
 
+  def count
+    query = EventQueryHandler.new
+    @results = query.totalEvents
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+  end
+
   def error 
     @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
   	if params.include?(:error_msg)

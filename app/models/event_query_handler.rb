@@ -18,6 +18,10 @@ class EventQueryHandler
       puts @eastlat.to_s + " " + @westlat.to_s + " " + @southlong.to_s + " " + @northlong.to_s
     end
 
+    def initialize
+      @lat = @long = @radius = @price = @northlat = @eastlong = @southlat = @westlong = @keyword = nil
+    end
+
     def boundingBox
       latConFactor = @radius / 69
       longConFactor = @radius / 69 / Math.cos(deg2rad(@lat)).abs
@@ -96,5 +100,9 @@ class EventQueryHandler
         resultArray.delete_at(randomChoice)
       end
       finalResults
+    end
+
+    def totalEvents
+      EventResult.count
     end
 end
