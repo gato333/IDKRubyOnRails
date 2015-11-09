@@ -5,22 +5,22 @@ class EventQueryHandler
 
 		attr_accessor :lat, :eastlat, :westlat, :long, :northlong, :southlong, :radius, :keyword, :price
 
-    def initialize(lat, long, radius, price, keyword = "")
-    	@lat = lat.to_f
-    	@long = long.to_f
-    	@radius = radius.to_f
-    	@price = price.to_f
+    def initialize(lat = nil , long = nil, radius = nil, price = nil, keyword = "")
+    	@lat = lat.nil? ? lat : lat.to_f
+    	@long = long.nil? ? long : long.to_f
+    	@radius = radius.nil? ? radius : radius.to_f
+    	@price = price.nil? ? price : price.to_f
 
-      @northlat, @eastlong, @southlat, @westlong = boundingBox
-  
+      if( @lat.nil? || @long.nil? || @radius.nil? )
+         @northlat = @eastlong = @southlat = @westlong = nil
+      else 
+        @northlat, @eastlong, @southlat, @westlong = boundingBox
+      end 
+
     	@keyword = keyword.to_s
-      puts @lat.to_s + " " + @long.to_s + " " + @radius.to_s + " " + @price.to_s + " " + @keyword.to_s
-      puts @eastlat.to_s + " " + @westlat.to_s + " " + @southlong.to_s + " " + @northlong.to_s
     end
 
-    def initialize
-      @lat = @long = @radius = @price = @northlat = @eastlong = @southlat = @westlong = @keyword = nil
-    end
+   
 
     def boundingBox
       latConFactor = @radius / 69
