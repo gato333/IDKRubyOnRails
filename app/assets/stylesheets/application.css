@@ -459,7 +459,8 @@ input.x-button {
 }
 
 .page_link {
-    float:right;
+    display: block;
+    text-align: right;
 }
 
 .even {
