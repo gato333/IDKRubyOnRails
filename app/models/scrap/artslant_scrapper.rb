@@ -26,8 +26,9 @@ class ArtslantScrapper < AbstractScrapper
 				tableright = e.css("td table tr td")[1]
 				date = @time.to_date.to_s + " " + e.css("td table tr td")[2].css("b span").text.split("-")[0]
 				enddate = @time.to_date.to_s + e.css("td table tr td")[2].css("b span").text.split("-")[1]
-
-				link = tableright.css("a")[1].nil? ? (tableright.css("a")[0].nil? ? "http://www.artslant.com" + e.css("span.imagethumbfield a")[0]["href"] : tableright.css("a")[0]["href"] ) : tableright.css("a")[1]["href"] 
+				# GET THE RIGHT LINK 
+				artslantlink =  "http://www.artslant.com" + tableright.css("b a")[0]["href"] 
+				link = tableright.css("a")[1].nil? ? (tableright.css("a")[0].nil? ? "http://www.artslant.com" + tableright.css("b a")[0]["href"]  : tableright.css("a")[0]["href"] ) : tableright.css("a")[1]["href"] 
 				name = tableright.css("a span.artist").text.split.join(" ") + ": " + tableright.css("a i").text.split.join(" ")
 				
 				rightarray = tableright.text.split(/\n/).reject(&:empty?).reject(&:blank?)
@@ -40,6 +41,8 @@ class ArtslantScrapper < AbstractScrapper
 				
 				org = rightarray[1]
 				
+				description = deepscrap(artslantlink)
+				
 				@eventcount += 1 
 				EventResult.create!( 
 					name: name, 
@@ -51,7 +54,7 @@ class ArtslantScrapper < AbstractScrapper
 					eventurl: link , 
 					startdate: date, 
 					enddate: enddate, 
-					description: '', 
+					description: description, 
 					types: "art, art gallery openings", 
 					source: ARTSLANT_SOURCE
 				)
@@ -59,6 +62,11 @@ class ArtslantScrapper < AbstractScrapper
 		end
 		db_logger.info(@eventcount.to_s + " events created")
 		db_logger.info("Artslant Done")
+	end
+
+	def deepscrap(link)
+		html = pullHtml(link)
+		html.css(".description").to_s.strip_tags
 	end
 
 end

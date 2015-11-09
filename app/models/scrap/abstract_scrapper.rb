@@ -1,6 +1,7 @@
 class AbstractScrapper
 	require 'open-uri'
 	require 'event_result'
+  require 'string'
 
   attr_accessor :time, :eventcount
 
@@ -19,6 +20,7 @@ class AbstractScrapper
   end
 
   def deepscrap
+    ""
   end
 
   def pullHtml(url)
@@ -41,7 +43,6 @@ class AbstractScrapper
 
   def calculateGeo(address)
     geo = Geocoder.coordinates(address)
-
     lat = geo.nil? ? "" : geo[0]
     long = geo.nil? ? "" : geo[1]
     return lat, long

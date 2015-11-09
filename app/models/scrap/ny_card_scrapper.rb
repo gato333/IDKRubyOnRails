@@ -34,6 +34,8 @@ class NyCardScrapper < AbstractScrapper
 				startdate =  @time.to_date.to_s 
 				enddate =  @time.to_date.to_s 
 			end
+			# not possible to do deep scrap on this site (too bare bones)
+			description = deepscrap
 
 			@eventcount += 1 
 			EventResult.create!( 
@@ -46,7 +48,7 @@ class NyCardScrapper < AbstractScrapper
 				eventurl: link , 
 				startdate: startdate, 
 				enddate: enddate, 
-				description: '', 
+				description: description, 
 				types: "art, art gallery openings", 
 				source: ARTCARDS_SOURCE
 			)
@@ -55,4 +57,7 @@ class NyCardScrapper < AbstractScrapper
 		db_logger.info( "NY Art Card Done" )
 	end
 
+	def deepscrap
+		super
+	end
 end

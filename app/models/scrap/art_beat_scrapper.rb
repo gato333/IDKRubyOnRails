@@ -31,6 +31,8 @@ class ArtBeatScrapper < AbstractScrapper
 			orgcontainer = e.css("div.smart_details ul li")[0]
 			org = orgcontainer.text.split.join(" ")[3..-1]
 
+			description = deepscrap(link);
+
 			@eventcount += 1 
 			EventResult.create!( 
 				name: name, 
@@ -42,13 +44,19 @@ class ArtBeatScrapper < AbstractScrapper
 				eventurl: link , 
 				startdate: startdate, 
 				enddate: enddate, 
-				description: '', 
+				description: description, 
 				types: "art, art gallery openings", 
 				source: NYARTBEAT_SOURCE
 			)
 		end
 		db_logger.info( @eventcount.to_s + " events created" )
 		db_logger.info( "Art Beat Done" )
+	end
+
+
+	def deepscrap(link)
+		html = pullHtml(link)
+		html.css(".intro_event").to_s.strip_tags
 	end
 
 end

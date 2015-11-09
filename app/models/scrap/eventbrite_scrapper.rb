@@ -63,8 +63,19 @@ class EventbriteScrapper < AbstractScrapper
 	end
 
 	def deepscrap(link)
-		html = pullHtml(link)
-		
+		html = pullHtml(forceHTTPS(link))
+		replacements = [ [ "&#13;", "&quot;" ], [ " ", "\"" ] ]
+		description = html.css(".panel_section .description").to_s.strip_tags
+		replacements.each { |replace| description.gsub!(replace[0], replace[1]) }
+		description
+	end
+
+	def forceHTTPS(link)
+		if link.include? "https://"
+			link
+		else 
+			link.sub! "http://" , "https://"
+		end
 	end
 
 	def freeTest(price)
