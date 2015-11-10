@@ -3,8 +3,8 @@ class NyCardScrapper < AbstractScrapper
 	ARTCARDS_SOURCE = "artcards"
 
 	def initialize
-		db_logger.info("NY Art Card Scrap Start")
-		super		#call absract scrapper class
+		message = "NY Art Card Scrap Start"
+		super(message)		#call absract scrapper class
 		@artcardsurl = "http://artcards.cc/"
 	end
 	#no pagination
@@ -53,8 +53,8 @@ class NyCardScrapper < AbstractScrapper
 				source: ARTCARDS_SOURCE
 			)
 		end
-		db_logger.info( @eventcount.to_s + " events created")
-		db_logger.info( "NY Art Card Done" )
+		message = "NY Art Card Done"
+		endScrapOutput( message, @eventcount.to_s )
 	end
 
 	def deepscrap

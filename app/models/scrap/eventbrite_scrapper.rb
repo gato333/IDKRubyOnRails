@@ -3,8 +3,8 @@ class EventbriteScrapper < AbstractScrapper
 	EVENTBRITE_SOURCE = 'eventbrite'
 
 	def initialize
-		db_logger.info( "Eventbrite Scrap Start")
-		super		#call absract scrapper class
+		message = "Eventbrite Scrap Start"
+		super( message )		#call absract scrapper class
 		@pagecount = 1
 		@urlbeg = "https://www.eventbrite.com/d/ny--manhattan/events--today/?"
 		@urlend = "&slat=40.7831&slng=-73.9712&sort=best"
@@ -58,8 +58,8 @@ class EventbriteScrapper < AbstractScrapper
 				)
 			end
 		end
-		db_logger.info( @eventcount.to_s + " events created")
-		db_logger.info( "Eventbrite Done")
+		message = "Eventbrite Done"
+		endScrapOutput( message, @eventcount.to_s )
 	end
 
 	def deepscrap(link)

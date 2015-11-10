@@ -5,10 +5,12 @@ class AbstractScrapper
 
   attr_accessor :time, :eventcount
 
-  def initialize
+  def initialize(msg)
     Geocoder.configure(:lookup   => :google, :timeout => 5)
     @time = Time.now
     @eventcount = 0
+    db_logger.info(msg)
+    puts msg
   end
 
   def db_logger 
@@ -47,4 +49,12 @@ class AbstractScrapper
     long = geo.nil? ? "" : geo[1]
     return lat, long
   end
+
+  def endScrapOutput(msg, count)
+    db_logger.info( count + " events created")
+    db_logger.info(msg)
+    puts count + " events created"
+    puts msg
+  end
+
 end

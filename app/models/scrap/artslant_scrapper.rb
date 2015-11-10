@@ -3,8 +3,8 @@ class ArtslantScrapper < AbstractScrapper
 	ARTSLANT_SOURCE = 'artslant'
 
 	def initialize
-		db_logger.info("Artslant Scrap Start")
-		super		#call absract scrapper class
+		message = "Artslant Scrap Start"
+		super(message)		#call absract scrapper class
 		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@dateTomorrow = @time.month.to_s + "/" + (@time.day.to_i + 1).to_s  + "/" + @time.year.to_s
 		@artslanturl = "http://www.artslant.com/ny/events/list?featured=all&fromdate=#{@dateTomorrow}&listtype=openings&todate=#{@dateTomorrow}"
@@ -60,8 +60,8 @@ class ArtslantScrapper < AbstractScrapper
 				)
 			end
 		end
-		db_logger.info(@eventcount.to_s + " events created")
-		db_logger.info("Artslant Done")
+		message = "Artslant Done"
+		endScrapOutput( message, @eventcount.to_s )
 	end
 
 	def deepscrap(link)

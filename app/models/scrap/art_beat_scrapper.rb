@@ -3,8 +3,8 @@ class ArtBeatScrapper < AbstractScrapper
 	NYARTBEAT_SOURCE = "nyartbeat"
 
 	def initialize
-		db_logger.info("Art Beat Scrap Start")
-		super		#call absract scrapper class
+		message = "Art Beat Scrap Start"
+		super(message)		#call absract scrapper class
 		@nyartbeaturl = "http://www.nyartbeat.com/list/event_opening"
 	end
 
@@ -49,8 +49,8 @@ class ArtBeatScrapper < AbstractScrapper
 				source: NYARTBEAT_SOURCE
 			)
 		end
-		db_logger.info( @eventcount.to_s + " events created" )
-		db_logger.info( "Art Beat Done" )
+		message = "Art Beat Done"
+		endScrapOutput( message, @eventcount.to_s )
 	end
 
 
