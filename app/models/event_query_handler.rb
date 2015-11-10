@@ -9,7 +9,7 @@ class EventQueryHandler
     	@lat = lat.nil? ? lat : lat.to_f
     	@long = long.nil? ? long : long.to_f
     	@radius = radius.nil? ? radius : radius.to_f
-    	@price = price.nil? ? price : price.to_f
+    	@price = price.nil? ? 0 : price.to_f
 
       if( @lat.nil? || @long.nil? || @radius.nil? )
          @northlat = @eastlong = @southlat = @westlong = nil
