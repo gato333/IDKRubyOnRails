@@ -66,7 +66,10 @@ class ArtslantScrapper < AbstractScrapper
 
 	def deepscrap(link)
 		html = pullHtml(link)
-		html.css(".description").to_s.strip_tags
+		replacements = [ [ "&#13;", "&quot;" ], [ " ", "\"" ] ]
+		description = StringHelper::strip_tags(html.css(".description").to_s)
+		replacements.each { |replace| description.gsub!(replace[0], replace[1]) }
+		description
 	end
 
 end
