@@ -1,5 +1,5 @@
 class StringHelper
-  def strip_tags
-    ActionController::Base.helpers.strip_tags(self)
+  def strip_tags(word)
+    ActionController::Base.helpers.strip_tags(word)
   end
 end
