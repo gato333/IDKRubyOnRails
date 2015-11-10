@@ -521,7 +521,7 @@ input.x-button {
     vertical-align: top;
     position: relative;
     max-width: 100%;
-    background-size: cover;
+    background-size: contain;
     width: 260px;
     min-width: 45%;
     margin-top: 20px;
