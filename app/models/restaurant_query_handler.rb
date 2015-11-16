@@ -19,7 +19,7 @@ class RestaurantQueryHandler
     	@url.concat( @lat + "," + @long )
     	@url.concat("&radius=" + @radius)
     	@url.concat("&key=" + API )
-    	@url.concat("&opennow&types=food&maxprice=" + @price)
+    	@url.concat("&opennow&types=restaurant&maxprice=" + @price)
     	if(@keyword != "")
     		@url.concat("&keyword=" + @keyword)
     	end
