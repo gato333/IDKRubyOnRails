@@ -9,9 +9,13 @@ require "scrap/abstract_scrapper"
 require "scrap/art_beat_scrapper"
 require "scrap/artslant_scrapper"
 require "scrap/eventbrite_scrapper"
+require "scrap/my_free_concert_scrapper"
 require "scrap/ny_card_scrapper"
 
 EventResult.delete_all
+
+myf = MyFreeConcertScrapper.new
+myf.scrap
 
 arts = ArtslantScrapper.new
 arts.scrap
