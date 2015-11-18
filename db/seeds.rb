@@ -11,9 +11,16 @@ require "scrap/artslant_scrapper"
 require "scrap/eventbrite_scrapper"
 require "scrap/my_free_concert_scrapper"
 require "scrap/ny_card_scrapper"
+require "scrap/timeout_scrapper"
 
 EventResult.delete_all
 
+tim = TimeoutScrapper.new
+tim.scrap
+
+
+puts EventResult.all.inspect
+=begin
 myf = MyFreeConcertScrapper.new
 myf.scrap
 
@@ -28,3 +35,4 @@ artb.scrap
 
 es = EventbriteScrapper.new
 es.scrap
+=end

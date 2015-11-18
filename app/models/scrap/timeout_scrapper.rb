@@ -6,29 +6,33 @@ class TimeoutScrapper < AbstractScrapper
 		message = "Timeout Scrap Start"
 		super(message)		#call absract scrapper class
 		@basetimeouturl = "http://www.timeout.com"
-		@timeoutsurl = @basefreeconcerturl + "/newyork/things-to-do/things-to-do-in-new-york-today"
+		@timeoutsurl = @basetimeouturl + "/newyork/things-to-do/things-to-do-in-new-york-today"
 	end
 
 	#no pagination
 	def scrap
-		puts @timeoutsurl
 		html = pullHtml(@timeoutsurl)
-		events = html.css(".month-calendar-current-day .item-list li")
+		events = html.css("#tab__panel_1 .small_list .tiles article")
 
 		events.each do |e|
-			name = e.css("a span.item-list-info .item-list-title").text
-			imglink = e.css(".item-list-img img")[0]["src"]
-			link = @basefreeconcerturl + e.css("a.item-list-item")[0]["href"]
+			container =  e.css(".feature-item__content .row")
 
-			startdate = @time.to_date.to_s + " " + findAddTimeSufix(e.css("a .item-list-date").text.split("-")[0])
-			enddate = @time.to_date.to_s + findAddTimeSufix(e.css("a .item-list-date").text.split("-")[1])
+			leftcontainer = container.css(".feature-item__column")[0]
+			rightcontainer = container.css(".feature-item__column")[1]
+			
+			name = rightcontainer.css("h3").text
 
-			description, lat, long, address = deepscrap(link)
+			link = @basetimeouturl + leftcontainer.css("a")[0]["href"]
+			imglink = leftcontainer.css("img")[0]["src"]
+
+			description = rightcontainer.css("p").text			
+
+			lat, long, address, startdate, enddate, price, types = deepscrap(link)
 
 			@eventcount += 1 
 			EventResult.create!( 
 				name: name, 
-				price: "0", 
+				price: price, 
 				lat: lat, 
 				long: long, 
 				address: address, 
@@ -37,11 +41,11 @@ class TimeoutScrapper < AbstractScrapper
 				startdate: startdate, 
 				enddate: enddate, 
 				description: description, 
-				types: "music, concert, sound, art", 
-				source: MYFREECONCERT_SOURCE
+				types: types, 
+				source: TIMEOUT_SOURCE
 			)
 		end
-		message = "My Free Concerts Done"
+		message = "Timeout Done"
 		endScrapOutput( message, @eventcount.to_s )
 	end
 
@@ -49,16 +53,31 @@ class TimeoutScrapper < AbstractScrapper
 	def deepscrap(link)
 		html = pullHtml(link)
 
-		description = StringHelper::strip_tags(html.css("div.event-desc-full").to_s)
-		description.gsub!('&#13;', ' ') 
+		typecontainer= html.css(".page_tags .page_tag")
+		types = ""
+		typecontainer.each do |t|
+			types += explodeImplode(t)
+		end
 
-		venuelink = @basefreeconcerturl + html.css(".event-where .event-venue a")[0]['href']
-		venuehtml = pullHtml(venuelink)
-
-		address = venuehtml.css(".venue-address").text
+		addresscontainer = html.css("#tab___content_2 .listing_details tbody tr")[1]
+		
+		address = explodeImplode(addresscontainer.css("td"))
 		lat, long = calculateGeo(address)
 
-		return description, lat, long, address
+		todayinstance = html.css("#tab___content_3 .occurrences__occurrence_day")[0]
+
+		startdate = @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time")))
+		enddate = ""
+
+		if todayinstance.css(".occurrence__price").empty?
+			price = 0
+		elsif todayinstance.css(".occurrence__price") =~ /\d/  
+			price = cleanMoney(explodeImplode(todayinstance.css(".occurrence__price")).split("-")[0])
+		else 
+			price = explodeImplode(todayinstance.css(".occurrence__price"))
+		end
+
+		return lat, long, address, startdate, enddate, price, types
 	end
 
 end

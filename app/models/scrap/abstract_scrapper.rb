@@ -57,4 +57,8 @@ class AbstractScrapper
     puts msg
   end
 
+  def cleanMoney(money)
+    money.gsub!('$','')
+  end
+
 end
