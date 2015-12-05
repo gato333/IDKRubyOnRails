@@ -499,6 +499,21 @@ input.x-button {
     display: block;
 }
 
+.result-container .learn_more_box.hidden {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    display: block !important;
+}
+
+.result-container .learn_more_box {
+    position: relative;
+    visibility: visible;
+    -webkit-transition: opacity 0.5s ease 0.1s; 
+    transition: opacity 0.5s ease 0.1s;
+    opacity: 1;
+}
+
 .result-container .result_img {
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -506,7 +521,7 @@ input.x-button {
     vertical-align: top;
     position: relative;
     max-width: 100%;
-    background-size: cover;
+    background-size: contain;
     width: 260px;
     min-width: 45%;
     margin-top: 20px;
@@ -514,8 +529,9 @@ input.x-button {
 }
 
 .result_submit {
-    margin-left: 150px;
+    margin: 0 auto;
     width: 300px;
+    display: block; 
 }
 
 /*********************************************************************************/
