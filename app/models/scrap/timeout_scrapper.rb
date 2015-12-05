@@ -66,7 +66,7 @@ class TimeoutScrapper < AbstractScrapper
 
 		todayinstance = html.css("#tab___content_3 .occurrences__occurrence_day")[0]
 
-		startdate = @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time")))
+		startdate =  todayinstance.css(".occurrence__time").nil? ? "" : @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time"))) 
 		enddate = ""
 
 		if todayinstance.css(".occurrence__price").empty?
