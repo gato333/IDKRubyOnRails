@@ -115,6 +115,7 @@ class EventQueryHandler
     def totalEventsHaventHappened
       #event that start in the furture or 2hrs ago
       curTime = (Time.now() - (60  * 60 * 2)).to_formatted_s(:db)
+      puts "CURRENT TIME" + curTime.to_s
       EventResult.where("startdate >= ?", curTime ).count
     end
 end
