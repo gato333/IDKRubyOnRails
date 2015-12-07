@@ -60,7 +60,8 @@ class ApplicationController < ActionController::Base
 
   def count
     query = EventQueryHandler.new
-    @results = query.totalEvents
+    @resultsAll = query.totalEvents
+    @resultsValid = query.totalEventsHaventHappened
     @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
   end
 
