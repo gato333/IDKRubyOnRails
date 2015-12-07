@@ -55,8 +55,9 @@ class EventQueryHandler
     end
 
     def queryDB 
-      puts Time.now()
-      EventResult.where("price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ? AND (types LIKE ? OR name LIKE ? OR address LIKE ? OR description LIKE ? OR source LIKE ? )", 0.0, @price, @northlat, @southlat, @westlong, @eastlong, queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword) )
+      #event that start in the furture or 2hrs ago
+      curTime = (Time.now() - (60  * 60 * 2)).to_formatted_s(:db)
+      EventResult.where("startdate >= ? AND price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ? AND (types LIKE ? OR name LIKE ? OR address LIKE ? OR description LIKE ? OR source LIKE ? )", curTime, 0.0, @price, @northlat, @southlat, @westlong, @eastlong, queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword) )
     end
 
     def queryLikeHelper(word)
@@ -70,9 +71,14 @@ class EventQueryHandler
     def formatResults(results)
       if !results.empty?
         resultArray = Array.new
+
+        puts "Current time " + Time.now().to_formatted_s(:db) 
         results.each do |r|
+          puts r.startdate
+          puts r.startdate >  Time.now().to_formatted_s(:db) 
           rholder = ResultContainer.new
           rholder.lat = r.lat
+          rholder.id = r.id
           rholder.long = r.long
           rholder.name = r.name
           rholder.imageurl = r.imageurl
@@ -104,5 +110,11 @@ class EventQueryHandler
 
     def totalEvents
       EventResult.count
+    end
+
+    def totalEventsHaventHappened
+      #event that start in the furture or 2hrs ago
+      curTime = (Time.now() - (60  * 60 * 2)).to_formatted_s(:db)
+      EventResult.where("startdate >= ?", curTime ).count
     end
 end
