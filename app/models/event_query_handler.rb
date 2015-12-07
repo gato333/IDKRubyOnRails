@@ -73,8 +73,6 @@ class EventQueryHandler
         resultArray = Array.new
 
         results.each do |r|
-          puts r.startdate
-          puts r.startdate >  @curTime 
           rholder = ResultContainer.new
           rholder.lat = r.lat
           rholder.id = r.id
