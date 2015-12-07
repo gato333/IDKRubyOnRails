@@ -479,6 +479,10 @@ input.x-button {
     display: inline-block;
 }
 
+.result-container h2, .result-container h5 {
+    line-height: 150%;
+}
+
 .result-container h5 {
     margin: 10px 0;
     font-weight: 300;
@@ -531,6 +535,7 @@ input.x-button {
 .result_submit {
     margin: 0 auto;
     width: 300px;
+    max-width: 100%;
     display: block; 
 }
 
