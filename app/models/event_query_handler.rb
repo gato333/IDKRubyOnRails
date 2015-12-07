@@ -3,7 +3,7 @@ class EventQueryHandler
     require 'event_result'
     require "result_container"
 
-		attr_accessor :lat, :eastlat, :westlat, :long, :northlong, :southlong, :radius, :keyword, :price
+		attr_accessor :lat, :eastlat, :westlat, :long, :northlong, :southlong, :radius, :keyword, :price, :curTime
 
     def initialize(lat = nil , long = nil, radius = nil, price = nil, keyword = "")
     	@lat = lat.nil? ? lat : lat.to_f
@@ -17,6 +17,7 @@ class EventQueryHandler
         @northlat, @eastlong, @southlat, @westlong = boundingBox
       end 
 
+      @curTime = (Time.now.utc + Time.zone_offset('EST') - (60  * 60 * 2)).to_formatted_s(:db)
     	@keyword = keyword.to_s
     end
 
@@ -56,8 +57,7 @@ class EventQueryHandler
 
     def queryDB 
       #event that start in the furture or 2hrs ago
-      curTime = (Time.now() - (60  * 60 * 2)).to_formatted_s(:db)
-      EventResult.where("startdate >= ? AND price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ? AND (types LIKE ? OR name LIKE ? OR address LIKE ? OR description LIKE ? OR source LIKE ? )", curTime, 0.0, @price, @northlat, @southlat, @westlong, @eastlong, queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword) )
+      EventResult.where("startdate >= ? AND price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ? AND (types LIKE ? OR name LIKE ? OR address LIKE ? OR description LIKE ? OR source LIKE ? )", @curTime, 0.0, @price, @northlat, @southlat, @westlong, @eastlong, queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword) )
     end
 
     def queryLikeHelper(word)
@@ -72,10 +72,9 @@ class EventQueryHandler
       if !results.empty?
         resultArray = Array.new
 
-        puts "Current time " + Time.now().to_formatted_s(:db) 
         results.each do |r|
           puts r.startdate
-          puts r.startdate >  Time.now().to_formatted_s(:db) 
+          puts r.startdate >  @curTime 
           rholder = ResultContainer.new
           rholder.lat = r.lat
           rholder.id = r.id
@@ -114,8 +113,6 @@ class EventQueryHandler
 
     def totalEventsHaventHappened
       #event that start in the furture or 2hrs ago
-      curTime = (Time.now() - (60  * 60 * 2)).to_formatted_s(:db)
-      puts "CURRENT TIME" + curTime.to_s
-      EventResult.where("startdate >= ?", curTime ).count
+      EventResult.where("startdate >= ?", @curTime ).count
     end
 end
