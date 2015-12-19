@@ -30,7 +30,7 @@ class TimeoutScrapper < AbstractScrapper
 			lat, long, address, startdate, enddate, price, types = deepscrap(link)
 
 			@eventcount += 1 
-			EventResult.create!( 
+			EventResult.create( 
 				name: name, 
 				price: price, 
 				lat: lat, 
@@ -61,15 +61,15 @@ class TimeoutScrapper < AbstractScrapper
 
 		addresscontainer = html.css("#tab___content_2 .listing_details tbody tr")[1]
 		
-		address = explodeImplode(addresscontainer.css("td"))
+		address = addresscontainer.nil? ? "" : explodeImplode(addresscontainer.css("td"))
 		lat, long = calculateGeo(address)
 
 		todayinstance = html.css("#tab___content_3 .occurrences__occurrence_day")[0]
 
-		startdate =  todayinstance.css(".occurrence__time").nil? ? "" : @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time"))) 
+		startdate =  todayinstance.nil? || todayinstance.css(".occurrence__time").nil? ? "" : @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time"))) 
 		enddate = ""
 
-		if todayinstance.css(".occurrence__price").empty?
+		if todayinstance.nil? || todayinstance.css(".occurrence__price").empty?
 			price = 0
 		elsif todayinstance.css(".occurrence__price") =~ /\d/  
 			price = cleanMoney(explodeImplode(todayinstance.css(".occurrence__price")).split("-")[0])

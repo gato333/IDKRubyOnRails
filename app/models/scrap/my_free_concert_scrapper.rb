@@ -26,7 +26,7 @@ class MyFreeConcertScrapper < AbstractScrapper
 			description, lat, long, address = deepscrap(link)
 
 			@eventcount += 1 
-			EventResult.create!( 
+			EventResult.create( 
 				name: name, 
 				price: "0", 
 				lat: lat, 

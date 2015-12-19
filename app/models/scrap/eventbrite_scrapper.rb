@@ -42,7 +42,7 @@ class EventbriteScrapper < AbstractScrapper
 				description = deepscrap(link);
 
 				@eventcount += 1
-				EventResult.create!( 
+				EventResult.create( 
 					name: name, 
 					price: price, 
 					lat: lat, 

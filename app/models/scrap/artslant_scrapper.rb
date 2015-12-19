@@ -44,7 +44,7 @@ class ArtslantScrapper < AbstractScrapper
 				description = deepscrap(artslantlink)
 				
 				@eventcount += 1 
-				EventResult.create!( 
+				EventResult.create( 
 					name: name, 
 					price: "0", 
 					lat: lat, 
