@@ -7,7 +7,7 @@ class EventbriteScrapper < AbstractScrapper
 		super( message )		#call absract scrapper class
 		@pagecount = 1
 		@urlbeg = "https://www.eventbrite.com/d/ny--manhattan/events--today/?"
-		@urlend = "&slat=40.7831&slng=-73.9712&sort=best"
+		@urlend = "&slat=40.7831&slng=-73.9712&sort=best&view=gallery"
 	end
 	#has pagination
 	def scrap
