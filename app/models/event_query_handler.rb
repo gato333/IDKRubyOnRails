@@ -113,4 +113,31 @@ class EventQueryHandler
       #event that start in the furture or 2hrs ago
       EventResult.where("startdate >= ?", @curTime ).count
     end
+
+    def getAllEvents
+      all = EventResult.all 
+
+      if !all.empty?
+        resultArray = Array.new
+
+        all.each do |r|
+          rholder = ResultContainer.new
+          rholder.lat = r.lat
+          rholder.id = r.id
+          rholder.long = r.long
+          rholder.name = r.name
+          rholder.imageurl = r.imageurl
+          rholder.types = r.types
+          rholder.address = r.address
+          rholder.price = r.price
+          rholder.eventurl = r.eventurl
+          rholder.startdate = r.startdate
+          rholder.enddate = r.enddate
+          rholder.source = r.source
+          rholder.description = r.description
+          resultArray.push(rholder)
+        end
+      end
+      resultArray
+    end
 end

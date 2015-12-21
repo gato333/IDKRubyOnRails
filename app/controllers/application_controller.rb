@@ -1,3 +1,5 @@
+ENV['googleKey'] = "AIzaSyDjQTEDezZLwMWAOr4ya1PYJIxJIgcMuWU"
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -45,7 +47,7 @@ class ApplicationController < ActionController::Base
   			end
   		elsif @title == ApplicationHelper::DO_STATUS
   			if ApplicationHelper.validateForm(params, ApplicationHelper::DO_STATUS)
-  				@googleKey = Rails.application.secrets.google_api_key
+  				@googleKey = Rails.application.secrets.google_api_key; 
           query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getEventResults
   			else 
@@ -63,11 +65,17 @@ class ApplicationController < ActionController::Base
     query = EventQueryHandler.new
     @resultsAll = query.totalEvents
     @resultsValid = query.totalEventsHaventHappened
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS) 
+  end
+
+  def all 
+    query = EventQueryHandler.new
+    @results = query.getAllEvents
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::RESULT_STATUS)
   end
 
   def error 
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS) 
   	if params.include?(:error_msg)
   		@error_msg = params[:error_msg]
   	else 

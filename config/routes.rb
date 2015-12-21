@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get '/count' => 'application#count'
 
+  get '/all'  => 'application#all'
+
   # Example resource route with options:
   #   resources :products do
   #     member do
