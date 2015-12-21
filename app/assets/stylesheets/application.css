@@ -498,13 +498,9 @@ input.x-button {
     width: 100px;
     height: 20px;
     position: relative;
-    margin-left: 20px;
+    margin-left: auto;
     vertical-align: bottom;
-    display: inline-block;
-}
-
-.result-container .learn_more_button {
-    margin-left: 29%;
+    display:block;
 }
 
 

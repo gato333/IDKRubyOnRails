@@ -47,26 +47,15 @@
 								</div>
 
 								<div class="learn_more_box hidden">
+										<% if !result.description.nil? && result.description.length > 0 %>
+											<h5><span>Description:</span> <%= result.description %></h5>
+										<% end %>
 
 										<div class="map_container hidden">
 											<input class="lat" value="<%= result.lat %>" type="hidden">
 											<input class="lng" value="<%= result.long %>" type="hidden">
 											<input class="name" value="<%= result.name %>" type="hidden">
 										</div>
-
-										<h5><span>Source:</span> <%= result.source %></h5>
-
-										<% if !result.lat.nil? %>
-											<h5><span>Latitude:</span> <%= result.lat %></h5>
-										<% end %>
-
-										<% if !result.long.nil?  %>
-											<h5><span>Longitude:</span> <%= result.long %></h5>
-										<% end %>
-
-										<% if !result.description.nil? && result.description.length > 0 %>
-											<h5><span>Description:</span> <%= result.description %></h5>
-										<% end %>
 
 										<h5><span>ID:</span> <%=result.id %></h5>
 										<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> event link</a></div>
