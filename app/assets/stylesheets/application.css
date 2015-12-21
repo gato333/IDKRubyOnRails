@@ -75,7 +75,6 @@ h1 {
 #wrapper {
     position: relative;
     margin:0 auto;
-    min-width: 60%;
     width: 650px;
     max-width: 100%;
 }
@@ -565,13 +564,13 @@ img.error_icon {
 /*********************************************************************************/
 
 
-@media (max-width: 665px) {
+@media screen and (max-device-width: 665px) {
     .result-container .result_img {
         max-width: 32%; 
     }
 }
 
-@media (max-width: 560px) {
+@media screen and (max-device-width: 560px) {
     #main { padding: 10px 0px ;}
     article#watdo, article#wateat, article#error, article#random, article#me{ 
         padding: 0 10px 10px 10px; 
