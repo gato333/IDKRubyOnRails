@@ -9,7 +9,7 @@
 	<% end %>
 
 	<form action="results" method="post">
-		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" placeholder="Enter Keyword:" value="<%= params.include?('price') ? params['price'] : '' %>" class="<%= @price_error.nil? ? '' : 'error' %>"/>
+		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" placeholder="Enter Price:" value="<%= params.include?('price') ? params['price'] : '' %>" class="<%= @price_error.nil? ? '' : 'error' %>"/>
 
 		<select name="radius" id="radius" class="<%= @radius_error.nil? ? '' : 'error' %>"> 
 			<option value="0" <%= params.include?('radius') ? (params['radius'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Distance </option>

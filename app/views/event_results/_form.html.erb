@@ -1,7 +1,6 @@
   <% if @event_result.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@event_result.errors.count, "error") %> prohibited this event_result from being saved:</h2>
-
+      <h3><%= pluralize(@event_result.errors.count, "error") %> prohibited this event_result from being saved:</h2>
       <ul>
       <% @event_result.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,48 +9,49 @@
     </div>
   <% end %>
 
+<div>
 <%= form_for(@event_result) do |f| %>
 
   <div class="actions">
     <%= f.submit %>
   </div>
-  
+
   <h5><span>ID: </span> <%= @event_result.id %></h5>
 
-  <%= f.label :name %>
+  <%= f.label "Name:" %>
   <%= f.text_field :name %>
 
-  <%= f.label :address %>
+  <%= f.label "Address:" %>
   <%= f.text_field :address %>
 
-  <%= f.label :lat %>
+  <%= f.label "Latitude:" %>
   <%= f.number_field :lat %>
 
-  <%= f.label :long %>
+  <%= f.label "Longitude:" %>
   <%= f.number_field :long %>
 
-  <%= f.label :startdate %>
+  <%= f.label "Startdate:" %>
   <%= f.time_field :startdate, min: Time.now %>
 
-  <%= f.label :enddate %>
+  <%= f.label "Enddate:" %>
   <%= f.time_field :enddate, min: Time.now %>
 
-  <%= f.label :price %>
+  <%= f.label "Price:" %>
   <%= f.number_field :price %>
 
-  <%= f.label :types %>
+  <%= f.label "Types" %>
   <%= f.text_field :types %>
 
-  <%= f.label :source %>
+  <%= f.label "Source:" %>
   <%= f.text_field :source %>
 
-  <%= f.label :description %>
+  <%= f.label "Description:" %>
   <%= f.text_area :description, cols: 60, rows: 10 %>
 
-  <%= f.label :eventurl %>
+  <%= f.label "Event url:" %>
    <%= f.url_field :eventurl, cols: 60, rows: 4 %>
 
-  <%= f.label :imageurl %>
+  <%= f.label "Image url:" %>
   <%= f.url_field :imageurl, cols: 60, rows: 4%>
   <%= image_tag( @event_result.imageurl) %>
 
@@ -60,4 +60,4 @@
     <%= f.submit %>
   </div>
 <% end %>
-
+</div>

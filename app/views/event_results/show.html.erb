@@ -6,7 +6,9 @@
 	<%= image_tag @event_result.imageurl %>
 
 	<h3> <%= @event_result.name %> </h3>
-	<h5><span>Address:</span> <%= @event_result.address %></h5>
+	<% if !@event_result.address.nil? && @event_result.address.length > 0 %>
+		<h5><span>Address:</span> <%= @event_result.address %></h5>
+	<% end %>
 
 	<% if !@event_result.types.nil? && @event_result.types.length > 0 %>
 	<h5><span>Type:</span> <%= @event_result.types %></h5>

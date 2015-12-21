@@ -29,7 +29,8 @@ class EventResultsController < ApplicationController
   # POST /event_results
   # POST /event_results.json
   def create
-    @event_result = EventResult.new(event_result_params)
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @event_result = EventResult.new( event_result_params(params) )
 
     respond_to do |format|
       if @event_result.save
@@ -45,8 +46,10 @@ class EventResultsController < ApplicationController
   # PATCH/PUT /event_results/1
   # PATCH/PUT /event_results/1.json
   def update
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
     respond_to do |format|
-      if @event_result.update(event_result_params)
+      @event_result = EventResult.find(params[:id]); 
+      if @event_result.update_attributes(event_result_params(params))
         format.html { redirect_to @event_result, notice: 'Event result was successfully updated.' }
         format.json { render :show, status: :ok, location: @event_result }
       else
@@ -59,6 +62,7 @@ class EventResultsController < ApplicationController
   # DELETE /event_results/1
   # DELETE /event_results/1.json
   def destroy
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
     @event_result.destroy
     respond_to do |format|
       format.html { redirect_to event_results_url, notice: 'Event result was successfully destroyed.' }
@@ -73,7 +77,20 @@ class EventResultsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def event_result_params
-      params[:event_result]
+    def event_result_params(p)
+      { 
+        "name" => p["event_result"][:name], 
+        "lat" => p["event_result"][:lat], 
+        "long" => p["event_result"][:long], 
+        "address" => p["event_result"][:address], 
+        "eventurl" => p["event_result"][:eventurl], 
+        "imageurl" => p["event_result"][:imageurl], 
+        "startdate" => p["event_result"][:startdate], 
+        "enddate" => p["event_result"][:enddate], 
+        "source" => p["event_result"][:source], 
+        "types" => p["event_result"][:types], 
+        "price" => p["event_result"][:price], 
+        "description" => p["event_result"][:description]
+      }
     end
 end

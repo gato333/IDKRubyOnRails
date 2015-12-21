@@ -488,7 +488,7 @@ article#show {
 /* Edit page                                                                           */
 /*********************************************************************************/
 
-article#edit {
+article#edit, article#new {
     label { 
         display: inline-block;
         width: 14%;
@@ -518,7 +518,15 @@ article#edit {
         margin-bottom: 10px;
         display: block;
     }
-}
+    .field_with_errors {
+        display: inline-block; 
+        width:85%;
+        input { 
+            border: solid 1px red; 
+            width: 100%; 
+        } 
+    }
+
 
 
 /*********************************************************************************/
