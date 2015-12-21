@@ -24,32 +24,13 @@ $(document).ready( function() {
 		$(".learn_more_button").val("expand");
 	}
 
-	function closeMap(){
-		$(".map_container").addClass("hidden");
-		$(".map_button").val("see map");
-	}
-
 	$('.learn_more_button').on("click", function(){
+		var mapContainer = $(this).parent().children(".learn_more_box").children(".map_container")[0]; 
 		if( $(this).parent().children(".learn_more_box").hasClass("hidden") ){
+			//delete all others that are open 
 			closeMore(); 
-			closeMap();
-			$(this).parent().children(".learn_more_box").removeClass("hidden"); 
-			$(this).val("hide");
-			$('body, html').animate({ scrollTop: $($(this).parent()).offset().top });
-		} else {
-			$(this).parent().children(".learn_more_box").addClass("hidden"); 
-			$(this).val("expand");
-		}
-	});
-
-	$('.map_button').on("click", function(){
-		var mapContainer = $(this).parent().children(".map_container")[0]; 
-		if( $(mapContainer).hasClass("hidden") ){
-			closeMore(); 
-			closeMap();
-			$(this).parent().children(".map_container").removeClass("hidden");
-			$(this).val("hide map"); 
-			$('body, html').animate({ scrollTop: $($(this).parent()).offset().top });
+			$(mapContainer).removeClass("hidden");
+			//if map obj doesnt exist we create it 
 			if( !$(mapContainer).hasClass("exists") ){
 				var lat = parseFloat(mapContainer.getElementsByClassName("lat")[0].value); 
 				var lng = parseFloat(mapContainer.getElementsByClassName("lng")[0].value); 
@@ -57,13 +38,18 @@ $(document).ready( function() {
 				
 				if(name.length > 100) name  = name.substr(0,97) + "..."; 
 				while (mapContainer.firstChild) mapContainer.removeChild(mapContainer.firstChild);
-				console.log(lat, lng); 
+
 				initMap(lat, lng, name, mapContainer); 
 				$(mapContainer).addClass("exists"); 
-			} 
+			}
+
+			$(this).parent().children(".learn_more_box").removeClass("hidden"); 
+			$(this).val("hide");
+			$('body, html').animate({ scrollTop: $($(this).parent()).offset().top });
 		} else {
-			$(this).parent().children(".map_container").addClass("hidden");
-			$(this).val("see map"); 
+			$(mapContainer).addClass("hidden"); 
+			$(this).parent().children(".learn_more_box").addClass("hidden"); 
+			$(this).val("expand");
 		}
 	}); 
 

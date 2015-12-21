@@ -124,8 +124,8 @@ input.error {
     border: 2px red solid;
 }
 
-input.original {
-    margin-right: 28px;
+#random input { 
+    width: 90%; 
 }
 
 div.delete-choice {
@@ -495,7 +495,7 @@ input.x-button {
    font-weight: 600;
 }
 
-.result-container .learn_more_button, .result-container .map_button {
+.result-container .learn_more_button {
     width: 100px;
     height: 20px;
     position: relative;
@@ -508,9 +508,6 @@ input.x-button {
     margin-left: 29%;
 }
 
-.result-container .map_button {
-    margin-right: 29%;
-}
 
 .result-container .map_container.hidden{
     opacity: 0;
