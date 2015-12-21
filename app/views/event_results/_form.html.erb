@@ -1,4 +1,3 @@
-<%= form_for(@event_result) do |f| %>
   <% if @event_result.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event_result.errors.count, "error") %> prohibited this event_result from being saved:</h2>
@@ -11,7 +10,50 @@
     </div>
   <% end %>
 
+<%= form_for(@event_result) do |f| %>
+
+  <h5><span>ID: </span> <%= @event_result.id %></h5>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.label :lat %>
+  <%= f.number_field :lat %>
+
+  <%= f.label :long %>
+  <%= f.number_field :long %>
+
+  <%= f.label :startdate %>
+  <%= f.time_field :startdate, min: Time.now %>
+
+  <%= f.label :enddate %>
+  <%= f.time_field :enddate, min: Time.now %>
+
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+
+  <%= f.label :types %>
+  <%= f.text_field :types %>
+
+  <%= f.label :source %>
+  <%= f.text_field :source %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, cols: 60, rows: 10 %>
+
+  <%= f.label :eventurl %>
+   <%= f.url_field :eventurl, cols: 60, rows: 4 %>
+
+  <%= f.label :imageurl %>
+   <%= f.url_field :imageurl, cols: 60, rows: 4%>
+  <%= image_tag( @event_result.imageurl) %>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
