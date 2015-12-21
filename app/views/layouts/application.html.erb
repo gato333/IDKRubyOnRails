@@ -12,7 +12,7 @@
 		<%= stylesheet_link_tag    'application.css', media: 'all', 'data-turbolinks-track' => true %>
 		<% @javascriptsArray.each do |file| %>
 			<% if(file === 'googleMaps') %>
-				<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key="+ @googleKey +"&language=en", 'data-turbolinks-track' => true %>
+				<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key="+ ENV["googleKey"] +"&language=en", 'data-turbolinks-track' => true %>
 			<% else %>
 	  		<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
 	  	<% end %>
