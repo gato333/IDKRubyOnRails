@@ -15,12 +15,17 @@
 		<%  elsif @results.kind_of?(Array) == false %>
 				<%= @results %>
 		<%  else %>
+
+
 			<% if @title == "DO" 
 					count = 1
 					@results.each do |result| %>
 							<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
+
+								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
+				
 								<div class="text">
-									<h2> <%= result.name %> </h2>
+									<h3> <%= result.name %> </h3>
 									<h5><span>Address:</span> <%= result.address %></h5>
 
 									<% if !result.types.nil? %>
@@ -40,14 +45,14 @@
 									<% end %>
 
 								</div>
-								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
+							
 								<div class="learn_more_box hidden">
 										<h5><span>Source:</span> <%= result.source %></h5>
 
 										<% if !result.description.nil? && result.description.length > 0 %>
 											<h5><span>Description:</span> <%= result.description %></h5>
 										<% end %>
-										
+
 										<h5><span>ID:</span> <%=result.id %></h5>
 										<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> event link</a></div>
 								</div>
@@ -64,11 +69,13 @@
 						<input type="hidden" name="source" value="<%= @title %>">
 				 		<input type="submit" name="topic_submit" value="More" class="result_submit" />
 				 	</form>
+
+
 				<% elsif @title = "EAT"
 					@results.each do |result| %>
 							<div class="result-container">
 								<div class="text">
-									<h2> <%= result.name %> </h2>
+									<h3> <%= result.name %> </h3>
 									<h5><span>Address:</span> <%= result.address %></h5>
 									<h5><span>Type:</span> <%= result.types %></h5>
 									<h5 class="short"><span>Price:</span> <%= result.price %></h5>
@@ -88,5 +95,7 @@
 				 	</form>
 				<% end 
 			end %>
+
+
 	</div>
 </article>

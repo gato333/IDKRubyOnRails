@@ -9,9 +9,7 @@
 	<% end %>
 
 	<form action="results" method="post">
-		<br />Enter Price:
-		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= params.include?('price') ? params['price'] : '' %>" class="<%= @price_error.nil? ? '' : 'error' %>"/>
-		<br />
+		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" placeholder="Enter Keyword:" value="<%= params.include?('price') ? params['price'] : '' %>" class="<%= @price_error.nil? ? '' : 'error' %>"/>
 
 		<select name="radius" id="radius" class="<%= @radius_error.nil? ? '' : 'error' %>"> 
 			<option value="0" <%= params.include?('radius') ? (params['radius'] == '0' ? 'selected="selected"' : ''): selected="selected" %> > Distance </option>
@@ -22,10 +20,8 @@
 			<option value="10" <%= params.include?('radius') ? (params['radius'] == '10' ? 'selected="selected"' : ''): '' %> > 10 mile </option>
 		</select>
 
-		<br />Enter Keyword:
-		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" /> 
-		<br />
-		<br />
+		<input type= "text" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" placeholder="Enter Keyword:"/> 
+	
 		<input class="ipHolder" type="hidden" name="ip" value="<%= @ip %>" />
 		<input type="hidden" name="lat" value="<%= params.include?('latitude') ? params['latitude'] : '' %>" />
 		<input type="hidden" name="long" value="<%= params.include?('longitude') ? params['longitude'] : '' %>" />
