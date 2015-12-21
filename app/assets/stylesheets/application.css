@@ -571,7 +571,7 @@ img.error_icon {
 
 @media screen and (max-device-width: 560px) {
     #main { padding: 10px 0px ;}
-    article#watdo, article#wateat, article#error, article#random, article#me{ 
+    article#watdo, article#wateat, article#error, article#random, article#count, article#me{ 
         padding: 0 10px 10px 10px; 
     }
     article#me header h1 { margin: 20px 0;}
