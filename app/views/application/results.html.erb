@@ -70,7 +70,7 @@
 										<h5><span>ID:</span> <%=result.id %></h5>
 										<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> event link</a></div>
 								</div>
-								
+
 								<input class="map_button" type="button" value="see map">
 								<input class="learn_more_button" type="button" value="expand">
 
@@ -88,7 +88,7 @@
 				 	</form>
 
 
-				<% elsif @title = "EAT"
+				<% elsif @title == "EAT"
 					@results.each do |result| %>
 							<div class="result-container">
 								<div class="text">
