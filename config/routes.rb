@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get '/all'  => 'application#all'
 
 
+  get '/index' => 'event_results#index'
+
   get '/event' => 'event_results#index'
 
   get '/event/new' => 'event_results#new'

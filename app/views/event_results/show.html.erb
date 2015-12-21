@@ -1,41 +1,46 @@
-<p id="notice"><%= notice %></p>
 
-<%= image_tag @event_result.imageurl %>
+<article id="show" class="panel">
 
-<h3> <%= @event_result.name %> </h3>
-<h5><span>Address:</span> <%= @event_result.address %></h5>
+	<p id="notice"><%= notice %></p>
 
-<% if !@event_result.types.nil? %>
-<h5><span>Type:</span> <%= @event_result.types %></h5>
-<% end %>
+	<%= image_tag @event_result.imageurl %>
 
-<% if !@event_result.startdate.nil? %>
-	<h5><span>Start Time:</span> <%= @event_result.startdate.strftime("%l:%M %P") %></h5>
-<% end %> 
+	<h3> <%= @event_result.name %> </h3>
+	<h5><span>Address:</span> <%= @event_result.address %></h5>
 
-<% if !@event_result.enddate.nil? %>
-	<h5><span>End Time:</span> <%= @event_result.enddate.strftime("%l:%M %P") %></h5>
-<% end %>
+	<% if !@event_result.types.nil? && @event_result.types.length > 0 %>
+	<h5><span>Type:</span> <%= @event_result.types %></h5>
+	<% end %>
 
-<% if !@event_result.price.nil? %>
-<h5><span>Price:</span> <%= @event_result.price == 0 ? " free" : " $" + @event_result.price.to_s + "0" %></h5>
-<% end %>
+	<% if !@event_result.startdate.nil? %>
+		<h5><span>Start Time:</span> <%= @event_result.startdate.strftime("%l:%M %P") %></h5>
+	<% end %> 
 
+	<% if !@event_result.enddate.nil? %>
+		<h5><span>End Time:</span> <%= @event_result.enddate.strftime("%l:%M %P") %></h5>
+	<% end %>
 
-<% if !@event_result.description.nil? && @event_result.description.length > 0 %>
-	<h5><span>Description:</span> <%= @event_result.description %></h5>
-<% end %>
-
-<div class="map_container hidden">
-	<input class="lat" value="<%= @event_result.lat %>" type="hidden">
-	<input class="lng" value="<%= @event_result.long %>" type="hidden">
-	<input class="name" value="<%= @event_result.name %>" type="hidden">
-</div>
-
-<h5><span>ID:</span> <%=@event_result.id %></h5>
-
-<div class="learn_more"><a class="page_link" href="<%= @event_result.eventurl %>"> event link</a></div>
+	<% if !@event_result.price.nil? %>
+	<h5><span>Price:</span> <%= @event_result.price == 0 ? " free" : " $" + @event_result.price.to_s + "0" %></h5>
+	<% end %>
 
 
-<%= link_to 'Edit', edit_event_result_path(@event_result) %> |
-<%= link_to 'Back', event_results_path %>
+	<% if !@event_result.description.nil? && @event_result.description.length > 0 %>
+		<h5><span>Description:</span> <%= @event_result.description %></h5>
+	<% end %>
+
+	<div class="map_container hidden">
+		<input class="lat" value="<%= @event_result.lat %>" type="hidden">
+		<input class="lng" value="<%= @event_result.long %>" type="hidden">
+		<input class="name" value="<%= @event_result.name %>" type="hidden">
+	</div>
+
+	<h5><span>ID:</span> <%=@event_result.id %></h5>
+
+	<div class="learn_more"><a class="page_link" href="<%= @event_result.eventurl %>"> event link</a></div>
+
+
+	<%= link_to 'Edit', edit_event_result_path(@event_result) %> |
+	<%= link_to 'Back', event_results_path %>
+
+</article>

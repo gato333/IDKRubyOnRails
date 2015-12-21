@@ -12,6 +12,10 @@
 
 <%= form_for(@event_result) do |f| %>
 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
   <h5><span>ID: </span> <%= @event_result.id %></h5>
 
   <%= f.label :name %>
@@ -48,7 +52,7 @@
    <%= f.url_field :eventurl, cols: 60, rows: 4 %>
 
   <%= f.label :imageurl %>
-   <%= f.url_field :imageurl, cols: 60, rows: 4%>
+  <%= f.url_field :imageurl, cols: 60, rows: 4%>
   <%= image_tag( @event_result.imageurl) %>
 
 

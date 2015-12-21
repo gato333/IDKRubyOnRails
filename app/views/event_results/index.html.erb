@@ -1,28 +1,37 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Event Results</h1>
+<article id="index" class="panel">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <p id="notice"><%= notice %></p>
 
-  <tbody>
-    <% @event_results.each do |event_result| %>
+  <h1>Listing Event Results</h1>
+
+  <h5> Total Events in database: <%= @event_results.length %> </h5>
+  <table>
+    <thead>
       <tr>
-        <td><%= event_result.id %></td>
-        <td><%= event_result.name %></td>
-        <td><%= event_result.startdate %></td>
-        <td><%= link_to 'Show', event_result %></td>
-        <td><%= link_to 'Edit', edit_event_result_path(event_result) %></td>
-        <td><%= link_to 'Destroy', event_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @event_results.each do |event_result| %>
+        <tr>
+          <td><%= event_result.id %></td>
+          <td><%= event_result.name %></td>
+          <td><%= event_result.startdate %></td>
+          <td><%= link_to 'Show', event_result %></td>
+          <td><%= link_to 'Edit', edit_event_result_path(event_result) %></td>
+          <!---
+          NOT TILL THE FAT LADY SINGS
+          <td><%= link_to 'Destroy', event_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Event result', new_event_result_path %>
+  <br>
+
+  <%= link_to 'New Event result', new_event_result_path %>
+
+</article>
