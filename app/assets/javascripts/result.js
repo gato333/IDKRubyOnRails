@@ -45,6 +45,11 @@ $(document).ready( function() {
 	$('.map_button').on("click", function(){
 		var mapContainer = $(this).parent().children(".map_container")[0]; 
 		if( $(mapContainer).hasClass("hidden") ){
+			closeMore(); 
+			closeMap();
+			$(this).parent().children(".map_container").removeClass("hidden");
+			$(this).val("hide map"); 
+			$('body, html').animate({ scrollTop: $($(this).parent()).offset().top });
 			if( !$(mapContainer).hasClass("exists") ){
 				var lat = parseFloat(mapContainer.getElementsByClassName("lat")[0].value); 
 				var lng = parseFloat(mapContainer.getElementsByClassName("lng")[0].value); 
@@ -56,11 +61,6 @@ $(document).ready( function() {
 				initMap(lat, lng, name, mapContainer); 
 				$(mapContainer).addClass("exists"); 
 			} 
-			closeMore(); 
-			closeMap();
-			$(this).parent().children(".map_container").removeClass("hidden");
-			$(this).val("hide map"); 
-			$('body, html').animate({ scrollTop: $($(this).parent()).offset().top });
 		} else {
 			$(this).parent().children(".map_container").addClass("hidden");
 			$(this).val("see map"); 
