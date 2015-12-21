@@ -29,11 +29,12 @@ Rails.application.routes.draw do
 
   get '/event' => 'event_results#index'
 
+  get '/event/new' => 'event_results#new'
+
   get '/event/:id' => 'event_results#show'
 
   get '/event/:id/edit' => 'event_results#edit'
 
-  get '/event/new' => 'event_results#new'
 
   # Example resource route with options:
   #   resources :products do

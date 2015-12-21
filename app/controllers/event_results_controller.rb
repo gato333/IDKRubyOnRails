@@ -1,24 +1,29 @@
 class EventResultsController < ApplicationController
   before_action :set_event_result, only: [:show, :edit, :update, :destroy]
+  include ApplicationHelper 
 
   # GET /event_results
   # GET /event_results.json
   def index
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
     @event_results = EventResult.all
   end
 
   # GET /event_results/1
   # GET /event_results/1.json
   def show
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::PAGE_STATUS); 
   end
 
   # GET /event_results/new
   def new
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
     @event_result = EventResult.new
   end
 
   # GET /event_results/1/edit
   def edit
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
   end
 
   # POST /event_results

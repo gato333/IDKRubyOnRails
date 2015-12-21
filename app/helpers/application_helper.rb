@@ -5,6 +5,7 @@ module ApplicationHelper
 	DEFAULT_STATUS = "DEFAULT"
 	RANDOM_STATUS = "RANDOM"
 	RESULT_STATUS = "RESULT"
+	PAGE_STATUS = "PAGE"
 
 	def self.validateForm( params , status )
 		if !validateGeoLocation(params)
@@ -58,7 +59,9 @@ module ApplicationHelper
 	end
 
 	def self.includeJavascripts(status) 
-		if status == EAT_STATUS || status == DO_STATUS
+		if status == PAGE_STATUS
+			['application']
+		elsif status == EAT_STATUS || status == DO_STATUS
 			['application', 'form']
 		elsif status == RANDOM_STATUS
 			['application', 'random']
