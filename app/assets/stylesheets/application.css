@@ -495,18 +495,42 @@ input.x-button {
    font-weight: 600;
 }
 
-.result-container .learn_more_button {
-    width: 100px; 
-    height: 20px; 
+.result-container .learn_more_button, .result-container .map_button {
+    width: 100px;
+    height: 20px;
     position: relative;
     margin-left: 20px;
     vertical-align: bottom;
-    margin-left: auto;
-    display: block;
+    display: inline-block;
+}
+
+.result-container .learn_more_button {
+    margin-left: 29%;
+}
+
+.result-container .map_button {
+    margin-right: 29%;
+}
+
+.result-container .map_container.hidden{
+    opacity: 0;
+    visibility: visible;
+    height: 0; 
+    display: block !important;
+}
+
+.result-container .map_container{
+    position: relative;;
+    -webkit-transition: opacity 0.5s ease 0.1s; 
+    transition: opacity 0.5s ease 0.1s;
+    opacity: 1;
+    visibility: visible;
+    height: 200px;
 }
 
 .result-container .learn_more_box.hidden {
     opacity: 0;
+    height: 0; 
     position: absolute;
     visibility: hidden;
     display: block !important;
@@ -563,13 +587,13 @@ img.error_icon {
 /*********************************************************************************/
 
 
-@media screen and (max-device-width: 665px) {
+@media screen and (max-device-width: 665px), (max-width: 665px) {
     .result-container .result_img {
         max-width: 32%; 
     }
 }
 
-@media screen and (max-device-width: 560px) {
+@media screen and (max-device-width: 560px), (max-width: 560px) {
     #main { padding: 10px 0px ;}
     article#watdo, article#wateat, article#error, article#random, article#count, article#me{ 
         padding: 0 10px 10px 10px; 

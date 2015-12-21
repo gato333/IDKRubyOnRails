@@ -23,7 +23,7 @@
 							<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
 
 								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
-				
+
 								<div class="text">
 									<h3> <%= result.name %> </h3>
 									<h5><span>Address:</span> <%= result.address %></h5>
@@ -45,9 +45,23 @@
 									<% end %>
 
 								</div>
-							
+
+								<div class="map_container hidden">
+									<input class="lat" value="<%= result.lat %>" type="hidden">
+									<input class="lng" value="<%= result.long %>" type="hidden">
+									<input class="name" value="<%= result.name %>" type="hidden">
+								</div>
+
 								<div class="learn_more_box hidden">
 										<h5><span>Source:</span> <%= result.source %></h5>
+
+										<% if !result.lat.nil? %>
+											<h5><span>Latitude:</span> <%= result.lat %></h5>
+										<% end %>
+
+										<% if !result.long.nil?  %>
+											<h5><span>Longitude:</span> <%= result.long %></h5>
+										<% end %>
 
 										<% if !result.description.nil? && result.description.length > 0 %>
 											<h5><span>Description:</span> <%= result.description %></h5>
@@ -56,7 +70,10 @@
 										<h5><span>ID:</span> <%=result.id %></h5>
 										<div class="learn_more"><a class="page_link" href="<%= result.eventurl %>"> event link</a></div>
 								</div>
+								
+								<input class="map_button" type="button" value="see map">
 								<input class="learn_more_button" type="button" value="expand">
+
 							</div>
 			 		<% count += 1
 			 			end %>

@@ -63,7 +63,7 @@ module ApplicationHelper
 		elsif status == RANDOM_STATUS
 			['application', 'random']
 		elsif status == RESULT_STATUS
-			['application', 'result']
+			['application', 'result', 'googleMaps']
 		elsif status == DEFAULT_STATUS
 			['application']
 		else

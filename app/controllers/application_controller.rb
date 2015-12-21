@@ -45,7 +45,8 @@ class ApplicationController < ActionController::Base
   			end
   		elsif @title == ApplicationHelper::DO_STATUS
   			if ApplicationHelper.validateForm(params, ApplicationHelper::DO_STATUS)
-  				query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
+  				@googleKey = Rails.application.secrets.google_api_key
+          query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getEventResults
   			else 
 					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1", :lat => params["lat"] || "", :long => params["long"] || ""
