@@ -1,7 +1,6 @@
 class EventQueryHandler
 		require 'open-uri'
     require 'event_result'
-    require "result_container"
 
 		attr_accessor :lat, :eastlat, :westlat, :long, :northlong, :southlong, :radius, :keyword, :price, :curTime
 
@@ -68,7 +67,7 @@ class EventQueryHandler
 
     def formatResults(results)
       if !results.empty?
-        chooseRandom3(resultArray)
+        chooseRandom3(results.to_a)
       else 
         "ZERO_RESULTS"
       end
@@ -97,10 +96,10 @@ class EventQueryHandler
       all = EventResult.all 
 
       if !all.empty?
-        resultArray
+        all
       else
         "ZERO_RESULTS"
       end
     end
-    
+
 end

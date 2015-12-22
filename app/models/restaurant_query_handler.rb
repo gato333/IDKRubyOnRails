@@ -1,7 +1,6 @@
 class RestaurantQueryHandler
 	require 'open-uri'
 	require 'json'
-	require "result_container"
 
     attr_accessor :lat, :long, :radius, :keyword, :price, :url
     API = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
