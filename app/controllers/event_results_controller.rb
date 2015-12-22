@@ -17,13 +17,13 @@ class EventResultsController < ApplicationController
 
   # GET /event_results/new
   def new
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::EDIT_STATUS); 
     @event_result = EventResult.new
   end
 
   # GET /event_results/1/edit
   def edit
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::EDIT_STATUS); 
   end
 
   # POST /event_results

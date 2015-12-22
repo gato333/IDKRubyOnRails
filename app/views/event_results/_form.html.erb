@@ -47,7 +47,7 @@
 
   <%= f.label "Image url:" %>
   <%= f.url_field :imageurl, cols: 60, rows: 4%>
-  <%= image_tag( @event_result.imageurl) %>
+  <%= image_tag( @event_result.imageurl, alt: "") %>
 
 
   <div class="actions">
