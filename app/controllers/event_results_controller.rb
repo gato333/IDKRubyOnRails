@@ -76,12 +76,20 @@ class EventResultsController < ApplicationController
       @event_result = EventResult.find(params[:id])
     end
 
+    def generateLocation(address)
+      geo = Geocoder.coordinates(address)
+      lat = geo.nil? ? "" : geo[0]
+      long = geo.nil? ? "" : geo[1]
+      return lat, long
+    end 
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_result_params(p)
+      lat, long = generateLocation(p["event_result"][:address])
       { 
         "name" => p["event_result"][:name], 
-        "lat" => p["event_result"][:lat], 
-        "long" => p["event_result"][:long], 
+        "lat" => lat, 
+        "long" => long, 
         "address" => p["event_result"][:address], 
         "eventurl" => p["event_result"][:eventurl], 
         "imageurl" => p["event_result"][:imageurl], 
