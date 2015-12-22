@@ -2,34 +2,49 @@ class EventResultsController < ApplicationController
   before_action :set_event_result, only: [:show, :edit, :update, :destroy]
   include ApplicationHelper 
 
+  LOGO = ApplicationHelper::LOGO
+  DESCRIPTION = ApplicationHelper::DESCRIPTION
+
+  DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
+  SHOW_STATUS = ApplicationHelper::SHOW_STATUS
+  EDIT_STATUS = ApplicationHelper::EDIT_STATUS
+
   # GET /event_results
   # GET /event_results.json
   def index
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @logo = LOGO
+    @description = DESCRIPTION
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     @event_results = EventResult.all
   end
 
   # GET /event_results/1
   # GET /event_results/1.json
   def show
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::SHOW_STATUS); 
+    @logo = @event_result.imageurl
+    @description = @event_result.name
+    @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
   end
 
   # GET /event_results/new
   def new
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::EDIT_STATUS); 
+    @logo = LOGO
+    @description = "Create New"
+    @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 
     @event_result = EventResult.new
   end
 
   # GET /event_results/1/edit
   def edit
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::EDIT_STATUS); 
+    @logo = @event_result.imageurl
+    @description = @event_result.name
+    @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 
   end
 
   # POST /event_results
   # POST /event_results.json
   def create
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     @event_result = EventResult.new( event_result_params(params) )
 
     respond_to do |format|
@@ -46,7 +61,7 @@ class EventResultsController < ApplicationController
   # PATCH/PUT /event_results/1
   # PATCH/PUT /event_results/1.json
   def update
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     respond_to do |format|
       @event_result = EventResult.find(params[:id]); 
       if @event_result.update_attributes(event_result_params(params))
@@ -62,7 +77,7 @@ class EventResultsController < ApplicationController
   # DELETE /event_results/1
   # DELETE /event_results/1.json
   def destroy
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     @event_result.destroy
     respond_to do |format|
       format.html { redirect_to event_results_url, notice: 'Event result was successfully destroyed.' }

@@ -5,46 +5,65 @@ class ApplicationController < ActionController::Base
 	require "restaurant_query_handler"
 	include ApplicationHelper  
 
+  EAT_STATUS = ApplicationHelper::EAT_STATUS
+  DO_STATUS = ApplicationHelper::DO_STATUS
+  DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
+  RANDOM_STATUS = ApplicationHelper::RANDOM_STATUS
+  RESULT_STATUS = ApplicationHelper::RESULT_STATUS
+
+  LOGO = ApplicationHelper::LOGO
+  DESCRIPTION = ApplicationHelper::DESCRIPTION
+
 	#page functions
   def home
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS); 
+    @logo = LOGO
+    @description = DESCRIPTION
+    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS); 
   end
 
   def do
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DO_STATUS); 
+    @logo = LOGO
+    @description = DESCRIPTION
+    @javascriptsArray = ApplicationHelper.includeJavascripts(DO_STATUS); 
     if params.include?('error') 
-      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, ApplicationHelper::DO_STATUS);
+      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, DO_STATUS);
     end
     puts request.remote_ip
     @ip = remote_ip
   end
 
   def eat 
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::EAT_STATUS); 
+    @logo = LOGO
+    @description = DESCRIPTION
+    @javascriptsArray = ApplicationHelper.includeJavascripts(EAT_STATUS); 
     if params.include?('error') 
-      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, ApplicationHelper::EAT_STATUS);
+      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, EAT_STATUS);
     end
     puts request.remote_ip
     @ip = remote_ip
   end
 
   def random
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::RANDOM_STATUS); 
+    @logo = LOGO
+    @description = "Uncertainty Helper"
+    @javascriptsArray = ApplicationHelper.includeJavascripts( RANDOM_STATUS); 
   end
 
   def results 
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::RESULT_STATUS); 
+    @logo = LOGO
+    @description = DESCRIPTION
+    @javascriptsArray = ApplicationHelper.includeJavascripts( RESULT_STATUS); 
   	if params.include?("source")
   		@title = params["source"]
-  		if @title == ApplicationHelper::EAT_STATUS
-  			if ApplicationHelper.validateForm(params, ApplicationHelper::EAT_STATUS)
+  		if @title == EAT_STATUS
+  			if ApplicationHelper.validateForm(params, EAT_STATUS)
   				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getRestaurantResults
   			else 
   				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1", :lat => params["lat"] || "", :long => params["long"] || ""
   			end
-  		elsif @title == ApplicationHelper::DO_STATUS
-  			if ApplicationHelper.validateForm(params, ApplicationHelper::DO_STATUS)
+  		elsif @title == DO_STATUS
+  			if ApplicationHelper.validateForm(params, DO_STATUS)
   				@googleKey = Rails.application.secrets.google_api_key; 
           query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getEventResults
@@ -60,20 +79,26 @@ class ApplicationController < ActionController::Base
   end
 
   def count
+    @logo = LOGO
+    @description = "Hidden Page"
     query = EventQueryHandler.new
     @resultsAll = query.totalEvents
     @resultsValid = query.totalEventsHaventHappened
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS) 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
   end
 
   def all 
+    @logo = LOGO
+    @description = "Hidden Page"
     query = EventQueryHandler.new
     @results = query.getAllEvents
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::RESULT_STATUS)
+    @javascriptsArray = ApplicationHelper.includeJavascripts(RESULT_STATUS)
   end
 
   def error 
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::DEFAULT_STATUS) 
+    @logo = LOGO
+    @description = "Problems"
+    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
   	if params.include?(:error_msg)
   		@error_msg = params[:error_msg]
   	else 

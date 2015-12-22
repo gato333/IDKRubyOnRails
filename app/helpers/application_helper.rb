@@ -1,5 +1,8 @@
 module ApplicationHelper
 
+	LOGO = "http://49.media.tumblr.com/c8bdf16535f80091a941843de701532b/tumblr_n9stfetbYf1r5mmhlo1_400.gif"
+  DESCRIPTION = "Secret Events NYC"
+
 	EAT_STATUS = "EAT"
 	DO_STATUS = "DO"
 	DEFAULT_STATUS = "DEFAULT"
