@@ -113,13 +113,15 @@ input.error {
     border: 2px red solid;
 }
 
-#random input { 
+#random input[type="text"] { 
     width: 90%; 
+
 }
 
 div.delete-choice {
     display: inline-block;
     padding:10px;
+    margin-right: -26px;
 }
 
 article {
@@ -226,7 +228,7 @@ h5 {
         display: block !important;
     }
 }
-    
+
 /*********************************************************************************/
 /* Icons                                                                         */
 /* Powered by Font Awesome by Dave Gandy | http://fontawesome.io                 */
