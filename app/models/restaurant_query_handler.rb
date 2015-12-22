@@ -40,20 +40,7 @@ class RestaurantQueryHandler
     def json2Object
     	results = getJSON
     	if results["status"] == "OK"
-    		resultArray = Array.new
-    		results["results"].each do |r|
-    			rholder = ResultContainer.new
-    			rholder.lat = r["geometry"]["location"]["lat"]
-    			rholder.long = r["geometry"]["location"]["lng"]
-    			rholder.name = r["name"]
-    			rholder.imageurl = r.include?("photos") ? generateGoogleImage( r["photos"][0]["photo_reference"] ) : r["icon"]
-    			rholder.types = r["types"].join(", ")
-    			rholder.address = r["vicinity"]
-    			rholder.price = moneyConversion(r["price_level"])
-    			rholder.rating = r["rating"].nil? || !r["rating"] ? "no rating" : r["rating"]
-    			resultArray.push(rholder)
-    		end
-    		chooseRandom3(resultArray)
+    		chooseRandom3(results["results"])
     	else 
     		results["status"]
     	end

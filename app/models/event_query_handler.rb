@@ -21,8 +21,6 @@ class EventQueryHandler
     	@keyword = keyword.to_s
     end
 
-   
-
     def boundingBox
       latConFactor = @radius / 69
       longConFactor = @radius / 69 / Math.cos(deg2rad(@lat)).abs
@@ -70,28 +68,9 @@ class EventQueryHandler
 
     def formatResults(results)
       if !results.empty?
-        resultArray = Array.new
-
-        results.each do |r|
-          rholder = ResultContainer.new
-          rholder.lat = r.lat
-          rholder.id = r.id
-          rholder.long = r.long
-          rholder.name = r.name
-          rholder.imageurl = r.imageurl
-          rholder.types = r.types
-          rholder.address = r.address
-          rholder.price = r.price
-          rholder.eventurl = r.eventurl
-          rholder.startdate = r.startdate
-          rholder.enddate = r.enddate
-          rholder.source = r.source
-          rholder.description = r.description
-          resultArray.push(rholder)
-        end
         chooseRandom3(resultArray)
       else 
-        "No Results"
+        "ZERO_RESULTS"
       end
     end
 
@@ -118,26 +97,10 @@ class EventQueryHandler
       all = EventResult.all 
 
       if !all.empty?
-        resultArray = Array.new
-
-        all.each do |r|
-          rholder = ResultContainer.new
-          rholder.lat = r.lat
-          rholder.id = r.id
-          rholder.long = r.long
-          rholder.name = r.name
-          rholder.imageurl = r.imageurl
-          rholder.types = r.types
-          rholder.address = r.address
-          rholder.price = r.price
-          rholder.eventurl = r.eventurl
-          rholder.startdate = r.startdate
-          rholder.enddate = r.enddate
-          rholder.source = r.source
-          rholder.description = r.description
-          resultArray.push(rholder)
-        end
+        resultArray
+      else
+        "ZERO_RESULTS"
       end
-      resultArray
     end
+    
 end
