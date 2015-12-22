@@ -211,6 +211,22 @@ h5 {
     }
 }     
 
+
+.map_container {
+    position: relative;;
+    -webkit-transition: opacity 0.5s ease 0.1s; 
+    transition: opacity 0.5s ease 0.1s;
+    opacity: 1;
+    visibility: visible;
+    height: 200px;
+    &.hidden{
+        opacity: 0;
+        visibility: visible;
+        height: 0; 
+        display: block !important;
+    }
+}
+    
 /*********************************************************************************/
 /* Icons                                                                         */
 /* Powered by Font Awesome by Dave Gandy | http://fontawesome.io                 */
@@ -407,20 +423,6 @@ input.x-button {
         display:block;
     }
  
-    .map_container {
-        position: relative;;
-        -webkit-transition: opacity 0.5s ease 0.1s; 
-        transition: opacity 0.5s ease 0.1s;
-        opacity: 1;
-        visibility: visible;
-        height: 200px;
-        &.hidden{
-            opacity: 0;
-            visibility: visible;
-            height: 0; 
-            display: block !important;
-        }
-    }
     .learn_more_box {
         position: relative;
         visibility: visible;

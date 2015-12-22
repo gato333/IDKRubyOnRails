@@ -12,7 +12,7 @@ class EventResultsController < ApplicationController
   # GET /event_results/1
   # GET /event_results/1.json
   def show
-    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::PAGE_STATUS); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(ApplicationHelper::SHOW_STATUS); 
   end
 
   # GET /event_results/new

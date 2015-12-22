@@ -6,6 +6,7 @@
 	<%= image_tag @event_result.imageurl %>
 
 	<h3> <%= @event_result.name %> </h3>
+
 	<% if !@event_result.address.nil? && @event_result.address.length > 0 %>
 		<h5><span>Address:</span> <%= @event_result.address %></h5>
 	<% end %>
@@ -31,7 +32,7 @@
 		<h5><span>Description:</span> <%= @event_result.description %></h5>
 	<% end %>
 
-	<div class="map_container hidden">
+	<div class="map_container">
 		<input class="lat" value="<%= @event_result.lat %>" type="hidden">
 		<input class="lng" value="<%= @event_result.long %>" type="hidden">
 		<input class="name" value="<%= @event_result.name %>" type="hidden">

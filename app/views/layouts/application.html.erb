@@ -13,9 +13,8 @@
 		<% @javascriptsArray.each do |file| %>
 			<% if(file === 'googleMaps') %>
 				<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key="+ ENV["googleKey"] +"&language=en", 'data-turbolinks-track' => true %>
-			<% else %>
-	  		<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
-	  	<% end %>
+			<% end %>
+	  	<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
 	  <% end %>
 
 	  <%= csrf_meta_tags %>
