@@ -96,7 +96,7 @@ class EventQueryHandler
       all = EventResult.all 
 
       if !all.empty?
-        all
+        all.to_a
       else
         "ZERO_RESULTS"
       end
