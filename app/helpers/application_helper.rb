@@ -64,7 +64,7 @@ module ApplicationHelper
 
 	def self.includeJavascripts(status) 
 		if status == SHOW_STATUS
-			['application', 'show', 'googleMaps']
+			['application', 'show', 'googleMaps', 'social']
 		elsif status == EDIT_STATUS
 			['application', 'edit']
 		elsif status == EAT_STATUS || status == DO_STATUS
@@ -72,7 +72,7 @@ module ApplicationHelper
 		elsif status == RANDOM_STATUS
 			['application', 'random']
 		elsif status == RESULT_STATUS
-			['application', 'result', 'googleMaps']
+			['application', 'result', 'googleMaps', 'social']
 		elsif status == DEFAULT_STATUS
 			['application']
 		else

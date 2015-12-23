@@ -192,7 +192,7 @@ section:last-child, article:last-child{
 
 .share-obj {
     position: absolute;
-    right: 0;
+    right: 10px;
     margin-top: 15px;
     .social {
         width: 30px;
@@ -576,6 +576,7 @@ article#show {
         margin: 0 auto;
         display: block;
     }
+    h3 { width: 60%; }
 }
 
 /*********************************************************************************/

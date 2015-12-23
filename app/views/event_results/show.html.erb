@@ -6,14 +6,14 @@
 	<%= image_tag @event_result.imageurl %>
 
 	<div class="share-obj"> 
-		<a class="facebook social" target="_blank" href="javascript:open_popup('https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>');">F</a>
-		<a class="twitter social" target="_blank" href="javascript:open_popup('javascript:open_popup('https://twitter.com/intent/tweet?text=<%= @event_url %>%2Fat%2FIDK%2FNYC&url=<%= request.original_url %>&via=idkNYC');">L</a>
-		<a class="google social plus" target="_blank" href="javascript:open_popup('');">H</a>
-		<a class="tumblr social" target="_blank" href="javascript:open_popup('');">O</a>
+		<a class="facebook social" target="_blank">F</a>
+		<a class="twitter social" target="_blank">L</a>
+		<a class="google social plus" target="_blank">H</a>
+		<a class="tumblr social" target="_blank">O</a>
 		<!--
-		<a class="instagram social plus" target="_blank" href="javascript:open_popup('');">I</a>
+		<a class="instagram social plus" target="_blank">I</a>
 		-->
-		<a class="email social plus " target="_blank" href="javascript:open_popup('');">M</a>
+		<a class="email social plus " target="_blank">M</a>
 	</div>
 
 	<h3> <%= @event_result.name %> </h3>
