@@ -61,4 +61,21 @@ class AbstractScrapper
     money.gsub!('$','')
   end
 
+  def createEvent(name, address, price, lat, long, imglink, link, startdate, enddate, description, types, source)
+    EventResult.create( 
+        name: name, 
+        price: price, 
+        lat: lat, 
+        long: long, 
+        address: address, 
+        imageurl: imglink, 
+        eventurl: link , 
+        startdate: startdate, 
+        enddate: enddate, 
+        description: description, 
+        types: types, 
+        source: source
+      )
+  end
+
 end

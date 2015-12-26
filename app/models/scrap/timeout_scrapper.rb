@@ -29,21 +29,11 @@ class TimeoutScrapper < AbstractScrapper
 
 			lat, long, address, startdate, enddate, price, types = deepscrap(link)
 
+			createEvent(name, address, price, lat, long, 
+				imglink, link, startdate, enddate, 
+				description, types, TIMEOUT_SOURCE )
+			
 			@eventcount += 1 
-			EventResult.create( 
-				name: name, 
-				price: price, 
-				lat: lat, 
-				long: long, 
-				address: address, 
-				imageurl: imglink, 
-				eventurl: link , 
-				startdate: startdate, 
-				enddate: enddate, 
-				description: description, 
-				types: types, 
-				source: TIMEOUT_SOURCE
-			)
 		end
 		message = "Timeout Done"
 		endScrapOutput( message, @eventcount.to_s )

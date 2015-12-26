@@ -25,21 +25,11 @@ class MyFreeConcertScrapper < AbstractScrapper
 
 			description, lat, long, address = deepscrap(link)
 
+			createEvent( name, address, "0", lat, long, imglink, 
+				link, startdate, enddate, description, 
+				"music, concert, sound, art", MYFREECONCERT_SOURCE )
+			
 			@eventcount += 1 
-			EventResult.create( 
-				name: name, 
-				price: "0", 
-				lat: lat, 
-				long: long, 
-				address: address, 
-				imageurl: imglink, 
-				eventurl: link , 
-				startdate: startdate, 
-				enddate: enddate, 
-				description: description, 
-				types: "music, concert, sound, art", 
-				source: MYFREECONCERT_SOURCE
-			)
 		end
 		message = "My Free Concerts Done"
 		endScrapOutput( message, @eventcount.to_s )

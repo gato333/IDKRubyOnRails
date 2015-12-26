@@ -27,12 +27,12 @@ class EventbriteScrapper < AbstractScrapper
 				price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
 				price = freeTest(price)
 				name = explodeImplode(linkholder.css(".poster-card__body .poster-card__title"))
-				date = explodeImplode(linkholder.css(".poster-card__body .poster-card__date"))
+				startdate = explodeImplode(linkholder.css(".poster-card__body .poster-card__date"))
 				address = explodeImplode(linkholder.css(".poster-card__body .poster-card__venue"))
 				typelist = e.css(".poster-card__footer .poster-card__tags a")
-				type = ""
+				types = ""
 				typelist.each do |t|
-					type.concat(explodeImplode(t).gsub("#", "") + " ")
+					types.concat(explodeImplode(t).gsub("#", "") + " ")
 				end
 
 				geo = e.css(".poster-card__body .poster-card__venue span[itemprop='location'] span[itemprop='geo']")
@@ -41,21 +41,11 @@ class EventbriteScrapper < AbstractScrapper
 
 				description = deepscrap(link);
 
+				createEvent(name, address, price, lat, long, 
+					imglink.nil? ? '' : imglink, link, startdate, '', 
+					description, types, EVENTBRITE_SOURCE )
+				
 				@eventcount += 1
-				EventResult.create( 
-					name: name, 
-					price: price, 
-					lat: lat, 
-					long: long, 
-					address: address, 
-					imageurl: imglink.nil? ? '' : imglink, 
-					eventurl: link, 
-					startdate: date, 
-					enddate: '', 
-					description: description, 
-					types: type, 
-					source: EVENTBRITE_SOURCE
-				)
 			end
 		end
 		message = "Eventbrite Done"

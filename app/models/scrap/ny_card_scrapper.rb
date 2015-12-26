@@ -37,21 +37,11 @@ class NyCardScrapper < AbstractScrapper
 			# not possible to do deep scrap on this site (too bare bones)
 			description = deepscrap
 
+			createEvent(name, address, "0", lat, long, imglink, 
+				link, startdate, enddate, description, 
+				"art, art gallery openings", ARTCARDS_SOURCE )
+			
 			@eventcount += 1 
-			EventResult.create( 
-				name: name, 
-				price: "0", 
-				lat: lat, 
-				long: long, 
-				address: address, 
-				imageurl: imglink , 
-				eventurl: link , 
-				startdate: startdate, 
-				enddate: enddate, 
-				description: description, 
-				types: "art, art gallery openings", 
-				source: ARTCARDS_SOURCE
-			)
 		end
 		message = "NY Art Card Done"
 		endScrapOutput( message, @eventcount.to_s )

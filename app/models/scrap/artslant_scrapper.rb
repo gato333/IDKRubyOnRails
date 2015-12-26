@@ -24,7 +24,7 @@ class ArtslantScrapper < AbstractScrapper
 			events.each do |e|
 				imglink =  e.css("span.imagethumbfield img")[0]["src"]
 				tableright = e.css("td table tr td")[1]
-				date = @time.to_date.to_s + " " + e.css("td table tr td")[2].css("b span").text.split("-")[0]
+				startdate = @time.to_date.to_s + " " + e.css("td table tr td")[2].css("b span").text.split("-")[0]
 				enddate = @time.to_date.to_s + e.css("td table tr td")[2].css("b span").text.split("-")[1]
 				# GET THE RIGHT LINK 
 				artslantlink =  "http://www.artslant.com" + tableright.css("b a")[0]["href"] 
@@ -42,22 +42,12 @@ class ArtslantScrapper < AbstractScrapper
 				org = rightarray[1]
 				
 				description = deepscrap(artslantlink)
+		
+				createEvent(name, address, "0", lat, long, imglink, 
+					link, startdate, enddate, description, 
+					"art, art gallery openings", ARTSLANT_SOURCE )
 				
-				@eventcount += 1 
-				EventResult.create( 
-					name: name, 
-					price: "0", 
-					lat: lat, 
-					long: long, 
-					address: address, 
-					imageurl: imglink , 
-					eventurl: link , 
-					startdate: date, 
-					enddate: enddate, 
-					description: description, 
-					types: "art, art gallery openings", 
-					source: ARTSLANT_SOURCE
-				)
+				@eventcount += 1
 			end
 		end
 		message = "Artslant Done"
