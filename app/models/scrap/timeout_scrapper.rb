@@ -11,32 +11,38 @@ class TimeoutScrapper < AbstractScrapper
 
 	#no pagination
 	def scrap
-		html = pullHtml(@timeoutsurl)
-		events = html.css("#tab__panel_1 .small_list .tiles article")
+		begin
+			html = pullHtml(@timeoutsurl)
+			events = html.css("#tab__panel_1 .small_list .tiles article")
 
-		events.each do |e|
-			container =  e.css(".feature-item__content .row")
+			events.each do |e|
+				container =  e.css(".feature-item__content .row")
 
-			leftcontainer = container.css(".feature-item__column")[0]
-			rightcontainer = container.css(".feature-item__column")[1]
-			
-			name = rightcontainer.css("h3").text
+				leftcontainer = container.css(".feature-item__column")[0]
+				rightcontainer = container.css(".feature-item__column")[1]
+				
+				name = rightcontainer.css("h3").text
 
-			link = @basetimeouturl + leftcontainer.css("a")[0]["href"]
-			imglink = leftcontainer.css("img")[0]["src"]
+				link = @basetimeouturl + leftcontainer.css("a")[0]["href"]
+				imglink = leftcontainer.css("img")[0]["src"]
 
-			description = rightcontainer.css("p").text			
+				description = rightcontainer.css("p").text			
 
-			lat, long, address, startdate, enddate, price, types = deepscrap(link)
+				lat, long, address, startdate, enddate, price, types = deepscrap(link)
 
-			createEvent(name, address, price, lat, long, 
-				imglink, link, startdate, enddate, 
-				description, types, TIMEOUT_SOURCE )
-			
-			@eventcount += 1 
+				createEvent(name, address, price, lat, long, 
+					imglink, link, startdate, enddate, 
+					description, types, TIMEOUT_SOURCE )
+
+				@eventcount += 1 
+			end
+
+			message = "Timeout Done"
+			endScrapOutput( message, @eventcount.to_s )
+		rescue
+			AlertMailer.send_error_email(TIMEOUT_SOURCE)
+			raise
 		end
-		message = "Timeout Done"
-		endScrapOutput( message, @eventcount.to_s )
 	end
 
 
