@@ -44,4 +44,20 @@ Rails.application.configure do
 
   config.assets.compress = false
 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.smtp_settings = {
+    :address              => ENV["smtp_address"],
+    :port                 => ENV["smtp_port"],
+    :domain               => ENV["smtp_domain"],
+    :user_name            => ENV["default_email"],
+    :password             => ENV["default_email_pwd"],
+    :authentication       => :plain,
+    :enable_starttls_auto => true
+  }
+
+
+
 end

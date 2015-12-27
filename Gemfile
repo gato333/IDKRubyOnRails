@@ -25,6 +25,9 @@ gem 'nokogiri'
 gem 'geocoder'
 # validating url duuuuh
 gem 'validate_url'
+# for safe pwd and env vars
+gem 'figaro'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

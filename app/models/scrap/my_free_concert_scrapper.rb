@@ -11,28 +11,32 @@ class MyFreeConcertScrapper < AbstractScrapper
 
 	#no pagination
 	def scrap
-		puts @myfreeconcertsurl
-		html = pullHtml(@myfreeconcertsurl)
-		events = html.css(".month-calendar-current-day .item-list li")
+		begin 
+			puts @myfreeconcertsurl
+			html = pullHtml(@myfreeconcertsurl)
+			events = html.css(".month-calendar-current-day .item-list li")
 
-		events.each do |e|
-			name = e.css("a span.item-list-info .item-list-title").text
-			imglink = e.css(".item-list-img img")[0]["src"]
-			link = @basefreeconcerturl + e.css("a.item-list-item")[0]["href"]
+			events.each do |e|
+				name = e.css("a span.item-list-info .item-list-title").text
+				imglink = e.css(".item-list-img img")[0]["src"]
+				link = @basefreeconcerturl + e.css("a.item-list-item")[0]["href"]
 
-			startdate = @time.to_date.to_s + " " + findAddTimeSufix(e.css("a .item-list-date").text.split("-")[0])
-			enddate = @time.to_date.to_s + findAddTimeSufix(e.css("a .item-list-date").text.split("-")[1])
+				startdate = @time.to_date.to_s + " " + findAddTimeSufix(e.css("a .item-list-date").text.split("-")[0])
+				enddate = @time.to_date.to_s + findAddTimeSufix(e.css("a .item-list-date").text.split("-")[1])
 
-			description, lat, long, address = deepscrap(link)
+				description, lat, long, address = deepscrap(link)
 
-			createEvent( name, address, "0", lat, long, imglink, 
-				link, startdate, enddate, description, 
-				"music, concert, sound, art", MYFREECONCERT_SOURCE )
-			
-			@eventcount += 1 
+				createEvent( name, address, "0", lat, long, imglink, 
+					link, startdate, enddate, description, 
+					"music, concert, sound, art", MYFREECONCERT_SOURCE )
+				
+				@eventcount += 1 
+			end
+			message = "My Free Concerts Done"
+			endScrapOutput( message, @eventcount.to_s )
+		rescue
+			AlertMailer.send_error_email(MYFREECONCERT_SOURCE).deliver_now
 		end
-		message = "My Free Concerts Done"
-		endScrapOutput( message, @eventcount.to_s )
 	end
 
 

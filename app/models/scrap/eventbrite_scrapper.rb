@@ -11,45 +11,49 @@ class EventbriteScrapper < AbstractScrapper
 	end
 	#has pagination
 	def scrap
-		loop do 
-			page = "page=" + @pagecount.to_s
-			url = @urlbeg + page + @urlend
-			html = pullHtml(url)
+		begin
+			loop do 
+				page = "page=" + @pagecount.to_s
+				url = @urlbeg + page + @urlend
+				html = pullHtml(url)
 
-			events = html.css("section.js-content div.g-cell div.poster-card.js-d-poster")
-			break if events.empty?
-			@pagecount += 1
+				events = html.css("section.js-content div.g-cell div.poster-card.js-d-poster")
+				break if events.empty?
+				@pagecount += 1
 
-			events.each do |e|
-				linkholder =  e.css("a.js-event-link.js-xd-track-link")
-				link = linkholder[0]["href"]
-				imglink = linkholder.css(".poster-card__header .poster-card__image img")[0]["src"]
-				price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
-				price = freeTest(price)
-				name = explodeImplode(linkholder.css(".poster-card__body .poster-card__title"))
-				startdate = explodeImplode(linkholder.css(".poster-card__body .poster-card__date"))
-				address = explodeImplode(linkholder.css(".poster-card__body .poster-card__venue"))
-				typelist = e.css(".poster-card__footer .poster-card__tags a")
-				types = ""
-				typelist.each do |t|
-					types.concat(explodeImplode(t).gsub("#", "") + " ")
+				events.each do |e|
+					linkholder =  e.css("a.js-event-link.js-xd-track-link")
+					link = linkholder[0]["href"]
+					imglink = linkholder.css(".poster-card__header .poster-card__image img")[0]["src"]
+					price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
+					price = freeTest(price)
+					name = explodeImplode(linkholder.css(".poster-card__body .poster-card__title"))
+					startdate = explodeImplode(linkholder.css(".poster-card__body .poster-card__date"))
+					address = explodeImplode(linkholder.css(".poster-card__body .poster-card__venue"))
+					typelist = e.css(".poster-card__footer .poster-card__tags a")
+					types = ""
+					typelist.each do |t|
+						types.concat(explodeImplode(t).gsub("#", "") + " ")
+					end
+
+					geo = e.css(".poster-card__body .poster-card__venue span[itemprop='location'] span[itemprop='geo']")
+					lat = geo.css("meta[itemprop='latitude']")[0]["content"]
+					long = geo.css("meta[itemprop='longitude']")[0]["content"]
+
+					description = deepscrap(link);
+
+					createEvent(name, address, price, lat, long, 
+						imglink.nil? ? '' : imglink, link, startdate, '', 
+						description, types, EVENTBRITE_SOURCE )
+					
+					@eventcount += 1
 				end
-
-				geo = e.css(".poster-card__body .poster-card__venue span[itemprop='location'] span[itemprop='geo']")
-				lat = geo.css("meta[itemprop='latitude']")[0]["content"]
-				long = geo.css("meta[itemprop='longitude']")[0]["content"]
-
-				description = deepscrap(link);
-
-				createEvent(name, address, price, lat, long, 
-					imglink.nil? ? '' : imglink, link, startdate, '', 
-					description, types, EVENTBRITE_SOURCE )
-				
-				@eventcount += 1
 			end
+			message = "Eventbrite Done"
+			endScrapOutput( message, @eventcount.to_s )
+		rescue
+			AlertMailer.send_error_email(EVENTBRITE_SOURCE).deliver_now
 		end
-		message = "Eventbrite Done"
-		endScrapOutput( message, @eventcount.to_s )
 	end
 
 	def deepscrap(link)

@@ -13,45 +13,49 @@ class ArtslantScrapper < AbstractScrapper
 
 	#has pagination
 	def scrap
-		loop do 
-			page = "&page=" + @pagecount.to_s
-			html = pullHtml(@artslanturl + page)
-			events = html.css("tbody#thelist tr.t1")
+		begin
+			loop do 
+				page = "&page=" + @pagecount.to_s
+				html = pullHtml(@artslanturl + page)
+				events = html.css("tbody#thelist tr.t1")
 
-			break if events.empty?
-			@pagecount += 1
+				break if events.empty?
+				@pagecount += 1
 
-			events.each do |e|
-				imglink =  e.css("span.imagethumbfield img")[0]["src"]
-				tableright = e.css("td table tr td")[1]
-				startdate = @time.to_date.to_s + " " + e.css("td table tr td")[2].css("b span").text.split("-")[0]
-				enddate = @time.to_date.to_s + e.css("td table tr td")[2].css("b span").text.split("-")[1]
-				# GET THE RIGHT LINK 
-				artslantlink =  "http://www.artslant.com" + tableright.css("b a")[0]["href"] 
-				link = tableright.css("a")[1].nil? ? (tableright.css("a")[0].nil? ? "http://www.artslant.com" + tableright.css("b a")[0]["href"]  : tableright.css("a")[0]["href"] ) : tableright.css("a")[1]["href"] 
-				name = tableright.css("a span.artist").text.split.join(" ") + ": " + tableright.css("a i").text.split.join(" ")
-				
-				rightarray = tableright.text.split(/\n/).reject(&:empty?).reject(&:blank?)
-				if( rightarray[3].nil? || rightarray[4].nil? )
-					address = ""
-				else 
-					address =  rightarray[3] + " " + rightarray[4]
+				events.each do |e|
+					imglink =  e.css("span.imagethumbfield img")[0]["src"]
+					tableright = e.css("td table tr td")[1]
+					startdate = @time.to_date.to_s + " " + e.css("td table tr td")[2].css("b span").text.split("-")[0]
+					enddate = @time.to_date.to_s + e.css("td table tr td")[2].css("b span").text.split("-")[1]
+					# GET THE RIGHT LINK 
+					artslantlink =  "http://www.artslant.com" + tableright.css("b a")[0]["href"] 
+					link = tableright.css("a")[1].nil? ? (tableright.css("a")[0].nil? ? "http://www.artslant.com" + tableright.css("b a")[0]["href"]  : tableright.css("a")[0]["href"] ) : tableright.css("a")[1]["href"] 
+					name = tableright.css("a span.artist").text.split.join(" ") + ": " + tableright.css("a i").text.split.join(" ")
+					
+					rightarray = tableright.text.split(/\n/).reject(&:empty?).reject(&:blank?)
+					if( rightarray[3].nil? || rightarray[4].nil? )
+						address = ""
+					else 
+						address =  rightarray[3] + " " + rightarray[4]
+					end
+					lat, long = calculateGeo(address)
+					
+					org = rightarray[1]
+					
+					description = deepscrap(artslantlink)
+			
+					createEvent(name, address, "0", lat, long, imglink, 
+						link, startdate, enddate, description, 
+						"art, art gallery openings", ARTSLANT_SOURCE )
+					
+					@eventcount += 1
 				end
-				lat, long = calculateGeo(address)
-				
-				org = rightarray[1]
-				
-				description = deepscrap(artslantlink)
-		
-				createEvent(name, address, "0", lat, long, imglink, 
-					link, startdate, enddate, description, 
-					"art, art gallery openings", ARTSLANT_SOURCE )
-				
-				@eventcount += 1
 			end
+			message = "Artslant Done"
+			endScrapOutput( message, @eventcount.to_s )
+		rescue
+			AlertMailer.send_error_email(ARTSLANT_SOURCE).deliver_now
 		end
-		message = "Artslant Done"
-		endScrapOutput( message, @eventcount.to_s )
 	end
 
 	def deepscrap(link)

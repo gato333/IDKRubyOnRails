@@ -6,10 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-ENV["default_email"] = "gvoll333@gmail.com"
-ENV["default_email_pwd"] = "Hentai72"
-
-
 module IDKwebappRuby
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -31,21 +27,6 @@ module IDKwebappRuby
     config.assets.initialize_on_precompile = false
 
 
-    config.serve_static_assets = true
-
-    config.action_mailer.delivery_method = :sendmail
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = true
-
-    config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => "gmail.com",
-      :user_name            => ENV["default_email"],
-      :password             => ENV["default_email_pwd"],
-      :authentication       => :plain,
-      :enable_starttls_auto => true
-    }
-
+    config.serve_static_assets = true 
   end
 end

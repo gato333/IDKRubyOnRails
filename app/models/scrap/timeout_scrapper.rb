@@ -1,6 +1,6 @@
 class TimeoutScrapper < AbstractScrapper 
 	attr_accessor :timouturl
-	TIMEOUT_SOURCE = "myfreeconcerts"
+	TIMEOUT_SOURCE = "timeout"
 
 	def initialize
 		message = "Timeout Scrap Start"
@@ -29,7 +29,7 @@ class TimeoutScrapper < AbstractScrapper
 				description = rightcontainer.css("p").text			
 
 				lat, long, address, startdate, enddate, price, types = deepscrap(link)
-
+				
 				createEvent(name, address, price, lat, long, 
 					imglink, link, startdate, enddate, 
 					description, types, TIMEOUT_SOURCE )
@@ -40,8 +40,7 @@ class TimeoutScrapper < AbstractScrapper
 			message = "Timeout Done"
 			endScrapOutput( message, @eventcount.to_s )
 		rescue
-			AlertMailer.send_error_email(TIMEOUT_SOURCE)
-			raise
+			AlertMailer.send_error_email(TIMEOUT_SOURCE).deliver_now
 		end
 	end
 

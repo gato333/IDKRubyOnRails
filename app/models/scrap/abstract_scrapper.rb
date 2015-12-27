@@ -74,8 +74,7 @@ class AbstractScrapper
         enddate: enddate, 
         description: description, 
         types: types, 
-        source: source
-      )
+        source: source )
   end
 
 end

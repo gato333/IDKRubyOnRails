@@ -10,37 +10,41 @@ class ArtBeatScrapper < AbstractScrapper
 
 	#no pagination
 	def scrap
-		html = pullHtml(@nyartbeaturl)
-		container = html.css("ul.longsmartlist")[0]
-		events = container.css("> li")
+		begin
+			html = pullHtml(@nyartbeaturl)
+			container = html.css("ul.longsmartlist")[0]
+			events = container.css("> li")
 
-		events.each do |e|
-			name = e.css("h4 a").text.split.join(" ")
-			imglink = "http://www.nyartbeat.com/" + e.css("div.smartpic_m a img")[0]["src"]
-			link = e.css("div.smartpic_m a")[0]["href"]
+			events.each do |e|
+				name = e.css("h4 a").text.split.join(" ")
+				imglink = "http://www.nyartbeat.com/" + e.css("div.smartpic_m a img")[0]["src"]
+				link = e.css("div.smartpic_m a")[0]["href"]
 
-			addressholder =  e.css("div.smart_details ul li")[2]
-			address = addressholder.css("span").text
-			lat, long = calculateGeo(address)
-			
-			datecontainer = e.css("div.smart_details ul li")[4]
-			date = datecontainer.text.scan( /\d{2}\:\d{2}/ )
-			startdate = @time.to_date.to_s + " " + date[0]
-			enddate = date[1].nil? ? "" : @time.to_date.to_s + " " + date[1]
+				addressholder =  e.css("div.smart_details ul li")[2]
+				address = addressholder.css("span").text
+				lat, long = calculateGeo(address)
+				
+				datecontainer = e.css("div.smart_details ul li")[4]
+				date = datecontainer.text.scan( /\d{2}\:\d{2}/ )
+				startdate = @time.to_date.to_s + " " + date[0]
+				enddate = date[1].nil? ? "" : @time.to_date.to_s + " " + date[1]
 
-			orgcontainer = e.css("div.smart_details ul li")[0]
-			org = orgcontainer.text.split.join(" ")[3..-1]
+				orgcontainer = e.css("div.smart_details ul li")[0]
+				org = orgcontainer.text.split.join(" ")[3..-1]
 
-			description = deepscrap(link);
+				description = deepscrap(link);
 
-			createEvent( name, address, "0", lat, long, 
-				imglink, link, startdate, enddate, description, 
-				"art, art gallery openings", NYARTBEAT_SOURCE )
-			
-			@eventcount += 1
+				createEvent( name, address, "0", lat, long, 
+					imglink, link, startdate, enddate, description, 
+					"art, art gallery openings", NYARTBEAT_SOURCE )
+				
+				@eventcount += 1
+			end
+			message = "Art Beat Done"
+			endScrapOutput( message, @eventcount.to_s )
+		rescue
+			AlertMailer.send_error_email(NYARTBEAT_SOURCE).deliver_now
 		end
-		message = "Art Beat Done"
-		endScrapOutput( message, @eventcount.to_s )
 	end
 
 
