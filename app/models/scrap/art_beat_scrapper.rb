@@ -12,9 +12,8 @@ class ArtBeatScrapper < AbstractScrapper
 	def scrap
 		begin
 			html = pullHtml(@nyartbeaturl)
-			container = html.css("ul.longsmartlist")[0]
-			events = container.css("> li")
-
+			events = html.css("ul.events_list li")
+			
 			events.each do |e|
 				name = e.css("h4 a").text.split.join(" ")
 				imglink = "http://www.nyartbeat.com/" + e.css("div.smartpic_m a img")[0]["src"]
