@@ -61,8 +61,11 @@ class AbstractScrapper
     money.gsub!('$','')
   end
 
-  def createEvent(name, address, price, lat, long, imglink, link, startdate, enddate, description, types, source)
-    EventResult.create( 
+  def createEvent(name, address, price, lat, long, imglink, 
+    link, startdate, enddate, description, types, source)
+    #address, name, and link must be not empty and not nil to create an event
+    if( !(address.nil? || address === "" || name.nil? || name === "" ))
+      EventResult.create( 
         name: name, 
         price: price, 
         lat: lat, 
@@ -75,6 +78,7 @@ class AbstractScrapper
         description: description, 
         types: types, 
         source: source )
+    end
   end
 
 end
