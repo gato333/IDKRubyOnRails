@@ -193,7 +193,10 @@ section:last-child, article:last-child{
 .share-obj {
     position: absolute;
     right: 10px;
-    margin-top: 15px;
+    margin-top: -45px;
+    background: white;
+    padding: 15px 5px;
+    border-radius: 5px;
     .social {
         width: 30px;
         height: 30px;
