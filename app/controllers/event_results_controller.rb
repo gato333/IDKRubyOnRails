@@ -16,6 +16,11 @@ class EventResultsController < ApplicationController
     @description = DESCRIPTION
     @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     @event_results = EventResult.all
+
+    respond_to do |format|
+      format.html
+      format.json  { render :json => @event_results }
+    end
   end
 
   # GET /event_results/1
@@ -24,6 +29,11 @@ class EventResultsController < ApplicationController
     @logo = @event_result.imageurl
     @description = @event_result.name
     @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
+
+    respond_to do |format|
+      format.html
+      format.json  { render :json => @event_result }
+    end
   end
 
   # GET /event_results/new

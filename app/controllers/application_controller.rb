@@ -85,6 +85,12 @@ class ApplicationController < ActionController::Base
     @resultsAll = query.totalEvents
     @resultsValid = query.totalEventsHaventHappened
     @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
+    
+    results = { all: @resultsAll, valid: @resultsValid }
+    respond_to do |format|
+      format.html
+      format.json  { render :json => results }
+    end
   end
 
   def all 
@@ -93,6 +99,11 @@ class ApplicationController < ActionController::Base
     query = EventQueryHandler.new
     @results = query.getAllEvents
     @javascriptsArray = ApplicationHelper.includeJavascripts(RESULT_STATUS)
+
+    respond_to do |format|
+      format.html
+      format.json  { render :json => @results }
+    end
   end
 
   def error 
