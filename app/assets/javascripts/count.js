@@ -14,7 +14,7 @@ function requestCount(currentTotal, refreshTime, failCount){
 			  	setTimeout( function () {
 			  		requestCount(data.all, initalWait, 0);
 			  	}, initalWait);
-			  }else if(failCount < 8) {
+			  }else if(failCount < 10) {
 			  	setTimeout( function(){
 						requestCount(currentTotal, refreshTime*2, failCount + 1);
 					}, refreshTime)
