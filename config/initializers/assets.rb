@@ -24,3 +24,6 @@ Rails.application.config.assets.precompile += %w( googleMaps.js )
 Rails.application.config.assets.precompile += %w( edit.js )
 
 Rails.application.config.assets.precompile += %w( social.js )
+
+Rails.application.config.assets.precompile += %w( count.js )
+

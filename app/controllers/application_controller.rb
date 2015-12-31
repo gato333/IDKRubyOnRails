@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
   RANDOM_STATUS = ApplicationHelper::RANDOM_STATUS
   RESULT_STATUS = ApplicationHelper::RESULT_STATUS
+  COUNT_STATUS = ApplicationHelper::COUNT_STATUS
 
   LOGO = ApplicationHelper::LOGO
   DESCRIPTION = ApplicationHelper::DESCRIPTION
@@ -84,7 +85,7 @@ class ApplicationController < ActionController::Base
     query = EventQueryHandler.new
     @resultsAll = query.totalEvents
     @resultsValid = query.totalEventsHaventHappened
-    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
+    @javascriptsArray = ApplicationHelper.includeJavascripts(COUNT_STATUS) 
     
     results = { all: @resultsAll, valid: @resultsValid }
     respond_to do |format|

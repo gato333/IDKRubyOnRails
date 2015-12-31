@@ -5,9 +5,14 @@
 	</header>
 
 <div> 
-	TOTAL COUNT : <%= @resultsAll  %>
+	TOTAL COUNT : 
+		<span id="all">
+			<%= @resultsAll  %>
+		</span>
 	<br>
-	TOTAL that still haven't happened: <%= @resultsValid %>
-
+	TOTAL that still haven't happened: 
+		<span id="valid"> 
+			<%= @resultsValid %>
+		</span>
 </div>
 </article>

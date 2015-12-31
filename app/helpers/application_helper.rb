@@ -10,6 +10,7 @@ module ApplicationHelper
 	RESULT_STATUS = "RESULT"
 	SHOW_STATUS = "SHOW"
 	EDIT_STATUS = "EDIT"
+	COUNT_STATUS = "COUNT"
 
 	def self.validateForm( params , status )
 		if !validateGeoLocation(params)
@@ -65,6 +66,8 @@ module ApplicationHelper
 	def self.includeJavascripts(status) 
 		if status == SHOW_STATUS
 			['application', 'show', 'googleMaps', 'social']
+		elsif status == COUNT_STATUS
+			['application', 'count']
 		elsif status == EDIT_STATUS
 			['application', 'edit']
 		elsif status == EAT_STATUS || status == DO_STATUS
