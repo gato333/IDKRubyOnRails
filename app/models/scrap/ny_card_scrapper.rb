@@ -47,7 +47,7 @@ class NyCardScrapper < AbstractScrapper
 			message = "NY Art Card Done"
 			endScrapOutput( message, @eventcount.to_s )
 		rescue
-			AlertMailer.send_error_email(MYFREECONCERT_SOURCE).deliver_now
+			AlertMailer.send_error_email(ARTCARDS_SOURCE).deliver_now
 		end
 	end
 
