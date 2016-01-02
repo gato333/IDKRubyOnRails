@@ -13,7 +13,7 @@ $(document).ready( function(){
 		if( $(this).hasClass("facebook") ){
 			url = "https://www.facebook.com/sharer/sharer.php?u=" + currentUrl;
 		} else if ( $(this).hasClass("twitter") ) {
-			url = "https://twitter.com/intent/tweet?text="+ eventName +"%2Fat%2FIDK%2FNYC&url=" + currentUrl +"&via=idkNYC"; 
+			url = "https://twitter.com/intent/tweet?text="+ eventName + encodeURIComponent(" at IDK NYC") +"&url=" + currentUrl +"&via=idkNYC"; 
 		} else if ( $(this).hasClass("google") ) {
 			url = "https://plus.google.com/share?url=" + currentUrl; 
 		} else if ( $(this).hasClass("email") ) {
