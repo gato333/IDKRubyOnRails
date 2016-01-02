@@ -15,7 +15,7 @@ $(document).ready( function(){
 		if( $(this).hasClass("facebook") ){
 			url = "https://www.facebook.com/sharer/sharer.php?u=" + currentUrl;
 		} else if ( $(this).hasClass("twitter") ) {
-			url = "https://twitter.com/intent/tweet?url=" + currentUrl +"&text="+ eventName + encodeURIComponent(" at IDK NYC") + "&via=idkNYC"; 
+			url = "https://twitter.com/intent/tweet?url=" + currentUrl +"&text="+ eventName + encodeURIComponent(" at IDK NYC") + "&via=idk_nyc"; 
 		} else if ( $(this).hasClass("google") ) {
 			url = "https://plus.google.com/share?url=" + currentUrl; 
 		} else if ( $(this).hasClass("email") ) {
