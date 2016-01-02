@@ -28,7 +28,7 @@ class EventResultsController < ApplicationController
   def show
     @logo = @event_result.imageurl
     @description = @event_result.description[0..80]
-    @title = @event_result.name
+    @title = @event_result.name + 'at IDK NYC'
     @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
 
     respond_to do |format|
