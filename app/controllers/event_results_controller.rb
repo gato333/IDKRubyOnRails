@@ -27,7 +27,8 @@ class EventResultsController < ApplicationController
   # GET /event_results/1.json
   def show
     @logo = @event_result.imageurl
-    @description = @event_result.name
+    @description = @event_result.description[0..80]
+    @title = @event_result.name
     @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
 
     respond_to do |format|

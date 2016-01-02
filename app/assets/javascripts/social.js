@@ -8,7 +8,8 @@ $(document).ready( function(){
 				currentUrl = encodeURIComponent(window.location.href),
 		    eventName = $(this).parent().parent().children("h3").text || $(this).parent().parent().children(".text").children("h3").text; 
 		eventName = encodeURIComponent(eventName); 
-		
+		console.log(eventName, currentUrl); 
+		console.log(window.location);
 		if( $(this).hasClass("facebook") ){
 			url = "https://www.facebook.com/sharer/sharer.php?u=" + currentUrl;
 		} else if ( $(this).hasClass("twitter") ) {
