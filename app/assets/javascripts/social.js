@@ -3,17 +3,19 @@ $(document).ready( function(){
 
 	$("a.social").on( 'click', function(e){
 		e.preventDefault()
-		console.log(this); 
 		var url = "", 
-				id = $(this).parent().id,  
-				currentUrl = encodeURIComponent(window.location.host + "/event/" + id),
+				id = $(this).parent()[0].id, 
+				currentUrl = encodeURIComponent(window.location.host + "/event/" + id), 
 				eventName = $(this).parent().parent().children("h3")[0] || $(this).parent().parent().children(".text").children("h3")[0]; 
-		eventName = encodeURIComponent(eventName.innerHTML); 
-		console.log(eventName, currentUrl); 
+		eventName = eventName.innerHTML; 
+		eventName = eventName.substr(0, eventName.indexOf(' ', 50)); 
+		eventName = encodeURIComponent(eventName); 
+
+		console.log(eventName); console.log( currentUrl); 
 		if( $(this).hasClass("facebook") ){
 			url = "https://www.facebook.com/sharer/sharer.php?u=" + currentUrl;
 		} else if ( $(this).hasClass("twitter") ) {
-			url = "https://twitter.com/intent/tweet?text="+ eventName + encodeURIComponent(" at IDK NYC") +"&url=" + currentUrl +"&via=idkNYC"; 
+			url = "https://twitter.com/intent/tweet?url=" + currentUrl +"&text="+ eventName + encodeURIComponent(" at IDK NYC") + "&via=idkNYC"; 
 		} else if ( $(this).hasClass("google") ) {
 			url = "https://plus.google.com/share?url=" + currentUrl; 
 		} else if ( $(this).hasClass("email") ) {
