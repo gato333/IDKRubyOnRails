@@ -5,7 +5,8 @@ $(document).ready( function(){
 		e.preventDefault()
 		console.log(this); 
 		var url = "", 
-				currentUrl = encodeURIComponent(window.location.host), 
+				id = $(this).parent().id,  
+				currentUrl = encodeURIComponent(window.location.host + "/event/" + id),
 				eventName = $(this).parent().parent().children("h3")[0] || $(this).parent().parent().children(".text").children("h3")[0]; 
 		eventName = encodeURIComponent(eventName.innerHTML); 
 		console.log(eventName, currentUrl); 
