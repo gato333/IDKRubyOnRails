@@ -39,7 +39,9 @@ class TimeoutScrapper < AbstractScrapper
 
 			message = "Timeout Done"
 			endScrapOutput( message, @eventcount.to_s )
-		rescue
+		rescue Exception => e  
+			puts e.inspect
+			puts e
 			AlertMailer.send_error_email(TIMEOUT_SOURCE).deliver_now
 		end
 	end

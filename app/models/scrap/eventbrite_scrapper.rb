@@ -51,7 +51,9 @@ class EventbriteScrapper < AbstractScrapper
 			end
 			message = "Eventbrite Done"
 			endScrapOutput( message, @eventcount.to_s )
-		rescue
+		rescue Exception => e  
+			puts e.inspect
+			puts e
 			AlertMailer.send_error_email(EVENTBRITE_SOURCE).deliver_now
 		end
 	end

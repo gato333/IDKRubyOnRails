@@ -53,7 +53,9 @@ class ArtslantScrapper < AbstractScrapper
 			end
 			message = "Artslant Done"
 			endScrapOutput( message, @eventcount.to_s )
-		rescue
+		rescue Exception => e  
+			puts e.inspect
+			puts e
 			AlertMailer.send_error_email(ARTSLANT_SOURCE).deliver_now
 		end
 	end

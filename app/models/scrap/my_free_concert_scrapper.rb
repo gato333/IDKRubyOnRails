@@ -34,7 +34,9 @@ class MyFreeConcertScrapper < AbstractScrapper
 			end
 			message = "My Free Concerts Done"
 			endScrapOutput( message, @eventcount.to_s )
-		rescue
+		rescue Exception => e  
+			puts e.inspect
+			puts e
 			AlertMailer.send_error_email(MYFREECONCERT_SOURCE).deliver_now
 		end
 	end
