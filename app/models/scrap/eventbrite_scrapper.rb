@@ -27,13 +27,13 @@ class EventbriteScrapper < AbstractScrapper
 					imglink = linkholder.css(".poster-card__header .poster-card__image img")[0]["src"]
 					price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
 					price = freeTest(price)
-					name = explodeImplode(linkholder.css(".poster-card__body .poster-card__title"))
-					startdate = explodeImplode(linkholder.css(".poster-card__body .poster-card__date"))
-					address = explodeImplode(linkholder.css(".poster-card__body .poster-card__venue"))
+					name = linkholder.css(".poster-card__body .poster-card__title")
+					startdate = linkholder.css(".poster-card__body .poster-card__date")
+					address = linkholder.css(".poster-card__body .poster-card__venue")
 					typelist = e.css(".poster-card__footer .poster-card__tags a")
 					types = ""
 					typelist.each do |t|
-						types.concat(explodeImplode(t).gsub("#", "") + " ")
+						types.concat(explodeImplode(t).downcase.gsub("#", "") + " ")
 					end
 
 					geo = e.css(".poster-card__body .poster-card__venue span[itemprop='location'] span[itemprop='geo']")

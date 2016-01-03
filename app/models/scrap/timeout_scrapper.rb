@@ -51,25 +51,25 @@ class TimeoutScrapper < AbstractScrapper
 		typecontainer= html.css(".page_tags .page_tag")
 		types = ""
 		typecontainer.each do |t|
-			types += explodeImplode(t)
+			types += explodeImplode(t).downcase
 		end
 
 		addresscontainer = html.css("#tab___content_2 .listing_details tbody tr")[1]
 		
-		address = addresscontainer.nil? ? "" : explodeImplode(addresscontainer.css("td"))
+		address = addresscontainer.nil? ? "" : addresscontainer.css("td")
 		lat, long = calculateGeo(address)
 
 		todayinstance = html.css("#tab___content_3 .occurrences__occurrence_day")[0]
 
-		startdate =  todayinstance.nil? || todayinstance.css(".occurrence__time").nil? ? "" : @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time"))) 
+		startdate = ( todayinstance.nil? || todayinstance.css(".occurrence__time").nil? ) ? "" : @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time"))) 
 		enddate = ""
 
 		if todayinstance.nil? || todayinstance.css(".occurrence__price").empty?
-			price = 0
+			price = "0"
 		elsif todayinstance.css(".occurrence__price") =~ /\d/  
-			price = cleanMoney(explodeImplode(todayinstance.css(".occurrence__price")).split("-")[0])
+			price = cleanMoney(todayinstance.css(".occurrence__price").split("-")[0])
 		else 
-			price = explodeImplode(todayinstance.css(".occurrence__price"))
+			price = todayinstance.css(".occurrence__price")
 		end
 
 		return lat, long, address, startdate, enddate, price, types

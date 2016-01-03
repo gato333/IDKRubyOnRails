@@ -19,16 +19,16 @@ $(document).ready( function(){
 				eventName = $(this).parent().parent().children("h3")[0] || $(this).parent().parent().children(".text").children("h3")[0]; 
 		eventName = eventName.innerHTML; 
 		eventName = eventName.substr(0, eventName.indexOf(' ', 40)); 
-		eventName = encodeURIComponent(eventName); 
+		eventName = encodeURI(eventName); 
 
 		if( $(this).hasClass("facebook") ){
 			url = "https://www.facebook.com/sharer/sharer.php?u=" + currentUrl;
 		} else if ( $(this).hasClass("twitter") ) {
-			url = "https://twitter.com/intent/tweet?url=" + currentUrl +"&text="+ eventName + encodeURIComponent(" at IDK NYC") + "&via=idk_nyc"; 
+			url = "https://twitter.com/intent/tweet?url=" + currentUrl +"&text="+ eventName + encodeURI(" at IDK NYC") + "&via=idk_nyc"; 
 		} else if ( $(this).hasClass("google") ) {
 			url = "https://plus.google.com/share?url=" + currentUrl; 
 		} else if ( $(this).hasClass("email") ) {
-			openMailer( decodeURIComponent(eventName), description, decodeURIComponent(currentUrl) ); 
+			openMailer( decodeURI(eventName), description, decodeURI(currentUrl) ); 
 			return;
 		} else if ( $(this).hasClass("tumblr") ) {
 			url = "http://www.tumblr.com/share/link?url="  + currentUrl; 

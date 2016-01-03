@@ -15,11 +15,11 @@ class NyCardScrapper < AbstractScrapper
 			events = container.css("article")
 
 			events.each do |e|
-				name = explodeImplode( e.css("span[itemprop='name']"))
+				name = e.css("span[itemprop='name']")
 				imglink = e.css("a.thumb img").empty? ? "" : e.css("a.thumb img")[0]["src"]
 				link = e.css("div[itemprop='location'] a[itemprop='url']")[0]["href"]
-				org = explodeImplode( e.css("div[itemprop='location'] a[itemprop='url'] span") )
-				address =  explodeImplode( e.css("div[itemprop='location'] a.map-link") ).gsub(":","")
+				org = e.css("div[itemprop='location'] a[itemprop='url'] span") 
+				address = e.css("div[itemprop='location'] a.map-link").gsub(":","")
 				address = address + " New York, NY"
 				lat, long = calculateGeo(address)
 				
