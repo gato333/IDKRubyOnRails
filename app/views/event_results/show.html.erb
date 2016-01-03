@@ -6,6 +6,7 @@
 	<%= image_tag @event_result.imageurl %>
 
 	<div class="share-obj" id="<%= @event_result.id %>"> 
+		<input type="hidden" id="description" value="<%= @event_result.description %>">
 		<a class="facebook social" target="_blank">F</a>
 		<a class="twitter social" target="_blank">L</a>
 		<a class="google social plus" target="_blank">H</a>
