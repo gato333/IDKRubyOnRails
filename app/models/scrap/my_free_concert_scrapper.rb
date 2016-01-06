@@ -26,7 +26,7 @@ class MyFreeConcertScrapper < AbstractScrapper
 
 				description, lat, long, address = deepscrap(link)
 
-				createEvent( name, address, "0", lat, long, imglink, 
+				createEvent( name, address, 0, lat, long, imglink, 
 					link, startdate, enddate, description, 
 					"music, concert, sound, art", MYFREECONCERT_SOURCE )
 				
@@ -35,9 +35,7 @@ class MyFreeConcertScrapper < AbstractScrapper
 			message = "My Free Concerts Done"
 			endScrapOutput( message, @eventcount.to_s )
 		rescue Exception => e  
-			puts e.inspect
-			puts e
-			AlertMailer.send_error_email(MYFREECONCERT_SOURCE).deliver_now
+			failHandler(e, MYFREECONCERT_SOURCE)
 		end
 	end
 

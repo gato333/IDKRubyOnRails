@@ -40,9 +40,7 @@ class TimeoutScrapper < AbstractScrapper
 			message = "Timeout Done"
 			endScrapOutput( message, @eventcount.to_s )
 		rescue Exception => e  
-			puts e.inspect
-			puts e
-			AlertMailer.send_error_email(TIMEOUT_SOURCE).deliver_now
+			failHandler(e, TIMEOUT_SOURCE)
 		end
 	end
 
@@ -66,12 +64,12 @@ class TimeoutScrapper < AbstractScrapper
 		startdate = ( todayinstance.nil? || todayinstance.css(".occurrence__time").nil? ) ? "" : @time.to_date.to_s + " " + findAddTimeSufix(explodeImplode(todayinstance.css(".occurrence__time"))) 
 		enddate = ""
 
-		if todayinstance.nil? || todayinstance.css(".occurrence__price").empty?
-			price = "0"
+		if todayinstance.nil? || todayinstance.css(".occurrence__price").empty? || todayinstance.css(".occurrence__price").nil?
+			price = 0
 		elsif todayinstance.css(".occurrence__price") =~ /\d/  
-			price = cleanMoney(todayinstance.css(".occurrence__price").split("-")[0])
+			price = cleanMoney(todayinstance.css(".occurrence__price").split("-")[0]).text.to_f
 		else 
-			price = todayinstance.css(".occurrence__price")
+			price = todayinstance.css(".occurrence__price").text.to_f
 		end
 
 		return lat, long, address, startdate, enddate, price, types

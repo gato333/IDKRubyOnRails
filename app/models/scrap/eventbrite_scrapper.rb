@@ -52,9 +52,7 @@ class EventbriteScrapper < AbstractScrapper
 			message = "Eventbrite Done"
 			endScrapOutput( message, @eventcount.to_s )
 		rescue Exception => e  
-			puts e.inspect
-			puts e
-			AlertMailer.send_error_email(EVENTBRITE_SOURCE).deliver_now
+			failHandler(e, EVENTBRITE_SOURCE)
 		end
 	end
 
@@ -80,13 +78,13 @@ class EventbriteScrapper < AbstractScrapper
 
 	def freeTest(price)
 		if price.nil?
-			return "n/a"
+			return -1
 		end
 		price = price.gsub("$", "")
     if price.downcase == "free"
-      "0"
+      0
     else 
-      price
+      price.to_f
     end
   end
 end

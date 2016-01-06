@@ -19,7 +19,7 @@ class NyCardScrapper < AbstractScrapper
 				imglink = e.css("a.thumb img").empty? ? "" : e.css("a.thumb img")[0]["src"]
 				link = e.css("div[itemprop='location'] a[itemprop='url']")[0]["href"]
 				org = e.css("div[itemprop='location'] a[itemprop='url'] span") 
-				address = e.css("div[itemprop='location'] a.map-link").gsub(":","")
+				address = e.css("div[itemprop='location'] a.map-link").text.gsub(":","")
 				address = address + " New York, NY"
 				lat, long = calculateGeo(address)
 				
@@ -38,7 +38,7 @@ class NyCardScrapper < AbstractScrapper
 				# not possible to do deep scrap on this site (too bare bones)
 				description = deepscrap
 
-				createEvent(name, address, "0", lat, long, imglink, 
+				createEvent(name, address, 0, lat, long, imglink, 
 					link, startdate, enddate, description, 
 					"art, art gallery openings", ARTCARDS_SOURCE )
 				
@@ -47,9 +47,7 @@ class NyCardScrapper < AbstractScrapper
 			message = "NY Art Card Done"
 			endScrapOutput( message, @eventcount.to_s )
 		rescue Exception => e  
-			puts e.inspect
-			puts e
-			AlertMailer.send_error_email(ARTCARDS_SOURCE).deliver_now
+			failHandler(e, ARTCARDS_SOURCE)
 		end
 	end
 

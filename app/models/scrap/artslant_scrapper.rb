@@ -44,7 +44,7 @@ class ArtslantScrapper < AbstractScrapper
 					
 					description = deepscrap(artslantlink)
 			
-					createEvent(name, address, "0", lat, long, imglink, 
+					createEvent(name, address, 0, lat, long, imglink, 
 						link, startdate, enddate, description, 
 						"art, art gallery openings", ARTSLANT_SOURCE )
 					
@@ -54,9 +54,7 @@ class ArtslantScrapper < AbstractScrapper
 			message = "Artslant Done"
 			endScrapOutput( message, @eventcount.to_s )
 		rescue Exception => e  
-			puts e.inspect
-			puts e
-			AlertMailer.send_error_email(ARTSLANT_SOURCE).deliver_now
+			failHandler(e, ARTSLANT_SOURCE)
 		end
 	end
 
