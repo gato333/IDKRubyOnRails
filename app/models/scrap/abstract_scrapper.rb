@@ -66,19 +66,24 @@ class AbstractScrapper
     #address, name, and link must be not empty and not nil to create an event
     if( !(address.nil? || address === "" || name.nil? || name === "" ))
       EventResult.create( 
-        name: explodeImplode(name), 
+        name: (name), 
         price: price, 
         lat: lat, 
         long: long, 
-        address: explodeImplode(address), 
+        address: (address), 
         imageurl: imglink, 
         eventurl: link , 
         startdate: startdate, 
         enddate: enddate, 
-        description: explodeImplode(description), 
+        description: (description), 
         types: types, 
         source: source )
     end
+  end
+
+  def failHandler(err, source)
+    puts e.inspect
+    AlertMailer.send_error_email(source).deliver_now
   end
 
 end
