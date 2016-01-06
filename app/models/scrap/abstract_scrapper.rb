@@ -30,7 +30,11 @@ class AbstractScrapper
   end
 
   def explodeImplode(textManipulate)
-    textManipulate.text.split.join(" ")
+    if textManipulate.kind_of? String  
+      textManipulate.split.join(" ")
+    else 
+      textManipulate.text.split.join(" ")
+    end
   end
 
   # test to see if there is time sufix in a string 
@@ -66,24 +70,24 @@ class AbstractScrapper
     #address, name, and link must be not empty and not nil to create an event
     if( !(address.nil? || address === "" || name.nil? || name === "" ))
       EventResult.create( 
-        name: (name), 
+        name: explodeImplode(name), 
         price: price, 
         lat: lat, 
         long: long, 
-        address: (address), 
+        address: explodeImplode(address), 
         imageurl: imglink, 
         eventurl: link , 
         startdate: startdate, 
         enddate: enddate, 
-        description: (description), 
+        description: explodeImplode(description), 
         types: types, 
         source: source )
     end
   end
 
   def failHandler(err, source)
-    puts e.inspect
-    AlertMailer.send_error_email(source).deliver_now
+    puts err.inspect
+    AlertMailer.send_error_email(err, source).deliver_now
   end
 
 end
