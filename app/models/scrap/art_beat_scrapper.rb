@@ -41,6 +41,7 @@ class ArtBeatScrapper < AbstractScrapper
 			end
 			message = "Art Beat Done"
 			endScrapOutput( message, @eventcount.to_s )
+			return @eventcount
 		rescue Exception => e  
 			failHandler(e, NYARTBEAT_SOURCE)
 		end

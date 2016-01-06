@@ -51,6 +51,7 @@ class EventbriteScrapper < AbstractScrapper
 			end
 			message = "Eventbrite Done"
 			endScrapOutput( message, @eventcount.to_s )
+			return @eventcount
 		rescue Exception => e  
 			failHandler(e, EVENTBRITE_SOURCE)
 		end

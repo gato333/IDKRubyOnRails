@@ -15,21 +15,24 @@ require "scrap/timeout_scrapper"
 
 EventResult.delete_all
 
+total = 0 
+
 tim = TimeoutScrapper.new
-tim.scrap
+total = total + tim.scrap
 
 myf = MyFreeConcertScrapper.new
-myf.scrap
+total = total + myf.scrap
 
 arts = ArtslantScrapper.new
-arts.scrap
+total = total + arts.scrap
 
 nyc = NyCardScrapper.new
-nyc.scrap
+total = total + nyc.scrap
 
 artb = ArtBeatScrapper.new
-artb.scrap
+total = total + artb.scrap
 
 es = EventbriteScrapper.new
-es.scrap
+total = total + es.scrap
 
+puts "Total Events Scrapped: " + total.to_s

@@ -53,6 +53,7 @@ class ArtslantScrapper < AbstractScrapper
 			end
 			message = "Artslant Done"
 			endScrapOutput( message, @eventcount.to_s )
+			return @eventcount
 		rescue Exception => e  
 			failHandler(e, ARTSLANT_SOURCE)
 		end

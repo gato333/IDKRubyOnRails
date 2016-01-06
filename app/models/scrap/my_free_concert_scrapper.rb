@@ -34,6 +34,7 @@ class MyFreeConcertScrapper < AbstractScrapper
 			end
 			message = "My Free Concerts Done"
 			endScrapOutput( message, @eventcount.to_s )
+			return @eventcount
 		rescue Exception => e  
 			failHandler(e, MYFREECONCERT_SOURCE)
 		end

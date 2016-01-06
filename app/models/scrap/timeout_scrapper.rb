@@ -39,6 +39,7 @@ class TimeoutScrapper < AbstractScrapper
 
 			message = "Timeout Done"
 			endScrapOutput( message, @eventcount.to_s )
+			return @eventcount
 		rescue Exception => e  
 			failHandler(e, TIMEOUT_SOURCE)
 		end
