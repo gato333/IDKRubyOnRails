@@ -75,16 +75,6 @@
 							</div>
 			 		<% count += 1
 			 			end %>
-				 	<form method="post" action="results"> 
-				 		<input type="hidden" type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= params.include?('price') ? params['price'] : '' %>" />
-						<input type="hidden" name="radius" value="<%= params.include?('radius') ? params['radius'] : '' %>" /> 
-						<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
-						<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
-						<input type="hidden" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" />
-						<input type="hidden" name="source" value="<%= @title %>">
-				 		<input type="submit" name="topic_submit" value="More" class="result_submit" />
-				 	</form>
-
 	<% end %>
 
 
