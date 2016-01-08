@@ -86,7 +86,8 @@ class AbstractScrapper
   end
 
   def failHandler(err, source)
-    puts err.inspect
+    puts err.message
+    puts err.backtrace.join("\n")
     AlertMailer.send_error_email(err, source).deliver_now
   end
 

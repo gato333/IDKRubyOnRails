@@ -7,6 +7,7 @@
     <h1>Hey Gabby there is some problems in <%= @source %> scapper!</h1>
     <p>Please get work to figuring it out as soon as possible.</p>
     <p>Error Message:</p>
-    <p><%= @err %></p>
+    <p><%= @err.message %></p>
+    <p><%= @err.backtrace.join("\n") %></p>
   </body>
 </html>

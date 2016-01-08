@@ -46,9 +46,10 @@ class NyCardScrapper < AbstractScrapper
 			end
 			message = "NY Art Card Done"
 			endScrapOutput( message, @eventcount.to_s )
-			return @eventcount
 		rescue Exception => e  
 			failHandler(e, ARTCARDS_SOURCE)
+		ensure 
+			return @eventcount
 		end
 	end
 
