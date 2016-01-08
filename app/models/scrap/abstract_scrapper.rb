@@ -30,7 +30,9 @@ class AbstractScrapper
   end
 
   def explodeImplode(textManipulate)
-    if textManipulate.kind_of? String  
+    if textManipulate.nil? 
+      textManipulate
+    elsif textManipulate.kind_of? String  
       textManipulate.split.join(" ")
     else 
       textManipulate.text.split.join(" ")
