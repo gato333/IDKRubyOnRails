@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/new'
+
   resources :event_results
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -27,13 +29,15 @@ Rails.application.routes.draw do
   get '/all'  => 'application#all'
 
 
-  #get '/index' => 'event_results#index'
 
-  #get '/event' => 'event_results#index'
+  get '/index' => 'event_results#index'
+
+  get '/event' => 'event_results#index'
 
   get '/event/new' => 'event_results#new'
 
   get '/event/:id' => 'event_results#show'
 
-  #get '/event/:id/edit' => 'event_results#edit'
+  get '/event/:id/edit' => 'event_results#edit'
+
 end
