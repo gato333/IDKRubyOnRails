@@ -2,18 +2,28 @@
 
 one:
   name: MyString
-  location: MyString
-  image: MyString
+  address: MyString
+  eventurl: MyString
+  price: 1.5
+  types: MyString
+  description: MyString
+  imageurl: MyString
   lat: 1.5
   long: 1.5
-  time: MyString
-  date: MyString
+  source: MyString
+  startdate: '2016-01-12 02:31:54'
+  enddate: '2016-01-12 02:31:54'
 
 two:
   name: MyString
-  location: MyString
-  image: MyString
+  address: MyString
+  eventurl: MyString
+  price: 1.5
+  types: MyString
+  description: MyString
+  imageurl: MyString
   lat: 1.5
   long: 1.5
-  time: MyString
-  date: MyString
+  source: MyString
+  startdate: '2016-01-12 02:31:54'
+  enddate: '2016-01-12 02:31:54'

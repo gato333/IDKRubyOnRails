@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(version: 20160111235329) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "userType"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "password_digest"
+    t.integer  "userType",        default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end

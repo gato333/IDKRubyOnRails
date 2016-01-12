@@ -2,7 +2,7 @@ require 'test_helper'
 
 class EventResultsControllerTest < ActionController::TestCase
   setup do
-    @event_result = event_results(:one)
+    @event_result = event_results(:first)
   end
 
   test "should get index" do
