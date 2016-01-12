@@ -13,8 +13,6 @@ require "scrap/my_free_concert_scrapper"
 require "scrap/ny_card_scrapper"
 require "scrap/timeout_scrapper"
 
-EventResult.delete_all
-
 total = 0 
 
 tim = TimeoutScrapper.new
