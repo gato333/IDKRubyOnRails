@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
 	#page functions
   def home
     @logo = LOGO
+    @title = "HOME"
     @description = DESCRIPTION
     @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS); 
   end
@@ -25,6 +26,7 @@ class ApplicationController < ActionController::Base
   def do
     @logo = LOGO
     @description = DESCRIPTION
+    @title = "DO"
     @javascriptsArray = ApplicationHelper.includeJavascripts(DO_STATUS); 
     if params.include?('error') 
       @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, DO_STATUS);
@@ -35,6 +37,7 @@ class ApplicationController < ActionController::Base
 
   def eat 
     @logo = LOGO
+    @title = "EAT"
     @description = DESCRIPTION
     @javascriptsArray = ApplicationHelper.includeJavascripts(EAT_STATUS); 
     if params.include?('error') 
@@ -47,6 +50,7 @@ class ApplicationController < ActionController::Base
   def random
     @logo = LOGO
     @description = "Uncertainty Helper"
+    @title = "RANDOM"
     @javascriptsArray = ApplicationHelper.includeJavascripts( RANDOM_STATUS); 
   end
 
@@ -81,6 +85,7 @@ class ApplicationController < ActionController::Base
 
   def count
     @logo = LOGO
+    @title = "COUNT"
     @description = "Hidden Page"
     query = EventQueryHandler.new
     @resultsAll = query.totalEvents
@@ -97,6 +102,7 @@ class ApplicationController < ActionController::Base
   def all 
     @logo = LOGO
     @description = "Hidden Page"
+    @title = "ALL"
     query = EventQueryHandler.new
     @results = query.getAllEvents
     @javascriptsArray = ApplicationHelper.includeJavascripts(RESULT_STATUS)
@@ -109,6 +115,7 @@ class ApplicationController < ActionController::Base
 
   def error 
     @logo = LOGO
+    @title = "ERROR"
     @description = "Problems"
     @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
   	if params.include?(:error_msg)

@@ -14,6 +14,7 @@ class EventResultsController < ApplicationController
   def index
     @logo = LOGO
     @description = DESCRIPTION
+    @title = "INDEX"
     @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     @event_results = EventResult.all
 
@@ -28,7 +29,7 @@ class EventResultsController < ApplicationController
   def show
     @logo = @event_result.imageurl
     @description = @event_result.description[0..80]
-    @title = @event_result.name + ' at IDK NYC'
+    @title = "SHOW " + @event_result.id 
     @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
 
     respond_to do |format|
@@ -41,12 +42,14 @@ class EventResultsController < ApplicationController
   def new
     @logo = LOGO
     @description = "Create New"
+    @title = "NEW"
     @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 
     @event_result = EventResult.new
   end
 
   # GET /event_results/1/edit
   def edit
+    @title = "EDIT " + @event_result.id
     @logo = @event_result.imageurl
     @description = @event_result.name
     @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 

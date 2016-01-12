@@ -1,49 +1,48 @@
 require 'test_helper'
 
 class EventResultsControllerTest < ActionController::TestCase
-  setup do
-    @event_result = event_results(:first)
+  include ApplicationHelper 
+
+  LOGO = ApplicationHelper::LOGO
+  DESCRIPTION = ApplicationHelper::DESCRIPTION
+
+  DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
+  SHOW_STATUS = ApplicationHelper::SHOW_STATUS
+  EDIT_STATUS = ApplicationHelper::EDIT_STATUS
+
+  def setup 
+    @logo = LOGO
+    @event = EventResult.first
+    @base_title = " | I Dont Know - WebApp"
+    @description = DESCRIPTION
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:event_results)
+    assert_select "title", "INDEX" + @base_title
+  end
+
+  test "should get show" do
+    @javascriptsArray = ApplicationHelper.includeJavascripts(SHOW_STATUS); 
+    get :show
+    assert_response :success
+    assert_select "title", "SHOW " + @event.id + @base_title
   end
 
   test "should get new" do
+    @javascriptsArray = ApplicationHelper.includeJavascripts(EDIT_STATUS); 
     get :new
     assert_response :success
-  end
-
-  test "should create event_result" do
-    assert_difference('EventResult.count') do
-      post :create, event_result: {  }
-    end
-
-    assert_redirected_to event_result_path(assigns(:event_result))
-  end
-
-  test "should show event_result" do
-    get :show, id: @event_result
-    assert_response :success
+    assert_select "title", "NEW" + @base_title
   end
 
   test "should get edit" do
-    get :edit, id: @event_result
+    @javascriptsArray = ApplicationHelper.includeJavascripts(EDIT_STATUS); 
+    get :edit
     assert_response :success
+    assert_select "title", "EDIT " + @event.id + @base_title
   end
 
-  test "should update event_result" do
-    patch :update, id: @event_result, event_result: {  }
-    assert_redirected_to event_result_path(assigns(:event_result))
-  end
-
-  test "should destroy event_result" do
-    assert_difference('EventResult.count', -1) do
-      delete :destroy, id: @event_result
-    end
-
-    assert_redirected_to event_results_path
-  end
 end
