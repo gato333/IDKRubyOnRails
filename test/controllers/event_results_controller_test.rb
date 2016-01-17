@@ -28,7 +28,7 @@ class EventResultsControllerTest < ActionController::TestCase
     @javascriptsArray = ApplicationHelper.includeJavascripts(SHOW_STATUS); 
     get :show
     assert_response :success
-    assert_select "title", "SHOW " + @event.id + @base_title
+    assert_select "title", "SHOW " + @event.id.to_s + " " + @base_title
   end
 
   test "should get new" do
@@ -42,7 +42,7 @@ class EventResultsControllerTest < ActionController::TestCase
     @javascriptsArray = ApplicationHelper.includeJavascripts(EDIT_STATUS); 
     get :edit
     assert_response :success
-    assert_select "title", "EDIT " + @event.id + @base_title
+    assert_select "title", "EDIT " + @event.id.to_s + " " + @base_title
   end
 
 end
