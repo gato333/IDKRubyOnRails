@@ -29,7 +29,7 @@ class EventResultsController < ApplicationController
   def show
     @logo = @event_result.imageurl
     @description = @event_result.description[0..80]
-    @title = "SHOW " + @event_result.id.to_s + " "
+    @title = "SHOW " + @event_result.id.to_s
     @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
 
     respond_to do |format|
@@ -49,7 +49,7 @@ class EventResultsController < ApplicationController
 
   # GET /event_results/1/edit
   def edit
-    @title = "EDIT " + @event_result.id.to_s + " "
+    @title = "EDIT " + @event_result.id.to_s 
     @logo = @event_result.imageurl
     @description = @event_result.name
     @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 

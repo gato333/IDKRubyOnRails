@@ -25,7 +25,6 @@ module ApplicationHelper
 	end
 
 	def self.validateGeoLocation( params )
-		puts params
 		if params["lat"] == nil || params["lat"] == "" || params["long"] == nil || params["long"] == ""
 			return false 
 		end 

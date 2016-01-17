@@ -26,9 +26,9 @@ class EventResultsControllerTest < ActionController::TestCase
 
   test "should get show" do
     @javascriptsArray = ApplicationHelper.includeJavascripts(SHOW_STATUS); 
-    get :show
+    get(:show, {'id' =>  @event.id.to_s}, {'user_id' => @event.id})
     assert_response :success
-    assert_select "title", "SHOW " + @event.id.to_s + " " + @base_title
+    assert_select "title", "SHOW " + @event.id.to_s + @base_title
   end
 
   test "should get new" do
@@ -40,9 +40,9 @@ class EventResultsControllerTest < ActionController::TestCase
 
   test "should get edit" do
     @javascriptsArray = ApplicationHelper.includeJavascripts(EDIT_STATUS); 
-    get :edit
+    get(:edit, {'id' =>  @event.id.to_s}, {'user_id' => @event.id})
     assert_response :success
-    assert_select "title", "EDIT " + @event.id.to_s + " " + @base_title
+    assert_select "title", "EDIT " + @event.id.to_s + @base_title
   end
 
 end

@@ -56,8 +56,7 @@ class ApplicationControllerTest < ActionController::TestCase
     @javascriptsArray = ApplicationHelper.includeJavascripts(RESULT_STATUS); 
     get( :results, 
       { 'radius' => "10", 'lat' => "40.727", 'long' => "-73.977", 
-        'source' => 'DO', 'price' => '', 'keyword' => ''}
-    )
+        'source' => 'DO', 'price' => '', 'keyword' => ''} )
     assert_response :success
     assert_select "title", "DO" + @base_title
   end
