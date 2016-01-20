@@ -10,9 +10,9 @@
   <% end %>
 
 <div>
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, html: { multipart: true }) do |f| %>
 
-  <h5><span>ID: </span> <%= @user.id %></h5>
+  <h5><span>ID: </span> <%= @user.id.to_s %></h5>
 
   <%= f.label "Name:" %>
   <%= f.text_field :name %>
@@ -28,6 +28,10 @@
 
   <%= f.label "Password Confirmation:" %>
   <%= f.password_field :password_confirmation %>
+
+  <%= image_tag @user.picture.url if @user.picture? %>
+
+  <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
 
   <br /> <br />
   <div class="actions">

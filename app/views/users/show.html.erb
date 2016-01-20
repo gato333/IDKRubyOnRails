@@ -3,8 +3,10 @@
 <h1>User <%= @user.name %></h1>
 
 <h2> Email: <%= @user.email %></h2> 
+
+<%= image_tag @user.picture.url if @user.picture? %>
  
- <p> pwd digest: <%= @user.password_digest || "NOT DEFINED" %> </p>
+<p> pwd digest: <%= @user.password_digest || "NOT DEFINED" %> </p>
 
 <%= link_to 'Back', users_path %>
 

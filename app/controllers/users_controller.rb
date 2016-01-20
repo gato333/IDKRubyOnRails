@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
+	#before_action :must_be_admin, [:destroy, :index]
 	include ApplicationHelper 
 
 
@@ -80,6 +81,10 @@ class UsersController < ApplicationController
 
   private 
 
+  	def must_be_admin
+      redirect_to :new if !@user.admin?
+  	end
+
   	def set_user
       @user = User.find(params[:id])
     end
@@ -90,7 +95,8 @@ class UsersController < ApplicationController
 	        "email" => p["user"][:email], 
 	        "password" => p["user"][:password], 
 	        "password_confirmation" => p["user"][:password_confirmation], 
-	        "userType" => p["user"][:userType]
+	        "userType" => p["user"][:userType],
+	        "picture" => p["user"][:picture]
 	      }
 	    end
 
