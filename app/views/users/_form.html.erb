@@ -11,8 +11,9 @@
 
 <div>
 <%= form_for(@user, html: { multipart: true }) do |f| %>
-
-  <h5><span>ID: </span> <%= @user.id.to_s %></h5>
+  <% if @user.id %>
+    <h5><span>ID: </span> <%= @user.id.to_s %></h5>
+  <% end %>
 
   <%= f.label "Name:" %>
   <%= f.text_field :name %>

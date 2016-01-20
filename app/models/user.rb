@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
 	enum userType: [:user, :admin, :banned]
 
 	has_secure_password
-	validates :password, presence: true, length: { minimum: 5 }
-	validates :password_confirmation, presence: true, length: { minimum: 5}
+	validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
+	validates :password_confirmation, presence: true, length: { minimum: 5}, allow_nil: true
 
-	mount_uploader :picture, ::PictureUploader
+	mount_uploader :picture, PictureUploader
 	validate  :picture_size
 
 	private 

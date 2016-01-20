@@ -40,9 +40,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
-    puts 'user p ' 
-    puts user_params(params); 
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );  
     @user = User.new( user_params(params) )
 
     respond_to do |format|
@@ -90,14 +88,8 @@ class UsersController < ApplicationController
     end
 
 	  def user_params(p)
-	      { 
-	        "name" => p["user"][:name], 
-	        "email" => p["user"][:email], 
-	        "password" => p["user"][:password], 
-	        "password_confirmation" => p["user"][:password_confirmation], 
-	        "userType" => p["user"][:userType],
-	        "picture" => p["user"][:picture]
-	      }
-	    end
+      p.require(:user).permit(:name, :email, :password, :userType,
+                                 :password_confirmation, :picture )
+    end
 
 end

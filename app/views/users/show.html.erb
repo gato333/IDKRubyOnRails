@@ -7,8 +7,9 @@
 
 <h2> Email: <%= @user.email %></h2> 
 
+<h2> User Type: <%= @user.userType %> </h2>
  
-<p> pwd digest: <%= @user.password_digest || "NOT DEFINED" %> </p>
+<p> pwd digest: <%= @user.password_digest? ? "DEFINED" : "NOT DEFINED" %> </p>
 
 <%= link_to 'Back', users_path %>
 

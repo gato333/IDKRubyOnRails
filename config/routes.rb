@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   get 'users/new'
 
   resources :event_results, :users
@@ -52,5 +54,9 @@ Rails.application.routes.draw do
   get '/user/:id' => 'users#show'
 
   get '/user/:id/edit' => 'users#edit'
+
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
 end
