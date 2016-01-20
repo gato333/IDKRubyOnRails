@@ -26,14 +26,14 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@title = "SHOW " + @user.id.to_s 
+  	@title = "SHOW USER " + @user.id.to_s 
   	@logo = LOGO
     @description = DESCRIPTION
     @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
   end
 
   def edit 
-  	@title = "EDIT " + @user.id.to_s 
+  	@title = "EDIT USER " + @user.id.to_s 
   	@logo = LOGO
     @description = DESCRIPTION
     @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );

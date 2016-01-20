@@ -1,10 +1,12 @@
 <article id="show" class="panel">
 
-<h1>User <%= @user.name %></h1>
+
+<%= image_tag @user.picture.url if @user.picture? %>
+
+<h1>User: <%= @user.name %></h1>
 
 <h2> Email: <%= @user.email %></h2> 
 
-<%= image_tag @user.picture.url if @user.picture? %>
  
 <p> pwd digest: <%= @user.password_digest || "NOT DEFINED" %> </p>
 
