@@ -1,9 +1,10 @@
-<article id="new" class="panel">
+<article id="edit" class="panel">
 
-<h1>New User</h1>
+<h1>User <%= @user.id %></h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Back', users_path %>
 
 </article>
+

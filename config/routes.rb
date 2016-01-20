@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'users/new'
 
-  resources :event_results
+  resources :event_results, :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -39,5 +39,18 @@ Rails.application.routes.draw do
   get '/event/:id' => 'event_results#show'
 
   get '/event/:id/edit' => 'event_results#edit'
+
+
+
+  get '/user_index' => 'users#index'
+
+  get '/user' => 'users#index'
+
+  get '/signup' => 'users#new'
+  get '/user/new' => 'users#new'
+
+  get '/user/:id' => 'users#show'
+
+  get '/user/:id/edit' => 'users#edit'
 
 end

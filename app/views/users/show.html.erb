@@ -1,0 +1,11 @@
+<article id="show" class="panel">
+
+<h1>User <%= @user.name %></h1>
+
+<h2> Email: <%= @user.email %></h2> 
+ 
+ <p> pwd digest: <%= @user.password_digest || "NOT DEFINED" %> </p>
+
+<%= link_to 'Back', users_path %>
+
+</article>
