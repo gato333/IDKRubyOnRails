@@ -1,24 +1,25 @@
 <article id="show_user" class="panel">
 
-<p id="notice"><%= notice %></p>
+	<p id="notice"><%= notice %></p>
 
-<h1>User Profile</h1> 
+	<h1>User Profile</h1> 
 
-<%= image_tag @user.picture.url if @user.picture? %>
+	<%= image_tag @user.picture.url if @user.picture? %>
 
-<div class="user_text"> 
+	<div class="user_text"> 
 
-	<h4> Name: <%= @user.name %></h4>
+		<h4> Name: <%= @user.name %></h4>
 
-	<h4> Email: <%= @user.email %></h4> 
+		<h4> Email: <%= @user.email %></h4> 
 
-	<h4> User Type: <%= @user.userType %> </h4>
-	 
-	<h4> Pwd Digest: <%= @user.password_digest? ? "DEFINED" : "NOT DEFINED" %> </h4>
-</div>
+		<h4> User Type: <%= @user.userType %> </h4>
+		 
+		<h4> Pwd Digest: <%= @user.password_digest? ? "DEFINED" : "NOT DEFINED" %> </h4>
+		
+	</div>
 
-<% if is_current_user(@user) %>
-	<%= link_to 'Edit Profile', edit_user_path(@current_user) %>
-<% end %>
+	<% if is_current_user(@user) %>
+		<%= link_to 'Edit Profile', edit_user_path(@current_user) %>
+	<% end %>
 
 </article>

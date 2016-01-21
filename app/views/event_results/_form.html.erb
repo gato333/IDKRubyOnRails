@@ -26,7 +26,6 @@
   <%= f.label "Address:" %>
   <%= f.text_field :address %>
 
-
   <%= f.label "Startdate:" %>
   <%= date_field :start1, nil, class: "half first" %>
   <%= time_select :start2, nil, { include_seconds: false }, { :class => "quarter"} %>
@@ -53,7 +52,6 @@
   <%= f.label "Image url:" %>
   <%= f.url_field :imageurl, cols: 60, rows: 4%>
   <%= image_tag( @event_result.imageurl, alt: "") %>
-
 
   <div class="actions">
     <%= f.submit %>
