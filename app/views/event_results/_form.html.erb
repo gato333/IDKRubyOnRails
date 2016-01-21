@@ -35,7 +35,7 @@
   <%= time_select :end2, nil, { include_seconds: false, :default =>  {:hour => '23', :minute => '59'} }, { :class => "quarter" } %>
 
   <%= f.label "Price:" %>
-  <%= f.number_field :price %>
+  <%= f.number_field :price, :value => 0 %>
 
   <%= f.label "Types:" %>
   <%= f.text_field :types %>
