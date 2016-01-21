@@ -638,11 +638,11 @@ article#edit, article#new {
         display: inline-block; 
         width: 85%; 
         margin-top: 0px; 
-    }
-    select.quarter { width: 10%; }
-    input.half {
-        width: 48%;
-        &.first { margin-right: 2%; }
+        &.quarter { width: 10%; }
+        &.half {
+            width: 48%;
+            &.first { margin-right: 2%; }
+        }
     }
     input[type='submit']{
         background-color:#efefef; 
