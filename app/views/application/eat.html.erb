@@ -6,7 +6,7 @@
 	<% if defined? @error_msg %>
 		<div class="error_msg"> <%= @error_msg.html_safe %> </div>
 	<% end %>
-	<form action="results" method="post">
+	<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
 
 		<input type="hidden" name="source" value="<%= yield(:title) %>">
 		<select name="price" id="price" class="<%= @price_error.nil? ? '' : 'error' %>">
@@ -34,5 +34,5 @@
 		<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
 		<input type="submit" name="topic_submit" value="Search"  class="dbquery" />
 	
-	</form>			
+	<% end %>
 </article>

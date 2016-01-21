@@ -8,7 +8,8 @@
 		<div class="error_msg"> <%= @error_msg.html_safe %> </div>
 	<% end %>
 
-	<form action="results" method="post">
+	<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
+
 		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" placeholder="Enter Price:" value="<%= params.include?('price') ? params['price'] : '' %>" class="<%= @price_error.nil? ? '' : 'error' %>"/>
 
 		<select name="radius" id="radius" class="<%= @radius_error.nil? ? '' : 'error' %>"> 
@@ -30,6 +31,6 @@
 
 		<input type="submit" name="topic_submit" value="Search" class="dbquery" />
 
-	</form action>
+	<% end %>
 
 </article>
