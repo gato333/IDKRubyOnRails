@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
   DESCRIPTION = ApplicationHelper::DESCRIPTION
   DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
 
-
   def new
   	@logo = LOGO
     @description = DESCRIPTION
@@ -34,5 +33,4 @@ class SessionsController < ApplicationController
   	log_out
   	redirect_to login_path
   end
-
 end

@@ -34,7 +34,6 @@ class EventResultsController < ApplicationController
     @description = @event_result.description[0..80]
     @title = "SHOW " + @event_result.id.to_s
     @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
-    puts @event_result
     respond_to do |format|
       format.html
       format.json  { render :json => @event_result }
@@ -55,7 +54,6 @@ class EventResultsController < ApplicationController
     @title = "EDIT " + @event_result.id.to_s 
     @logo = @event_result.imageurl
     @description = @event_result.name
-    puts @event_result
     @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 
   end
 
@@ -94,7 +92,6 @@ class EventResultsController < ApplicationController
   def create
     @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     @event_result = EventResult.new( event_result_params(params) )
-    puts  event_result_params(params)
     respond_to do |format|
       if @event_result.save
         format.html { redirect_to @event_result, notice: 'Event result was successfully created.' }
@@ -134,7 +131,6 @@ class EventResultsController < ApplicationController
   end
 
   private
-
     def is_member 
       redirect_to access_denied_path if !logged_in?
     end
@@ -142,6 +138,7 @@ class EventResultsController < ApplicationController
     def only_admin
       redirect_to access_denied_path if !is_admin
     end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event_result
       @event_result = EventResult.find(params[:id])

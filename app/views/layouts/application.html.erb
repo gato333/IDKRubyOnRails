@@ -27,10 +27,8 @@
 				<%= javascript_include_tag "http://code.jquery.com/jquery-1.10.2.js", 'data-turbolinks-track' => true %>
 				<%= javascript_include_tag "http://code.jquery.com/ui/1.11.4/jquery-ui.js", 'data-turbolinks-track' => true %>
 				<%= stylesheet_link_tag "http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css", 'data-turbolinks-track' => true %>
-				<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
-			<% else %>
-	  		<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
-	  	<% end %>
+			<% end %>
+	  	<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
 	  <% end %>
 
 	  <%= csrf_meta_tags %>
