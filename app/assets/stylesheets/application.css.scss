@@ -450,6 +450,20 @@ input.x-button {
     right: 30px;
 }
 
+input[type='submit'], input[type="button"]{
+    background-color:#efefef; 
+    height: auto;
+    color: #000; 
+    background: rgb(239, 239, 239) none repeat scroll 0% 0%;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+input[type="submit"] { width: 100%; }
+
 .hidden { display: none !important; }
 
 /*********************************************************************************/
@@ -537,6 +551,7 @@ input.x-button {
         width: 100px;
         height: 20px;
         position: relative;
+        padding: 5px 0 17px 0;
         margin-left: auto;
         vertical-align: bottom;
         display:block;
@@ -643,18 +658,7 @@ article#edit, article#new {
             width: 48%;
             &.first { margin-right: 2%; }
         }
-    }
-    input[type='submit']{
-        background-color:#efefef; 
-        height: auto;
-        width: 100%;
-        color: #000; 
-        background: rgb(239, 239, 239) none repeat scroll 0% 0%;
-        border: 1px solid;
-        border-radius: 10px;
-        padding: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
+        &[type="submit"] { width: 100%; }
     }
     img { 
         margin-left: auto;
@@ -741,6 +745,7 @@ article#user_edit {
         width: 80%; 
     }
     input[type='submit']{
+        width: 100%; 
         margin-top: 10px; 
     }
     input[type='file']{
