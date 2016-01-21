@@ -34,7 +34,7 @@ class EventResultsController < ApplicationController
     @description = @event_result.description[0..80]
     @title = "SHOW " + @event_result.id.to_s
     @javascriptsArray = ApplicationHelper.includeJavascripts( SHOW_STATUS ); 
-
+    puts @event_result
     respond_to do |format|
       format.html
       format.json  { render :json => @event_result }
@@ -55,6 +55,7 @@ class EventResultsController < ApplicationController
     @title = "EDIT " + @event_result.id.to_s 
     @logo = @event_result.imageurl
     @description = @event_result.name
+    puts @event_result
     @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 
   end
 
