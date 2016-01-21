@@ -677,6 +677,31 @@ article#edit, article#new {
 /*********************************************************************************/
 
 article#index_user {
+    label { 
+        display: inline-block;
+        width: 16%;
+        vertical-align: top; 
+        margin-top: 10px;
+    }
+    input, textarea, select { 
+        vertical-align: top; 
+        display: inline-block; 
+        width: 83%; 
+        margin-top: 0px; 
+        &.quarter { width: 10%; }
+        &.half {
+            width: 48%;
+            &.first { margin-right: 2%; }
+        }
+    }
+}
+
+
+/*********************************************************************************/
+/* User New page                                                                           */
+/*********************************************************************************/
+
+article#user_new {
     td { padding: 2px 5px; }
 }
 
