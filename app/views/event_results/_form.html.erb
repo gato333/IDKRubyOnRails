@@ -27,12 +27,12 @@
   <%= f.text_field :address %>
 
   <%= f.label "Startdate:" %>
-  <%= date_field :start1, nil, class: "half first" %>
-  <%= time_select :start2, nil, { include_seconds: false }, { :class => "quarter"} %>
+  <%= f.date_field :start1, nil, class: "half first" %>
+  <%= f.time_select :start2, nil, { include_seconds: false }, { :class => "quarter"} %>
 
   <%= f.label "Enddate:" %>
-  <%= date_field :end1, nil, class: "half first" %>
-  <%= time_select :end2, nil,{ include_seconds: false }, { :class => "quarter"} %>
+  <%= f.date_field :end1, nil, class: "half first" %>
+  <%= f.time_select :end2, nil,{ include_seconds: false }, { :class => "quarter"} %>
 
   <%= f.label "Price:" %>
   <%= f.number_field :price %>

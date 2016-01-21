@@ -93,7 +93,7 @@ class EventResultsController < ApplicationController
   def create
     @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
     @event_result = EventResult.new( event_result_params(params) )
-
+    puts  event_result_params(params)
     respond_to do |format|
       if @event_result.save
         format.html { redirect_to @event_result, notice: 'Event result was successfully created.' }
@@ -153,6 +153,10 @@ class EventResultsController < ApplicationController
       return lat, long
     end 
 
+    def createDateTime(start1, start2)
+     start1[0] + " " + start2["(4i)"] + ":" + start2["(5i)"] + ":00"
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_result_params(p)
       lat, long = generateLocation(p["event_result"][:address])
@@ -163,8 +167,8 @@ class EventResultsController < ApplicationController
         "address" => p["event_result"][:address], 
         "eventurl" => p["event_result"][:eventurl], 
         "imageurl" => p["event_result"][:imageurl], 
-        "startdate" => p["event_result"][:startdate], 
-        "enddate" => p["event_result"][:enddate], 
+        "startdate" => createDateTime(p[:start1], p[:start2]), 
+        "enddate" => createDateTime(p[:end1], p[:end2]), 
         "source" => p["event_result"][:source], 
         "types" => p["event_result"][:types], 
         "price" => p["event_result"][:price], 
