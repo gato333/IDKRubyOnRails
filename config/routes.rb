@@ -26,13 +26,15 @@ Rails.application.routes.draw do
 
   get '/error' => 'application#error'
 
-  get '/count' => 'application#count'
-
-  get '/all'  => 'application#all'
+  get '/access_denied' => 'application#access_denied'
 
 
 
   get '/index' => 'event_results#index'
+
+  get '/all'  => 'event_results#all'
+
+  get '/count' => 'event_results#count'
 
   get '/event' => 'event_results#index'
 
@@ -53,10 +55,12 @@ Rails.application.routes.draw do
 
   get '/user/:id' => 'users#show'
 
+  get 'user_events/:id' => 'users#events'
+
   get '/user/:id/edit' => 'users#edit'
 
-  get    'login'   => 'sessions#new'
-  post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+  get    '/login'   => 'sessions#new'
+  post   '/login'   => 'sessions#create'
+  delete '/logout'  => 'sessions#destroy'
 
 end

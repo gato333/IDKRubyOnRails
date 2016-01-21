@@ -1,5 +1,6 @@
 <article id="show" class="panel">
 
+<p id="notice"><%= notice %></p>
 
 <%= image_tag @user.picture.url if @user.picture? %>
 
@@ -11,6 +12,8 @@
  
 <p> pwd digest: <%= @user.password_digest? ? "DEFINED" : "NOT DEFINED" %> </p>
 
-<%= link_to 'Back', users_path %>
+<% if is_current_user(@user) %>
+	<%= link_to 'Edit Profile', edit_user_path(@current_user) %>
+<% end %>
 
 </article>

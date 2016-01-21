@@ -83,36 +83,6 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  def count
-    @logo = LOGO
-    @title = "COUNT"
-    @description = "Hidden Page"
-    query = EventQueryHandler.new
-    @resultsAll = query.totalEvents
-    @resultsValid = query.totalEventsHaventHappened
-    @javascriptsArray = ApplicationHelper.includeJavascripts(COUNT_STATUS) 
-    
-    results = { all: @resultsAll, valid: @resultsValid }
-    respond_to do |format|
-      format.html
-      format.json  { render :json => results }
-    end
-  end
-
-  def all 
-    @logo = LOGO
-    @description = "Hidden Page"
-    @title = "ALL"
-    query = EventQueryHandler.new
-    @results = query.getAllEvents
-    @javascriptsArray = ApplicationHelper.includeJavascripts(RESULT_STATUS)
-
-    respond_to do |format|
-      format.html
-      format.json  { render :json => @results }
-    end
-  end
-
   def error 
     @logo = LOGO
     @title = "ERROR"
@@ -123,6 +93,13 @@ class ApplicationController < ActionController::Base
   	else 
   		@error_msg = "SOMETHING HAPPENED, dont really know what"
   	end
+  end
+
+  def access_denied 
+    @logo = LOGO
+    @title = "ACCESS DENIED"
+    @description = "ACCESS DENIED"
+    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
   end
 
   ## helper functions 

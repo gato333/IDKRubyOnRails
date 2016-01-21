@@ -40,6 +40,24 @@
 						<input class="refresh-button" type="submit" value="Refresh">
 				</div>
 			</div>
+
+			<% if logged_in? %>
+				<div class="user_nav"> 
+					<ul> 
+						<% if is_admin %>
+						<li><%= link_to 'USER INDEX', user_index_path %></li>
+						<li><%= link_to 'EVENT DB', count_path %></li>
+						<li><%= link_to 'EVENT INDEX', index_path %></li>
+						<li><%= link_to 'EVENTS', all_path %></li>
+						<% end %>
+
+						<li><%= link_to 'YOUR PROFILE', user_path(current_user) %></li>
+          	<li><%= link_to 'CREATE EVENT', new_event_result_path %></li>      
+						<li><%= link_to 'YOUR EVENTS', :controller=>"users", :action=>"events", :id => @current_user.id %></li>       
+						<li><%= link_to 'LOG OUT', logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out, ' + current_user.name + '?' } %></li>
+					</ul>
+				</div>
+			<% end %> 
 		<!-- Wrapper-->
 			<div id="wrapper">
 				

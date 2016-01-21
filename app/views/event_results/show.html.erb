@@ -54,9 +54,10 @@
 
 	<div class="learn_more"><a class="page_link" href="<%= @event_result.eventurl %>"> original event</a></div>
 
-	<!--
-	NOT TILL THE FAT LADY SINGS
-	<%= link_to 'Edit', edit_event_result_path(@event_result) %> |
-	<%= link_to 'Back', event_results_path %>
-	-->
+	<% if is_admin %>
+	
+		<%= link_to 'Edit', edit_event_result_path(@event_result) %> |
+		<%= link_to 'Back', event_results_path %>
+	<% end %> 
+
 </article>

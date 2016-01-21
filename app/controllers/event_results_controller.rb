@@ -1,6 +1,8 @@
 class EventResultsController < ApplicationController
   before_action :set_event_result, only: [:show, :edit, :update, :destroy]
+  before_action :only_admin, only: [:index, :edit, :update, :destroy, :count, :all]
   include ApplicationHelper 
+  include SessionsHelper
 
   LOGO = ApplicationHelper::LOGO
   DESCRIPTION = ApplicationHelper::DESCRIPTION
@@ -55,6 +57,36 @@ class EventResultsController < ApplicationController
     @javascriptsArray = ApplicationHelper.includeJavascripts( EDIT_STATUS ); 
   end
 
+  def count
+    @logo = LOGO
+    @title = "COUNT"
+    @description = "Hidden Page"
+    query = EventQueryHandler.new
+    @resultsAll = query.totalEvents
+    @resultsValid = query.totalEventsHaventHappened
+    @javascriptsArray = ApplicationHelper.includeJavascripts(COUNT_STATUS) 
+    
+    results = { all: @resultsAll, valid: @resultsValid }
+    respond_to do |format|
+      format.html
+      format.json  { render :json => results }
+    end
+  end
+
+  def all 
+    @logo = LOGO
+    @description = "Hidden Page"
+    @title = "ALL"
+    query = EventQueryHandler.new
+    @results = query.getAllEvents
+    @javascriptsArray = ApplicationHelper.includeJavascripts(RESULT_STATUS)
+
+    respond_to do |format|
+      format.html
+      format.json  { render :json => @results }
+    end
+  end
+
   # POST /event_results
   # POST /event_results.json
   def create
@@ -100,6 +132,9 @@ class EventResultsController < ApplicationController
   end
 
   private
+    def only_admin
+      redirect_to access_denied_path if !is_admin
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_event_result
       @event_result = EventResult.find(params[:id])
