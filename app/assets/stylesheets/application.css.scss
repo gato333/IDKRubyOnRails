@@ -587,15 +587,31 @@ input.x-button {
 }
 
 /*********************************************************************************/
-/* Index page                                                                           */
+/* Event Index page                                                                           */
 /*********************************************************************************/
 
 article#index {
-    td { padding: 0 5px; }
+    .table { display:table; }
+    .cell { 
+        display:table-cell; 
+        font-size: 12px;
+        padding: 0 3px 0 0;
+        &.name { width: 240px; }
+        &.action { width: 40px; }
+        &.first { padding-left: 20px; }
+        &.date { width: 175px; }
+    }
+    .row { 
+        display: table-row; 
+        &.head { 
+            font-size: 14px; 
+            border-bottom: 1px solid #ddd; 
+        }
+    }
 }
 
 /*********************************************************************************/
-/* Show page                                                                           */
+/* Event Show page                                                                           */
 /*********************************************************************************/
 
 article#show {
@@ -607,7 +623,7 @@ article#show {
 }
 
 /*********************************************************************************/
-/* Edit page                                                                           */
+/* Event Edit/New page                                                                           */
 /*********************************************************************************/
 
 article#edit, article#new {
@@ -622,6 +638,11 @@ article#edit, article#new {
         display: inline-block; 
         width: 85%; 
         margin-top: 0px; 
+    }
+    select.quarter { width: 10%; }
+    input.half {
+        width: 48%;
+        &.first { margin-right: 2%; }
     }
     input[type='submit']{
         background-color:#efefef; 
@@ -649,6 +670,59 @@ article#edit, article#new {
         } 
     }
 
+}
+
+/*********************************************************************************/
+/* User Index page                                                                           */
+/*********************************************************************************/
+
+
+
+/*********************************************************************************/
+/* User Show page                                                                           */
+/*********************************************************************************/
+
+article#show_user {
+    img {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px;
+    }
+    .user_text {
+        display: inline-block; 
+        vertical-align: top;
+        h4 { margin-top: 0; }
+    }
+    a { display: block;}
+}
+
+/*********************************************************************************/
+/*  User Edit page                                                                           */
+/*********************************************************************************/
+
+article#user_edit {
+    label { 
+        display: inline-block;
+        vertical-align: top; 
+        margin-top: 10px;
+        width: 19%; 
+    }
+    input, select { 
+        vertical-align: top; 
+        display: inline-block; 
+        margin-top: 0px; 
+        width: 80%; 
+    }
+    input[type='submit']{
+        margin-top: 10px; 
+    }
+    input[type='file']{
+        vertical-align: bottom; 
+    }
+    img { 
+        display: inline-block;
+        margin-top: 15px;
+    }
 }
 
 /*********************************************************************************/
