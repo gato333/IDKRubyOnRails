@@ -1,5 +1,6 @@
 class EventResultsController < ApplicationController
   before_action :set_event_result, only: [:show, :edit, :update, :destroy]
+  before_action :is_member, only: [ :new ]
   before_action :only_admin, only: [:index, :edit, :update, :destroy, :count, :all]
   include ApplicationHelper 
   include SessionsHelper
@@ -132,6 +133,11 @@ class EventResultsController < ApplicationController
   end
 
   private
+
+    def is_member 
+      redirect_to access_denied_path if !logged_in?
+    end
+
     def only_admin
       redirect_to access_denied_path if !is_admin
     end

@@ -22,7 +22,7 @@
   <%= f.text_field :email %>
 
   <%= f.label "User Type:" %>
-  <%= f.select "userType", options_for_select([ "admin", "banned", "user" ], "user") %>
+  <%= f.select "userType", options_for_select(["banned", "user" ], "user") %>
 
   <%= f.label "Password:" %>
   <%= f.password_field :password, min: DateTime.now %>
@@ -34,7 +34,7 @@
 
   <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
 
-  <br /> <br />
+  <br />
   <div class="actions">
     <%= f.submit %>
   </div>

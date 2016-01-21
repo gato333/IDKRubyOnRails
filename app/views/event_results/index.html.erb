@@ -6,26 +6,30 @@
   <h1>Listing Event Results</h1>
 
   <h5> Total Events in database: <%= @event_results.length %> </h5>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <div class="table">
+   
+      <div class="row head">
+        <div class="cell" >ID</div>
+        <div class="cell name" >NAME</div>
+        <div class="cell" >START DATE</div>
+        <div class="cell" ></div>
+        <div class="cell" >ACTIONS</div>
+        <div class="cell" ></div>
+      </div>
 
-    <tbody>
-      <% @event_results.each do |event_result| %>
-        <tr>
-          <td><%= event_result.id %></td>
-          <td><%= event_result.name %></td>
-          <td><%= event_result.startdate %></td>
-          <td><%= link_to 'Show', event_result %></td>
-          <td><%= link_to 'Edit', edit_event_result_path(event_result) %></td>
-          <td><%= link_to 'Destroy', event_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    
+    <% @event_results.each do |event_result| %>
+      <div class="row">
+        <div class="cell"><%= event_result.id %></div>
+        <div class="cell name" ><%= event_result.name %></div>
+        <div class="cell date" ><%= event_result.startdate %></div>
+        <div class="cell first action" ><%= link_to 'Show', event_result %></div>
+        <div class="cell action" ><%= link_to 'Edit', edit_event_result_path(event_result) %></div>
+        <div class="cell action" ><%= link_to 'Destroy', event_result, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      </div>
+    <% end %>
+    
+  </div>
 
   <br>
 

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 	require "restaurant_query_handler"
 	include ApplicationHelper  
+  include SessionsHelper
 
   EAT_STATUS = ApplicationHelper::EAT_STATUS
   DO_STATUS = ApplicationHelper::DO_STATUS
@@ -69,9 +70,10 @@ class ApplicationController < ActionController::Base
   			end
   		elsif @title == DO_STATUS
   			if ApplicationHelper.validateForm(params, DO_STATUS)
-  				@googleKey = Rails.application.secrets.google_api_key; 
+          @googleKey = Rails.application.secrets.google_api_key; 
           query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
           @results = query.getEventResults
+
   			else 
 					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1", :lat => params["lat"] || "", :long => params["long"] || ""
   			end

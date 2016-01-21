@@ -1,7 +1,9 @@
 <% provide(:title, "Log in") %>
 <h1>Log in</h1>
 
-<p id="notice"><%= @notice %></p>
+<% if  @notice && !@notice.nil? %>
+  <p class="error_msg"><%= @notice %></p>
+<% end %>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">

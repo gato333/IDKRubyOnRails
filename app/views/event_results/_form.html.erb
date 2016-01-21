@@ -16,7 +16,9 @@
     <%= f.submit %>
   </div>
 
+  <% if @event_result.id %>
   <h5><span>ID: </span> <%= @event_result.id %></h5>
+  <% end %> 
 
   <%= f.label "Name:" %>
   <%= f.text_field :name %>
@@ -24,16 +26,19 @@
   <%= f.label "Address:" %>
   <%= f.text_field :address %>
 
+
   <%= f.label "Startdate:" %>
-  <%= f.time_field :startdate, min: Time.now %>
+  <%= date_field :start1, nil, class: "half first" %>
+  <%= time_select :start2, nil, { include_seconds: false }, { :class => "quarter"} %>
 
   <%= f.label "Enddate:" %>
-  <%= f.time_field :enddate, min: Time.now %>
+  <%= date_field :end1, nil, class: "half first" %>
+  <%= time_select :end2, nil,{ include_seconds: false }, { :class => "quarter"} %>
 
   <%= f.label "Price:" %>
   <%= f.number_field :price %>
 
-  <%= f.label "Types" %>
+  <%= f.label "Types:" %>
   <%= f.text_field :types %>
 
   <%= f.label "Source:" %>

@@ -19,11 +19,18 @@
 		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" />
 		-->
 		<%= stylesheet_link_tag    'application.css', media: 'all', 'data-turbolinks-track' => true %>
+
 		<% @javascriptsArray.each do |file| %>
 			<% if(file === 'googleMaps') %>
 				<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key="+ ENV["googleKey"] +"&language=en", 'data-turbolinks-track' => true %>
-			<% end %>
-	  	<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
+			<% elsif(file === 'edit') %> 
+				<%= javascript_include_tag "http://code.jquery.com/jquery-1.10.2.js", 'data-turbolinks-track' => true %>
+				<%= javascript_include_tag "http://code.jquery.com/ui/1.11.4/jquery-ui.js", 'data-turbolinks-track' => true %>
+				<%= stylesheet_link_tag "http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css", 'data-turbolinks-track' => true %>
+				<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
+			<% else %>
+	  		<%= javascript_include_tag file, 'data-turbolinks-track' => true %>
+	  	<% end %>
 	  <% end %>
 
 	  <%= csrf_meta_tags %>
@@ -41,23 +48,26 @@
 				</div>
 			</div>
 
-			<% if logged_in? %>
+		
 				<div class="user_nav"> 
 					<ul> 
-						<% if is_admin %>
-						<li><%= link_to 'USER INDEX', user_index_path %></li>
-						<li><%= link_to 'EVENT DB', count_path %></li>
-						<li><%= link_to 'EVENT INDEX', index_path %></li>
-						<li><%= link_to 'EVENTS', all_path %></li>
-						<% end %>
+						<% if logged_in? %>
+							<% if is_admin %>
+							<li><%= link_to 'USER INDEX', user_index_path %></li>
+							<li><%= link_to 'EVENT DB', count_path %></li>
+							<li><%= link_to 'EVENT INDEX', index_path %></li>
+							<li><%= link_to 'EVENTS', all_path %></li>
+							<% end %>
 
-						<li><%= link_to 'YOUR PROFILE', user_path(current_user) %></li>
-          	<li><%= link_to 'CREATE EVENT', new_event_result_path %></li>      
-						<li><%= link_to 'YOUR EVENTS', :controller=>"users", :action=>"events", :id => @current_user.id %></li>       
-						<li><%= link_to 'LOG OUT', logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out, ' + current_user.name + '?' } %></li>
+							<li><%= link_to 'YOUR PROFILE', user_path(current_user) %></li>
+	          	<li><%= link_to 'CREATE EVENT', new_event_result_path %></li>      
+							<li><%= link_to 'YOUR EVENTS', :controller=>"users", :action=>"events", :id => @current_user.id %></li>       
+							<li><%= link_to 'LOG OUT', logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out, ' + current_user.name + '?' } %></li>
+						<% elsif !(on_log_in_page) %> 
+							<li><%= link_to 'LOG IN', login_path %></li>
+						<% end %> 
 					</ul>
 				</div>
-			<% end %> 
 		<!-- Wrapper-->
 			<div id="wrapper">
 				

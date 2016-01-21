@@ -13,6 +13,13 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def on_log_in_page
+    if params["controller"] === "sessions" && params["action"] === "new"
+      return true
+    end
+    false
+  end
+
   def is_current_user(user)
   	user.id === current_user.id
   end

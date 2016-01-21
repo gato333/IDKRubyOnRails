@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   end
 
   def create 
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
     @user = User.new( user_params(params) )
 
     respond_to do |format|
@@ -55,6 +56,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
+    
     respond_to do |format|
       @user = User.find(params[:id]); 
       if @user.update_attributes(user_params(params))
