@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get '/access_denied' => 'application#access_denied'
 
+  get '/unknown' => 'application#unknown'
 
 
   get '/index' => 'event_results#index'
@@ -62,5 +63,9 @@ Rails.application.routes.draw do
   get    '/login'   => 'sessions#new'
   post   '/login'   => 'sessions#create'
   delete '/logout'  => 'sessions#destroy'
+
+  #catch all
+
+  get '*path' => 'application#unknown'
 
 end

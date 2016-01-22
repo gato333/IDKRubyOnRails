@@ -104,6 +104,13 @@ class ApplicationController < ActionController::Base
     @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
   end
 
+  def unknown
+    @logo = LOGO
+    @title = "UNKWOWN"
+    @description = "UNKWOWN"
+    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS)
+  end
+
   ## helper functions 
   def app_logger 
     @@app_logger ||= Logger.new("#{Rails.root}/log/app.log")
