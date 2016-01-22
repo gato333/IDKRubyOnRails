@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, uniqueness: true, length: { maximum: 250 }, 
 						format: { with: VALID_EMAIL_REGEX }
 
-	validates :userType, presence: true
-	enum userType: [:user, :admin, :banned]
+	validates :user_type, presence: true
+	enum user_type: [:user, :admin, :banned]
 
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
