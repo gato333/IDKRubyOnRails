@@ -170,7 +170,9 @@ class EventResultsController < ApplicationController
         "source" => p["event_result"][:source], 
         "types" => p["event_result"][:types], 
         "price" => p["event_result"][:price], 
-        "description" => p["event_result"][:description]
+        "description" => p["event_result"][:description],
+        "creator_name" => p["event_result"][:creator_name],
+        "creator_id" => p["event_result"][:creator_id]
       }
     end
 end

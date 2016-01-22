@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
 	mount_uploader :picture, PictureUploader
 	validate  :picture_size
 
+	def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+  
 	private 
 		def picture_size 
 			if picture.size > 5.megabytes

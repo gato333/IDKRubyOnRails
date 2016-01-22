@@ -83,7 +83,9 @@ class AbstractScrapper
         enddate: enddate, 
         description: explodeImplode(description), 
         types: types, 
-        source: source )
+        source: source, 
+        creator_name: "IDK", 
+        creator_id: -1  )
     end
   end
 
