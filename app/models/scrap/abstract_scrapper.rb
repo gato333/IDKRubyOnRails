@@ -85,7 +85,7 @@ class AbstractScrapper
         types: types, 
         source: source, 
         creator_name: "IDK", 
-        creator_id: -1  )
+        creator_id: 1  )
     end
   end
 
