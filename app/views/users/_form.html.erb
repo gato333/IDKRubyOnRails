@@ -21,8 +21,10 @@
   <%= f.label "Email:" %>
   <%= f.text_field :email %>
 
-  <%= f.label "User Type:" %>
-  <%= f.select :user_type, options_for_select(["banned", "user" ], "user") %>
+  <% if is_admin %>
+    <%= f.label "User Type:" %>
+    <%= f.select :user_type, options_for_select(["banned", "user", "admin"], "user") %>
+  <% end %>
 
   <%= f.label "Password:" %>
   <%= f.password_field :password, min: DateTime.now %>
