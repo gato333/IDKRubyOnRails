@@ -53,6 +53,13 @@
   <%= f.url_field :imageurl, cols: 60, rows: 4%>
   <%= image_tag( @event_result.imageurl, alt: "") %>
 
+  <% if params['action'] == 'new' %>
+
+    <%= f.hidden_field :creator_name, :value => current_user.name %> 
+    <%= f.hidden_field :creator_id, :value => current_user.id %> 
+
+  <% end %> 
+
   <div class="actions">
     <%= f.submit %>
   </div>

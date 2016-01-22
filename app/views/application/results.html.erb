@@ -70,6 +70,7 @@
 											<input class="name" value="<%= result.name %>" type="hidden">
 										</div>
 
+										<h5><span>Creator:</span> <%= link_to result.creator_name, user_path(result.creator_id) %> </h5>
 										<h5><span>ID:</span> <%=result.id %></h5>
 										<div class="learn_more"><a class="page_link" href="/event/<%= result.id %>">link</a></div>
 								</div>

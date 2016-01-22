@@ -50,6 +50,7 @@
 		<input class="name" value="<%= @event_result.name %>" type="hidden">
 	</div>
 
+	<h5><span>Creator:</span> <%= link_to @event_result.creator_name, user_path(@event_result.creator_id) %> </h5>
 	<h5><span>ID:</span> <%=@event_result.id %></h5>
 
 	<div class="learn_more"><a class="page_link" href="<%= @event_result.eventurl %>"> original event</a></div>
