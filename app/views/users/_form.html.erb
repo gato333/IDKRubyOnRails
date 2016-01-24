@@ -19,7 +19,7 @@
   <%= f.text_field :name %>
 
   <%= f.label "Email:" %>
-  <%= f.text_field :email %>
+  <%= f.email_field :email %>
 
   <% if is_admin %>
     <%= f.label "User Type:" %>
@@ -31,11 +31,11 @@
 
   <%= f.label "Password Confirmation:" %>
   <%= f.password_field :password_confirmation %>
-
+  <!---
   <%= image_tag @user.picture.url if @user.picture? %>
 
   <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-
+  -->
   <br />
   <div class="actions">
     <%= f.submit %>
