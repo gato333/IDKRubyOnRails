@@ -47,10 +47,10 @@
   <%= f.text_area :description, cols: 60, rows: 10 %>
 
   <%= f.label "Event url:" %>
-   <%= f.url_field :eventurl, cols: 60, rows: 4 %>
+   <%= f.url_field :eventurl %>
 
   <%= f.label "Image url:" %>
-  <%= f.url_field :imageurl, cols: 60, rows: 4%>
+  <%= f.url_field :imageurl %>
   <%= image_tag( @event_result.imageurl, alt: "") %>
 
   <% if params['action'] == 'new' || params['action'] == 'create' %>
