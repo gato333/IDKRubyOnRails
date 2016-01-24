@@ -73,7 +73,7 @@ class AbstractScrapper
     if( !(address.nil? || address === "" || name.nil? || name === "" ))
       event = EventResult.find_or_initialize_by( 
         name: explodeImplode(name), 
-        startdate: startdate
+        startdate: DateTime.parse(startdate)
       )
       event.update_attributes(  
         price: price, 
