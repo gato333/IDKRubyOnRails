@@ -69,13 +69,12 @@
 			 		<% count += 1
 			 			end %>
 			 		<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
-
-			 		 	<%= hidden_field :price, :value => params.include?('price') ? params['price'] : '' %> 
-    				<%= hidden_field :radius, :value => params.include?('radius') ? params['radius'] : '' %> 
-			 		 	<%= hidden_field :lat, :value => params.include?('lat') ? params['lat'] : '' %> 
-    				<%= hidden_field :long, :value => params.include?('long') ? params['long'] : '' %> 
-			 		 	<%= hidden_field :keyword, :value => params.include?('keyword') ? params['keyword'] : '' %> 
-    				<%= hidden_field :source, :value => @title %> 
+ 						<%= hidden_field_tag :price, nil, :value =>  params['price'] || '' %> 
+    				<%= hidden_field_tag :radius, nil, :value =>  params['radius'] || '' %> 
+			 		 	<%= hidden_field_tag :lat, nil, :value =>  params['lat'] || '' %> 
+    				<%= hidden_field_tag :long, nil, :value =>  params['long'] || '' %> 
+			 		 	<%= hidden_field_tag :keyword, nil, :value => params['keyword'] || '' %> 
+    				<%= hidden_field_tag :source, nil, :value => @title %> 
 						
     				<%= submit_tag "More" %>
 				 	<% end %>
@@ -96,12 +95,12 @@
 
 			 		<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
 
-			 		 	<%= f.hidden_field :price, :value => params.include?('price') ? params['price'] : '' %> 
-    				<%= f.hidden_field :radius, :value => params.include?('radius') ? params['radius'] : '' %> 
-			 		 	<%= f.hidden_field :lat, :value => params.include?('lat') ? params['lat'] : '' %> 
-    				<%= f.hidden_field :long, :value => params.include?('long') ? params['long'] : '' %> 
-			 		 	<%= f.hidden_field :keyword, :value => params.include?('keyword') ? params['keyword'] : '' %> 
-    				<%= f.hidden_field :source, :value => @title %> 
+			 		  <%= hidden_field_tag :price, nil, :value =>  params['price'] || '' %> 
+    				<%= hidden_field_tag :radius, nil, :value =>  params['radius'] || '' %> 
+			 		 	<%= hidden_field_tag :lat, nil, :value =>  params['lat'] || '' %> 
+    				<%= hidden_field_tag :long, nil, :value =>  params['long'] || '' %> 
+			 		 	<%= hidden_field_tag :keyword, nil, :value => params['keyword'] || '' %> 
+    				<%= hidden_field_tag :source, nil, :value => @title %> 
 						
     				<%= f.submit "More" %>
 				 	<% end %> 
