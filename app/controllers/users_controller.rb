@@ -90,8 +90,16 @@
     end
 
 	  def user_params(p)
-      p.require(:user).permit(:name, :email, :description, :password, :user_type,
-                                 :password_confirmation, :picture )
+      if( p["commit"] === "Change Photo")
+        p.require(:user).permit( :picture )
+      elsif( p["commit"] === "Save Description")
+        p.require(:user).permit( :description )
+      elsif( p["commit"] === "Change Password")
+        p.require(:user).permit( :password, :password_confirmation )
+      else 
+        p.require(:user).permit(:name, :email, :password, :password_confirmation, 
+          :user_type )
+      end
     end
 
 end
