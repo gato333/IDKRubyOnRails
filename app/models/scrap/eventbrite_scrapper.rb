@@ -28,7 +28,7 @@ class EventbriteScrapper < AbstractScrapper
 					price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
 					price = freeTest(price)
 					name = linkholder.css(".poster-card__body .poster-card__title")
-					startdate = @time.to_date.to_s + " " + linkholder.css(".poster-card__body .poster-card__date .event-time")
+					startdate = @time.to_date.to_s + " " + linkholder.css(".poster-card__body .poster-card__date .event-time").text
 					address = linkholder.css(".poster-card__body .poster-card__venue")
 					typelist = e.css(".poster-card__footer .poster-card__tags a")
 					types = ""
