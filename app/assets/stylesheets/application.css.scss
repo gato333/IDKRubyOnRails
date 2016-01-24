@@ -189,6 +189,8 @@ section:last-child, article:last-child{
     margin: 0 2em 2em 0;
 }
 
+.centered { text-align: center; }
+
 .image-centered {
     display: block;
     margin: 0 0 2em 0;
@@ -428,7 +430,7 @@ h5 {
  
 .panel {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 } 
 
 a.fa-home {
@@ -517,8 +519,10 @@ input[type="submit"] { width: 100%; }
     border: 1px solid red;
     color: red; 
     padding: 5px;
-    padding: 15px;
+    padding: 10px 5px 0 10px;
+    margin: 0 0 10px 0; 
     border-radius: 10px;
+    h4 { margin: 0; }
     span {
         font-weight: 600;
     }
@@ -715,18 +719,46 @@ article#user_new {
 
 article#show_user {
     img {
-        display: inline-block;
+        width: 100px;
+        height: 100px;
+        margin: 0 10px;
+    }
+    .user_avatar {
+        width: 23%; 
+         display: inline-block; 
         vertical-align: top;
-        margin-right: 10px;
     }
     .user_text {
+        width: 75%;
         display: inline-block; 
         vertical-align: top;
         h4 { margin-top: 0; }
     }
-    a { display: block;}
+    input[type='button'] { width: auto; }
+    a {     
+        padding: 10px 20px;
+        border-radius: 10px;
+        background: #eee;
+        text-decoration: none;
+        color: #444;
+        &.right { 
+            position: absolute;
+            top: -5px;
+            right: 0;
+        }
+    }
 }
 
+
+
+article#user_photo{ 
+    img {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        display: block;
+    }
+}
 /*********************************************************************************/
 /*  User Edit page                                                                           */
 /*********************************************************************************/
@@ -754,6 +786,38 @@ article#user_edit {
     img { 
         display: inline-block;
         margin-top: 15px;
+    }
+    a {     
+        padding: 10px 20px;
+        border-radius: 10px;
+        background: #eee;
+        text-decoration: none;
+        color: #444;
+    }
+    .account_panel {
+        display: inline-block;
+        width: 15%;
+        background: #eee;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-right: 1%;
+        a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            color: #444;
+            width: 87%;
+            padding: 6px 0;
+            margin: 4px 6px;
+            &.active { background: white; }
+        }
+    }
+
+    .account_form {
+        display: inline-block;
+        width: 81%;
+        vertical-align: top;
     }
 }
 

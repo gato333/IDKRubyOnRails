@@ -1,14 +1,27 @@
 <article id="show_user" class="panel">
 
 	<p id="notice"><%= notice %></p>
-	<h1><%= @user.name %>'s Profile</h1> 
-	<%= image_tag @user.picture.url || '' %>
+	<h1><%= @user.name %>'s Profile</h1>
+	<% if is_current_user(@user) %>
+	 	<%= link_to 'Edit Account', edit_user_path(@current_user), class: "right" %>
+	<% end %> 
+
+	<div class="user_avatar"> 
+		<%= image_tag @user.picture.url || '', alt: "" %>
+
+		<% if is_current_user(@user) %>
+			<br /><br />
+			<%= link_to (@user.picture.url ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
+		<% end %>
+	</div>
 
 	<div class="user_text"> 
 		<% if !is_current_user(@user) %>
 			<p><%= @user.description || '' %></p>
 		<% else %> 
-			<p class="description"><%= @user.description || '' %></p>
+			<% if @user.description && !@user.description.empty? %>
+				<p class="description"><%= @user.description %></p>
+			<% end %> 
 			<input type="button" value="<%= @user.description ? 'edit' :'add' %> description" class="edit_description_button" onclick="trigger_edit_descripton(); return false">
 
 			<div class="edit_description hidden"> 
@@ -19,16 +32,13 @@
 				<% end %> 
 			</div>
 		<% end %>
-
-		<% if !is_current_user(@user)  %>
-			<a href='https://mail.google.com/mail/?view=cm&fs=1&to=<%= @user.email %>&su=Message%20from%20user%20at%20IDK%20NYC' target='_blank'>contact this person</a>
-		<% end %>
 	</div>
 
-	<% if is_current_user(@user) %>
-		<br /><br />
-		<%= link_to (@user.picture.url ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
-		<%= link_to 'Edit Account', edit_user_path(@current_user) %>
+	<% if !is_current_user(@user)  %>
+	  <br /><br />
+		<a href='https://mail.google.com/mail/?view=cm&fs=1&to=<%= @user.email %>&su=Message%20from%20user%20at%20IDK%20NYC' target='_blank'>contact this person</a>
 	<% end %>
+
+	
 
 </article>

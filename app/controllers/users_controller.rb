@@ -131,7 +131,7 @@
         user.errors.add(:password_confirmation, "can't be empty")
       end
       if p[:user][:password] != p[:user][:password_confirmation]
-        user.errors.add(:password, "and password confirmation don't match")
+        user.errors.add(:password_confirmation, "and password don't match")
       end
       return user
     end

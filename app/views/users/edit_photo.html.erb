@@ -3,13 +3,13 @@
 	<p id="notice"><%= notice %></p>
 
 	<%= form_for(@user) do |f| %>
-		<%= image_tag @user.picture.url if @user.picture? %>
+		<%= image_tag @user.picture.url || '', alt: '' %>
 
 		<br /><br />
     <%= f.label "Upload photo:" %> 
 	  <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
 
-	  <p>or</p>
+	  <p class="centered">or</p>
 	  
     <%= f.label "Photo url:" %> 
 	  <%= f.url_field :picture_url, { value: '' }%>

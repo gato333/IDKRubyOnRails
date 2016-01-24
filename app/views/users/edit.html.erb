@@ -3,8 +3,8 @@
 	<h1>Edit User</h1>
 
 	  <% if @user.errors.any? %>
-	    <div id="error_explanation">
-	      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+	    <div class="error_msg">
+	      <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 	      <ul>
 	      <% @user.errors.full_messages.each do |message| %>
 	        <li><%= message %></li>
@@ -15,7 +15,7 @@
 
 
 	<div class="account_panel">
-		<%= link_to "Info", 'javascript:;' %> 
+		<%= link_to "Info", 'javascript:;', class: 'active' %> 
 		<%= link_to "Security", :controller=>"users", :action=>"new_password", :id => current_user.id %> 
 	</div> 
 
