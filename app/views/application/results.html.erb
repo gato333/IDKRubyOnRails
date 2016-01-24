@@ -24,18 +24,7 @@
 
 								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
 
-								<div class="share-obj" id="<%= result.id %>"> 
-									<input type="hidden" id="description" value="<%= result.description %>">
-									<a class="facebook social" target="_blank">F</a>
-									<a class="twitter social" target="_blank">L</a>
-									<a class="google social plus" target="_blank">H</a>
-									<a class="tumblr social" target="_blank">O</a>
-									<!--
-									<a class="instagram social plus" target="_blank">I</a>
-									-->
-									<a class="email social plus " target="_blank">M</a>
-								</div>
-
+								<%= render 'shared/social', result: result %>
 
 								<div class="text">
 									<h3> <%= result.name %> </h3>
@@ -79,16 +68,17 @@
 							</div>
 			 		<% count += 1
 			 			end %>
-				 	<form method="post" action="results"> 
-				 		<input type="hidden" type= "number" name="price" min="0.00" default="0.00" max="100000.00" value="<%= params.include?('price') ? params['price'] : '' %>" />
-						<input type="hidden" name="radius" value="<%= params.include?('radius') ? params['radius'] : '' %>" /> 
-						<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
-						<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
-						<input type="hidden" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" />
-						<input type="hidden" name="source" value="<%= @title %>">
-				 		<input type="submit" name="topic_submit" value="More" class="result_submit" />
-				 	</form>
+			 		<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
 
+			 		 	<%= hidden_field :price, :value => params.include?('price') ? params['price'] : '' %> 
+    				<%= hidden_field :radius, :value => params.include?('radius') ? params['radius'] : '' %> 
+			 		 	<%= hidden_field :lat, :value => params.include?('lat') ? params['lat'] : '' %> 
+    				<%= hidden_field :long, :value => params.include?('long') ? params['long'] : '' %> 
+			 		 	<%= hidden_field :keyword, :value => params.include?('keyword') ? params['keyword'] : '' %> 
+    				<%= hidden_field :source, :value => @title %> 
+						
+    				<%= submit_tag "More" %>
+				 	<% end %>
 
 				<% elsif @title == "EAT"
 					@results.each do |result| %>
@@ -103,15 +93,18 @@
 								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
 							</div>
 			 	<% end %>
-			 		<form method="post" action="results"> 
-				 		<input type="hidden" type= "number" name="price" value="<%= params.include?('price') ? params['price'] : '' %>" />
-						<input type="hidden" name="radius" value="<%= params.include?('radius') ? params['radius'] : '' %>" /> 
-						<input type="hidden" name="lat" value="<%= params.include?('lat') ? params['lat'] : '' %>" />
-						<input type="hidden" name="long" value="<%= params.include?('long') ? params['long'] : '' %>" />
-						<input type="hidden" name="keyword" value="<%= params.include?('keyword') ? params['keyword'] : '' %>" />
-						<input type="hidden" name="source" value="<%= @title %>">
-				 		<input type="submit" name="topic_submit" value="More" class="result_submit"/>
-				 	</form>
+
+			 		<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
+
+			 		 	<%= f.hidden_field :price, :value => params.include?('price') ? params['price'] : '' %> 
+    				<%= f.hidden_field :radius, :value => params.include?('radius') ? params['radius'] : '' %> 
+			 		 	<%= f.hidden_field :lat, :value => params.include?('lat') ? params['lat'] : '' %> 
+    				<%= f.hidden_field :long, :value => params.include?('long') ? params['long'] : '' %> 
+			 		 	<%= f.hidden_field :keyword, :value => params.include?('keyword') ? params['keyword'] : '' %> 
+    				<%= f.hidden_field :source, :value => @title %> 
+						
+    				<%= f.submit "More" %>
+				 	<% end %> 
 				<% end 
 			end %>
 
