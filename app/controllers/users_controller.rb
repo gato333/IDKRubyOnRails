@@ -48,21 +48,14 @@
         format.html { render :new_password }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       else 
-        if @user.authenticate(params[:user][:old_password])
-          if @user.update_attributes(user_params(params))
-            format.html { redirect_to @user, notice: 'Your password was successfully updated.' }
-            format.json { render :show, status: :ok, location: @user }
-          else 
-            format.html { render :new_password }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
+        if @user.update_attributes(user_params(params))
+          format.html { redirect_to @user, notice: 'Your password was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
         else 
-          @user.errors.add( :old_password, 'is the wrong current password. Please try again.')
           format.html { render :new_password }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
-
     end
   end
 
@@ -128,6 +121,8 @@
     def validate_password_params(user, p)
       if p[:user][:old_password].empty?
         user.errors.add(:old_password, "can't be empty")
+      elsif user.authenticate(params[:user][:old_password])
+        @user.errors.add( :old_password, 'is the wrong current password. Please try again.')
       end
       if p[:user][:password].empty?
         user.errors.add(:password, "can't be empty")
