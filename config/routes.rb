@@ -58,7 +58,6 @@ Rails.application.routes.draw do
 
   get '/user_photo/:id' => 'users#edit_photo'
 
-  get '/user/:id/update_description' => 'users#update_description'
 
 
   get    '/login'   => 'sessions#new'

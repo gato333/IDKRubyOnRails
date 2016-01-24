@@ -14,8 +14,8 @@
 			<input type="button" value="<%= @user.description ? 'edit' :'add' %> description" class="edit_description_button" onclick="trigger_edit_descripton(); return false">
 
 			<div class="edit_description hidden"> 
-				<%= form_tag( controller: "users", action: "update", :id => @current_user.id , method: "post") do %>
-					<%= text_area_tag :description, @user.description || '', cols: 40, rows: 4 %>
+				<%= form_for(@user) do |f| %>
+					<%= f.text_area :description, { value: @user.description || '', cols: 40, rows: 4 } %>
 					<%= submit_tag 'Save Description' %> 
 					<input type="button" value="cancel" class="cancel_edit_descripton" onclick="cancel_description_edit(); return false">
 				<% end %> 

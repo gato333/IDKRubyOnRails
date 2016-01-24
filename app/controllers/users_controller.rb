@@ -47,7 +47,6 @@
   end
 
   def update
-    put "IN UPDATE"
     @logo, @description, @javascriptsArray = preRender('user_edit')
     @title = "EDIT USER " + @user.id.to_s 
 
