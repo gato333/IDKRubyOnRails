@@ -92,7 +92,7 @@ module ApplicationHelper
 		elsif page === 'random'
 			return LOGO, "RANDOM", "Uncertainty Helper", includeJavascripts(RANDOM_STATUS)
 		elsif page === 'result'
-			return LOGO, DESCRIPTION, includeJavascripts(RANDOM_STATUS)
+			return LOGO, DESCRIPTION, includeJavascripts(RESULT_STATUS)
 		elsif page ===  'error'
 			return LOGO, "ERROR", "Problems in Paradise", includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'unknown'
@@ -105,9 +105,9 @@ module ApplicationHelper
   	elsif page === 'event_new'
   		return LOGO, "Create New", "NEW", includeJavascripts(EDIT_STATUS)
   	elsif page === 'event_edit'
-  		return includeJavascripts(SHOW_STATUS)
-  	elsif page === 'event_show'
   		return includeJavascripts(EDIT_STATUS)
+  	elsif page === 'event_show'
+  		return includeJavascripts(SHOW_STATUS)
   	elsif page === 'event_count'
   		return LOGO, "COUNT", "Admin Panel", includeJavascripts(COUNT_STATUS)
   	elsif page === 'event_all'
