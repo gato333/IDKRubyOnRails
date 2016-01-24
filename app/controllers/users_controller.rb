@@ -1,8 +1,8 @@
  class UsersController < ApplicationController
   include ApplicationHelper 
   include SessionsHelper
-	before_action :set_user, only: [:show, :edit, :update, :destroy, :events]
-  before_action :only_current_user_n_admin, only: [:edit, :update, :events]
+	before_action :set_user, only: [:show, :edit, :edit_photo, :update, :destroy, :events]
+  before_action :only_current_user_n_admin, only: [:edit, :update, :events, :edit_photo, ]
 	before_action :only_admin, only: [:destroy, :index]
 
   def index 
@@ -25,6 +25,11 @@
   	@title = "EDIT USER " + @user.id.to_s 
   end
 
+  def edit_photo
+    @logo, @description, @javascriptsArray = preRender('user_photo')
+    @title = "EDIT USER " + @user.id.to_s + " PHOTO"
+  end
+
   def create 
     @logo, @title, @description, @javascriptsArray = preRender('user_new')
     @user = User.new( user_params(params) )
@@ -42,9 +47,10 @@
   end
 
   def update
+    put "IN UPDATE"
     @logo, @description, @javascriptsArray = preRender('user_edit')
     @title = "EDIT USER " + @user.id.to_s 
-    
+
     respond_to do |format|
       @user = User.find(params[:id]); 
       if @user.update_attributes(user_params(params))
@@ -66,6 +72,7 @@
   end
 
   def events 
+    @logo, @title, @description, @javascriptsArray = preRender('user_events')
    # will bring up favorited events
   end
 
@@ -84,7 +91,7 @@
     end
 
 	  def user_params(p)
-      p.require(:user).permit(:name, :email, :password, :user_type,
+      p.require(:user).permit(:name, :email, :description, :password, :user_type,
                                  :password_confirmation, :picture )
     end
 

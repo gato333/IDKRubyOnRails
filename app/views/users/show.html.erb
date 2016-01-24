@@ -2,25 +2,36 @@
 
 	<p id="notice"><%= notice %></p>
 
-	<h1>User Profile</h1> 
+	<h1><%= @user.name %>'s Profile</h1> 
 
-	<%= image_tag @user.picture.url if @user.picture? %>
+	<%= image_tag @user.picture.url || '' %>
 
 	<div class="user_text"> 
+		<% if !is_current_user(@user) %>
+			<p><%= @user.description || '' %> </p>
+		<% else %> 
+			<p class="description"><%= @user.description || '' %> </p>
+			<input type="button" value="<%= @user.description ? 'edit' :'add' %> description" class="edit_description_button" onclick="trigger_edit_descripton(); return false">
 
-		<h4> Name: <%= @user.name %></h4>
+			<div class="edit_description hidden"> 
+				<%= form_tag( controller: "users", action: "update", :id => @current_user.id , method: "post") do %>
+					<%= text_area_tag :description, @user.description || '', cols: 40, rows: 4 %>
+					<%= submit_tag 'Save Description' %> 
+					<input type="button" value="cancel" class="cancel_edit_descripton" onclick="cancel_description_edit(); return false">
+				<% end %> 
+			</div>
+		<% end %>
 
-		<h4> Email: <%= @user.email %></h4> 
-
-		<h4> User Type: <%= @user.user_type %> </h4>
-		 
-		<h4> Description: <%= @user.description || '' %> </h4>
-		<h4> Pwd Digest: <%= @user.password_digest? ? "DEFINED" : "NOT DEFINED" %> </h4>
-		
+		<% if !is_current_user(@user)  %>
+			<a href='https://mail.google.com/mail/?view=cm&fs=1&to=<%= @user.email %>&su=Message%20from%20user%20at%20IDK%20NYC' target='_blank'>contact this person</a>
+		<% end %>
 	</div>
 
 	<% if is_current_user(@user) %>
-		<%= link_to 'Edit Profile', edit_user_path(@current_user) %>
+		<br />
+		<br />
+		<%= link_to (@user.picture ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
+		<%= link_to 'Edit Account', edit_user_path(@current_user) %>
 	<% end %>
 
 </article>

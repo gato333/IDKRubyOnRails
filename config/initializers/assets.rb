@@ -27,3 +27,5 @@ Rails.application.config.assets.precompile += %w( social.js )
 
 Rails.application.config.assets.precompile += %w( count.js )
 
+
+Rails.application.config.assets.precompile += %w( description.js )

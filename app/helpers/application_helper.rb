@@ -12,6 +12,8 @@ module ApplicationHelper
 	EDIT_STATUS = "EDIT"
 	COUNT_STATUS = "COUNT"
 
+	USER_DESCRIPTION_STATUS = "USER_DESCRIPT"
+
 	def validateForm( params , status )
 		if !validateGeoLocation(params)
 			return false 
@@ -75,6 +77,8 @@ module ApplicationHelper
 			['application', 'random']
 		elsif status == RESULT_STATUS
 			['application', 'result', 'googleMaps', 'social']
+		elsif status == USER_DESCRIPTION_STATUS
+			['application', 'description' ]
 		elsif status == DEFAULT_STATUS
 			['application']
 		else
@@ -120,6 +124,8 @@ module ApplicationHelper
   	elsif page === 'user_edit'
   		return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'user_show'
+  		return LOGO, DESCRIPTION, includeJavascripts(USER_DESCRIPTION_STATUS)
+  	elsif page === 'user_photo'
   		return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'user_events'
     	return LOGO, DESCRIPTION, "FAV EVENTS", includeJavascripts(DEFAULT_STATUS)

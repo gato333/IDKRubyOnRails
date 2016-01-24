@@ -1,0 +1,17 @@
+<article id="user_photo" class="panel">
+
+	<p id="notice"><%= notice %></p>
+
+	<%= image_tag @user.picture.url if @user.picture? %>
+
+  <%= file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+
+  <p>or</p>
+
+  Photo url: <%= url_field :picture_url, cols: 60, rows: 4%>
+
+  <%= submit_tag "Change Photo" %> 
+
+  <%= link_to "Back to Profile", current_user %> 
+
+</article>

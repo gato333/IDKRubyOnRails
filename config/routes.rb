@@ -56,12 +56,16 @@ Rails.application.routes.draw do
 
   get '/user/:id/edit' => 'users#edit'
 
+  get '/user_photo/:id' => 'users#edit_photo'
+
+  get '/user/:id/update_description' => 'users#update_description'
+
+
   get    '/login'   => 'sessions#new'
   post   '/login'   => 'sessions#create'
   delete '/logout'  => 'sessions#destroy'
 
   #catch all
-
   get '*path' => 'application#unknown'
 
 end
