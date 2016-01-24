@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get '/unknown' => 'application#unknown'
 
 
+
   get '/admin/index' => 'event_results#index'
 
   get '/admin/all'  => 'event_results#all'
@@ -58,10 +59,15 @@ Rails.application.routes.draw do
 
   get '/user_photo/:id' => 'users#edit_photo'
 
+  get '/password_reset/:id' => 'users#new_password'
+
+  post '/password_reset/:id' => 'users#change_password'
 
 
   get    '/login'   => 'sessions#new'
+
   post   '/login'   => 'sessions#create'
+
   delete '/logout'  => 'sessions#destroy'
 
   #catch all

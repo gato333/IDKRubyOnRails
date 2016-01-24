@@ -129,7 +129,9 @@ module ApplicationHelper
   		return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'user_events'
     	return LOGO, DESCRIPTION, "FAV EVENTS", includeJavascripts(DEFAULT_STATUS)
-  	
+  	elsif page === 'user_password'
+    	return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
+
     elsif page === 'session_new'
     	return LOGO, DESCRIPTION, "Log In", includeJavascripts(DEFAULT_STATUS)
   	end
