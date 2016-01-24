@@ -38,28 +38,31 @@
   end
 
   def change_password
-    puts "change_password"
     @logo, @description, @javascriptsArray = preRender('user_password')
     @title = "EDIT USER " + @user.id.to_s + " PWD"
 
     respond_to do |format|
-      @user = User.find(params[:id]); 
-      if @user && @user.authenticate(params[:user][:old_password])
-        puts "valid pwd"
-        if @user.update_attributes(user_params(params))
-          puts "valid new pwd"
-          format.html { redirect_to @user, notice: 'Your password was successfully updated.' }
-          format.json { render :show, status: :ok, location: @user }
+      @user = User.find(params[:id]);
+      @user = validate_password_params(@user, params)
+      if @user.errors.any? 
+        format.html { render :new_password }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      else 
+        if @user.authenticate(params[:user][:old_password])
+          if @user.update_attributes(user_params(params))
+            format.html { redirect_to @user, notice: 'Your password was successfully updated.' }
+            format.json { render :show, status: :ok, location: @user }
+          else 
+            format.html { render :new_password }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
         else 
-          puts "not valid new pwd"
+          @user.errors.add( :old_password, 'is the wrong current password. Please try again.')
           format.html { render :new_password }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-      else 
-        puts "not valid pwd"
-        format.html { render :new_password, notice: 'You supplied the wrong current password. Please try again.' }
-        format.json { render json: 'You supplied the wrong current password. Please try again.', status: :unprocessable_entity }
       end
+
     end
   end
 
@@ -122,13 +125,29 @@
       @user = User.find(params[:id])
     end
 
+    def validate_password_params(user, p)
+      if p[:user][:old_password].empty?
+        user.errors.add(:old_password, "can't be empty")
+      end
+      if p[:user][:password].empty?
+        user.errors.add(:password, "can't be empty")
+      end
+      if p[:user][:password_confirmation].empty?
+        user.errors.add(:password_confirmation, "can't be empty")
+      end
+      if p[:user][:password] != p[:user][:password_confirmation]
+        user.errors.add(:password, "and password confirmation don't match")
+      end
+      return user
+    end
+
 	  def user_params(p)
       if( p["commit"] === "Change Photo")
         p.require(:user).permit( :picture )
       elsif( p["commit"] === "Save Description")
         p.require(:user).permit( :description )
       elsif( p["commit"] === "Change Password")
-        p.require(:user).permit( :password, :password_confirmation, :old_password )
+        p.require(:user).require( :password, :password_confirmation, :old_password )
       else 
         p.require(:user).permit(:name, :email, :password, :password_confirmation, 
           :user_type )
