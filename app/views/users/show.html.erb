@@ -27,7 +27,7 @@
 
 	<% if is_current_user(@user) %>
 		<br /><br />
-		<%= link_to (@user.picture ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
+		<%= link_to (@user.picture.url ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
 		<%= link_to 'Edit Account', edit_user_path(@current_user) %>
 	<% end %>
 
