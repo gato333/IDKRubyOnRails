@@ -31,13 +31,11 @@ Rails.application.routes.draw do
   get '/unknown' => 'application#unknown'
 
 
-  get '/index' => 'event_results#index'
+  get '/admin/index' => 'event_results#index'
 
-  get '/all'  => 'event_results#all'
+  get '/admin/all'  => 'event_results#all'
 
-  get '/count' => 'event_results#count'
-
-  get '/event' => 'event_results#index'
+  get '/admin/count' => 'event_results#count'
 
   get '/event/new' => 'event_results#new'
 
@@ -47,16 +45,14 @@ Rails.application.routes.draw do
 
 
 
-  get '/user_index' => 'users#index'
-
-  get '/user' => 'users#index'
+  get '/admin/user_index' => 'users#index'
 
   get '/signup' => 'users#new'
   get '/user/new' => 'users#new'
 
   get '/user/:id' => 'users#show'
 
-  get 'user_events/:id' => 'users#events'
+  get '/user_events/:id' => 'users#events'
 
   get '/user/:id/edit' => 'users#edit'
 

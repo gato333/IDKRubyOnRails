@@ -51,10 +51,10 @@
 					<ul> 
 						<% if logged_in? %>
 							<% if is_admin %>
-							<li><%= link_to 'USER INDEX', user_index_path %></li>
-							<li><%= link_to 'EVENT DB', count_path %></li>
-							<li><%= link_to 'EVENT INDEX', index_path %></li>
-							<li><%= link_to 'EVENTS', all_path %></li>
+							<li><%= link_to 'USER INDEX', admin_user_index_path %></li>
+							<li><%= link_to 'EVENT DB', admin_count_path %></li>
+							<li><%= link_to 'EVENT INDEX', admin_index_path %></li>
+							<li><%= link_to 'EVENTS', admin_all_path %></li>
 							<% end %>
 
 							<li><%= link_to 'YOUR PROFILE', user_path(current_user) %></li>
