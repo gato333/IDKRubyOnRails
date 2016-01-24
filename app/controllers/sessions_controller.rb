@@ -2,22 +2,12 @@ class SessionsController < ApplicationController
 	include ApplicationHelper 
 	include SessionsHelper
 
-	LOGO = ApplicationHelper::LOGO
-  DESCRIPTION = ApplicationHelper::DESCRIPTION
-  DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
-
   def new
-  	@logo = LOGO
-    @description = DESCRIPTION
-    @title = "Log In"
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
+    @logo, @title, @description, @javascriptsArray = preRender('session_new') 
 	end
 
   def create
-  	@logo = LOGO
-    @description = DESCRIPTION
-    @title = "Log In"
-  	@javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
+    @logo, @title, @description, @javascriptsArray = preRender('session_new') 
 
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
