@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include ApplicationHelper
 
-	#page functions
   def home
     @logo, @title, @description, @javascriptsArray = preRender('home')
   end
@@ -83,7 +82,7 @@ class ApplicationController < ActionController::Base
 
 
   private 
-  ## helper functions 
+
   def app_logger 
     @@app_logger ||= Logger.new("#{Rails.root}/log/app.log")
   end

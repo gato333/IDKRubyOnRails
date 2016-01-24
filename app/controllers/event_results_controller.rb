@@ -6,8 +6,6 @@ class EventResultsController < ApplicationController
   include EventResultsHelper
   include SessionsHelper
 
-  # GET /event_results
-  # GET /event_results.json
   def index
     @logo, @title, @description, @javascriptsArray = preRender('event_index')
     @event_results = EventResult.all
@@ -18,8 +16,6 @@ class EventResultsController < ApplicationController
     end
   end
 
-  # GET /event_results/1
-  # GET /event_results/1.json
   def show
     @logo = @event_result.imageurl
     @description = @event_result.description[0..80]
@@ -32,13 +28,11 @@ class EventResultsController < ApplicationController
     end
   end
 
-  # GET /event_results/new
   def new
     @logo, @title, @description, @javascriptsArray = preRender('event_new')
     @event_result = EventResult.new
   end
 
-  # GET /event_results/1/edit
   def edit
     @javascriptsArray = preRender('event_edit')
     @title = "EDIT " + @event_result.id.to_s 
@@ -70,8 +64,6 @@ class EventResultsController < ApplicationController
     end
   end
 
-  # POST /event_results
-  # POST /event_results.json
   def create
     @logo, @title, @description, @javascriptsArray = preRender('event_new')
     @event_result = EventResult.new( event_result_params(params) )
@@ -86,8 +78,6 @@ class EventResultsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /event_results/1
-  # PATCH/PUT /event_results/1.json
   def update
     @javascriptsArray = preRender('event_edit') 
     respond_to do |format|
@@ -102,8 +92,6 @@ class EventResultsController < ApplicationController
     end
   end
 
-  # DELETE /event_results/1
-  # DELETE /event_results/1.json
   def destroy
     @logo, @title, @description, @javascriptsArray = preRender('event_index') 
     @event_result.destroy
@@ -123,12 +111,10 @@ class EventResultsController < ApplicationController
     redirect_to access_denied_path if !is_admin
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_event_result
     @event_result = EventResult.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def event_result_params(p)
     lat, long = generateLocation(p["event_result"][:address])
     { 
