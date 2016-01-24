@@ -6,6 +6,9 @@
   <h1>Listing Event Results</h1>
 
   <h5> Total Events in database: <%= @event_results.length %> </h5>
+
+  <%= will_paginate %>
+
   <div class="table">
    
       <div class="row head">
@@ -31,6 +34,8 @@
     
   </div>
 
+  <%= will_paginate %>
+  
   <br>
 
   <%= link_to 'New Event result', new_event_result_path %>

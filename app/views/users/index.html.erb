@@ -6,6 +6,9 @@
   <h1>Listing Users</h1>
 
   <h5> Users in database: <%= @users.length %> </h5>
+
+  <%= will_paginate %>
+
   <table>
     <thead>
       <tr>
@@ -33,6 +36,8 @@
       <% end %>
     </tbody>
   </table>
+
+  <%= will_paginate %>
 
   <br>
 

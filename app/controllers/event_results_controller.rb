@@ -8,7 +8,7 @@ class EventResultsController < ApplicationController
 
   def index
     @logo, @title, @description, @javascriptsArray = preRender('event_index')
-    @event_results = EventResult.all
+    @event_results = EventResult.paginate(page: params[:page])
 
     respond_to do |format|
       format.html

@@ -9,7 +9,7 @@
 
   def index 
   	@logo, @title, @description, @javascriptsArray = preRender('user_index')
-    @users = User.all
+    @users = User.paginate(page: params[:page])
 	end 
   
   def new
