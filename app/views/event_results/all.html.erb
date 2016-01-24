@@ -5,18 +5,20 @@
 		<center><h1>Results</h1></center>
 	</header>
 
+	<%= will_paginate %>
 	<div> 
-		<%  if @results == "ZERO_RESULTS" %>
+		<%  if @event_results == "ZERO_RESULTS" %>
 					Error: NO RESULTS
-		<%	elsif @results == "INVALID_REQUEST" %>
+		<%	elsif @event_results == "INVALID_REQUEST" %>
 			 		SOMETHING HAPPEDN BAD REQEST
-		<%  elsif @results.nil? || @results.empty?  %>
+		<%  elsif @event_results.nil? || @event_results.empty?  %>
 					No Results.
-		<%  elsif @results.kind_of?(Array) == false %>
-				<%= @results %>
+		<%  elsif @event_results.kind_of?(Array) == false %>
+				<%= @event_results %>
 		<%  else  
 					count = 1
-					@results.each do |result| %>
+
+					@event_results.each do |result| %>
 							<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
 
 								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
@@ -67,6 +69,8 @@
 			 			end %>
 	<% end %>
 
-
 	</div>
+	
+	<%= will_paginate %>
+
 </article>

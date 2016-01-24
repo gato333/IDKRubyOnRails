@@ -5,6 +5,7 @@ class EventResultsController < ApplicationController
   include ApplicationHelper 
   include EventResultsHelper
   include SessionsHelper
+  require 'will_paginate/array'
 
   def index
     @logo, @title, @description, @javascriptsArray = preRender('event_index')
@@ -56,7 +57,8 @@ class EventResultsController < ApplicationController
   def all 
     @logo, @title, @description, @javascriptsArray = preRender('event_all')
     query = EventQueryHandler.new
-    @results = query.getAllEvents
+    @event_results = query.getAllEvents.paginate(page: params[:page])
+
 
     respond_to do |format|
       format.html
