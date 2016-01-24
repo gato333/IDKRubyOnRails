@@ -1,95 +1,71 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 	require "restaurant_query_handler"
-	include ApplicationHelper  
   include SessionsHelper
-
-  EAT_STATUS = ApplicationHelper::EAT_STATUS
-  DO_STATUS = ApplicationHelper::DO_STATUS
-  DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
-  RANDOM_STATUS = ApplicationHelper::RANDOM_STATUS
-  RESULT_STATUS = ApplicationHelper::RESULT_STATUS
-  COUNT_STATUS = ApplicationHelper::COUNT_STATUS
-
-  LOGO = ApplicationHelper::LOGO
-  DESCRIPTION = ApplicationHelper::DESCRIPTION
+  include ApplicationHelper
 
 	#page functions
   def home
-    @logo = LOGO
-    @title = "HOME"
-    @description = DESCRIPTION
-    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS); 
+    @logo, @title, @description, @javascriptsArray = preRender('home')
   end
 
   def do
-    @logo = LOGO
-    @description = DESCRIPTION
-    @title = "DO"
-    @javascriptsArray = ApplicationHelper.includeJavascripts(DO_STATUS); 
-    if params.include?('error') 
-      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, DO_STATUS);
-    end
-    puts request.remote_ip
+    @logo, @title, @description, @javascriptsArray = preRender('do')
     @ip = remote_ip
+    if params.include?('error') 
+      @error_msg, @radius_error, @price_error = formErrorMsg(params, DO_STATUS);
+    end
   end
 
   def eat 
-    @logo = LOGO
-    @title = "EAT"
-    @description = DESCRIPTION
-    @javascriptsArray = ApplicationHelper.includeJavascripts(EAT_STATUS); 
-    if params.include?('error') 
-      @error_msg, @radius_error, @price_error = ApplicationHelper.formErrorMsg(params, EAT_STATUS);
-    end
-    puts request.remote_ip
+    @logo, @title, @description, @javascriptsArray = preRender('eat')
     @ip = remote_ip
+    if params.include?('error') 
+      @error_msg, @radius_error, @price_error = formErrorMsg(params, EAT_STATUS);
+    end
   end
 
   def random
-    @logo = LOGO
-    @description = "Uncertainty Helper"
-    @title = "RANDOM"
-    @javascriptsArray = ApplicationHelper.includeJavascripts( RANDOM_STATUS); 
+    @logo, @title, @description, @javascriptsArray = preRender('random')
   end
 
   def results 
-    @logo = LOGO
-    @description = DESCRIPTION
-    @javascriptsArray = ApplicationHelper.includeJavascripts( RESULT_STATUS); 
-  	if params.include?("source")
-  		@title = params["source"]
-  		if @title == EAT_STATUS
-  			if ApplicationHelper.validateForm(params, EAT_STATUS)
-  				query = RestaurantQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
-          @results = query.getRestaurantResults
-  			else 
-  				redirect_to :action => 'eat', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1", :lat => params["lat"] || "", :long => params["long"] || ""
-  			end
-  		elsif @title == DO_STATUS
-  			if ApplicationHelper.validateForm(params, DO_STATUS)
-          @googleKey = Rails.application.secrets.google_api_key; 
-          query = EventQueryHandler.new( params["lat"], params["long"], params["radius"], params["price"], params["keyword"])
-          @results = query.getEventResults
-
-  			else 
-					redirect_to :action => 'do', :radius => params["radius"] || "", :price => params["price"] || "", :keyword => params["keyword"] || "", :error => "1", :lat => params["lat"] || "", :long => params["long"] || ""
-  			end
-  		else 
-  			redirect_to :action => 'error', :error_msg => "Submitted from a not accepted page."
-  		end
-  	else 
-  		redirect_to :action => 'error', :error_msg => "You must submit from either the EAT or DO pages to get Results. You can't just jump to the end!"
-  	end
+    @logo, @description, @javascriptsArray = preRender('result')
+		if params["source"] == EAT_STATUS
+			if validateForm(params, EAT_STATUS)
+				query = RestaurantQueryHandler.new( app_params(params) )
+        @results = query.getRestaurantResults
+			else 
+				redirect_to :action => 'eat', 
+        :radius => params["radius"] || "", 
+        :price => params["price"] || "", 
+        :keyword => params["keyword"] || "",  
+        :error => "1", 
+        :lat => params["lat"] || "", 
+        :long => params["long"] || ""
+			end
+		elsif params["source"] == DO_STATUS
+			if validateForm(params, DO_STATUS)
+        @googleKey = Rails.application.secrets.google_api_key; 
+        query = EventQueryHandler.new( app_params(params) )
+        @results = query.getEventResults
+			else 
+				redirect_to :action => 'do',
+        :radius => params["radius"] || "", 
+        :price => params["price"] || "", 
+        :keyword => params["keyword"] || "",  
+        :error => "1", 
+        :lat => params["lat"] || "", 
+        :long => params["long"] || ""
+			end
+		else 
+			redirect_to :action => 'error', :error_msg => "Submitted from a not accepted page."
+		end
+    @title = params["source"]
   end
 
   def error 
-    @logo = LOGO
-    @title = "ERROR"
-    @description = "Problems"
-    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
+    @logo, @title, @description, @javascriptsArray = preRender('error')
   	if params.include?(:error_msg)
   		@error_msg = params[:error_msg]
   	else 
@@ -98,19 +74,15 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied 
-    @logo = LOGO
-    @title = "ACCESS DENIED"
-    @description = "ACCESS DENIED"
-    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS) 
+    @logo, @title, @description, @javascriptsArray = preRender('access_denied')
   end
 
   def unknown
-    @logo = LOGO
-    @title = "UNKWOWN"
-    @description = "UNKWOWN"
-    @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS)
+    @logo, @title, @description, @javascriptsArray = preRender('unknown')
   end
 
+
+  private 
   ## helper functions 
   def app_logger 
     @@app_logger ||= Logger.new("#{Rails.root}/log/app.log")
@@ -123,6 +95,10 @@ class ApplicationController < ActionController::Base
     else
       request.remote_ip
     end
+  end
+
+  def app_params(p)
+    return p["lat"], p["long"], p["radius"], p["price"], p["keyword"]
   end
 
 end

@@ -5,12 +5,12 @@ class RestaurantQueryHandler
     attr_accessor :lat, :long, :radius, :keyword, :price, :url
     API = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
 	
-    def initialize(lat, long, radius, price, keyword = "")
-    	@lat = lat.to_s
-    	@long = long.to_s 
-    	@radius = radius.to_s
-    	@price = price.to_s
-    	@keyword = keyword
+    def initialize(queryObj)
+    	@lat = queryObj.lat.to_s 
+    	@long = queryObj.long.to_s 
+    	@radius = queryObj.radius.to_s
+    	@price = queryObj.price.to_s
+    	@keyword = queryObj.keyword.to_s
     end
 
     def generateGoogleRequest 

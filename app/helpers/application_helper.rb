@@ -12,7 +12,7 @@ module ApplicationHelper
 	EDIT_STATUS = "EDIT"
 	COUNT_STATUS = "COUNT"
 
-	def self.validateForm( params , status )
+	def validateForm( params , status )
 		if !validateGeoLocation(params)
 			return false 
 		elsif !validateRadius(params["radius"])
@@ -24,28 +24,28 @@ module ApplicationHelper
 		end
 	end
 
-	def self.validateGeoLocation( params )
+	def validateGeoLocation( params )
 		if params["lat"] == nil || params["lat"] == "" || params["long"] == nil || params["long"] == ""
 			return false 
 		end 
 		return true
 	end
 
-	def self.validateRadius( radius )
+	def validateRadius( radius )
 		if radius == nil || radius == "" || radius == 0 || radius == "0"
 			return false 
 		end 
 		return true
 	end
 
-	def self.validatePriceEat( price, status )
+	def validatePriceEat( price, status )
 		if price == nil || price == "0" && status == EAT_STATUS
 			return false
 		end
 		return true
 	end
 
-	def self.formErrorMsg( params, status )
+	def formErrorMsg( params, status )
 		error_msg = ""
 		radius_error = price_error = nil
 		if !validateGeoLocation(params)
@@ -62,7 +62,7 @@ module ApplicationHelper
 		return error_msg, radius_error, price_error
 	end
 
-	def self.includeJavascripts(status) 
+	def includeJavascripts(status) 
 		if status == SHOW_STATUS
 			['application', 'show', 'googleMaps', 'social']
 		elsif status == COUNT_STATUS
@@ -80,6 +80,42 @@ module ApplicationHelper
 		else
 			"problem assinging javacripts to page" 
 		end
+	end
+
+	def preRender(page)
+		if page === 'home'
+    	return LOGO, "HOME", DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
+		elsif page === 'do'
+    	return LOGO, "DO", DESCRIPTION, includeJavascripts(DO_STATUS)
+		elsif page === 'eat'
+    	return LOGO, "EAT", DESCRIPTION, includeJavascripts(EAT_STATUS)
+		elsif page === 'random'
+			return LOGO, "RANDOM", "Uncertainty Helper", includeJavascripts(RANDOM_STATUS)
+		elsif page === 'result'
+			return LOGO, DESCRIPTION, includeJavascripts(RANDOM_STATUS)
+		elsif page ===  'error'
+			return LOGO, "ERROR", "Problems in Paradise", includeJavascripts(DEFAULT_STATUS)
+  	elsif page === 'unknown'
+  		return LOGO, "UNKWOWN", "UNKWOWN", includeJavascripts(DEFAULT_STATUS)
+  	elsif page === "access_denied"
+  		return LOGO, "ACCESS DENIED", "ACCESS DENIED", includeJavascripts(DEFAULT_STATUS)
+  	elsif page === 'event_index'
+  		return LOGO, DESCRIPTION, "INDEX", includeJavascripts(DEFAULT_STATUS)
+  	elsif page === 'event_new'
+  		return LOGO, "Create New", "NEW", includeJavascripts(EDIT_STATUS)
+  	elsif page === 'event_edit'
+  		return includeJavascripts(SHOW_STATUS)
+  	elsif page === 'event_show'
+  		return includeJavascripts(EDIT_STATUS)
+  	elsif page === 'event_count'
+  		return LOGO, "COUNT", "Admin Panel", includeJavascripts(COUNT_STATUS)
+  	elsif page === 'event_all'
+  		return LOGO, "ALL", "Admin Panel", includeJavascripts(RESULT_STATUS)
+  	elsif page === 'user_new'
+
+  	elsif page === 'user_edit'
+
+  	end
 	end
 
 end

@@ -4,20 +4,27 @@ class EventQueryHandler
 
 		attr_accessor :lat, :eastlat, :westlat, :long, :northlong, :southlong, :radius, :keyword, :price, :curTime
 
-    def initialize(lat = nil , long = nil, radius = nil, price = nil, keyword = "")
-    	@lat = lat.nil? ? lat : lat.to_f
-    	@long = long.nil? ? long : long.to_f
-    	@radius = radius.nil? ? radius : radius.to_f
-    	@price = price.nil? ? 0 : price.to_f
+    def initialize(queryObj=nil)
+      puts queryObj[0], queryObj[0].class 
+      puts 'start'
+      if queryObj
+      	@lat = queryObj[0] ? queryObj[0].to_f : nil
+      	@long = queryObj[1] ? queryObj[1].to_f : nil
+      	@radius = queryObj[2] ? queryObj[2].to_f : nil
+      	@price = queryObj[3] ? queryObj[3].to_f : nil
+        @keyword = queryObj[4].to_s || ""
 
-      if( @lat.nil? || @long.nil? || @radius.nil? )
-         @northlat = @eastlong = @southlat = @westlong = nil
+        if( @lat.nil? || @long.nil? || @radius.nil? )
+           @northlat = @eastlong = @southlat = @westlong = nil
+        else 
+          @northlat, @eastlong, @southlat, @westlong = boundingBox
+        end 
       else 
-        @northlat, @eastlong, @southlat, @westlong = boundingBox
-      end 
-
+        puts 'not'
+        @lat = @long = @radius = @price = @keyword = @northlat = @eastlong  = @southlat = @westlong = @keyword = nil
+      end
       @curTime = (Time.now.utc + Time.zone_offset('EST') - (60  * 60 * 2)).to_formatted_s(:db)
-    	@keyword = keyword.to_s
+      puts @lat , @long ,@radius , @price , @keyword , @northlat , @eastlong  , @southlat, @westlong , @keyword
     end
 
     def boundingBox
