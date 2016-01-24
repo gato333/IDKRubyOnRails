@@ -11,7 +11,7 @@
 
 <div>
 <%= form_for(@user, html: { multipart: true }) do |f| %>
-  <% if @user.id %>
+  <% if @user.id && is_admin %>
     <h5><span>ID: </span> <%= @user.id.to_s %></h5>
   <% end %>
 
@@ -25,17 +25,13 @@
     <%= f.label "User Type:" %>
     <%= f.select :user_type, options_for_select(["banned", "user", "admin"], "user") %>
   <% end %>
-
+  
   <%= f.label "Password:" %>
   <%= f.password_field :password, min: DateTime.now %>
 
   <%= f.label "Password Confirmation:" %>
   <%= f.password_field :password_confirmation %>
-  <!---
-  <%= image_tag @user.picture.url if @user.picture? %>
-
-  <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-  -->
+ 
   <br />
   <div class="actions">
     <%= f.submit %>
