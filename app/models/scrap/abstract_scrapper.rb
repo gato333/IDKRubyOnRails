@@ -71,21 +71,25 @@ class AbstractScrapper
     link, startdate, enddate, description, types, source)
     #address, name, and link must be not empty and not nil to create an event
     if( !(address.nil? || address === "" || name.nil? || name === "" ))
-      EventResult.create( 
+      event = EventResult.find_or_initialize_by( 
         name: explodeImplode(name), 
+        startdate: startdate
+      )
+      event.update_attributes(  
         price: price, 
         lat: lat, 
         long: long, 
         address: explodeImplode(address), 
         imageurl: imglink, 
-        eventurl: link , 
-        startdate: startdate, 
+        eventurl: link ,  
         enddate: enddate, 
         description: explodeImplode(description), 
         types: types, 
         source: source, 
         creator_name: "IDK", 
-        creator_id: 1  )
+        creator_id: 1  
+      )
+      event.save
     end
   end
 
