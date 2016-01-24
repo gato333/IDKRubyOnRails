@@ -53,7 +53,7 @@
   <%= f.url_field :imageurl, cols: 60, rows: 4%>
   <%= image_tag( @event_result.imageurl, alt: "") %>
 
-  <% if params['action'] == 'new' %>
+  <% if params['action'] == 'new' || params['action'] == 'create' %>
 
     <%= f.hidden_field :creator_name, :value => current_user.name %> 
     <%= f.hidden_field :creator_id, :value => current_user.id %> 

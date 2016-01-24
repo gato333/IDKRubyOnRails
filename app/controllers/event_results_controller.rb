@@ -68,11 +68,16 @@ class EventResultsController < ApplicationController
     @logo, @title, @description, @javascriptsArray = preRender('event_new')
     @event_result = EventResult.new( event_result_params(params) )
     respond_to do |format|
-      if @event_result.save
-        format.html { redirect_to @event_result, notice: 'Event result was successfully created.' }
-        format.json { render :show, status: :created, location: @event_result }
-      else
-        format.html { render :new }
+      if user_has_can_make_event(current_user.id)
+        if @event_result.save
+          format.html { redirect_to @event_result, notice: 'Event result was successfully created.' }
+          format.json { render :show, status: :created, location: @event_result }
+        else
+          format.html { render :new }
+          format.json { render json: @event_result.errors, status: :unprocessable_entity }
+        end
+      else 
+        format.html { redirect_to current_user, notice: 'I\'m sorry, but you have reached your 5 event limit for event creation today.'  }
         format.json { render json: @event_result.errors, status: :unprocessable_entity }
       end
     end
