@@ -5,18 +5,8 @@
 
 	<%= image_tag @event_result.imageurl %>
 
-	<div class="share-obj" id="<%= @event_result.id %>"> 
-		<input type="hidden" id="description" value="<%= @event_result.description %>">
-		<a class="facebook social" target="_blank">F</a>
-		<a class="twitter social" target="_blank">L</a>
-		<a class="google social plus" target="_blank">H</a>
-		<a class="tumblr social" target="_blank">O</a>
-		<!--
-		<a class="instagram social plus" target="_blank">I</a>
-		-->
-		<a class="email social plus " target="_blank">M</a>
-	</div>
-
+	<%= render 'shared/social', result: @event_result %>
+	
 	<h3> <%= @event_result.name %> </h3>
 
 	<% if !@event_result.address.nil? && @event_result.address.length > 0 %>
