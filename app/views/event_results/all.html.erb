@@ -1,0 +1,72 @@
+<% provide(:title, @title) %>
+<article id="all" class="panel">
+
+	<header>
+		<center><h1>Results</h1></center>
+	</header>
+
+	<div> 
+		<%  if @results == "ZERO_RESULTS" %>
+					Error: NO RESULTS
+		<%	elsif @results == "INVALID_REQUEST" %>
+			 		SOMETHING HAPPEDN BAD REQEST
+		<%  elsif @results.nil? || @results.empty?  %>
+					No Results.
+		<%  elsif @results.kind_of?(Array) == false %>
+				<%= @results %>
+		<%  else  
+					count = 1
+					@results.each do |result| %>
+							<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
+
+								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
+
+								<%= render 'shared/social', result: result %>
+
+								<div class="text">
+									<h3> <%= result.name %> </h3>
+									<h5><span>Address:</span> <%= result.address %></h5>
+
+									<% if !result.types.nil? %>
+									<h5><span>Type:</span> <%= result.types %></h5>
+									<% end %>
+
+									<% if !result.startdate.nil? %>
+										<h5><span>Start Time:</span> <%= result.startdate.strftime("%l:%M %P") %></h5>
+									<% end %> 
+
+									<% if !result.enddate.nil? %>
+										<h5><span>End Time:</span> <%= result.enddate.strftime("%l:%M %P") %></h5>
+									<% end %>
+
+									<% if !result.price.nil? %>
+									<h5><span>Price:</span> <%= result.price == 0 ? " free" : " $" + result.price.to_s + "0" %></h5>
+									<% end %>
+
+								</div>
+
+								<div class="learn_more_box hidden">
+										<% if !result.description.nil? && result.description.length > 0 %>
+											<h5><span>Description:</span> <%= result.description %></h5>
+										<% end %>
+										
+										<div class="map_container hidden">
+											<input class="lat" value="<%= result.lat %>" type="hidden">
+											<input class="lng" value="<%= result.long %>" type="hidden">
+											<input class="name" value="<%= result.name %>" type="hidden">
+										</div>
+
+										<h5><span>ID:</span> <%=result.id %></h5>
+
+										<div class="learn_more"><a class="page_link" href="/event/<%= result.id %>">link</a></div>
+								</div>
+								<input class="learn_more_button" type="button" value="expand">
+
+							</div>
+			 		<% count += 1
+			 			end %>
+	<% end %>
+
+
+	</div>
+</article>
