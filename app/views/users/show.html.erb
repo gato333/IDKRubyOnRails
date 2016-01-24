@@ -1,16 +1,14 @@
 <article id="show_user" class="panel">
 
 	<p id="notice"><%= notice %></p>
-
 	<h1><%= @user.name %>'s Profile</h1> 
-
 	<%= image_tag @user.picture.url || '' %>
 
 	<div class="user_text"> 
 		<% if !is_current_user(@user) %>
-			<p><%= @user.description || '' %> </p>
+			<p><%= @user.description || '' %></p>
 		<% else %> 
-			<p class="description"><%= @user.description || '' %> </p>
+			<p class="description"><%= @user.description || '' %></p>
 			<input type="button" value="<%= @user.description ? 'edit' :'add' %> description" class="edit_description_button" onclick="trigger_edit_descripton(); return false">
 
 			<div class="edit_description hidden"> 
@@ -28,8 +26,7 @@
 	</div>
 
 	<% if is_current_user(@user) %>
-		<br />
-		<br />
+		<br /><br />
 		<%= link_to (@user.picture ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
 		<%= link_to 'Edit Account', edit_user_path(@current_user) %>
 	<% end %>

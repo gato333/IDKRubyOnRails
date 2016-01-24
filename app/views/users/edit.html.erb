@@ -1,43 +1,41 @@
 <article id="user_edit" class="panel">
 
-<h1>Edit User</h1>
+	<h1>Edit User</h1>
+	
+	  <% if @user.errors.any? %>
+	    <div id="error_explanation">
+	      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+	      <ul>
+	      <% @user.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
 
- <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+	<div>
+		<%= form_for(@user, html: { multipart: true }) do |f| %>
+		  <% if @user.id && is_admin %>
+		    <h5><span>ID: </span> <%= @user.id.to_s %></h5>
+		  <% end %>
 
-<div>
-<%= form_for(@user, html: { multipart: true }) do |f| %>
-  <% if @user.id && is_admin %>
-    <h5><span>ID: </span> <%= @user.id.to_s %></h5>
-  <% end %>
+		  <%= f.label "Name:" %>
+		  <%= f.text_field :name %>
 
-  <%= f.label "Name:" %>
-  <%= f.text_field :name %>
+		  <%= f.label "Email:" %>
+		  <%= f.text_field :email %>
 
-  <%= f.label "Email:" %>
-  <%= f.text_field :email %>
+		  <% if is_admin %>
+		    <%= f.label "User Type:" %>
+		    <%= f.select :user_type, options_for_select(["banned", "user", "admin"], @user.user_type || 'user' ) %>
+		  <% end %>
 
-  <% if is_admin %>
-    <%= f.label "User Type:" %>
-    <%= f.select :user_type, options_for_select(["banned", "user", "admin"], @user.user_type || 'user' ) %>
-  <% end %>
+		  <br />
+		  <div class="actions">
+		    <%= f.submit %>
+		  </div>
+		<% end %>
+	</div>
 
-  <br />
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-</div>
-
-<%= link_to 'Back', user_path %>
-
+	<%= link_to 'Back', user_path %>
 </article>
-
