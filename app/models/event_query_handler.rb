@@ -5,8 +5,6 @@ class EventQueryHandler
 		attr_accessor :lat, :eastlat, :westlat, :long, :northlong, :southlong, :radius, :keyword, :price, :curTime
 
     def initialize(queryObj=nil)
-      puts queryObj[0], queryObj[0].class 
-      puts 'start'
       if queryObj
       	@lat = queryObj[0] ? queryObj[0].to_f : nil
       	@long = queryObj[1] ? queryObj[1].to_f : nil
@@ -20,11 +18,9 @@ class EventQueryHandler
           @northlat, @eastlong, @southlat, @westlong = boundingBox
         end 
       else 
-        puts 'not'
         @lat = @long = @radius = @price = @keyword = @northlat = @eastlong  = @southlat = @westlong = @keyword = nil
       end
       @curTime = (Time.now.utc + Time.zone_offset('EST') - (60  * 60 * 2)).to_formatted_s(:db)
-      puts @lat , @long ,@radius , @price , @keyword , @northlat , @eastlong  , @southlat, @westlong , @keyword
     end
 
     def boundingBox
