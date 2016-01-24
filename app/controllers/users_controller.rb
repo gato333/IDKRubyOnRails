@@ -1,46 +1,32 @@
-class UsersController < ApplicationController
+ class UsersController < ApplicationController
   include ApplicationHelper 
   include SessionsHelper
 	before_action :set_user, only: [:show, :edit, :update, :destroy, :events]
   before_action :only_current_user_n_admin, only: [:edit, :update, :events]
 	before_action :only_admin, only: [:destroy, :index]
 
-	LOGO = ApplicationHelper::LOGO
-  DESCRIPTION = ApplicationHelper::DESCRIPTION
-  DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
-
   def index 
-  	@logo = LOGO
-    @description = DESCRIPTION
-    @title = "USER INDEX"
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
+  	@logo, @title, @description, @javascriptsArray = preRender('user_index')
     @users = User.all
 	end 
   
   def new
-  	@title = "NEW USER"
-  	@logo = LOGO
-    @description = DESCRIPTION
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
+    @logo, @title, @description, @javascriptsArray = preRender('user_new')
     @user = User.new 
   end
 
   def show
-  	@title = "SHOW USER " + @user.id.to_s 
-  	@logo = LOGO
-    @description = DESCRIPTION
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
+    @title = "SHOW USER " + @user.id.to_s 
+    @logo, @description, @javascriptsArray = preRender('user_show')
   end
 
   def edit 
+    @logo, @description, @javascriptsArray = preRender('user_edit')
   	@title = "EDIT USER " + @user.id.to_s 
-  	@logo = LOGO
-    @description = DESCRIPTION
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
   end
 
   def create 
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
+    @logo, @title, @description, @javascriptsArray = preRender('user_new')
     @user = User.new( user_params(params) )
 
     respond_to do |format|
@@ -56,7 +42,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS );
+    @logo, @description, @javascriptsArray = preRender('user_edit')
+    @title = "EDIT USER " + @user.id.to_s 
     
     respond_to do |format|
       @user = User.find(params[:id]); 
@@ -79,10 +66,7 @@ class UsersController < ApplicationController
   end
 
   def events 
-    @logo = LOGO
-    @description = DESCRIPTION
-    @javascriptsArray = ApplicationHelper.includeJavascripts( DEFAULT_STATUS ); 
-    # will bring up favorited events
+   # will bring up favorited events
   end
 
   private 

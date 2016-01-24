@@ -99,6 +99,7 @@ module ApplicationHelper
   		return LOGO, "UNKWOWN", "UNKWOWN", includeJavascripts(DEFAULT_STATUS)
   	elsif page === "access_denied"
   		return LOGO, "ACCESS DENIED", "ACCESS DENIED", includeJavascripts(DEFAULT_STATUS)
+  	
   	elsif page === 'event_index'
   		return LOGO, DESCRIPTION, "INDEX", includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'event_new'
@@ -111,10 +112,17 @@ module ApplicationHelper
   		return LOGO, "COUNT", "Admin Panel", includeJavascripts(COUNT_STATUS)
   	elsif page === 'event_all'
   		return LOGO, "ALL", "Admin Panel", includeJavascripts(RESULT_STATUS)
+  	
+  	elsif page === 'user_index'
+  		return LOGO, DESCRIPTION, "Admin Panel", includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'user_new'
-
+    	return LOGO, DESCRIPTION, "NEW USER", includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'user_edit'
-
+  		return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
+  	elsif page === 'user_show'
+  		return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
+  	elsif page === 'user_events'
+    	return LOGO, DESCRIPTION, "FAV EVENTS", includeJavascripts(DEFAULT_STATUS)
   	end
 	end
 
