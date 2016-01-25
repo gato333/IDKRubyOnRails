@@ -298,6 +298,29 @@ section:last-child, article:last-child{
     }  
 }
 
+.social.fav {
+    top: 10px;
+    position: absolute;
+    left: 15px;
+    background-color: #dd39aa; 
+    color: #fff; 
+    padding: 6px 2px 0px 7px;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    margin: 0px;
+    font-family: 'Socialico';
+    line-height: 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 2px solid #fff; 
+    &:hover, &.active {
+        color: #dd39aa;
+        background-color: #fff; 
+        border-color:  #dd39aa; 
+    }
+}
+
 
 ul.style1 {
     list-style: disc;
@@ -734,14 +757,16 @@ article#show_user {
         margin: 0 10px;
     }
     .user_avatar {
-        width: 23%; 
-         display: inline-block; 
+        width: 120px; 
+        display: inline-block; 
         vertical-align: top;
     }
     .user_text {
         width: 75%;
-        display: inline-block; 
+        margin-left: 140px;
         vertical-align: top;
+        position: absolute;
+        top: 30px;
         h4 { margin-top: 0; }
     }
     input[type='button'] { width: auto; }

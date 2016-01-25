@@ -55,7 +55,7 @@
           format.html { render :new_password }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-      end
+      endx
     end
   end
 
@@ -96,6 +96,43 @@
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def favorite 
+    event = EventResults.find(params[:id])
+    @userEvent = UserEvent.new( event_id: event.id, user_id: current_user.id )
+
+    respond_to do |format|
+      if @userEvent.save
+        format.json  { render :json => { 
+            :msg => 'Event ' + params[:id] + ' was successfully favorited.', 
+            :status => 200
+          } 
+        }
+      else 
+        format.json  { render :json => { 
+            :msg => 'Event ' + params[:id] + ' was unsuccessfully favorited.',
+            :status => 400
+          } 
+        }
+      end
+    end
+    head :ok
+  end
+
+
+  def unfavorite
+    event = EventResults.find(params[:id])
+    @userEvent = UserEvent.find( event_id: event.id, user_id: current_user.id )
+    @userEvent.destroy
+    respond_to do |format|
+      format.json  { render :json => {
+          :msg => 'Event ' + params[:id] + ' was successfully unfavorited.', 
+          :status => 200
+        } 
+      }
+      head :ok
     end
   end
 
