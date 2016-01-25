@@ -1,12 +1,3 @@
-function openMailer(name, description, url){
-
-}
-
-function closeMailer(){
-
-
-}
-
 $(document).ready( function(){
 
 	$("a.social").on( 'click', function(e){
@@ -28,8 +19,10 @@ $(document).ready( function(){
 		} else if ( $(this).hasClass("google") ) {
 			url = "https://plus.google.com/share?url=" + currentUrl; 
 		} else if ( $(this).hasClass("email") ) {
-			openMailer( decodeURI(eventName), description, decodeURI(currentUrl) ); 
-			return;
+			url = "https://mail.google.com/mail/?view=cm&fs=1" +
+						"&su=" + encodeURI("Sharing an event with you from IDK NYC") +
+						"&body=" + "Found an exciting event, that you'll be interested in." + eventName + 
+						"%0A%0A" + encodeURI(currentUrl); 
 		} else if ( $(this).hasClass("tumblr") ) {
 			url = "http://www.tumblr.com/share/link?url="  + currentUrl; 
 		} else { 
