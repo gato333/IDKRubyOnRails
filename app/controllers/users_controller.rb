@@ -48,14 +48,15 @@
         format.html { render :new_password }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       else 
-        if @user.update_attributes(user_params(params))
+        if @user.update_attribute(:password_digest, generate_digest(params))
+          @user.save
           format.html { redirect_to @user, notice: 'Your password was successfully updated.' }
           format.json { render :show, status: :ok, location: @user }
         else 
           format.html { render :new_password }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-      endx
+      end
     end
   end
 
@@ -170,7 +171,15 @@
       if p[:user][:password] != p[:user][:password_confirmation]
         user.errors.add(:password_confirmation, "and password don't match")
       end
-      return user
+      if p[:user][:old_password] == p[:user][:password]
+        user.errors.add(:password, "and old password can't be the same")
+      end
+      user
+    end
+
+    def generate_digest(p)
+      puts p.inspect
+      User.digest(p[:user][:password])
     end
 
 	  def user_params(p)
@@ -179,7 +188,7 @@
       elsif( p["commit"] === "Save Description")
         p.require(:user).permit( :description )
       elsif( p["commit"] === "Change Password")
-        p.require(:user).require( :password, :password_confirmation, :old_password )
+        p.require(:user).require( :password_digest )
       else 
         p.require(:user).permit(:name, :email, :password, :password_confirmation, 
           :user_type )
