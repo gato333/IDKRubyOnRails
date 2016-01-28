@@ -1,6 +1,7 @@
  class UsersController < ApplicationController
   include ApplicationHelper 
   include SessionsHelper
+  require 'will_paginate/array'
 	before_action :set_user, only: [:show, :edit, :edit_photo, :validate_password, 
     :new_password, :change_password, :update, :destroy, :events]
   before_action :only_current_user_n_admin, only: [:edit, :update, 
@@ -128,7 +129,10 @@
 
   def events 
     @logo, @title, @description, @javascriptsArray = preRender('user_events')
-    # will bring up favorited events
+    @events = UserEvent.where(:user_id => current_user.id).paginate(page: params[:page])
+    @events = @events.map{ |a| a.event_id }
+    #needs to be users since pagiantion is dum
+    @users = EventResult.find(@events).paginate(page: params[:page] )
   end
 
   private 

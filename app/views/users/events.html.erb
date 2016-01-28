@@ -1,1 +1,19 @@
-#TODO to be filled in
+<% provide(:title, @title) %>
+<article id="fav_events" class="panel">
+
+	<header>
+		<center><h1>Your Favorite Events</h1></center>
+	</header>
+
+	<div> 
+		<%= will_paginate %>
+<% count = 1
+	@users.each do |result| %>
+			<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
+				<%= render 'shared/event', result: result %>
+			</div>
+		<% count += 1
+	end %>
+
+	<%= will_paginate %>
+</div>
