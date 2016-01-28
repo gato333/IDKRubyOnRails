@@ -48,8 +48,7 @@
         format.html { render :new_password }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       else 
-        if @user.update_attribute(:password_digest, generate_digest(params))
-          @user.save
+        if @user.update_attributes(user_params(params))
           format.html { redirect_to @user, notice: 'Your password was successfully updated.' }
           format.json { render :show, status: :ok, location: @user }
         else 
@@ -101,40 +100,30 @@
   end
 
   def favorite 
-    event = EventResults.find(params[:id])
+    event = EventResult.find(params[:id])
     @userEvent = UserEvent.new( event_id: event.id, user_id: current_user.id )
-
-    respond_to do |format|
-      if @userEvent.save
-        format.json  { render :json => { 
-            :msg => 'Event ' + params[:id] + ' was successfully favorited.', 
-            :status => 200
-          } 
-        }
-      else 
-        format.json  { render :json => { 
-            :msg => 'Event ' + params[:id] + ' was unsuccessfully favorited.',
-            :status => 400
-          } 
-        }
-      end
+    if @userEvent.save
+      render :json => { 
+        :msg => 'Event ' + params[:id] + ' was successfully favorited.', 
+        :status => 200
+      }
+    else 
+      render :json => { 
+        :msg => 'Event ' + params[:id] + ' was unsuccessfully favorited.',
+        :status => 400
+      }
     end
-    head :ok
   end
 
 
   def unfavorite
-    event = EventResults.find(params[:id])
-    @userEvent = UserEvent.find( event_id: event.id, user_id: current_user.id )
+    event = EventResult.find(params[:id])
+    @userEvent = UserEvent.find_by( event_id: event.id, user_id: current_user.id )
     @userEvent.destroy
-    respond_to do |format|
-      format.json  { render :json => {
-          :msg => 'Event ' + params[:id] + ' was successfully unfavorited.', 
-          :status => 200
-        } 
-      }
-      head :ok
-    end
+    render :json => {
+              :msg => 'Event ' + params[:id] + ' was successfully unfavorited.', 
+              :status => 200 
+    }
   end
 
   def events 
@@ -159,8 +148,8 @@
     def validate_password_params(user, p)
       if p[:user][:old_password].empty?
         user.errors.add(:old_password, "can't be empty")
-      elsif user.authenticate(params[:user][:old_password])
-        @user.errors.add( :old_password, 'is the wrong current password. Please try again.')
+      elsif user.authenticate(p[:user][:old_password]) === false
+        user.errors.add( :old_password, 'is the wrong current password. Please try again.')
       end
       if p[:user][:password].empty?
         user.errors.add(:password, "can't be empty")
@@ -177,18 +166,13 @@
       user
     end
 
-    def generate_digest(p)
-      puts p.inspect
-      User.digest(p[:user][:password])
-    end
-
 	  def user_params(p)
       if( p["commit"] === "Change Photo")
         p.require(:user).permit( :picture )
       elsif( p["commit"] === "Save Description")
         p.require(:user).permit( :description )
       elsif( p["commit"] === "Change Password")
-        p.require(:user).require( :password_digest )
+        p.require(:user).permit( :password, :password_confirmation )
       else 
         p.require(:user).permit(:name, :email, :password, :password_confirmation, 
           :user_type )

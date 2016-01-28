@@ -1,7 +1,7 @@
 function favorite_event(event_id){
 	$.ajax({
 	    method: "GET",
-	    url: "/favorite/" + event_id + ".json",
+	    url: "/fav/" + event_id ,
 	    error :function(e){
 				console.log(e);
 				console.log("failed favorite event.")
@@ -16,7 +16,7 @@ function favorite_event(event_id){
 function unfavorite_event(event_id){
 	$.ajax({
  			method: "GET",
- 		  url: "/unfavorite/" + event_id + ".json",
+ 		  url: "/unfav/" + event_id ,
  		  error :function(e){
 				console.log(e);
 				console.log("failed to unfavorite event.")
