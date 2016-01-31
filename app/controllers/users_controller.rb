@@ -3,7 +3,7 @@
   include SessionsHelper
   require 'will_paginate/array'
 	before_action :set_user, only: [:show, :edit, :edit_photo, :change_password, 
-    :new_password, :change_password, :update, :destroy, :events]
+    :new_password, :change_password, :update, :destroy, :fav_events, :events]
   before_action :only_current_user_n_admin, only: [:edit, :update, 
     :events, :edit_photo, ]
 	before_action :only_admin, only: [:destroy, :index]
@@ -134,7 +134,13 @@
 
   def events 
     @logo, @title, @description, @javascriptsArray = preRender('user_events')
-    @user_events = user_events
+    @user_events = get_fav_events(@user)
+    @events = EventResult.where(:creator_id => @user.id).paginate(page: params[:page] )
+  end
+
+  def fav_events
+    @logo, @title, @description, @javascriptsArray = preRender('fav_events')
+    @user_events = get_fav_events(@user)
     #needs to be users since pagiantion is dum
     @events = EventResult.find(@user_events).paginate(page: params[:page] )
   end

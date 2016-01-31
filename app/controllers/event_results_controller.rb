@@ -1,7 +1,8 @@
 class EventResultsController < ApplicationController
   before_action :set_event_result, only: [:show, :edit, :update, :destroy]
   before_action :is_member, only: [ :new ]
-  before_action :only_admin, only: [:index, :edit, :update, :destroy, :count, :all]
+  before_action :only_admin, only: [:index, :count, :all]
+  before_action :admin_or_current_user, only: [:edit, :update, :destroy]
   include ApplicationHelper 
   include EventResultsHelper
   include SessionsHelper
@@ -24,7 +25,7 @@ class EventResultsController < ApplicationController
     @description = @event_result.description.nil? ? DEFAULT_DESCRIPTION : @event_result.description[0..80]
     @title = "SHOW " + @event_result.id.to_s
     @javascriptsArray = preRender('event_show')
-    @user_events = user_events
+    @user_events = get_fav_events(current_user)
 
     respond_to do |format|
       format.html
@@ -61,7 +62,7 @@ class EventResultsController < ApplicationController
     @logo, @title, @description, @javascriptsArray = preRender('event_all')
     query = EventQueryHandler.new
     @event_results = query.getAllEvents.paginate(page: params[:page])
-    @user_events = user_events
+    @user_events = get_fav_events(current_user)
 
     respond_to do |format|
       format.html
@@ -120,6 +121,10 @@ class EventResultsController < ApplicationController
     redirect_to access_denied_path if !is_admin
   end
 
+  def admin_or_current_user 
+     redirect_to access_denied_path if !current_user_n_admin_id(@event_result.creator_id)
+  end
+
   def set_event_result
     @event_result = EventResult.find_by_id(params[:id])
     if !@event_result 
@@ -149,7 +154,6 @@ class EventResultsController < ApplicationController
     if !p["event_result"][:creator_name].nil?
       eventObj["creator_name"] = p["event_result"][:creator_name]
     end 
-    puts eventObj
     eventObj
   end
 end

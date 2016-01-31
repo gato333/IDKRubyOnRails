@@ -131,6 +131,8 @@ module ApplicationHelper
   	elsif page === 'user_photo'
   		return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'user_events'
+    	return LOGO, DESCRIPTION, "FAV EVENTS", includeJavascripts(RESULT_STATUS)
+    elsif page === 'fav_events'
     	return LOGO, DESCRIPTION, "FAV EVENTS", includeJavascripts(USER_EVENT_STATUS)
   	elsif page === 'user_password'
     	return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)

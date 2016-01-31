@@ -24,13 +24,17 @@ module SessionsHelper
   	user.id === current_user.id
   end
 
+  def is_current_user_id(userid)
+    logged_in? && userid === current_user.id
+  end
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-  def user_events 
+  def get_fav_events(user)
     if logged_in?
-      events = UserEvent.where(:user_id => current_user.id).paginate(page: params[:page])
+      events = UserEvent.where(:user_id => user.id).paginate(page: params[:page])
       events = events.map{ |a| a.event_id }
       events = events.uniq
     else 
@@ -41,6 +45,14 @@ module SessionsHelper
 
   def is_admin
   	logged_in? && current_user.admin? 
+  end
+
+  def current_user_n_admin_id(userid)
+    puts "user" + userid.to_s + " " + current_user.id.to_s
+    puts logged_in?
+    puts is_current_user_id(userid)
+    puts is_admin
+    (is_current_user_id(userid) || is_admin)
   end
 
   def only_current_user_n_admin(user)

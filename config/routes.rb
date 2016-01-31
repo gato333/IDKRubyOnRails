@@ -55,6 +55,8 @@ Rails.application.routes.draw do
 
   get '/user_events/:id' => 'users#events'
 
+  get '/user_favorites/:id' => 'users#fav_events'
+
   get '/fav/:id' => 'users#favorite'
 
   get '/unfav/:id' => 'users#unfavorite'
