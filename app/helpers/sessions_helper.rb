@@ -42,4 +42,8 @@ module SessionsHelper
   def is_admin
   	logged_in? && current_user.admin? 
   end
+
+  def only_current_user_n_admin(user)
+    (!is_current_user(user) || !is_admin)
+  end
 end

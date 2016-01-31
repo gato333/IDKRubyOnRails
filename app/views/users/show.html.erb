@@ -2,21 +2,21 @@
 
 	<p id="notice"><%= notice %></p>
 	<h1><%= @user.name %>'s Profile</h1>
-	<% if is_current_user(@user) %>
+	<% if only_current_user_n_admin(@user) %>
 	 	<%= link_to 'Edit Account', edit_user_path(@current_user), class: "right" %>
 	<% end %> 
 
 	<div class="user_avatar"> 
 		<%= image_tag @user.picture.url || '', alt: "" %>
 
-		<% if is_current_user(@user) %>
+		<% if only_current_user_n_admin(@user) %>
 			<br /><br />
 			<%= link_to (@user.picture.url ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
 		<% end %>
 	</div>
 
 	<div class="user_text"> 
-		<% if !is_current_user(@user) %>
+		<% if !only_current_user_n_admin(@user) %>
 			<p><%= @user.description || '' %></p>
 		<% else %> 
 			<% if @user.description && !@user.description.empty? %>
