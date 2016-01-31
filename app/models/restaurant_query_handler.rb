@@ -28,11 +28,16 @@ class RestaurantQueryHandler
     	results = JSON.load(open(@url))
     end
 
-    def generateGoogleImage( photoref )
+    def generateGoogleImageRequest( photoref )
     	imageurl = "https://maps.googleapis.com/maps/api/place/photo?"
     	imageurl.concat("key=" + ENV["googleServerKey"])
     	imageurl.concat("&photoreference=" + photoref)
     	imageurl.concat("&maxheight=150")
+        imageurl
+    end
+
+    def getGoogleImage(photoref)
+        open(generateGoogleImageRequest( photoref )).base_uri.to_s
     end
 
     def json2Object
@@ -64,6 +69,13 @@ class RestaurantQueryHandler
     	finalResults = Array.new
     	until finalResults.length >= 3  || resultArray.empty? do 
     		randomChoice = Random.rand(resultArray.length) 
+            if !resultArray[randomChoice]["photos"].nil? && !resultArray[randomChoice]["photos"][0]["photo_reference"].empty?
+                resultArray[randomChoice]["imageurl"]  =  getGoogleImage(resultArray[randomChoice]["photos"][0]["photo_reference"])
+                puts "image"
+                puts resultArray[randomChoice]["imageurl"].to_s
+            else 
+                resultArray[randomChoice]["imageurl"] = resultArray[randomChoice]["icon"] 
+            end
     		finalResults.push(resultArray[randomChoice])
     		resultArray.delete_at(randomChoice)
     	end

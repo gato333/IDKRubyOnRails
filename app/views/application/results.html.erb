@@ -40,13 +40,13 @@
 					@results.each do |result| %>
 							<div class="result-container">
 								<div class="text">
-									<h3> <%= result.name %> </h3>
-									<h5><span>Address:</span> <%= result.address %></h5>
-									<h5><span>Type:</span> <%= result.types %></h5>
-									<h5 class="short"><span>Price:</span> <%= result.price %></h5>
-									<h5 class="short"><span>Rating:</span> <%= result.rating %></h5>
+									<h3> <%= result["name"] %> </h3>
+									<h5><span>Address:</span> <%= result["vicinity"] %></h5>
+									<h5><span>Type:</span> <%= result["types"].join(", ") %></h5>
+									<h5 class="short"><span>Price:</span> <%= "$" * result["price_level"].to_i %></h5>
+									<h5 class="short"><span>Rating:</span> <%= result["rating"] %></h5>
 								</div>
-								<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
+								<div class="result_img" style="background-image:url(<%= result["imageurl"] %>)"></div>
 							</div>
 			 	<% end %>
 
@@ -59,7 +59,7 @@
 			 		 	<%= hidden_field_tag :keyword, nil, :value => params['keyword'] || '' %> 
     				<%= hidden_field_tag :source, nil, :value => @title %> 
 						
-    				<%= f.submit "More" %>
+    				<%= submit_tag "More" %>
 				 	<% end %> 
 				<% end 
 			end %>
