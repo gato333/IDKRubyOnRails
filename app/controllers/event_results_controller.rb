@@ -7,6 +7,8 @@ class EventResultsController < ApplicationController
   include SessionsHelper
   require 'will_paginate/array'
 
+  DEFAULT_DESCRIPTION = ApplicationHelper::DESCRIPTION 
+
   def index
     @logo, @title, @description, @javascriptsArray = preRender('event_index')
     @event_results = EventResult.order(startdate: :desc).paginate(page: params[:page])
@@ -19,7 +21,7 @@ class EventResultsController < ApplicationController
 
   def show
     @logo = @event_result.imageurl
-    @description = @event_result.description[0..80]
+    @description = @event_result.description.nil? ? DEFAULT_DESCRIPTION : @event_result.description[0..80]
     @title = "SHOW " + @event_result.id.to_s
     @javascriptsArray = preRender('event_show')
     @user_events = user_events
@@ -89,7 +91,6 @@ class EventResultsController < ApplicationController
   def update
     @javascriptsArray = preRender('event_edit') 
     respond_to do |format|
-      @event_result = EventResult.find(params[:id]); 
       if @event_result.update_attributes(event_result_params(params))
         format.html { redirect_to @event_result, notice: 'Event result was successfully updated.' }
         format.json { render :show, status: :ok, location: @event_result }
@@ -120,7 +121,10 @@ class EventResultsController < ApplicationController
   end
 
   def set_event_result
-    @event_result = EventResult.find(params[:id])
+    @event_result = EventResult.find_by_id(params[:id])
+    if !@event_result 
+      redirect_to unknown_path
+    end
   end
 
   def event_result_params(p)

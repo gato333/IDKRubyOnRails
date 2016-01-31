@@ -2,7 +2,7 @@
   include ApplicationHelper 
   include SessionsHelper
   require 'will_paginate/array'
-	before_action :set_user, only: [:show, :edit, :edit_photo, :validate_password, 
+	before_action :set_user, only: [:show, :edit, :edit_photo, :change_password, 
     :new_password, :change_password, :update, :destroy, :events]
   before_action :only_current_user_n_admin, only: [:edit, :update, 
     :events, :edit_photo, ]
@@ -43,7 +43,6 @@
     @title = "EDIT USER " + @user.id.to_s + " PWD"
 
     respond_to do |format|
-      @user = User.find(params[:id]);
       @user = validate_password_params(@user, params)
       if @user.errors.any? 
         format.html { render :new_password }
@@ -81,7 +80,6 @@
     @title = "EDIT USER " + @user.id.to_s 
 
     respond_to do |format|
-      @user = User.find(params[:id]); 
       if @user.update_attributes(user_params(params))
         format.html { redirect_to @user, notice: 'User result was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -118,7 +116,7 @@
 
 
   def unfavorite
-    event = EventResult.find(params[:id])
+    event = EventResult.find_by_id(params[:id])
     @userEvent = UserEvent.find_by( event_id: event.id, user_id: current_user.id )
     if(@userEvent)
       @userEvent.destroy
@@ -152,7 +150,10 @@
     end
 
   	def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by_id(params[:id])
+      if !@user 
+        redirect_to unknown_path
+      end
     end
 
     def validate_password_params(user, p)
