@@ -16,7 +16,7 @@ class RestaurantQueryHandler
     	@url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="				
     	@url.concat( @lat + "," + @long )
     	@url.concat("&radius=" + @radius)
-    	@url.concat("&key=" + ENV["googleKey"] )
+    	@url.concat("&key=" + ENV["googleServerKey"] )
     	@url.concat("&opennow&types=restaurant&maxprice=" + @price)
     	if( !@keyword.empty? )
     		@url.concat("&keyword=" + @keyword)
@@ -30,7 +30,7 @@ class RestaurantQueryHandler
 
     def generateGoogleImage( photoref )
     	imageurl = "https://maps.googleapis.com/maps/api/place/photo?"
-    	imageurl.concat("key=" + ENV["googleKey"])
+    	imageurl.concat("key=" + ENV["googleServerKey"])
     	imageurl.concat("&photoreference=" + photoref)
     	imageurl.concat("&maxheight=150")
     end
