@@ -302,7 +302,7 @@ section:last-child, article:last-child{
     top: 10px;
     position: absolute;
     left: 15px;
-    padding: 6px 2px 0px 7px;
+    padding: 6px 1px 0px 7px;
     width: 30px;
     height: 30px;
     font-size: 30px;
@@ -586,7 +586,7 @@ input[type="submit"] { width: 100%; }
     margin: 10px 0;
     position: relative;
     height: auto;
-    max-height: 600px;
+    max-height: 2000px;
     transition: opacity .75s, max-height 1s, padding 1s, margin 1s; 
     opacity: 1; 
 

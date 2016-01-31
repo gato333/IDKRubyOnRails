@@ -16,11 +16,11 @@
 		<% end %>
 
 		<% if !result.startdate.nil? %>
-			<h5><span>Start Time:</span> <%= result.startdate.strftime("%l:%M %P") %></h5>
+			<h5><span>Start Time:</span> <%= result.startdate.strftime("%Y-%m-%d %l:%M %P") %></h5>
 		<% end %> 
 
 		<% if !result.enddate.nil? %>
-			<h5><span>End Time:</span> <%= result.enddate.strftime("%l:%M %P") %></h5>
+			<h5><span>End Time:</span> <%= result.enddate.strftime("%Y-%m-%d %l:%M %P") %></h5>
 		<% end %>
 
 		<% if !result.price.nil? %>
