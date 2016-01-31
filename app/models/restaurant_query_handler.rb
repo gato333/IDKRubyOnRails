@@ -3,23 +3,22 @@ class RestaurantQueryHandler
 	require 'json'
 
     attr_accessor :lat, :long, :radius, :keyword, :price, :url
-    API = "AIzaSyDQLyJR4lAPS7JdQ_gTBbBlntGbfS_1V3A"
 	
-    def initialize(queryObj)
-    	@lat = queryObj.lat.to_s 
-    	@long = queryObj.long.to_s 
-    	@radius = queryObj.radius.to_s
-    	@price = queryObj.price.to_s
-    	@keyword = queryObj.keyword.to_s
+    def initialize(queryObj=nil)
+    	@lat = queryObj[0]
+    	@long = queryObj[1]
+    	@radius = queryObj[2]
+    	@price = queryObj[3]
+    	@keyword = queryObj[4]
     end
 
     def generateGoogleRequest 
     	@url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="				
     	@url.concat( @lat + "," + @long )
     	@url.concat("&radius=" + @radius)
-    	@url.concat("&key=" + API )
+    	@url.concat("&key=" + ENV["googleKey"] )
     	@url.concat("&opennow&types=restaurant&maxprice=" + @price)
-    	if(@keyword != "")
+    	if( !@keyword.empty? )
     		@url.concat("&keyword=" + @keyword)
     	end
     end
@@ -31,7 +30,7 @@ class RestaurantQueryHandler
 
     def generateGoogleImage( photoref )
     	imageurl = "https://maps.googleapis.com/maps/api/place/photo?"
-    	imageurl.concat("key=" + API)
+    	imageurl.concat("key=" + ENV["googleKey"])
     	imageurl.concat("&photoreference=" + photoref)
     	imageurl.concat("&maxheight=150")
     end
