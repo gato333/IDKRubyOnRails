@@ -5,7 +5,7 @@
 
 	<%= image_tag @event_result.imageurl %>
 
-	<%= render 'shared/social', result: @event_result %>
+	<%= render 'shared/social', result: @event_result, user_events: @user_events %>
 	
 	<h3> <%= @event_result.name %> </h3>
 

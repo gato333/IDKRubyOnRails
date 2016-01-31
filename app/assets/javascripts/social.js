@@ -1,29 +1,21 @@
-function favorite_event(event_id){
+function favorite_event(fav_button, event_id){
 	$.ajax({
 	    method: "GET",
 	    url: "/fav/" + event_id ,
 	    error :function(e){
-				console.log(e);
+	    	$(this).removeClass("active");
 				console.log("failed favorite event.")
-			},
-			success: function(data) {
-				console.log(data);
-				console.log("success favorited event.")
 			}
 	}); 
 }
 
-function unfavorite_event(event_id){
+function unfavorite_event(fav_button, event_id){
 	$.ajax({
  			method: "GET",
  		  url: "/unfav/" + event_id ,
  		  error :function(e){
-				console.log(e);
+ 		  	$(this).addClass("active");
 				console.log("failed to unfavorite event.")
-			},
-			success: function(data)  {
-				console.log(data);
-				console.log("success unfavorited event.")
 			}
  	}); 
 }
@@ -58,10 +50,10 @@ $(document).ready( function(){
 		} else if ( $(this).hasClass("fav") ) {
 			if( $(this).hasClass("active") ){
 				$(this).removeClass("active"); 
-				unfavorite_event(id); 
+				unfavorite_event(this, id); 
 			} else {
 				$(this).addClass("active"); 
-				favorite_event(id);
+				favorite_event(this, id);
 			}
 			return;
 		} else{ 

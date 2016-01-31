@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
         @googleKey = Rails.application.secrets.google_api_key; 
         query = EventQueryHandler.new( app_params(params) )
         @results = query.getEventResults
+        @user_events = user_events
 			else 
 				redirect_to :action => 'do',
         :radius => params["radius"] || "", 

@@ -129,10 +129,9 @@
 
   def events 
     @logo, @title, @description, @javascriptsArray = preRender('user_events')
-    @events = UserEvent.where(:user_id => current_user.id).paginate(page: params[:page])
-    @events = @events.map{ |a| a.event_id }
+    @user_events = user_events
     #needs to be users since pagiantion is dum
-    @users = EventResult.find(@events).paginate(page: params[:page] )
+    @events = EventResult.find(@user_events).paginate(page: params[:page] )
   end
 
   private 

@@ -1,7 +1,9 @@
 
 	<div class="result_img" style="background-image:url(<%= result.imageurl %>)"></div>
-
-	<a class="fav social" target="_blank">3</a>
+	
+	<% if logged_in? %> 
+		<a class="fav social <%= ((user_events.include? result.id.to_i )? 'active': '') %>" target="_blank">3</a>
+	<% end %> 
 	
 	<%= render 'shared/social', result: result %>
 
@@ -41,7 +43,7 @@
 			</div>
 
 			<h5><span>Creator:</span> <%= link_to result.creator_name, user_path(result.creator_id) %> </h5>
-			<h5><span>ID:</span> <%=result.id %></h5>
+			<h5><span>ID:</span> <%= result.id %></h5>
 			<div class="learn_more"><a class="page_link" href="/event/<%= result.id %>">link</a></div>
 	</div>
 	<input class="learn_more_button" type="button" value="expand">

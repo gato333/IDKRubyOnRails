@@ -302,8 +302,6 @@ section:last-child, article:last-child{
     top: 10px;
     position: absolute;
     left: 15px;
-    background-color: #dd39aa; 
-    color: #fff; 
     padding: 6px 2px 0px 7px;
     width: 30px;
     height: 30px;
@@ -313,14 +311,29 @@ section:last-child, article:last-child{
     line-height: 30px;
     border-radius: 10px;
     text-decoration: none;
-    border: 2px solid #fff; 
-    &:hover, &.active {
+    color: #555;
+    background-color: #fff;
+    border: #555 2px solid; 
+    &:hover{
         color: #dd39aa;
-        background-color: #fff; 
-        border-color:  #dd39aa; 
+        border-color: #dd39aa; 
+        animation: blink;  
+        animation-duration: 3s; 
+    } 
+    &.active, &.active:hover {
+        border-color: #fff; 
+        background-color: #dd39aa; 
+        color: #fff; 
+        animation: blink;
+        animation-duration: 3s; 
     }
 }
 
+@keyframes blink {
+    0% {opacity: 100%; }
+    60% {opacity: 40%; }
+    100% {opacity: 100%; }
+}
 
 ul.style1 {
     list-style: disc;

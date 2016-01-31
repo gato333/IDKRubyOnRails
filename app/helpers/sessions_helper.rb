@@ -28,6 +28,17 @@ module SessionsHelper
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
+  def user_events 
+    if logged_in?
+      events = UserEvent.where(:user_id => current_user.id).paginate(page: params[:page])
+      events = events.map{ |a| a.event_id }
+      events = events.uniq
+    else 
+      events = []
+    end 
+    events
+  end
+
   def is_admin
   	logged_in? && current_user.admin? 
   end

@@ -6,14 +6,14 @@
 	</header>
 
 	<div> 
-		<%= will_paginate %>
+	<%= will_paginate @events %>
 <% count = 1
-	@users.each do |result| %>
+	@events.each do |result| %>
 			<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
-				<%= render 'shared/event', result: result %>
+				<%= render 'shared/event', result: result, user_events: @user_events %>
 			</div>
 		<% count += 1
 	end %>
 
-	<%= will_paginate %>
+	<%= will_paginate @events %>
 </div>

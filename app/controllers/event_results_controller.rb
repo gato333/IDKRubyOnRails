@@ -22,6 +22,7 @@ class EventResultsController < ApplicationController
     @description = @event_result.description[0..80]
     @title = "SHOW " + @event_result.id.to_s
     @javascriptsArray = preRender('event_show')
+    @user_events = user_events
 
     respond_to do |format|
       format.html
@@ -58,7 +59,7 @@ class EventResultsController < ApplicationController
     @logo, @title, @description, @javascriptsArray = preRender('event_all')
     query = EventQueryHandler.new
     @event_results = query.getAllEvents.paginate(page: params[:page])
-
+    @user_events = user_events
 
     respond_to do |format|
       format.html
