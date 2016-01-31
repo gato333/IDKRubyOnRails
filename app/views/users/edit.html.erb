@@ -16,7 +16,7 @@
 
 	<div class="account_panel">
 		<%= link_to "Info", 'javascript:;', class: 'active' %> 
-		<%= link_to "Security", :controller=>"users", :action=>"new_password", :id => current_user.id %> 
+		<%= link_to "Security", :controller=>"users", :action=>"new_password", :id => @user.id %> 
 	</div> 
 
 	<div class="account_form">
