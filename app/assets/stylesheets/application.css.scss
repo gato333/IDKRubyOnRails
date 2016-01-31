@@ -784,19 +784,22 @@ article#show_user {
         height: 100px;
         margin: 0 10px;
     }
-    .user_avatar {
-        width: 125px; 
-        margin-bottom: 10px;
-        display: inline-block; 
-        vertical-align: top;
-    }
-    .user_text {
-        width: 75%;
-        margin-left: 140px;
-        vertical-align: top;
-        position: absolute;
-        top: 30px;
-        h4 { margin-top: 0; }
+    .user_info {
+        position: relative; 
+        .user_avatar {
+            width: 125px; 
+            margin-bottom: 10px;
+            display: inline-block; 
+            vertical-align: top;
+        }
+        .user_text {
+            width: 75%;
+            margin-left: 140px;
+            vertical-align: top;
+            position: absolute;
+            top: 0px;
+            h4 { margin-top: 0; }
+        }
     }
     input[type='button'] { width: auto; }
     a {     
@@ -881,6 +884,7 @@ article#user_edit {
     .account_form {
         display: inline-block;
         width: 81%;
+        margin-bottom: 10px;
         vertical-align: top;
     }
 }

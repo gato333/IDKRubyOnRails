@@ -6,32 +6,34 @@
 	 	<%= link_to 'Edit Account', edit_user_path(@current_user), class: "right" %>
 	<% end %> 
 
-	<div class="user_avatar"> 
-		<%= image_tag @user.picture.url || '', alt: "" %>
+	<div class="user_info"> 
+		<div class="user_avatar"> 
+			<%= image_tag @user.picture.url || '', alt: "" %>
 
-		<% if only_current_user_n_admin(@user) %>
-			<br /><br />
-			<%= link_to (@user.picture.url ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
-		<% end %>
-	</div>
+			<% if only_current_user_n_admin(@user) %>
+				<br /><br />
+				<%= link_to (@user.picture.url ? 'Edit Avatar' : 'Add Avatar'), :controller=>"users", :action=>"edit_photo", :id => @current_user.id %>
+			<% end %>
+		</div>
 
-	<div class="user_text"> 
-		<% if !only_current_user_n_admin(@user) %>
-			<p><%= @user.description || '' %></p>
-		<% else %> 
-			<% if @user.description && !@user.description.empty? %>
-				<p class="description"><%= @user.description %></p>
-			<% end %> 
-			<input type="button" value="<%= @user.description ? 'edit' :'add' %> description" class="edit_description_button" onclick="trigger_edit_descripton(); return false">
-
-			<div class="edit_description hidden"> 
-				<%= form_for(@user) do |f| %>
-					<%= f.text_area :description, { value: @user.description || '', cols: 40, rows: 4 } %>
-					<%= submit_tag 'Save Description' %> 
-					<input type="button" value="cancel" class="cancel_edit_descripton" onclick="cancel_description_edit(); return false">
+		<div class="user_text"> 
+			<% if !only_current_user_n_admin(@user) %>
+				<p><%= @user.description || '' %></p>
+			<% else %> 
+				<% if @user.description && !@user.description.empty? %>
+					<p class="description"><%= @user.description %></p>
 				<% end %> 
-			</div>
-		<% end %>
+				<input type="button" value="<%= @user.description ? 'edit' :'add' %> description" class="edit_description_button" onclick="trigger_edit_descripton(); return false">
+
+				<div class="edit_description hidden"> 
+					<%= form_for(@user) do |f| %>
+						<%= f.text_area :description, { value: @user.description || '', cols: 40, rows: 4 } %>
+						<%= submit_tag 'Save Description' %> 
+						<input type="button" value="cancel" class="cancel_edit_descripton" onclick="cancel_description_edit(); return false">
+					<% end %> 
+				</div>
+			<% end %>
+		</div>
 	</div>
 
 	<% if !is_current_user(@user)  %>
