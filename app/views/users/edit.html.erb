@@ -43,5 +43,9 @@
 		<% end %>
 	</div>
 
-	<%= link_to 'Back', user_path %>
+	<% if is_admin %> 
+		<%= link_to 'Back to Index', users_path %>
+	<% end %> 	
+	<%= link_to (is_current_user(@user) ? 'Back to Profile' : 'Show'), user_path %>
+
 </article>
