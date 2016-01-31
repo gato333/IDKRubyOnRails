@@ -145,7 +145,7 @@
     if @user_events.length > 0 
       @events = EventResult.where('id in (' + @user_events.join(',') + ')').order(startdate: :desc).paginate(page: params[:page] )
     else 
-      @events = []
+      @events = [].paginate(page: params[:page] )
     end
   end
 
