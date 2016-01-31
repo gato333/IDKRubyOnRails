@@ -6,16 +6,19 @@
 	</header>
 
 	<div> 
-		<%  if @results == "ZERO_RESULTS" %>
-					Error: NO RESULTS
+		<%  if @results == "ZERO_RESULTS" || @results.empty? %>
+				<div class="centered"> 
+					Sorry, there are no events in your specified vecinity. <br /> Please try a larger radius.
+				<div>  
 		<%	elsif @results == "INVALID_REQUEST" %>
+				<div class="centered"> 
 			 		SOMETHING HAPPEDN BAD REQEST
-		<%  elsif @results.empty?  %>
-					No Results.
+			 	<div> 
 		<%  elsif @results.kind_of?(Array) == false %>
-				<%= @results %>
+				<div class="centered"> 
+					<%= @results %>
+				</div> 
 		<%  else %>
-
 
 			<% if @title == "DO" 
 					count = 1
