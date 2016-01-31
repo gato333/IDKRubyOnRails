@@ -44,6 +44,6 @@ module SessionsHelper
   end
 
   def only_current_user_n_admin(user)
-    (!is_current_user(user) || !is_admin)
+    (is_current_user(user) || is_admin)
   end
 end
