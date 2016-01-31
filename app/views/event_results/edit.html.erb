@@ -6,6 +6,10 @@
 	<%= render 'form' %>
 
 	<%= link_to 'Show', @event_result %> |
-	<%= link_to 'Back', event_results_path %>
+	<% if is_admin %> 
+		<%= link_to 'Back', event_results_path %>
+	<% else %> 
+		<%= link_to 'Back', :controller=>"users", :action=>"events", :id => @current_user.id %>
+	<% end %> 
 	
 </article>

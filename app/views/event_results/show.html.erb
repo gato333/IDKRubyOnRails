@@ -48,7 +48,11 @@
 	<% if current_user_n_admin_id(@event_result.creator_id) %>
 		<%= link_to 'Delete', @event_result, method: :delete, data: { confirm: 'Are you sure?' } %> |
 		<%= link_to 'Edit', edit_event_result_path(@event_result) %> |
-		<%= link_to 'Back', event_results_path %>
+		<% if is_admin %> 
+			<%= link_to 'Back', event_results_path %>
+		<% else %> 
+			<%= link_to 'Back', :controller=>"users", :action=>"events", :id => @current_user.id %>
+		<% end %> 
 	<% end %> 
 
 </article>
