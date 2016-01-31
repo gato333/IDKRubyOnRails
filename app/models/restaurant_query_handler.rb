@@ -40,6 +40,8 @@ class RestaurantQueryHandler
     	if results["status"] == "OK"
     		chooseRandom3(results["results"])
     	else 
+            puts "results"
+            puts results.inspect
     		results["status"]
     	end
     end
