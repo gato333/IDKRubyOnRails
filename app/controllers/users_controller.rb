@@ -135,14 +135,14 @@
   def events 
     @logo, @title, @description, @javascriptsArray = preRender('user_events')
     @user_events = get_fav_events(@user)
-    @events = EventResult.where(:creator_id => @user.id).paginate(page: params[:page] )
+    @events = EventResult.where(:creator_id => @user.id).order(startdate: :desc).paginate(page: params[:page] )
   end
 
   def fav_events
     @logo, @title, @description, @javascriptsArray = preRender('fav_events')
     @user_events = get_fav_events(@user)
     #needs to be users since pagiantion is dum
-    @events = EventResult.find(@user_events).paginate(page: params[:page] )
+    @events = EventResult.find(@user_events).order(startdate: :desc).paginate(page: params[:page] )
   end
 
   private 
