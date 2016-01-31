@@ -51,9 +51,16 @@ $(document).ready( function(){
 			if( $(this).hasClass("active") ){
 				$(this).removeClass("active"); 
 				unfavorite_event(this, id); 
+				if(typeof disappear !== 'undefined'){
+					disappear($(this).parent()); 
+				}
 			} else {
-				$(this).addClass("active"); 
+				$(this).addClass("active").addClass("blink-animation"); 
 				favorite_event(this, id);
+				var button = this; 
+				setTimeout(function() {
+		        $(button).removeClass('blink-animation');
+		    }, 500);
 			}
 			return;
 		} else{ 
@@ -62,6 +69,5 @@ $(document).ready( function(){
 		}
 		var newwindow = window.open(url, "Sharing IDK NYC Events", 'height=550,width=500');
 		newwindow.focus();
-
 	}); 
 }); 

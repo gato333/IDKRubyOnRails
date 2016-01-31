@@ -317,22 +317,25 @@ section:last-child, article:last-child{
     &:hover{
         color: #dd39aa;
         border-color: #dd39aa; 
-        animation: blink;  
-        animation-duration: 3s; 
     } 
     &.active, &.active:hover {
         border-color: #fff; 
         background-color: #dd39aa; 
         color: #fff; 
-        animation: blink;
-        animation-duration: 3s; 
+    }
+    &.blink-animation {
+        animation: blink; 
+        animation-duration: .5s; 
+        animation-timing-function: ease-in;
+        animation-iteration-count: infinite; 
     }
 }
 
 @keyframes blink {
-    0% {opacity: 100%; }
-    60% {opacity: 40%; }
-    100% {opacity: 100%; }
+    0% {border-color: #dd39aa;  }
+    50% {border-color: #fff;}
+    75% {border-color: #dd39aa;}
+    100% {border-color: #fff; }
 }
 
 ul.style1 {
@@ -583,6 +586,17 @@ input[type="submit"] { width: 100%; }
     margin: 10px 0;
     position: relative;
     height: auto;
+    max-height: 600px;
+    transition: opacity .75s, max-height 1s, padding 1s, margin 1s; 
+    opacity: 1; 
+
+    &.disappear {
+        opacity: 0;
+        padding: 0 15px; 
+        margin: 0; 
+        max-height: 0;
+        overflow: hidden; 
+    }
 
     .text {
         width: 300px;

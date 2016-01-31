@@ -96,7 +96,7 @@ class EventQueryHandler
     end
 
     def getAllEvents
-      all = EventResult.all 
+      all = EventResult.order(startdate: :desc) 
 
       if !all.empty?
         all.to_a

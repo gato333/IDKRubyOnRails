@@ -120,11 +120,18 @@
   def unfavorite
     event = EventResult.find(params[:id])
     @userEvent = UserEvent.find_by( event_id: event.id, user_id: current_user.id )
-    @userEvent.destroy
-    render :json => {
+    if(@userEvent)
+      @userEvent.destroy
+      render :json => {
               :msg => 'Event ' + params[:id] + ' was successfully unfavorited.', 
               :status => 200 
-    }
+      }
+    else 
+      render :json => {
+              :msg => 'Event ' + params[:id] + ' was unsuccessfully unfavorited.', 
+              :status => 200 
+      }
+    end
   end
 
   def events 
