@@ -129,7 +129,7 @@ class EventResultsController < ApplicationController
 
   def event_result_params(p)
     lat, long = generateLocation(p["event_result"][:address])
-    { 
+    eventObj = { 
       "name" => p["event_result"][:name], 
       "lat" => lat, 
       "long" => long, 
@@ -141,9 +141,15 @@ class EventResultsController < ApplicationController
       "source" => p["event_result"][:source], 
       "types" => p["event_result"][:types], 
       "price" => p["event_result"][:price], 
-      "description" => p["event_result"][:description],
-      "creator_name" => p["event_result"][:creator_name],
-      "creator_id" => p["event_result"][:creator_id]
+      "description" => p["event_result"][:description]
     }
+    if !p["event_result"][:creator_id].nil?
+      eventObj["creator_id"] = p["event_result"][:creator_id]
+    end 
+    if !p["event_result"][:creator_name].nil?
+      eventObj["creator_name"] = p["event_result"][:creator_name]
+    end 
+    puts eventObj
+    eventObj
   end
 end
