@@ -72,7 +72,7 @@ body {
             position:relative; 
             z-index: 2;
             margin: 3px 0;
-            padding: 0px 4px 2px 4px;
+            padding: 5px 20px 4px 20px;
             background: #ccc;
             color:#000;
             padding-top: 3px;
@@ -95,12 +95,13 @@ body {
             z-index: 1;
             padding-top: 25px;
             top: 5px; 
-            &.event_button {  margin-left: 107px; }
-            &.user_button { margin-left: 57px; }
+            &.event_button {  margin-left: 170px; }
+            &.user_button { margin-left: 88px; }
             &.action_button { right: 5px; }
             li { 
                 width: 65px;
                 z-index: 3;
+                padding: 6px 15px 5px 15px;
                 display: list-item;
                 list-style: none;
             }
