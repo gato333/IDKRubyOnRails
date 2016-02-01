@@ -15,8 +15,6 @@ class User < ActiveRecord::Base
 	validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
 	validates :password_confirmation, presence: true, length: { minimum: 5}, allow_nil: true
 
-	validates :reachable, presence: true
-
 	mount_uploader :picture, PictureUploader
 	validate  :picture_size
 

@@ -202,8 +202,9 @@
       elsif( p["commit"] === "Change Password")
         p.require(:user).permit( :password, :password_confirmation )
       else 
+        p[:user][:reachable] = "false" if p[:user][:reachable].nil?
         p.require(:user).permit(:name, :email, :password, :password_confirmation, 
-          :user_type )
+          :user_type, :reachable )
       end
     end
 
