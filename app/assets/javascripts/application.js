@@ -53,7 +53,6 @@ $(document).ready( function() {
 	});
 
 	$(".user_nav ").on("mouseleave", function(){
-			console.log('out'); 
 			$('.user_nav div').addClass('hidden');
 	});
 
