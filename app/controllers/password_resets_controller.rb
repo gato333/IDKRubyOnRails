@@ -9,6 +9,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
+  	@logo, @title, @description, @javascriptsArray = preRender('reset_pwd_new')
     @user = User.find_by(email: params[:password_reset][:email].downcase)
     if @user
       @user.create_reset_digest
@@ -26,6 +27,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
+  	@logo, @title, @description, @javascriptsArray = preRender('reset_pwd_edit')
     if params[:user][:password].empty?
       @user.errors.add(:password, "can't be empty")
       render 'edit'
