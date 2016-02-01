@@ -142,6 +142,11 @@ module ApplicationHelper
 
     elsif page === 'session_new'
     	return LOGO, DESCRIPTION, "Log In", includeJavascripts(DEFAULT_STATUS)
+  	
+  	elsif page === 'reset_pwd_new'
+  		return LOGO, DESCRIPTION, "RESET PWD", includeJavascripts(DEFAULT_STATUS)
+  	elsif page === 'reset_pwd_edit'
+  		return LOGO, DESCRIPTION, "RESET PWD", includeJavascripts(DEFAULT_STATUS)
   	end
 	end
 
