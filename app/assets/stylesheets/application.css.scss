@@ -670,10 +670,10 @@ input[type="submit"] { width: 100%; }
 }
 
 /*********************************************************************************/
-/* Event Index page                                                                           */
+/* Event Index AND USER index page                                            */
 /*********************************************************************************/
 
-article#index {
+article#index, article#index_user {
     .table { display:table; }
     .cell { 
         display:table-cell; 
@@ -746,30 +746,6 @@ article#edit, article#new {
 
 }
 
-/*********************************************************************************/
-/* User Index page                                                                           */
-/*********************************************************************************/
-
-article#index_user {
-    label { 
-        display: inline-block;
-        width: 16%;
-        vertical-align: top; 
-        margin-top: 10px;
-    }
-    input, textarea, select { 
-        vertical-align: top; 
-        display: inline-block; 
-        width: 83%; 
-        margin-top: 0px; 
-        &.quarter { width: 10%; }
-        &.half {
-            width: 48%;
-            &.first { margin-right: 2%; }
-        }
-    }
-}
-
 
 /*********************************************************************************/
 /* User New page                                                                           */
@@ -804,7 +780,7 @@ article#show_user {
             vertical-align: top;
         }
         .user_text {
-            width: 75%;
+            width: auto;
             margin-left: 140px;
             vertical-align: top;
             position: absolute;
@@ -938,8 +914,7 @@ img.error_icon {
 
 @media screen and (max-device-width: 560px), (max-width: 560px) {
     #main { padding: 10px 0px ;}
-    article#watdo, article#wateat, article#error, article#random, 
-    article#count, article#me, article#show, article#edit, article#new { 
+    article { 
         padding: 0 10px 10px 10px; 
     }
     article#me header h1 { margin: 20px 0;}

@@ -9,33 +9,32 @@
 
   <%= will_paginate %>
 
-  <table>
-    <thead>
-      <tr>
-        <td>ID</td>
-        <td>User Type</td>
-        <td>Name</td>
-        <td>Email</td>
-        <td></td>
-        <td>Actions</td>
-        <td></td>
-      </tr>
-    </thead>
+  <div class="table">
+   
+      <div class="row head">
+        <div class="cell" >ID</div>
+        <div class="cell name" >User Type</div>
+        <div class="cell" >Name</div>
+        <div class="cell" >Email</div>
+        <div class="cell" ></div>
+        <div class="cell" >ACTIONS</div>
+        <div class="cell" ></div>
+      </div>
 
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.id %></td>
-          <td><%= user.user_type %></td>
-          <td><%= user.name %></td>
-          <td><%= user.email %></td>
-          <td><%= link_to 'Show', user %></td>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    
+    <%  @users.each do |user| %>
+      <div class="row">
+        <div class="cell"><%= user.id %></div>
+        <div class="cell" ><%= user.user_type %></div>
+        <div class="cell" ><%= user.name %></div>
+        <div class="cell"><%= user.email %></div>
+        <div class="cell first action" ><%= link_to 'Show', user %></div>
+        <div class="cell action" ><%= link_to 'Edit', edit_user_path(user) %></div>
+        <div class="cell action" ><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      </div>
+    <% end %>
+    
+  </div>
 
   <%= will_paginate %>
 
