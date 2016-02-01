@@ -37,7 +37,7 @@
 		</div>
 	</div>
 
-	<% if !is_current_user(@user)  %>
+	<% if !is_current_user(@user) && @user.reachable  %>
 	  <br /><br />
 		<a href='https://mail.google.com/mail/?view=cm&fs=1&to=<%= @user.email %>&su=Message%20from%20user%20at%20IDK%20NYC' target='_blank'>contact this person</a>
 	<% end %>
