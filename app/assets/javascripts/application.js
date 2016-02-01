@@ -28,4 +28,33 @@ $(document).ready( function() {
 		}
 	});
 
+	$(".user_nav ul > li").on("click", function(){
+		var cl = this.className;
+		if( $('div.'+cl).hasClass('hidden') ){
+			$('.user_nav div').addClass('hidden'); 
+			$('.user_nav div.'+cl).removeClass('hidden'); 
+		} else 
+			$('div.'+cl).addClass('hidden'); 
+	});
+
+	$(".user_nav ul > li, .user_nav ul > div").on("mouseenter", function(){
+			var cl = this.className;
+			if( $('div.'+cl).hasClass('hidden') ){
+				$('.user_nav div').addClass('hidden'); 
+				$('.user_nav div.'+cl).removeClass('hidden'); 
+			}
+	});
+
+	$(".user_nav ul > div").on("mouseleave", function(){
+			var cl = this.className;
+			if( !$('div.'+cl).hasClass('hidden') ){
+				$('div.'+cl).addClass('hidden');
+			}
+	});
+
+	$(".user_nav ").on("mouseleave", function(){
+			console.log('out'); 
+			$('.user_nav div').addClass('hidden');
+	});
+
 });

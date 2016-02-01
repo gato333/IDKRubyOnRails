@@ -50,19 +50,28 @@
 				<div class="user_nav"> 
 					<ul> 
 						<% if logged_in? %>
+
+							  <li><%= link_to 'YOUR PROFILE', user_path(current_user) %></li>
 							<% if is_admin %>
-							<li><%= link_to 'USER INDEX', admin_user_index_path %></li>
-							<li><%= link_to 'EVENT DB', admin_count_path %></li>
-							<li><%= link_to 'EVENT INDEX', admin_index_path %></li>
-							<li><%= link_to 'EVENTS', admin_all_path %></li>
+								<li class="user_button">Users</li>
+								<div class="user_button hidden"> 
+									<li><%= link_to 'USER INDEX', admin_user_index_path %></li>
+								</div>
+								<li class="event_button">Events</li>	
+								<div class="event_button hidden"> 
+									<li><%= link_to 'EVENT DB', admin_count_path %></li>
+									<li><%= link_to 'EVENT INDEX', admin_index_path %></li>
+									<li><%= link_to 'EVENTS', admin_all_path %></li>
+								</div>
 							<% end %>
 
-							<li><%= link_to 'YOUR PROFILE', user_path(current_user) %></li>
-
-	          	<li class="<%= current_user.activated ? '' : 'blocked' %>"><%= link_to 'CREATE EVENT', new_event_result_path %></li>      
-	          	<li><%= link_to 'FAV EVENTS', :controller=>"users", :action=>"fav_events", :id => @current_user.id %></li> 
-							<li class="<%= current_user.activated ? '' : 'blocked' %>"><%= link_to 'YOUR EVENTS', :controller=>"users", :action=>"events", :id => @current_user.id %></li>       
-							<li><%= link_to 'LOG OUT', logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out, ' + current_user.name + '?' } %></li>
+							<li class="action_button">Actions</li>	
+							<div class="action_button hidden">
+		          	<li class="<%= current_user.activated ? '' : 'blocked' %>"><%= link_to 'CREATE EVENT', new_event_result_path %></li>      
+		          	<li><%= link_to 'FAV EVENTS', :controller=>"users", :action=>"fav_events", :id => @current_user.id %></li> 
+								<li class="<%= current_user.activated ? '' : 'blocked' %>"><%= link_to 'YOUR EVENTS', :controller=>"users", :action=>"events", :id => @current_user.id %></li>       
+								<li><%= link_to 'LOG OUT', logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out, ' + current_user.name + '?' } %></li>
+							</div>
 						<% elsif !(on_log_in_page) %> 
 							<li><%= link_to 'LOG IN', login_path %></li>
 						<% end %> 
