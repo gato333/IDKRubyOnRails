@@ -29,4 +29,6 @@ Rails.application.config.assets.precompile += %w( count.js )
 
 Rails.application.config.assets.precompile += %w( user_event.js )
 
+Rails.application.config.assets.precompile += %w( edit_user.js )
+
 Rails.application.config.assets.precompile += %w( description.js )

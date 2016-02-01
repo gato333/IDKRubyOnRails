@@ -12,6 +12,7 @@ module ApplicationHelper
 	EDIT_STATUS = "EDIT"
 	COUNT_STATUS = "COUNT"
 	USER_EVENT_STATUS = "USER_EVENT"
+	USER_EDIT_STATUS = "USER_EDIT"
 
 	USER_DESCRIPTION_STATUS = "USER_DESCRIPT"
 
@@ -78,6 +79,8 @@ module ApplicationHelper
 			['application', 'random']
 		elsif status == RESULT_STATUS
 			['application', 'result', 'googleMaps', 'social']
+		elsif status == USER_EDIT_STATUS
+			['application', 'edit_user']
 		elsif status == USER_EVENT_STATUS
 			['application', 'result', 'googleMaps', 'social', 'user_event']
 		elsif status == USER_DESCRIPTION_STATUS
@@ -123,9 +126,9 @@ module ApplicationHelper
   	elsif page === 'user_index'
   		return LOGO, DESCRIPTION, "Admin Panel", includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'user_new'
-    	return LOGO, DESCRIPTION, "NEW USER", includeJavascripts(DEFAULT_STATUS)
+    	return LOGO, DESCRIPTION, "NEW USER", includeJavascripts(USER_EDIT_STATUS)
   	elsif page === 'user_edit'
-  		return LOGO, DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
+  		return LOGO, DESCRIPTION, includeJavascripts(USER_EDIT_STATUS)
   	elsif page === 'user_show'
   		return LOGO, DESCRIPTION, includeJavascripts(USER_DESCRIPTION_STATUS)
   	elsif page === 'user_photo'
