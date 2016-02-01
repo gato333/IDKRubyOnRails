@@ -4,6 +4,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', users_path %>
-
+<% if is_admin %> 
+	<%= link_to 'Back', users_path %>
+<% end %> 
 </article>

@@ -92,6 +92,9 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
+  host = 'http://idontknow-nyc.herokuapp.com/'       
+  config.action_mailer.default_url_options = { host: host }
+
 
   config.assets.precompile += %w[ javascripts/*.js stylesheets/*.css images/*.png images/*.jpg]
 end
