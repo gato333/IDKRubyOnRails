@@ -21,7 +21,7 @@ module SessionsHelper
   end
 
   def is_current_user(user)
-  	user.id === current_user.id
+  	current_user && user.id === current_user.id
   end
 
   def is_current_user_id(userid)
@@ -48,10 +48,6 @@ module SessionsHelper
   end
 
   def current_user_n_admin_id(userid)
-    puts "user" + userid.to_s + " " + current_user.id.to_s
-    puts logged_in?
-    puts is_current_user_id(userid)
-    puts is_admin
     (is_current_user_id(userid) || is_admin)
   end
 
