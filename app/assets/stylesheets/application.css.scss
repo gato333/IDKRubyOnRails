@@ -674,15 +674,18 @@ input[type="submit"] { width: 100%; }
 /*********************************************************************************/
 
 article#index, article#index_user {
-    .table { display:table; }
+    .table { 
+        display:table;
+        width: 100%; 
+    }
     .cell { 
         display:table-cell; 
         font-size: 12px;
         padding: 0 3px 0 0;
         &.name { width: 240px; }
-        &.action { width: 40px; }
-        &.first { padding-left: 20px; }
+        &.action { width: 173px; }
         &.date { width: 175px; }
+        a { padding: 0 6px; }
     }
     .row { 
         display: table-row; 

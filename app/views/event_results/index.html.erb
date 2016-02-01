@@ -13,9 +13,7 @@
         <div class="cell" >ID</div>
         <div class="cell name" >NAME</div>
         <div class="cell" >START DATE</div>
-        <div class="cell" ></div>
         <div class="cell" >ACTIONS</div>
-        <div class="cell" ></div>
       </div>
 
     
@@ -24,9 +22,11 @@
         <div class="cell"><%= event_result.id %></div>
         <div class="cell name" ><%= event_result.name %></div>
         <div class="cell date" ><%= event_result.startdate %></div>
-        <div class="cell first action" ><%= link_to 'Show', event_result %></div>
-        <div class="cell action" ><%= link_to 'Edit', edit_event_result_path(event_result) %></div>
-        <div class="cell action" ><%= link_to 'Destroy', event_result, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+        <div class="cell action" >
+          <%= link_to 'Show', event_result %>
+          <%= link_to 'Edit', edit_event_result_path(event_result) %>
+          <%= link_to 'Destroy', event_result, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
       </div>
     <% end %>
     

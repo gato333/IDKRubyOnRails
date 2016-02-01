@@ -16,9 +16,7 @@
         <div class="cell name" >User Type</div>
         <div class="cell" >Name</div>
         <div class="cell" >Email</div>
-        <div class="cell" ></div>
         <div class="cell" >ACTIONS</div>
-        <div class="cell" ></div>
       </div>
 
     
@@ -27,10 +25,12 @@
         <div class="cell"><%= user.id %></div>
         <div class="cell" ><%= user.user_type %></div>
         <div class="cell" ><%= user.name %></div>
-        <div class="cell"><%= user.email %></div>
-        <div class="cell first action" ><%= link_to 'Show', user %></div>
-        <div class="cell action" ><%= link_to 'Edit', edit_user_path(user) %></div>
-        <div class="cell action" ><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+        <div class="cell"><%= user.email.to(user.email.length > 11 ? 10 : user.email.length) %></div>
+        <div class="cell action" >
+          <%= link_to 'Show', user %>
+          <%= link_to 'Edit', edit_user_path(user) %>
+          <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
       </div>
     <% end %>
     
