@@ -31,9 +31,8 @@
 		  <%= f.label "Email:" %>
 		  <%= f.text_field :email %>
 
-		   <%= f.label "Allow other users to contact you via email:", class: 'long' %>
-		   <%= f.select :activated, options_for_select([ [ "yes", "true"], ["no", "false"] ], @user.reachable || 'yes' ),{}, { class: "short"} %>
-
+			<%= f.label "Allow other users to contact you via email:", class: 'long' %>
+			<%= f.radio_button :reachable, 'true', { checked: ( @user.reachable ? "checked" : ""), class: "short"} %>
 
 
 		  <% if is_admin %>

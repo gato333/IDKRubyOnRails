@@ -776,6 +776,12 @@ article#index_user {
 
 article#user_new {
     td { padding: 2px 5px; }
+    label.long {
+        width: 70%;
+    }
+    input.short, select.short {
+        width: 29%; 
+    }
 }
 
 /*********************************************************************************/
@@ -850,7 +856,8 @@ article#user_edit {
         margin-top: 0px; 
         width: 80%; 
         &.short {
-            width: 29%; 
+            width: 20px;
+            margin: 15px 23% 15px 0;
         }
     }
     input[type='submit']{

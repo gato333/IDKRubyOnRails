@@ -31,6 +31,10 @@
 
   <%= f.label "Password Confirmation:" %>
   <%= f.password_field :password_confirmation %>
+
+  <%= f.label "Allow other users to contact you via email:", class: 'long' %>
+  <%= f.radio_button :reachable, 'true', { checked: "checked", class: "short"} %>
+
  
   <br />
   <div class="actions">
