@@ -72,6 +72,10 @@ body {
             margin: 3px 0;
             padding: 0px 4px 2px 4px;
             background: #ccc;
+            &.blocked {
+                background: #666; 
+                a { color: #fff; }
+            }
             a {     
                 color: #000;
                 font-size: 10px;
@@ -836,12 +840,18 @@ article#user_edit {
         vertical-align: top; 
         margin-top: 10px;
         width: 19%; 
+        &.long {
+            width: 70%;
+        }
     }
     input, select { 
         vertical-align: top; 
         display: inline-block; 
         margin-top: 0px; 
         width: 80%; 
+        &.short {
+            width: 29%; 
+        }
     }
     input[type='submit']{
         width: 100%; 

@@ -31,9 +31,19 @@
 		  <%= f.label "Email:" %>
 		  <%= f.text_field :email %>
 
+		   <%= f.label "Allow other users to contact you via email:", class: 'long' %>
+		   <%= f.select :activated, options_for_select([ [ "yes", "true"], ["no", "false"] ], @user.reachable || 'yes' ),{}, { class: "short"} %>
+
+
+
 		  <% if is_admin %>
+
 		    <%= f.label "User Type:" %>
 		    <%= f.select :user_type, options_for_select(["banned", "user", "admin"], @user.user_type || 'user' ) %>
+
+		    <%= f.label "Activated:" %>
+		    <%= f.select :activated, options_for_select(["true", "false"], @user.activated || 'false' ) %>
+
 		  <% end %>
 
 		  <br />
