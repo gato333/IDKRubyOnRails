@@ -65,8 +65,9 @@
 
     respond_to do |format|
       if @user.save
+        @user.send_activation_email
         log_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: "Please check your email to activate your account." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

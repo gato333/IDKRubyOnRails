@@ -1,6 +1,9 @@
 <% provide(:title, "HOME") %>
 <article id="me" class="panel">
 	<header>
+		<% if  notice && !notice.nil? %>
+      <p class="error_msg"><%= notice %></p>
+    <% end %>
 		<h1>I Don't Know!?</h1>
 		<span class="byline">Gone are the days when you can’t figure out what to do. <br />
 		Let us do the thinking for you!<br /> 

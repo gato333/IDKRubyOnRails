@@ -11,11 +11,15 @@ class SessionsController < ApplicationController
 
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
-    	log_in user
-      redirect_to user, notice: "Welcome back, " + user.name
+      if user.activated?
+        log_in user
+        redirect_to user, notice: "Welcome back, " + user.name
+      else
+        redirect_to user, notice: "Account not activated. Check your email " + 
+          "for the activation link."
+      end
     else
-    	@notice = 'Invalid email/password combination'
-      render 'new'
+      render 'new', notice: 'Invalid email/password combination'
     end
   end
 

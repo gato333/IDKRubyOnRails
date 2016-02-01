@@ -1,6 +1,7 @@
 <article id="show_user" class="panel">
-
-	<p id="notice"><%= notice %></p>
+	<% if notice && !notice.nil? %>
+		<p id="notice"><%= notice %></p>
+	<% end %> 
 	<h1><%= @user.name %>'s Profile</h1>
 	<% if only_current_user_n_admin(@user) %>
 	 	<%= link_to 'Edit Account', edit_user_path(@current_user), class: "right" %>
