@@ -1,6 +1,6 @@
 class EventResultsController < ApplicationController
   before_action :set_event_result, only: [:show, :edit, :update, :destroy]
-  before_action :is_member, only: [ :new ]
+  before_action :is_member_n_activated, only: [ :new, :edit, :update, :destroy ]
   before_action :only_admin, only: [:index, :count, :all]
   before_action :admin_or_current_user, only: [:edit, :update, :destroy]
   include ApplicationHelper 
@@ -113,13 +113,13 @@ class EventResultsController < ApplicationController
 
   private
 
-  def is_member 
-    redirect_to access_denied_path if !logged_in?
-  end
-
   def only_admin
     redirect_to access_denied_path if !is_admin
   end
+
+  def is_member_n_activated 
+    redirect_to( login_path, notice: "You must be logged in to access this feature.") if !logged_in?
+    redirect_to( current_user, notice: "You must be activate your account to access this feature.") if !activated_member?   end
 
   def admin_or_current_user 
      redirect_to access_denied_path if !current_user_n_admin_id(@event_result.creator_id)

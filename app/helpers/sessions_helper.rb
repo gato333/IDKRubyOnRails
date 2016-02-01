@@ -13,6 +13,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def activated_member? 
+    logged_in? && current_user.activated
+  end
+
   def on_log_in_page
     if params["controller"] === "sessions" && params["action"] === "new"
       return true

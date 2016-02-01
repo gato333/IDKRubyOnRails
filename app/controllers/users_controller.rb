@@ -3,10 +3,11 @@
   include SessionsHelper
   require 'will_paginate/array'
 	before_action :set_user, only: [:show, :edit, :edit_photo, :change_password, 
-    :new_password, :change_password, :update, :destroy, :fav_events, :events]
-  before_action :only_current_user_n_admin, only: [:edit, :update, 
-    :events, :edit_photo, ]
-	before_action :only_admin, only: [:destroy, :index]
+    :new_password,  :update, :destroy, :fav_events, :events]
+  before_action :is_current_user_n_admin, only: [:edit, :update, 
+    :events, :edit_photo, :change_password, :new_password ]
+  before_action :is_member_n_activated, only: [ :events ]
+	before_action :only_admin, only: [ :destroy, :index ]
 
   def index 
   	@logo, @title, @description, @javascriptsArray = preRender('user_index')
@@ -156,8 +157,13 @@
       redirect_to access_denied_path if !is_admin
   	end
 
-    def only_current_user_n_admin 
-      redirect_to access_denied_path if !is_current_user(@user) && !is_admin
+    def is_member_n_activated 
+      redirect_to( login_path, notice: "You must be logged in to access this feature.") if !logged_in?
+      redirect_to( current_user, notice: "You must be activate your account to access this feature.") if !activated_member?
+    end
+
+    def is_current_user_n_admin 
+      redirect_to access_denied_path if !only_current_user_n_admin(@user)
     end
 
   	def set_user
