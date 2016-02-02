@@ -85,10 +85,8 @@ module ApplicationHelper
 			['application', 'result', 'googleMaps', 'social', 'user_event']
 		elsif status == USER_DESCRIPTION_STATUS
 			['application', 'description' ]
-		elsif status == DEFAULT_STATUS
+		else 
 			['application']
-		else
-			"problem assinging javacripts to page" 
 		end
 	end
 
