@@ -826,9 +826,8 @@ article#show_user {
         text-decoration: none;
         color: #444;
         &.right { 
-            position: absolute;
-            top: -5px;
-            right: 0;
+            float: right;
+             margin-top: -53px;
         }
     }
 }
