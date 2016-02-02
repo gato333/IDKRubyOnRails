@@ -29,7 +29,8 @@ $(document).ready( function(){
 				id = $(this).parent()[0].id || $(this).parent().children('.share-obj')[0].id, 
 				currentUrl = window.location.origin + "/event/" + id, 
 				description =  $(this).parent().children("input#description")[0].value, 
-				eventName = $(this).parent().parent().children("h3")[0] ||  $($(this).parent().children(".text")[0]).children('h3')[0]; 
+				eventName = $(this).parent().parent().children('.text').children('h3')[0] ||
+									  $($(this).parent().children(".text")[0]).children('h3')[0]; 
 		eventName = eventName.innerHTML.replace(/\s+/g,' ').trim(); 
 		eventName = eventName.substr(0, eventName.indexOf(' ', 40)); 
 		eventName = encodeURI(eventName); 
