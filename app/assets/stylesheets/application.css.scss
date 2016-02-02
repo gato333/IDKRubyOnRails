@@ -95,9 +95,8 @@ body {
             z-index: 1;
             padding-top: 25px;
             top: 5px; 
-            &.event_button {  margin-left: 170px; }
-            &.user_button { margin-left: 88px; }
-            &.action_button { right: 5px; }
+            &.admin-button { margin-left: 88px; }
+            &.action_button { right: 98px; }
             li { 
                 width: 65px;
                 z-index: 3;
