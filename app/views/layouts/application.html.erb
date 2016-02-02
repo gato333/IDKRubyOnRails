@@ -68,7 +68,7 @@
 		          	<li><%= link_to 'FAV EVENTS', :controller=>"users", :action=>"fav_events", :id => @current_user.id %></li> 
 								<li class="<%= current_user.activated ? '' : 'blocked' %>"><%= link_to 'YOUR EVENTS', :controller=>"users", :action=>"events", :id => @current_user.id %></li>       
 							</div>
-							<li><%= link_to 'LOG OUT', logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out, ' + current_user.name + '?' } %></li>
+							<li class="logout_button"><%= link_to 'LOG OUT', logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out, ' + current_user.name + '?' } %></li>
 						<% elsif !(on_log_in_page) %> 
 							<li><%= link_to 'LOG IN', login_path %></li>
 						<% end %> 

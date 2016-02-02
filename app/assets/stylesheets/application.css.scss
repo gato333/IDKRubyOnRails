@@ -77,6 +77,10 @@ body {
             color:#000;
             padding-top: 3px;
             font-size: 12px;
+            &.logout_button {
+                background-color: #A60727;
+                a { color: #fff; }
+            }
             &.blocked {
                 background: #444; 
                 a { color: #fff; }
