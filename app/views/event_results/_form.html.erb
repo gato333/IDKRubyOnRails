@@ -40,8 +40,7 @@
   <%= f.label "Types:" %>
   <%= f.text_field :types %>
 
-  <%= f.label "Source:" %>
-  <%= f.text_field :source %>
+  <%= f.hidden_field :source, :value => 'user' %>
 
   <%= f.label "Description:" %>
   <%= f.text_area :description, cols: 60, rows: 10 %>

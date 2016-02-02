@@ -118,8 +118,12 @@ class EventResultsController < ApplicationController
   end
 
   def is_member_n_activated 
-    redirect_to( login_path, notice: "You must be logged in to access this feature.") if !logged_in?
-    redirect_to( current_user, notice: "You must be activate your account to access this feature.") if !activated_member?   end
+    if !logged_in?
+      redirect_to( login_path, notice: "You must be logged in to access this feature.") 
+    elsif !activated_member?   
+      redirect_to( current_user , notice: "You must be activate your account to access this feature.")
+    end 
+  end
 
   def admin_or_current_user 
      redirect_to access_denied_path if !current_user_n_admin_id(@event_result.creator_id)
