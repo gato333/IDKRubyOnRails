@@ -19,6 +19,8 @@ Rails.application.config.assets.precompile += %w( application.js )
 
 Rails.application.config.assets.precompile += %w( show.js )
 
+Rails.application.config.assets.precompile += %w( googleCharts.js )
+
 Rails.application.config.assets.precompile += %w( googleMaps.js )
 
 Rails.application.config.assets.precompile += %w( edit.js )

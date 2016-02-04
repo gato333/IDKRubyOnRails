@@ -50,6 +50,8 @@ Rails.application.routes.draw do
 
   get '/event/:id/edit' => 'event_results#edit'
 
+  get '/admin/event_analytics' => 'event_results#analytics'
+
 
 
   get '/admin/user_index' => 'users#index'

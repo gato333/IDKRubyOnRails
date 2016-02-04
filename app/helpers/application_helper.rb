@@ -13,6 +13,7 @@ module ApplicationHelper
 	COUNT_STATUS = "COUNT"
 	USER_EVENT_STATUS = "USER_EVENT"
 	USER_EDIT_STATUS = "USER_EDIT"
+	ANALYTICS_STATUS = "ANALYTICS"
 
 	USER_DESCRIPTION_STATUS = "USER_DESCRIPT"
 
@@ -85,6 +86,8 @@ module ApplicationHelper
 			['application', 'result', 'googleMaps', 'social', 'user_event']
 		elsif status == USER_DESCRIPTION_STATUS
 			['application', 'description' ]
+		elsif status == ANALYTICS_STATUS
+			['application', 'googleCharts']
 		else 
 			['application']
 		end
@@ -120,6 +123,8 @@ module ApplicationHelper
   		return LOGO, "COUNT", "Admin Panel", includeJavascripts(COUNT_STATUS)
   	elsif page === 'event_all'
   		return LOGO, "ALL", "Admin Panel", includeJavascripts(RESULT_STATUS)
+  	elsif page === 'event_analytics'
+  		return LOGO, "EVENT ANALYTICS", "Admin Panel", includeJavascripts(ANALYTICS_STATUS)
   	
   	elsif page === 'user_index'
   		return LOGO, DESCRIPTION, "Admin Panel", includeJavascripts(DEFAULT_STATUS)

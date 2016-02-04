@@ -18,4 +18,37 @@ module EventResultsHelper
     end 
     return false 
   end
+
+  def generateEventDateData
+    # 4am-11am  11am-5pm  5pm-12am
+    results = [
+      ['Time', 'Morning', 'Afternoon', 'Evening']
+    ]; 
+    dateInfoObj = {}
+    EventResult.all.each do |e|
+      day = e.startdate.strftime("%Y-%m-%d")
+      daykey = e.startdate.strftime("%a, %d %b %y")
+      puts daykey
+      if !dateInfoObj.has_key?(daykey) 
+        dateInfoObj[daykey] = { "Morning" => 0, "Afternoon" => 0, "Evening" => 0 }
+      end
+      timeDay = getKey(e.startdate, day)
+      dateInfoObj[daykey][timeDay] = dateInfoObj[daykey][timeDay] + 1
+    end
+    dateInfoObj.each do |key, timeArr|
+      results.push( [key, timeArr["Morning"], timeArr["Afternoon"], timeArr["Evening"]])
+    end
+    results.to_json
+  end
+
+  def getKey( eventdate, day )
+    key = 'Morning'
+    if( eventdate < DateTime.parse(day + ' 18:00:00') && eventdate >= DateTime.parse(day + ' 11:00:00') )
+      key = "Afternoon"
+    elsif( eventdate >= DateTime.parse(day + ' 18:00:00') )
+      key = "Evening"
+    end
+    key
+  end
+
 end

@@ -111,6 +111,12 @@ class EventResultsController < ApplicationController
     end
   end
 
+
+  def analytics
+    @logo, @title, @description, @javascriptsArray = preRender('event_analytics')
+    @results = generateEventDateData
+  end
+
   private
 
   def only_admin
