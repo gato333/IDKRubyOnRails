@@ -28,15 +28,22 @@ module EventResultsHelper
     EventResult.all.each do |e|
       day = e.startdate.strftime("%Y-%m-%d")
       daykey = e.startdate.strftime("%a, %d %b %y")
-      puts daykey
       if !dateInfoObj.has_key?(daykey) 
         dateInfoObj[daykey] = { "Morning" => 0, "Afternoon" => 0, "Evening" => 0 }
       end
       timeDay = getKey(e.startdate, day)
       dateInfoObj[daykey][timeDay] = dateInfoObj[daykey][timeDay] + 1
     end
+    prevkey = nil
     dateInfoObj.each do |key, timeArr|
+      prevkey = Date.parse(key) if prevkey.nil? 
+      puts key, prevkey, prevkey + 1
+      while prevkey + 1 < Date.parse(key) do
+        prevkey = prevkey + 1
+        results.push( [prevkey ,0, 0, 0])
+      end
       results.push( [key, timeArr["Morning"], timeArr["Afternoon"], timeArr["Evening"]])
+      prevkey =  Date.parse(key)
     end
     results.to_json
   end
