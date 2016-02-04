@@ -37,7 +37,6 @@ module EventResultsHelper
     prevkey = nil
     dateInfoObj.each do |key, timeArr|
       prevkey = Date.parse(key) if prevkey.nil? 
-      puts key, prevkey, prevkey + 1
       while prevkey + 1 < Date.parse(key) do
         prevkey = prevkey + 1
         results.push( [prevkey ,0, 0, 0])
