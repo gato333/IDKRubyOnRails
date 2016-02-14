@@ -74,6 +74,7 @@ body {
             position:relative; 
             z-index: 2;
             margin: 3px 0;
+            width: auto;
             padding: 8px 3% 7px 3%;
             background: #ccc;
             color:#000;
@@ -88,6 +89,7 @@ body {
             }
             a {     
                 color: #000;
+                width: auto;
                 font-size: 12px;
                 text-decoration: none; 
             }
