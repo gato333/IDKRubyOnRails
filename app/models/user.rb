@@ -44,7 +44,12 @@ class User < ActiveRecord::Base
   end
 
   def send_activation_email
-    UserMailer.account_activation(self).deliver_now
+    begin
+      UserMailer.account_activation(self).deliver_now
+    rescue Exception => e
+      puts e.message
+      puts e.backtrace.join("\n")
+    end
   end
 
   # Sets the password reset attributes.
@@ -56,7 +61,12 @@ class User < ActiveRecord::Base
 
   # Sends password reset email.
   def send_password_reset_email
-    UserMailer.password_reset(self).deliver_now
+    begin
+      UserMailer.password_reset(self).deliver_now
+    rescue Exception => e
+      puts e.message
+      puts e.backtrace.join("\n")
+    end
   end
 
   def password_reset_expired?
