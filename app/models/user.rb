@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 	validates :name, presence: true, length: { maximum: 100 }
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :email, presence: true, uniqueness: true, length: { maximum: 250 }, 
+	validates :email, presence: true, uniqueness: true, length: { maximum: 250 },
 						format: { with: VALID_EMAIL_REGEX }
 
 	validates :user_type, presence: true
@@ -72,8 +72,8 @@ class User < ActiveRecord::Base
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
-  
-	private 
+
+	private
 
 	def create_activation_digest
 		 puts 'crateion'
@@ -82,11 +82,10 @@ class User < ActiveRecord::Base
      self.activation_digest = User.digest( self.activation_token )
   end
 
-	def picture_size 
+	def picture_size
 		if picture.size > 5.megabytes
 			errors.add(:picture, "should be less then 5MB")
 		end
   end
 
 end
-
