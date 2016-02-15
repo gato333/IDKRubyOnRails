@@ -75,7 +75,7 @@ body {
             z-index: 2;
             margin: 3px 0;
             width: auto;
-            padding: 8px 3% 7px 3%;
+            padding: 9px 0 7px 0;
             background: #ccc;
             color:#000;
             font-size: 12px;
@@ -87,11 +87,12 @@ body {
                 box-shadow: inset 0 0 25px 6px rgba(0, 0, 0, 0.74);
                 a { color: #555;; }
             }
-            a {     
+            a {
+                margin: 0 7px;
                 color: #000;
                 width: auto;
                 font-size: 12px;
-                text-decoration: none; 
+                text-decoration: none;
             }
         }
         div {
