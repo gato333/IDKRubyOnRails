@@ -17,13 +17,14 @@ class EventbriteScrapper < AbstractScrapper
 				url = @urlbeg + page + @urlend
 				html = pullHtml(url)
 
-				events = html.css("section.js-content div.g-cell div.poster-card.js-d-poster")
+				events = html.css("section.js-content > div")
 				break if events.empty?
 				@pagecount += 1
 
 				events.each do |e|
-					linkholder =  e.css("a.js-event-link.js-xd-track-link")
+					linkholder =  e.css("div a")
 					link = linkholder[0]["href"]
+
 					imglink = linkholder.css(".poster-card__header .poster-card__image img")[0]["src"]
 					price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
 					price = freeTest(price)
@@ -73,7 +74,7 @@ class EventbriteScrapper < AbstractScrapper
 	def forceHTTPS(link)
 		if link.include? "https://"
 			link
-		else 
+		else
 			link.sub! "http://" , "https://"
 		end
 	end
