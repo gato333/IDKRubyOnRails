@@ -13,3 +13,9 @@ NEXT
 LEVEL 
 
 --Gabriela Voll 
+
+
+HEROKU DB NOTES
+
+to access heroku db psql: 
+													heroku pg:psql
