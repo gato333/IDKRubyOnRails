@@ -11,7 +11,12 @@ require "scrap/my_free_concert_scrapper"
 require "scrap/ny_card_scrapper"
 require "scrap/timeout_scrapper"
 
-total = 0 
+total = 0
+
+if( EventResult.count > 10000 )
+	puts "HEROKU db limit has been reached, truncating...."
+	EventResult.destroy_all
+end
 
 tim = TimeoutScrapper.new
 total = total + tim.scrap
