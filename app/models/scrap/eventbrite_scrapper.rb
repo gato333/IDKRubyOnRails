@@ -6,43 +6,48 @@ class EventbriteScrapper < AbstractScrapper
 		message = "Eventbrite Scrap Start"
 		super( message )		#call absract scrapper class
 		@pagecount = 1
-		@urlbeg = "https://www.eventbrite.com/d/ny--manhattan/events--today/?"
-		@urlend = "&slat=40.7831&slng=-73.9712&sort=best&view=gallery"
+		@urlbeglist = [
+			"https://www.eventbrite.com/d/ny--manhattan/events--today/?",
+			"https://www.eventbrite.com/d/ny--brooklyn/events--today/?crt=regular&slat=40.678178&slng=-73.944158&vp_ne_lat=40.7175&vp_ne_lng=-73.9043&vp_sw_lat=40.6555&vp_sw_lng=-73.9860",
+		]
+		@urlend = "&sort=best&view=gallery"
 	end
 	#has pagination
 	def scrap
 		begin
-			loop do 
-				page = "page=" + @pagecount.to_s
-				url = @urlbeg + page + @urlend
-				html = pullHtml(url)
+			@urlbeglist.each do |urlbeg|
+				loop do
+					page = "page=" + @pagecount.to_s
+					url = urlbeg + page + @urlend
+					html = pullHtml(url)
 
-				events = html.css(".js-event-list-container > div")
-				break if events.empty? || @pagecount > 5
-				@pagecount += 1
+					events = html.css(".js-event-list-container > div")
+					break if events.empty? || @pagecount > 4
+					@pagecount += 1
 
-				events.each do |e|
-					link = e.css(".js-event-link")[0]["href"]
-					imglink = e.css(".list-card__header .list-card__image img")[0]["src"]
-					price = e.css(".list-card__header .list-card__label").text.split("-").first
-					price = freeTest(price)
-					name = e.css(".list-card__body .list-card__title")
-					startdate = @time.to_date.to_s + " " + e.css(".list-card__body .list-card__date").text
-					address = e.css(".list-card__body .list-card__venue").text
-					typelist = e.css(".list-card__footer .list-card__tags a")
-					types = ""
-					typelist.each do |t|
-						types.concat(explodeImplode(t).downcase.gsub("#", "") + " ")
+					events.each do |e|
+						link = e.css(".js-event-link")[0]["href"]
+						imglink = e.css(".list-card__header .list-card__image img")[0]["src"]
+						price = e.css(".list-card__header .list-card__label").text.split("-").first
+						price = freeTest(price)
+						name = e.css(".list-card__body .list-card__title")
+						startdate = @time.to_date.to_s + " " + e.css(".list-card__body .list-card__date").text
+						address = e.css(".list-card__body .list-card__venue").text
+						typelist = e.css(".list-card__footer .list-card__tags a")
+						types = ""
+						typelist.each do |t|
+							types.concat(explodeImplode(t).downcase.gsub("#", "") + " ")
+						end
+
+						lat, long = calculateGeo(address)
+						description = deepscrap(link);
+
+						createEvent(name, address, price, lat, long, 
+							imglink.nil? ? '' : imglink, link, startdate, '', 
+							description, types, EVENTBRITE_SOURCE )
+						
+						@eventcount += 1
 					end
-
-					lat, long = calculateGeo(address)
-					description = deepscrap(link);
-
-					createEvent(name, address, price, lat, long, 
-						imglink.nil? ? '' : imglink, link, startdate, '', 
-						description, types, EVENTBRITE_SOURCE )
-					
-					@eventcount += 1
 				end
 			end
 			message = "Eventbrite Done"
