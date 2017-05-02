@@ -7,7 +7,7 @@ class ArtslantScrapper < AbstractScrapper
 		super(message)		#call absract scrapper class
 		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@dateTomorrow = @time.month.to_s + "/" + (@time.day.to_i + 1).to_s  + "/" + @time.year.to_s
-		@artslanturl = "https://www.artslant.com/ny/events/list?featured=all&fromdate=#{@dateTomorrow}&listtype=openings&todate=#{@dateTomorrow}"
+		@artslanturl = "https://www.artslant.com/ny/events/list?event_type=Openings&time=upcoming"
 		@pagecount = 1
 	end
 
