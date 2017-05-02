@@ -5,7 +5,7 @@ class TimeoutScrapper < AbstractScrapper
 	def initialize
 		message = "Timeout Scrap Start"
 		super(message)		#call absract scrapper class
-		@basetimeouturl = "http://www.timeout.com"
+		@basetimeouturl = "https://www.timeout.com"
 		@timeoutsurl = @basetimeouturl + "/newyork/things-to-do/things-to-do-in-new-york-today"
 	end
 

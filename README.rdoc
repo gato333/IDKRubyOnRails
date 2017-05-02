@@ -1,21 +1,27 @@
 == README
 
 THIS IS THE IDK beta clone
+once it is successfully cloned, we are going to take it
 
-once it is successfully cloned, we are going to take it 
+TO
+THE
+NEXT
+LEVEL
 
-TO 
-
-THE 
-
-NEXT 
-
-LEVEL 
-
---Gabriela Voll 
+--Gabriela Voll
 
 
-HEROKU DB NOTES
+To Run App:
 
-to access heroku db psql: 
-													heroku pg:psql
+1. Locally run postgress DB
+2. in Terminal: rails server
+Done!
+
+
+Heroku DB Notes:
+
+to access heroku db psql:
+in Terminal: heroku pg:psql
+
+to test scraper:
+in Terminal: 	rake db:seed

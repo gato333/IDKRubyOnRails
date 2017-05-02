@@ -18,11 +18,13 @@ if( EventResult.count > 10000 )
 	EventResult.destroy_all
 end
 
-tim = TimeoutScrapper.new
-total = total + tim.scrap
+# seems it might not be possible to scrape Timeout anymore, they've implmented some sort cert for reteivign the page
+# tim = TimeoutScrapper.new
+# total = total + tim.scrap
 
-myf = MyFreeConcertScrapper.new
-total = total + myf.scrap
+#  My Free Concerts is currently offline till supposedly March 2017 ( yet its already May 2017 )
+#  myf = MyFreeConcertScrapper.new
+#  total = total + myf.scrap
 
 arts = ArtslantScrapper.new
 total = total + arts.scrap
