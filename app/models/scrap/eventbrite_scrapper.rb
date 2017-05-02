@@ -18,7 +18,7 @@ class EventbriteScrapper < AbstractScrapper
 				html = pullHtml(url)
 
 				events = html.css(".js-event-list-container > div")
-				break if events.empty?
+				break if events.empty? || @pagecount > 5
 				@pagecount += 1
 
 				events.each do |e|
