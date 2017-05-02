@@ -8,7 +8,7 @@ class EventbriteScrapper < AbstractScrapper
 		@pagecount = 1
 		@urlbeglist = [
 			"https://www.eventbrite.com/d/ny--manhattan/events--today/?",
-			"https://www.eventbrite.com/d/ny--brooklyn/events--today/?crt=regular&slat=40.678178&slng=-73.944158&vp_ne_lat=40.7175&vp_ne_lng=-73.9043&vp_sw_lat=40.6555&vp_sw_lng=-73.9860",
+			"https://www.eventbrite.com/d/ny--brooklyn/events--today/?crt=regular&slat=40.678178&slng=-73.944158&vp_ne_lat=40.7175&vp_ne_lng=-73.9043&vp_sw_lat=40.6555&vp_sw_lng=-73.9860&",
 		]
 		@urlend = "&sort=best&view=gallery"
 	end
