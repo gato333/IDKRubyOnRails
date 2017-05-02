@@ -17,37 +17,28 @@ class ArtslantScrapper < AbstractScrapper
 			loop do 
 				page = "&page=" + @pagecount.to_s
 				html = pullHtml(@artslanturl + page)
-				events = html.css("tbody#thelist tr.t1")
-
+				events = html.css("div#innerlist .list-item")
 				break if events.empty?
 				@pagecount += 1
 
 				events.each do |e|
-					imglink =  e.css("span.imagethumbfield img")[0]["src"]
-					tableright = e.css("td table tr td")[1]
-					startdate = @time.to_date.to_s + " " + e.css("td table tr td")[2].css("b span").text.split("-")[0]
-					enddate = @time.to_date.to_s + e.css("td table tr td")[2].css("b span").text.split("-")[1]
-					# GET THE RIGHT LINK 
-					artslantlink =  "http://www.artslant.com" + tableright.css("b a")[0]["href"] 
-					link = tableright.css("a")[1].nil? ? (tableright.css("a")[0].nil? ? "http://www.artslant.com" + tableright.css("b a")[0]["href"]  : tableright.css("a")[0]["href"] ) : tableright.css("a")[1]["href"] 
-					name = tableright.css("a span.artist").text.split.join(" ") + ": " + tableright.css("a i").text.split.join(" ")
-					
-					rightarray = tableright.text.split(/\n/).reject(&:empty?).reject(&:blank?)
-					if( rightarray[3].nil? || rightarray[4].nil? )
-						address = ""
-					else 
-						address =  rightarray[3] + " " + rightarray[4]
-					end
+					imglink =  e.css(".thumb-span img")[0]["src"]
+					link = "https://www.artslant.com" + e.css(".thumb-span a")[0]["href"]
+					name = e.css(".name-span .event span").text + ": " + e.css(".name-span .event i").text
+
+					startdate = @time.to_date.to_s + " " + e.css(".address-span b span")[0].text.split("-")[0]
+					enddate = @time.to_date.to_s +  e.css(".address-span b span")[0].text.split("-")[1]
+
+					address = e.css(".address-span").to_s.split("<br>")
+					address =  explodeImplode( address[1] + address[2] )
 					lat, long = calculateGeo(address)
-					
-					org = rightarray[1]
-					
-					description = deepscrap(artslantlink)
-			
+
+					description = deepscrap(link)
+
 					createEvent(name, address, 0, lat, long, imglink, 
 						link, startdate, enddate, description, 
 						"art, art gallery openings", ARTSLANT_SOURCE )
-					
+
 					@eventcount += 1
 				end
 			end
