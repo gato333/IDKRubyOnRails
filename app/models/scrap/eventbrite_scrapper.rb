@@ -17,30 +17,25 @@ class EventbriteScrapper < AbstractScrapper
 				url = @urlbeg + page + @urlend
 				html = pullHtml(url)
 
-				events = html.css("section.js-content > div")
+				events = html.css(".js-event-list-container > div")
 				break if events.empty?
 				@pagecount += 1
 
 				events.each do |e|
-					linkholder =  e.css("div a")
-					link = linkholder[0]["href"]
-
-					imglink = linkholder.css(".poster-card__header .poster-card__image img")[0]["src"]
-					price = linkholder.css(".poster-card__header .poster-card__label").text.split("-").first
+					link = e.css(".js-event-link")[0]["href"]
+					imglink = e.css(".list-card__header .list-card__image img")[0]["src"]
+					price = e.css(".list-card__header .list-card__label").text.split("-").first
 					price = freeTest(price)
-					name = linkholder.css(".poster-card__body .poster-card__title")
-					startdate = @time.to_date.to_s + " " + linkholder.css(".poster-card__body .poster-card__date .event-time").text
-					address = linkholder.css(".poster-card__body .poster-card__venue")
-					typelist = e.css(".poster-card__footer .poster-card__tags a")
+					name = e.css(".list-card__body .list-card__title")
+					startdate = @time.to_date.to_s + " " + e.css(".list-card__body .list-card__date").text
+					address = e.css(".list-card__body .list-card__venue").text
+					typelist = e.css(".list-card__footer .list-card__tags a")
 					types = ""
 					typelist.each do |t|
 						types.concat(explodeImplode(t).downcase.gsub("#", "") + " ")
 					end
 
-					geo = e.css(".poster-card__body .poster-card__venue span[itemprop='location'] span[itemprop='geo']")
-					lat = geo.css("meta[itemprop='latitude']")[0]["content"]
-					long = geo.css("meta[itemprop='longitude']")[0]["content"]
-
+					lat, long = calculateGeo(address)
 					description = deepscrap(link);
 
 					createEvent(name, address, price, lat, long, 
