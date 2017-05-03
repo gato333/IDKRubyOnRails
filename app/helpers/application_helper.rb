@@ -94,8 +94,6 @@ module ApplicationHelper
     	return LOGO, "HOME", DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
 		elsif page === 'do'
     	return LOGO, "DO", DESCRIPTION, includeJavascripts(DO_STATUS)
-		elsif page === 'eat'
-    	return LOGO, "EAT", DESCRIPTION, includeJavascripts(EAT_STATUS)
 		elsif page === 'random'
 			return LOGO, "RANDOM", "Uncertainty Helper", includeJavascripts(RANDOM_STATUS)
 		elsif page === 'result'
