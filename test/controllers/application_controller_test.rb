@@ -3,7 +3,6 @@ require 'test_helper'
 class ApplicationControllerTest < ActionController::TestCase
   include ApplicationHelper 
 
-  EAT_STATUS = ApplicationHelper::EAT_STATUS
   DO_STATUS = ApplicationHelper::DO_STATUS
   DEFAULT_STATUS = ApplicationHelper::DEFAULT_STATUS
   RANDOM_STATUS = ApplicationHelper::RANDOM_STATUS
@@ -33,14 +32,6 @@ class ApplicationControllerTest < ActionController::TestCase
     get :do
     assert_response :success
     assert_select "title", "DO" + @base_title
-  end
-
-  test "should get eat" do
-
-    @javascriptsArray = ApplicationHelper.includeJavascripts(EAT_STATUS); 
-    get :eat
-    assert_response :success
-    assert_select "title", "EAT" + @base_title
   end
 
   test "should get random" do

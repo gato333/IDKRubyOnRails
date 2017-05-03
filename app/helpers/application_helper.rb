@@ -3,7 +3,6 @@ module ApplicationHelper
 	LOGO = "http://49.media.tumblr.com/c8bdf16535f80091a941843de701532b/tumblr_n9stfetbYf1r5mmhlo1_400.gif"
   DESCRIPTION = "Secret Events NYC"
 
-	EAT_STATUS = "EAT"
 	DO_STATUS = "DO"
 	DEFAULT_STATUS = "DEFAULT"
 	RANDOM_STATUS = "RANDOM"
@@ -44,9 +43,6 @@ module ApplicationHelper
 	end
 
 	def validatePriceEat( price, status )
-		if price == nil || price == "0" && status == EAT_STATUS
-			return false
-		end
 		return true
 	end
 
@@ -74,7 +70,7 @@ module ApplicationHelper
 			['application', 'count']
 		elsif status == EDIT_STATUS
 			['application', 'edit']
-		elsif status == EAT_STATUS || status == DO_STATUS
+		elsif status == DO_STATUS
 			['application', 'form']
 		elsif status == RANDOM_STATUS
 			['application', 'random']

@@ -16,34 +16,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def eat 
-    @logo, @title, @description, @javascriptsArray = preRender('eat')
-    @ip = remote_ip
-    if params.include?('error') 
-      @error_msg, @radius_error, @price_error = formErrorMsg(params, EAT_STATUS);
-    end
-  end
-
   def random
     @logo, @title, @description, @javascriptsArray = preRender('random')
   end
 
   def results 
     @logo, @description, @javascriptsArray = preRender('result')
-		if params["source"] == EAT_STATUS
-			if validateForm(params, EAT_STATUS)
-				query = RestaurantQueryHandler.new( app_params(params) )
-        @results = query.getRestaurantResults
-			else 
-				redirect_to :action => 'eat', 
-        :radius => params["radius"] || "", 
-        :price => params["price"] || "", 
-        :keyword => params["keyword"] || "",  
-        :error => "1", 
-        :lat => params["lat"] || "", 
-        :long => params["long"] || ""
-			end
-		elsif params["source"] == DO_STATUS
+		if params["source"] == DO_STATUS
 			if validateForm(params, DO_STATUS)
         @googleKey = Rails.application.secrets.google_api_key; 
         query = EventQueryHandler.new( app_params(params) )
