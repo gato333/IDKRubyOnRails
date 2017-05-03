@@ -23,8 +23,6 @@ Rails.application.routes.draw do
   post '/results' => 'application#results'
 
   get '/whatdo' => 'application#do'
-  
-  get '/whateat' => 'application#eat'
 
   get '/random' => 'application#random'
 
