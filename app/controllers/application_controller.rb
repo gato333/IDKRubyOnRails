@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-	require "restaurant_query_handler"
   include SessionsHelper
   include ApplicationHelper
 
