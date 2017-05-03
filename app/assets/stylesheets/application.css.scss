@@ -132,6 +132,7 @@ h1 { color:black; }
 #wrapper {
     position: relative;
     margin:0 auto;
+    text-align: center;
     width: 650px;
     max-width: 98%;
 }
@@ -479,7 +480,7 @@ ul.pagination  {
 /*********************************************************************************/
 
 #nav {
-    width: 300px;
+    display: inline-block;
     max-width: 100%; 
     margin: 20px auto 0 auto;
     a {
@@ -490,6 +491,7 @@ ul.pagination  {
         line-height: 0.9em;
         padding-bottom:15px;
         max-width: 23%; 
+        min-width: 70px;
         &:after {
             content: '';
             display: block;
