@@ -1,24 +1,26 @@
-== README
+README
+============================================
 
 THIS IS THE IDK beta clone
 once it is successfully cloned, we are going to take it
 
-TO
-THE
-NEXT
-LEVEL
+TO THE NEXT LEVEL
 
 --Gabriela Voll
 
 
-To Run App:
+# To Run App:
 
 1. Locally run postgress DB
-2. in Terminal: rails server
+2. Make local config/application.yml based off application_test.yml template
+3. in Terminal: bundle install
+4. in Terminal: rails db:migrate
+5. in Terminal: rake db:seed   ( this will generate event in your db )
+6. in Terminal: rails server
 Done!
 
 
-Heroku DB Notes:
+# Heroku DB Notes:
 
 to access heroku db psql:
 in Terminal: heroku pg:psql
