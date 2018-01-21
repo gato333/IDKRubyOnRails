@@ -26,8 +26,11 @@ class ArtslantScrapper < AbstractScrapper
 					link = "https://www.artslant.com" + e.css(".thumb-span a")[0]["href"]
 					name = e.css(".name-span .event span").text + ": " + e.css(".name-span .event i").text
 
-					startdate = @time.to_date.to_s + " " + e.css(".address-span b span")[0].text.split("-")[0]
-					enddate = @time.to_date.to_s +  e.css(".address-span b span")[0].text.split("-")[1]
+					startdate = e.css(".address-span b span")[0].text.split("-")[0]
+					enddate = e.css(".address-span b span")[0].text.split("-")[1]
+
+					enddate =  startdate[0..(startdate.index(':') - 2)] + @time.year.to_s + enddate
+					startdate = startdate[0..(startdate.index(':') - 2)] + @time.year.to_s + startdate[(startdate.index(':') - 2)..-1]
 
 					address = e.css(".address-span").to_s.split("<br>")
 					address =  explodeImplode( address[1] + address[2] )
