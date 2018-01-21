@@ -18,6 +18,7 @@
 	<% end %>
 
 	<% if !@event_result.startdate.nil? %>
+		<h5><span>Date:</span> <%= @event_result.startdate.strftime("%B %e, %G") %></h5>
 		<h5><span>Start Time:</span> <%= @event_result.startdate.strftime("%l:%M %P") %></h5>
 	<% end %> 
 

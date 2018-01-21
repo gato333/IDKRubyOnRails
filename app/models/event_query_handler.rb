@@ -21,6 +21,7 @@ class EventQueryHandler
         @lat = @long = @radius = @price = @keyword = @northlat = @eastlong  = @southlat = @westlong = @keyword = nil
       end
       @curTime = (Time.now.utc + Time.zone_offset('EST') - (60  * 60 * 2)).to_formatted_s(:db)
+      @tomTime = (Time.now.utc + Time.zone_offset('EST') + (60  * 60 * 24)).to_formatted_s(:db)
     end
 
     def boundingBox
@@ -57,7 +58,12 @@ class EventQueryHandler
 
     def queryDB 
       #event that start in the furture or 2hrs ago
-      EventResult.where("startdate >= ? AND price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ? AND (types LIKE ? OR name LIKE ? OR address LIKE ? OR description LIKE ? OR source LIKE ? )", @curTime, 0.0, @price, @northlat, @southlat, @westlong, @eastlong, queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword) )
+      EventResult.where(
+        "startdate >= ? AND startdate <= ? AND price >= ? AND price <= ? AND lat <= ? AND lat >= ? AND long >= ? AND long <= ? AND " +
+        "(types LIKE ? OR name LIKE ? OR address LIKE ? OR description LIKE ? OR source LIKE ? )",
+        @curTime, @tomTime, 0.0, @price, @northlat, @southlat, @westlong, @eastlong, queryLikeHelper(@keyword),
+        queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword), queryLikeHelper(@keyword)
+      )
     end
 
     def queryLikeHelper(word)
