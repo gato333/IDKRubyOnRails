@@ -27,9 +27,12 @@ class ArtBeatScrapper < AbstractScrapper
 					lat, long = calculateGeo(address)
 
 					datecontainer = e.css("div.smart_details ul li")[4]
-					date = datecontainer.text.scan( /\d{2}\:\d{2}/ )
-					startdate = @time.to_date.to_s + " " + date[0]
-					enddate = date[1].nil? ? "" : @time.to_date.to_s + " " + date[1]
+
+					timeSelect = datecontainer.text.scan( /\d{2}\:\d{2}/ )
+					dateSelect = datecontainer.text.scan( /\d{4}\-\d{2}\-\d{2}/ )
+
+					startdate = dateSelect[0] + " " + timeSelect[0]
+					enddate = timeSelect[1].nil? ? startdate : dateSelect[0] + " " + timeSelect[1]
 
 					orgcontainer = e.css("div.smart_details ul li")[0]
 					org = orgcontainer.text.split.join(" ")[3..-1]

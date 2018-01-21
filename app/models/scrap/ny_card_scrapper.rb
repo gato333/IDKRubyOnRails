@@ -34,10 +34,10 @@ class NyCardScrapper < AbstractScrapper
 						enddate = day + " " +  @time.year.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[1] )).strftime("%H:%M")
 					elsif ( datecontainer[0].to_i.to_s == datecontainer[0] )
 						startdate = day + " " + @time.year.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
-						enddate = day + " " + @time.year.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
+						enddate = startdate
 					else
 						startdate = day + " " + @time.year.to_s
-						enddate = day + " " + @time.year.to_s
+						enddate = startdate
 					end
 					# not possible to do deep scrap on this site (too bare bones)
 					description = deepscrap
