@@ -16,6 +16,7 @@ class NyCardScrapper < AbstractScrapper
 
 			containers.each do |c|
 				events = c.css("article")
+				day = c.css("h1").text
 				events.each do |e|
 					name = e.css("span[itemprop='name']")
 					imglink = e.css("a.thumb img").empty? ? "" : e.css("a.thumb img")[0]["src"]
@@ -27,15 +28,16 @@ class NyCardScrapper < AbstractScrapper
 
 					datecontainer = e.css("div[itemprop='location'] time").text.split("-")
 					datecontainer = datecontainer.map { |x| x == "noon" ? "12" : x }
+
 					if( datecontainer.length > 1 )
-						startdate =  @time.to_date.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
-						enddate =  @time.to_date.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[1] )).strftime("%H:%M")
+						startdate = day + " " + @time.year.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
+						enddate = day + " " +  @time.year.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[1] )).strftime("%H:%M")
 					elsif ( datecontainer[0].to_i.to_s == datecontainer[0] )
-						startdate =  @time.to_date.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
-						enddate =  ""
+						startdate = day + " " + @time.year.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
+						enddate = day + " " + @time.year.to_s + " " + DateTime.parse( findAddTimeSufix( datecontainer[0] )).strftime("%H:%M")
 					else
-						startdate =  @time.to_date.to_s 
-						enddate =  @time.to_date.to_s 
+						startdate = day + " " + @time.year.to_s
+						enddate = day + " " + @time.year.to_s
 					end
 					# not possible to do deep scrap on this site (too bare bones)
 					description = deepscrap
