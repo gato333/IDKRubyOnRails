@@ -31,7 +31,24 @@ class EventbriteScrapper < AbstractScrapper
 						price = e.css(".list-card__header .list-card__label").text.split("-").first
 						price = freeTest(price)
 						name = e.css(".list-card__body .list-card__title")
-						startdate = @time.to_date.to_s + " " + e.css(".list-card__body .list-card__date").text
+
+						date = e.css(".list-card__body .list-card__date").text
+						timesuffix = date.index("PM").nil? ? "AM" : "PM"
+						day = date[0..(date.index(":") - 2)]
+						startdate = day + @time.year.to_s + date[(date.index(":") - 2)..-1]
+						# eventbrite doesnt give us end times
+						# so we are fudging it all events 2 hrs long
+						enddate = date[(date.index(":") - 2)..(date.index(":"))].to_i + 2
+						if(enddate > 12)
+							if(timesuffix == "AM")
+								timesuffix = "PM"
+							else
+								day = day[0..-3] + (day.last(2).to_i + 1).to_s
+								timesuffix = "AM"
+							end
+						end
+						enddate = day + @time.year.to_s  + " " + enddate.to_s  + ":00 " + timesuffix
+
 						address = e.css(".list-card__body .list-card__venue").text
 						typelist = e.css(".list-card__footer .list-card__tags a")
 						types = ""
@@ -43,7 +60,7 @@ class EventbriteScrapper < AbstractScrapper
 						description = deepscrap(link);
 
 						createEvent(name, address, price, lat, long, 
-							imglink.nil? ? '' : imglink, link, startdate, '', 
+							imglink.nil? ? '' : imglink, link, startdate, enddate, 
 							description, types, EVENTBRITE_SOURCE )
 						
 						@eventcount += 1
