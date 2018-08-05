@@ -24,21 +24,20 @@ $(document).ready( function() {
 	//  also enables the submit on success, error msg on failure
 	var ip = $('.ipHolder').val(); 
 	console.log(ip);
-	
+
 	if ( typeof ip === 'undefined' ){
 		$('.ipDialog').removeClass("hidden");
 	} else {
 		$.ajax({ 
-			url: 'https://freegeoip.net/json/' + ip, 
+			url: 'http://api.ipstack.com/' + ip + '?access_key=' + ipStackKey + '&output=json',
 			dataType: 'json',
 			type: 'GET',
 			timeout: 30000,
 			success: function(result){
 				$('.dbquery').on('click', function(e){});
 	      $('.dbquery').prop('disabled', false);
-	      $('input[name="lat"]').val(result.latitude); 
+	      $('input[name="lat"]').val(result.latitude);
 	      $('input[name="long"]').val(result.longitude);
-	    
 	    }, 
 	  	error: function(data){
 	  		$('.dbquery').prop('disabled', false);
