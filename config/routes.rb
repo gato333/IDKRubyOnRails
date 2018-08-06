@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   
   post '/results' => 'application#results'
 
+  post '/map_results' => 'application#map_results'
+
   get '/whatdo' => 'application#do'
 
   get '/random' => 'application#random'

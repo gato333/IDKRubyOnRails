@@ -6,6 +6,7 @@ module ApplicationHelper
 	DO_STATUS = "DO"
 	DEFAULT_STATUS = "DEFAULT"
 	RANDOM_STATUS = "RANDOM"
+	MAP_RESULT_STATUS = "MAP_RESULT"
 	RESULT_STATUS = "RESULT"
 	SHOW_STATUS = "SHOW"
 	EDIT_STATUS = "EDIT"
@@ -76,6 +77,8 @@ module ApplicationHelper
 			['application', 'random']
 		elsif status == RESULT_STATUS
 			['application', 'result', 'googleMaps', 'social']
+		elsif status == MAP_RESULT_STATUS
+			['application', 'map_result', 'googleMaps', 'social']
 		elsif status == USER_EDIT_STATUS
 			['application', 'edit_user']
 		elsif status == USER_EVENT_STATUS
@@ -98,6 +101,8 @@ module ApplicationHelper
 			return LOGO, "RANDOM", "Uncertainty Helper", includeJavascripts(RANDOM_STATUS)
 		elsif page === 'result'
 			return LOGO, DESCRIPTION, includeJavascripts(RESULT_STATUS)
+		elsif page === 'map_result'
+			return LOGO, DESCRIPTION, includeJavascripts(MAP_RESULT_STATUS)
 		elsif page ===  'error'
 			return LOGO, "ERROR", "Problems in Paradise", includeJavascripts(DEFAULT_STATUS)
   	elsif page === 'unknown'

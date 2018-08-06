@@ -42,6 +42,29 @@ class ApplicationController < ActionController::Base
     @title = params["source"]
   end
 
+  def map_results 
+    @logo, @description, @javascriptsArray = preRender('map_result')
+    if params["source"] == DO_STATUS
+      if validateForm(params, DO_STATUS)
+        @googleKey = Rails.application.secrets.google_api_key; 
+        query = EventQueryHandler.new( app_params(params) )
+        @results = query.getEventResults
+        @user_events = get_fav_events(current_user)
+      else 
+        redirect_to :action => 'do',
+        :radius => params["radius"] || "", 
+        :price => params["price"] || "", 
+        :keyword => params["keyword"] || "",  
+        :error => "1", 
+        :lat => params["lat"] || "", 
+        :long => params["long"] || ""
+      end
+    else 
+      redirect_to :action => 'error', :error_msg => "Submitted from a not accepted page."
+    end
+    @title = params["source"]
+  end
+
   def error 
     @logo, @title, @description, @javascriptsArray = preRender('error')
   	if params.include?(:error_msg)

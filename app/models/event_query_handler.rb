@@ -70,7 +70,7 @@ class EventQueryHandler
       '%' + word + '%'
     end
 
-   	def getEventResults
+    def getEventResults
       formatResults( queryDB )
     end
 
