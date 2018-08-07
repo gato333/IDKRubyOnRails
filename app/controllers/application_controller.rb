@@ -19,8 +19,19 @@ class ApplicationController < ActionController::Base
     @logo, @title, @description, @javascriptsArray = preRender('random')
   end
 
-  def results 
-    @logo, @description, @javascriptsArray = preRender('result')
+  def results
+    if params["mapview"].nil?
+      @logo, @description, @javascriptsArray = preRender('result')
+    else
+      redirect_to :action => 'map_results',
+        :radius => params["radius"] || "", 
+        :price => params["price"] || "", 
+        :keyword => params["keyword"] || "",  
+        :error => "1", 
+        :lat => params["lat"] || "", 
+        :long => params["long"] || "",
+        :source => DO_STATUS
+    end
 		if params["source"] == DO_STATUS
 			if validateForm(params, DO_STATUS)
         query = EventQueryHandler.new( app_params(params) )
@@ -28,12 +39,12 @@ class ApplicationController < ActionController::Base
         @user_events = get_fav_events(current_user)
 			else 
 				redirect_to :action => 'do',
-        :radius => params["radius"] || "", 
-        :price => params["price"] || "", 
-        :keyword => params["keyword"] || "",  
-        :error => "1", 
-        :lat => params["lat"] || "", 
-        :long => params["long"] || ""
+          :radius => params["radius"] || "", 
+          :price => params["price"] || "", 
+          :keyword => params["keyword"] || "",  
+          :error => "1", 
+          :lat => params["lat"] || "", 
+          :long => params["long"] || ""
 			end
 		else 
 			redirect_to :action => 'do'
