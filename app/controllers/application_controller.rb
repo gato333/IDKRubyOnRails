@@ -23,7 +23,6 @@ class ApplicationController < ActionController::Base
     @logo, @description, @javascriptsArray = preRender('result')
 		if params["source"] == DO_STATUS
 			if validateForm(params, DO_STATUS)
-        @googleKey = Rails.application.secrets.google_api_key; 
         query = EventQueryHandler.new( app_params(params) )
         @results = query.getEventResults
         @user_events = get_fav_events(current_user)
@@ -37,7 +36,7 @@ class ApplicationController < ActionController::Base
         :long => params["long"] || ""
 			end
 		else 
-			redirect_to :action => 'error', :error_msg => "Submitted from a not accepted page."
+			redirect_to :action => 'do'
 		end
     @title = params["source"]
   end
@@ -46,7 +45,6 @@ class ApplicationController < ActionController::Base
     @logo, @description, @javascriptsArray = preRender('map_result')
     if params["source"] == DO_STATUS
       if validateForm(params, DO_STATUS)
-        @googleKey = Rails.application.secrets.google_api_key; 
         query = EventQueryHandler.new( app_params(params) )
         @results = query.getEventResults
         @user_events = get_fav_events(current_user)
@@ -60,7 +58,7 @@ class ApplicationController < ActionController::Base
         :long => params["long"] || ""
       end
     else 
-      redirect_to :action => 'error', :error_msg => "Submitted from a not accepted page."
+      redirect_to :action => 'do'
     end
     @title = params["source"]
   end

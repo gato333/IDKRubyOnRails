@@ -66,7 +66,7 @@ module ApplicationHelper
 
 	def includeJavascripts(status) 
 		if status == SHOW_STATUS
-			['application', 'show', 'googleMaps', 'social']
+			['application', 'show', 'hereMaps', 'social']
 		elsif status == COUNT_STATUS
 			['application', 'count']
 		elsif status == EDIT_STATUS
@@ -76,13 +76,13 @@ module ApplicationHelper
 		elsif status == RANDOM_STATUS
 			['application', 'random']
 		elsif status == RESULT_STATUS
-			['application', 'result', 'googleMaps', 'social']
+			['application', 'result', 'hereMaps', 'social']
 		elsif status == MAP_RESULT_STATUS
-			['application', 'map_result', 'googleMaps', 'social']
+			['application', 'map_result', 'hereMaps', 'social']
 		elsif status == USER_EDIT_STATUS
 			['application', 'edit_user']
 		elsif status == USER_EVENT_STATUS
-			['application', 'result', 'googleMaps', 'social', 'user_event']
+			['application', 'result', 'hereMaps', 'social', 'user_event']
 		elsif status == USER_DESCRIPTION_STATUS
 			['application', 'description' ]
 		elsif status == ANALYTICS_STATUS

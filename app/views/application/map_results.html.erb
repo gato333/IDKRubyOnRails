@@ -26,16 +26,19 @@
 					<input class="lat" value="<%= params['lat'] %>" type="hidden">
 					<input class="lng" value="<%= params['long'] %>" type="hidden">
 					<input class="name" value="<%= params['name'] %>" type="hidden">
+
+					<% @results.each do |result| %>
+						<div class="arrayelm">
+							<input class="lat" value="<%= result["lat"] %>" type="hidden">
+							<input class="lng" value="<%= result['long'] %>" type="hidden">
+							<input class="name" value="<%= result['name'] %>" type="hidden">
+							<input class="address" value="<%= result['address'] %>" type="hidden">
+							<input class="types" value="<%= result['types'] %>" type="hidden">
+							<input class="id" value="<%= result['id'] %>" type="hidden">
+						</div>
+					<% end %>
+
 				</div>
-
-				<% @results.each do |result| %>
-					<div class="arrayelm">
-						<input class="lat" value="<%= result["lat"] %>" type="hidden">
-						<input class="lng" value="<%= result['long'] %>" type="hidden">
-						<input class="name" value="<%= result['name'] %>" type="hidden">
-					</div>
-
-				<% end %>
 
 			<% end
 			end %>

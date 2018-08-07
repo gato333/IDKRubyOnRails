@@ -21,12 +21,18 @@
 
 		<script>
 		  var ipStackKey = '<%= ENV['ipStackKey'] %>';
+		  var hereID = '<%= ENV['hereID'] %>';
+		  var hereCode = '<%= ENV['hereCode'] %>';
 		</script>
 		<%= stylesheet_link_tag    'application.css', media: 'all', 'data-turbolinks-track' => true %>
 
 		<% @javascriptsArray.each do |file| %>
-			<% if(file === 'googleMaps') %>
-				<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key="+ ENV["googleKey"] +"&language=en", 'data-turbolinks-track' => true %>
+			<% if(file === 'hereMaps') %>
+				<%= javascript_include_tag "http://js.api.here.com/v3/3.0/mapsjs-core.js", 'data-turbolinks-track' => true %>
+				<%= javascript_include_tag "http://js.api.here.com/v3/3.0/mapsjs-service.js", 'data-turbolinks-track' => true %>
+				<%= javascript_include_tag "http://js.api.here.com/v3/3.0/mapsjs-ui.js", 'data-turbolinks-track' => true %>
+				<%= javascript_include_tag "https://js.api.here.com/v3/3.0/mapsjs-mapevents.js", 'data-turbolinks-track' => true %>
+      	<%= stylesheet_link_tag "http://js.api.here.com/v3/3.0/mapsjs-ui.css", 'data-turbolinks-track' => true %>
 			<% elsif(file === 'edit') %> 
 				<%= javascript_include_tag "http://code.jquery.com/jquery-1.10.2.js", 'data-turbolinks-track' => true %>
 				<%= javascript_include_tag "http://code.jquery.com/ui/1.11.4/jquery-ui.js", 'data-turbolinks-track' => true %>
