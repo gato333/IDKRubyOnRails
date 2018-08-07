@@ -38,6 +38,9 @@ function initMapMulti(lat, lng, name, obj, latlongArray){
     var bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
       content: evt.target.getData()
     });
+    var allBubbles = ui.getBubbles();
+    for(var i = 0; i < allBubbles.length; i ++)
+      allBubbles[i].close();
     ui.addBubble(bubble);
   }, false);
 
@@ -58,4 +61,5 @@ function initMapMulti(lat, lng, name, obj, latlongArray){
     marker.setData(html);
     group.addObject(marker);
   }
+  map.setViewBounds(group.getBounds());
 }
