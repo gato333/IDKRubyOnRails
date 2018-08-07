@@ -40,6 +40,18 @@
 
 				</div>
 
+				<%= form_tag({controller: "application", action: "map_results"}, method: "post") do %>
+
+		 		  <%= hidden_field_tag :price, nil, :value =>  params['price'] || '' %> 
+  				<%= hidden_field_tag :radius, nil, :value =>  params['radius'] || '' %> 
+		 		 	<%= hidden_field_tag :lat, nil, :value =>  params['lat'] || '' %> 
+  				<%= hidden_field_tag :long, nil, :value =>  params['long'] || '' %> 
+		 		 	<%= hidden_field_tag :keyword, nil, :value => params['keyword'] || '' %> 
+  				<%= hidden_field_tag :source, nil, :value => @title %> 
+					
+  				<%= submit_tag "More" %>
+			 	<% end %> 
+
 			<% end
 			end %>
 
