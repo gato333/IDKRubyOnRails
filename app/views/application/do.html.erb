@@ -9,6 +9,11 @@
 	<% end %>
 
 	<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
+	 <input class="mapViewToggle" type="checkbox" name="mapview" value="mapview" />
+		<div class="maptoggle">
+			<img src="assets/list.png" class="listViewState" />
+			<img src="assets/map.png" class="mapViewState" />
+		</div>
 
 		<input type= "number" name="price" min="0.00" default="0.00" max="100000.00" placeholder="Enter Price:" value="<%= params.include?('price') ? params['price'] : '' %>" class="<%= @price_error.nil? ? '' : 'error' %>"/>
 

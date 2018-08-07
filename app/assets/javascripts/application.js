@@ -56,4 +56,12 @@ $(document).ready( function() {
 			$('.user_nav div').addClass('hidden');
 	});
 
+	$(".listViewState").on("click", function(){
+		$('.mapViewToggle').prop('checked', false);
+	});
+
+	$(".mapViewState").on("click", function(){
+		$('.mapViewToggle').prop('checked', true);
+	});
+
 });

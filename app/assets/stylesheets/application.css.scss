@@ -934,6 +934,48 @@ article#user_edit {
 /*********************************************************************************/
 
 
+.mapViewToggle {
+   display: none;
+}
+
+.mapViewToggle:checked + .maptoggle{
+    .listViewState {
+        background: #b6b1b1;
+        box-shadow: none;
+        z-index: 1;
+    }
+    .mapViewState {
+        background: #efefef;
+        z-index: 2;
+        box-shadow: #838383 -5px 0px 6px -1px;
+    }
+}
+.maptoggle {
+    text-align: right;
+    margin-top: -70px;
+    img {
+        border-radius: 10px;
+        background: #efefef;
+        position: relative;
+    }
+    .listViewState {
+        padding: 8px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-bottom: 0px;
+        margin-right: -4px;
+        z-index: 2;
+        box-shadow: #838383 5px 0px 6px -1px;
+    }
+    .mapViewState {
+        z-index: 1;
+        background: #b6b1b1;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        box-shadow: none;
+    }
+}
+
 #info_bubble {
     width: 165px;
     h2 {
