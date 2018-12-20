@@ -20,8 +20,8 @@ class EventQueryHandler
       else 
         @lat = @long = @radius = @price = @keyword = @northlat = @eastlong  = @southlat = @westlong = @keyword = nil
       end
-      @curTime = (Time.now.utc + Time.zone_offset('EST') - (60  * 60 * 2)).to_formatted_s(:db)
-      @tomTime = (Time.now.utc + Time.zone_offset('EST') + (60  * 60 * 24)).to_formatted_s(:db)
+      @curTime = (Time.now.utc + Time.zone_offset('EST') - (60  * 60 * 3)).to_formatted_s(:db)
+      @tomTime = (Time.now.utc + Time.zone_offset('EST') + (60  * 60 * 48)).to_formatted_s(:db)
     end
 
     def boundingBox
