@@ -58,6 +58,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    crass (1.0.5)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     excon (0.45.4)
@@ -173,7 +174,8 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
-    geocoder (1.2.9)
+    geocodio (3.0.0)
+      json
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hike (1.2.3)
@@ -188,7 +190,8 @@ GEM
       railties (>= 4.2.0.beta)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
-    loofah (2.0.3)
+    loofah (2.4.0)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -288,7 +291,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   figaro
   fog (= 1.36.0)
-  geocoder
+  geocodio
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick (= 3.8.0)
