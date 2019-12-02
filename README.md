@@ -29,9 +29,10 @@ It comes with a lot of upgrades, including:
 1. Locally run postgress DB
 2. Make local config/application.yml based off application_test.yml template
 3. in Terminal: bundle install
-4. in Terminal: rake db:migrate
-5. in Terminal: rake db:seed   ( this will generate event in your db )
-6. in Terminal: rails server
+4. make sure postgres is running locally
+5. in Terminal: rake db:migrate
+6. in Terminal: rake db:seed   ( this will generate event in your db )
+7. in Terminal: rails server
 
 Done!
 

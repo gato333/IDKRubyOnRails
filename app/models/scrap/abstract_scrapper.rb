@@ -6,7 +6,7 @@ class AbstractScrapper
   attr_accessor :time, :eventcount
 
   def initialize(msg)
-    Geocoder.configure(:lookup   => :google, :timeout => 5)
+    @geocodio = Geocodio::Client.new
     @time = Time.now
     @eventcount = 0
     db_logger.info(msg)
@@ -50,9 +50,12 @@ class AbstractScrapper
   end
 
   def calculateGeo(address)
-    geo = Geocoder.coordinates(address)
-    lat = geo.nil? ? "" : geo[0]
-    long = geo.nil? ? "" : geo[1]
+    results = @geocodio.geocode([address])
+    lat = "", long = ""
+    unless results.nil? or results.best.nil?
+      lat = results.best.latitude
+      long = results.best.longitude
+    end
     return lat, long
   end
 

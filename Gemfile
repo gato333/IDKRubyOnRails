@@ -22,7 +22,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # data-scrapping tool
 gem 'nokogiri'
 # convert address to geolocation
-gem 'geocoder'
+gem 'geocodio'
 # validating url duuuuh
 gem 'validate_url'
 # for safe pwd and env vars

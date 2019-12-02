@@ -8,8 +8,8 @@ class ArtslantScrapper < AbstractScrapper
 		#for some reason artslant needs the tomorrow date to get "todays" openings (dum)
 		@dateTomorrow = @time.month.to_s + "/" + (@time.day.to_i + 1).to_s  + "/" + @time.year.to_s
 		@artslanturllist = [
-			"https://www.artslant.com/ny/events/list?event_type=Openings&time=upcoming&featured=all&search_where=New+York%2C+NY%2C+USA",
-			"https://www.artslant.com/ny/events/list?event_type=Openings&time=upcoming&featured=all&search_where=Brooklyn%2C+NY%2C+USA"
+			"https://www.artslant.com/ny/events/list?event_type=Openings&time=upcoming&featured=all&search_where=",
+			"https://www.artslant.com/ny/events/list?event_type=Openings&time=upcoming&featured=all&search_where="
 		]
 		@pagecount = 1
 	end
