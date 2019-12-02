@@ -11,7 +11,10 @@ smtp_address: "something.com"
 smtp_domain: "something.info"
 smtp_port: "someport"
 
-googleKey: "somekey"
-googleServerKey: "someserverkey"
+GEOCODIO_API_KEY: "somekey"
+
+# we use developer.here.com map API, its free
+hereID: "someid"
+hereCode: "somekey"
 
 SECRET_KEY_BASE: "railssecretkey"
