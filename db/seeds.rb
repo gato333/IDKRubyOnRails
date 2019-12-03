@@ -26,8 +26,9 @@ end
 #  myf = MyFreeConcertScrapper.new
 #  total = total + myf.scrap
 
-arts = ArtslantScrapper.new
-total = total + arts.scrap
+# => ArtSlant is un-navigatale now of a while now, November 2019
+#  arts = ArtslantScrapper.new
+#  total = total + arts.scrap
 
 nyc = NyCardScrapper.new
 total = total + nyc.scrap
