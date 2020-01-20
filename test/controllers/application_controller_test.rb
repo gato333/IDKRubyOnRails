@@ -20,18 +20,18 @@ class ApplicationControllerTest < ActionController::TestCase
     @javascriptsArray = ApplicationHelper.includeJavascripts(DEFAULT_STATUS); 
   end
 
-  test "should get home" do
+  test "should get about" do
     get :home
     assert_response :success
-    assert_select "title", "HOME" + @base_title
+    assert_select "title", "ABOUT" + @base_title
   end
 
-  test "should get do" do
+  test "should get search" do
 
     @javascriptsArray = ApplicationHelper.includeJavascripts(DO_STATUS); 
     get :do
     assert_response :success
-    assert_select "title", "DO" + @base_title
+    assert_select "title", "SEARCH" + @base_title
   end
 
   test "should get random" do
@@ -49,7 +49,7 @@ class ApplicationControllerTest < ActionController::TestCase
       { 'radius' => "10", 'lat' => "40.727", 'long' => "-73.977", 
         'source' => 'DO', 'price' => '', 'keyword' => ''} )
     assert_response :success
-    assert_select "title", "DO" + @base_title
+    assert_select "title", "SEARCH" + @base_title
   end
 
   test "should get all" do

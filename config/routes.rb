@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'application#home'
+  root 'application#search'
 
   # Example of regular route:
   get '/results' => 'application#results'
@@ -26,11 +26,9 @@ Rails.application.routes.draw do
 
   post '/map_results' => 'application#map_results'
 
-  get '/whatdo' => 'application#do'
-
   get '/random' => 'application#random'
 
-  get '/home' => 'application#home'
+  get '/about' => 'application#about'
 
   get '/error' => 'application#error'
 

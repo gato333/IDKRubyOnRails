@@ -3,15 +3,15 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include ApplicationHelper
 
-  def home
-    @logo, @title, @description, @javascriptsArray = preRender('home')
+  def about
+    @logo, @title, @description, @javascriptsArray = preRender('about')
   end
 
-  def do
-    @logo, @title, @description, @javascriptsArray = preRender('do')
+  def search
+    @logo, @title, @description, @javascriptsArray = preRender('search')
     @ip = remote_ip
     if params.include?('error') 
-      @error_msg, @radius_error, @price_error = formErrorMsg(params, DO_STATUS);
+      @error_msg, @radius_error, @price_error = formErrorMsg(params, SEARCH_STATUS);
     end
   end
 
@@ -30,15 +30,16 @@ class ApplicationController < ActionController::Base
         :error => "1", 
         :lat => params["lat"] || "", 
         :long => params["long"] || "",
-        :source => DO_STATUS
+        :source => SEARCH_STATUS
     end
-		if params["source"] == DO_STATUS
-			if validateForm(params, DO_STATUS)
+		if params["source"] == SEARCH_STATUS
+			if validateForm(params, SEARCH_STATUS)
+
         query = EventQueryHandler.new( app_params(params) )
         @results = query.getEventResults
         @user_events = get_fav_events(current_user)
 			else 
-				redirect_to :action => 'do',
+				redirect_to :action => 'search',
           :radius => params["radius"] || "", 
           :price => params["price"] || "", 
           :keyword => params["keyword"] || "",  
@@ -47,20 +48,20 @@ class ApplicationController < ActionController::Base
           :long => params["long"] || ""
 			end
 		else 
-			redirect_to :action => 'do'
+			redirect_to :action => 'search'
 		end
     @title = params["source"]
   end
 
   def map_results 
     @logo, @description, @javascriptsArray = preRender('map_result')
-    if params["source"] == DO_STATUS
-      if validateForm(params, DO_STATUS)
+    if params["source"] == SEARCH_STATUS
+      if validateForm(params, SEARCH_STATUS)
         query = EventQueryHandler.new( app_params(params) )
         @results = query.getEventResults
         @user_events = get_fav_events(current_user)
       else 
-        redirect_to :action => 'do',
+        redirect_to :action => 'search',
         :radius => params["radius"] || "", 
         :price => params["price"] || "", 
         :keyword => params["keyword"] || "",  
@@ -69,7 +70,7 @@ class ApplicationController < ActionController::Base
         :long => params["long"] || ""
       end
     else 
-      redirect_to :action => 'do'
+      redirect_to :action => 'search'
     end
     @title = params["source"]
   end

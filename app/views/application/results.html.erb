@@ -20,7 +20,7 @@
 				</div> 
 		<%  else %>
 
-			<% if @title == "DO" 
+			<% if @title == "SEARCH" 
 					count = 1
 					@results.each do |result| %>
 							<div class="result-container <%= count % 2 == 0 ? 'even' : '' %>">
@@ -30,32 +30,6 @@
 			 			end %>
 			 		<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
  						<%= hidden_field_tag :price, nil, :value =>  params['price'] || '' %> 
-    				<%= hidden_field_tag :radius, nil, :value =>  params['radius'] || '' %> 
-			 		 	<%= hidden_field_tag :lat, nil, :value =>  params['lat'] || '' %> 
-    				<%= hidden_field_tag :long, nil, :value =>  params['long'] || '' %> 
-			 		 	<%= hidden_field_tag :keyword, nil, :value => params['keyword'] || '' %> 
-    				<%= hidden_field_tag :source, nil, :value => @title %> 
-						
-    				<%= submit_tag "More" %>
-				 	<% end %>
-
-				<% elsif @title == "EAT"
-					@results.each do |result| %>
-							<div class="result-container">
-								<div class="text">
-									<h3> <%= result["name"] %> </h3>
-									<h5><span>Address:</span> <%= result["vicinity"] %></h5>
-									<h5><span>Type:</span> <%= result["types"].join(", ") %></h5>
-									<h5 class="short"><span>Price:</span> <%= "$" * result["price_level"].to_i %></h5>
-									<h5 class="short"><span>Rating:</span> <%= result["rating"] %></h5>
-								</div>
-								<div class="result_img" style="background-image:url(<%= result["imageurl"] %>)"></div>
-							</div>
-			 	<% end %>
-
-			 		<%= form_tag({controller: "application", action: "results"}, method: "post") do %>
-
-			 		  <%= hidden_field_tag :price, nil, :value =>  params['price'] || '' %> 
     				<%= hidden_field_tag :radius, nil, :value =>  params['radius'] || '' %> 
 			 		 	<%= hidden_field_tag :lat, nil, :value =>  params['lat'] || '' %> 
     				<%= hidden_field_tag :long, nil, :value =>  params['long'] || '' %> 

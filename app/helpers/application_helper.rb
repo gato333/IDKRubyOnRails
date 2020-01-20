@@ -1,9 +1,9 @@
 module ApplicationHelper
 
 	LOGO = "http://49.media.tumblr.com/c8bdf16535f80091a941843de701532b/tumblr_n9stfetbYf1r5mmhlo1_400.gif"
-  DESCRIPTION = "Secret Events NYC"
+  	DESCRIPTION = "Secret Events NYC"
 
-	DO_STATUS = "DO"
+	SEARCH_STATUS = "SEARCH"
 	DEFAULT_STATUS = "DEFAULT"
 	RANDOM_STATUS = "RANDOM"
 	MAP_RESULT_STATUS = "MAP_RESULT"
@@ -22,8 +22,6 @@ module ApplicationHelper
 			return false 
 		elsif !validateRadius(params["radius"])
 			return false 
-		elsif !validatePriceEat(params["price"], status)
-			return false
 		else 
 			return true
 		end
@@ -43,10 +41,6 @@ module ApplicationHelper
 		return true
 	end
 
-	def validatePriceEat( price, status )
-		return true
-	end
-
 	def formErrorMsg( params, status )
 		error_msg = ""
 		radius_error = price_error = nil
@@ -56,10 +50,6 @@ module ApplicationHelper
 		if !validateRadius(params["radius"])
 			radius_error = true
 			error_msg += "You must supply a valid RADIUS to be able to generate a response. <br>"
-		end
-		if !validatePriceEat(params["price"], status)
-			price_error = true
-			error_msg += "You must supply a valid PRICE to be able to generate a response. <br>"
 		end
 		return error_msg, radius_error, price_error
 	end
@@ -71,7 +61,7 @@ module ApplicationHelper
 			['application', 'count']
 		elsif status == EDIT_STATUS
 			['application', 'edit']
-		elsif status == DO_STATUS
+		elsif status == SEARCH_STATUS
 			['application', 'form']
 		elsif status == RANDOM_STATUS
 			['application', 'random']
@@ -93,10 +83,10 @@ module ApplicationHelper
 	end
 
 	def preRender(page)
-		if page === 'home'
-    	return LOGO, "HOME", DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
-		elsif page === 'do'
-    	return LOGO, "DO", DESCRIPTION, includeJavascripts(DO_STATUS)
+		if page === 'about'
+    	return LOGO, "ABOUT", DESCRIPTION, includeJavascripts(DEFAULT_STATUS)
+		elsif page === 'search'
+    	return LOGO, "SEARCH", DESCRIPTION, includeJavascripts(SEARCH_STATUS)
 		elsif page === 'random'
 			return LOGO, "RANDOM", "Uncertainty Helper", includeJavascripts(RANDOM_STATUS)
 		elsif page === 'result'
