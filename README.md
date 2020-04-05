@@ -44,3 +44,10 @@ in Terminal: heroku pg:psql
 
 to test scraper:
 in Terminal: 	rake db:seed
+
+
+# Notes/Todo
+
+- seems Artcard.cc is down as of Jan 27, 2020
+at least im un able to access it on chrome or firefox but we are still extracting data, very odd
+- our map api is no longer working correctly either, location is always randall island
